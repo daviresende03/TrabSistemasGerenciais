@@ -13,4 +13,9 @@ import model.enums.DocumentType;
 public class Document {
     private DocumentType type;
     private String number;
+
+    public Document(DocumentType type, String number) {
+        this.type = type;
+        this.number = number;
+    }
 }

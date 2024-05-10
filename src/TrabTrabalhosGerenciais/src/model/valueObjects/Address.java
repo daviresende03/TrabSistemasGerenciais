@@ -19,6 +19,16 @@ public class Address extends BaseModel{
     private String postalCode;
     private String country;
 
+    public Address(String street, String number, String neighborhood, String city, String state, String postalCode, String country) {
+        this.street = street;
+        this.number = number;
+        this.neighborhood = neighborhood;
+        this.city = city;
+        this.state = state;
+        this.postalCode = postalCode;
+        this.country = country;
+    }
+
     public String getStreet() {
         return street;
     }

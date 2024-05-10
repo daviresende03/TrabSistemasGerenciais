@@ -20,6 +20,14 @@ public abstract class PersonModel extends BaseModel{
     private Address address;
     private Date birthDate;
 
+    public PersonModel(String name, Document document, PersonTypeEnum type, Address address, Date birthDate) {
+        this.name = name;
+        this.document = document;
+        this.type = type;
+        this.address = address;
+        this.birthDate = birthDate;
+    }
+
     public PersonTypeEnum getType() {
         return type;
     }

@@ -4,9 +4,11 @@
  */
 package view;
 
+import view.registers.PersonRegister;
+
 /**
  *
- * @author Davi
+ * @author joaov
  */
 public class MainView extends javax.swing.JFrame {
 
@@ -26,21 +28,80 @@ public class MainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jDesktopPane = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        registrationMenu = new javax.swing.JMenu();
+        productsRegistrationMenuItem = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        ordersRegistrationMenuItem = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        personRegistrationMenuItem = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem2.setText("jMenuItem2");
+
+        jMenuItem4.setText("jMenuItem4");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Restaurante");
+        setAlwaysOnTop(true);
+
+        javax.swing.GroupLayout jDesktopPaneLayout = new javax.swing.GroupLayout(jDesktopPane);
+        jDesktopPane.setLayout(jDesktopPaneLayout);
+        jDesktopPaneLayout.setHorizontalGroup(
+            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 912, Short.MAX_VALUE)
+        );
+        jDesktopPaneLayout.setVerticalGroup(
+            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 596, Short.MAX_VALUE)
+        );
+
+        registrationMenu.setText("Cadastros");
+
+        productsRegistrationMenuItem.setText("Produtos");
+        registrationMenu.add(productsRegistrationMenuItem);
+        registrationMenu.add(jSeparator1);
+
+        ordersRegistrationMenuItem.setText("Pedidos");
+        registrationMenu.add(ordersRegistrationMenuItem);
+        registrationMenu.add(jSeparator2);
+
+        personRegistrationMenuItem.setText("Pessoas");
+        personRegistrationMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                personRegistrationMenuItemActionPerformed(evt);
+            }
+        });
+        registrationMenu.add(personRegistrationMenuItem);
+
+        jMenuBar1.add(registrationMenu);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jDesktopPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jDesktopPane)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void personRegistrationMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personRegistrationMenuItemActionPerformed
+        PersonRegister personRegister = new PersonRegister();
+        personRegister.setVisible(true);
+        jDesktopPane.add(personRegister);
+    }//GEN-LAST:event_personRegistrationMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +139,16 @@ public class MainView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane jDesktopPane;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JMenuItem ordersRegistrationMenuItem;
+    private javax.swing.JMenuItem personRegistrationMenuItem;
+    private javax.swing.JMenuItem productsRegistrationMenuItem;
+    private javax.swing.JMenu registrationMenu;
     // End of variables declaration//GEN-END:variables
 }

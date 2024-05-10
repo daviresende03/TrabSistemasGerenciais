@@ -6,20 +6,32 @@ package service;
 
 import java.util.ArrayList;
 import model.entities.ClientModel;
+import model.interfaces.repositories.IClientRepository;
 import model.interfaces.services.IClientService;
+import repository.ClientRepository;
 
 /**
  *
  * @author Davi
  */
 public class ClientService implements IClientService{
+    private IClientRepository clientRepository;
+    
+    public ClientService(){
+        clientRepository = new ClientRepository();
+    }
     
     @Override
     public String insert(ClientModel model){
-        if(!validate(model)){
-            return model.getMessage();
+        try{
+            if(!validate(model)){
+                return model.getMessage();
+            }
+            clientRepository.insert(model);
+            return "";
+        }catch(Exception ex){
+            return "Houve um erro ao incluir o produto\nErro: " + ex.getMessage();
         }
-        return null;
     }
     
     @Override

@@ -11,9 +11,9 @@ import java.util.ArrayList;
  * @author Davi
  */
 public interface IBaseService<T> {
-    void insert(T model);
-    void remove(int id);
-    void update(T model);
+    String insert(T model);
+    String remove(int id);
+    String update(T model);
     T get(int id);
     ArrayList<T> getAll();
 }

@@ -13,14 +13,24 @@ import model.interfaces.services.IClientService;
  * @author Davi
  */
 public class ClientService implements IClientService{
-    @Override
-    public void insert(ClientModel model){}
     
     @Override
-    public void remove(int id){}
+    public String insert(ClientModel model){
+        if(!validate(model)){
+            return model.getMessage();
+        }
+        return null;
+    }
     
     @Override
-    public void update(ClientModel model){}
+    public String remove(int id){
+        return null;
+    }
+    
+    @Override
+    public String update(ClientModel model){
+        return null;
+    }
     
     @Override
     public ClientModel get(int id){
@@ -30,5 +40,16 @@ public class ClientService implements IClientService{
     @Override
     public ArrayList<ClientModel> getAll(){
         return null;
+    }
+    
+    private boolean validate(ClientModel client){
+        if(client.getName().isEmpty()){
+            client.addMessage("Nome é obrigatório.");
+        }
+        
+        if(client.getDocument().isEmpty()){
+            client.addMessage("Documento é obrigatório.");
+        }
+        return client.isValid();
     }
 }

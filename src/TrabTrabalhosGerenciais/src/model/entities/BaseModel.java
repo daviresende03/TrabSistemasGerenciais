@@ -14,6 +14,7 @@ public abstract class BaseModel {
     private int id;
     private Date createdDate;
     private Date updatedDate;
+    private String message = "";
     
     public void setId(int id){
         this.id = id;
@@ -23,5 +24,20 @@ public abstract class BaseModel {
     }
     public void setUpdatedDate(Date date){
         updatedDate = date;
+    }
+    public void addMessage(String message){
+        
+        if(!message.isEmpty()){
+            this.message += "\n";
+        }
+        
+        this.message += message;
+    }
+    public String getMessage(){
+        return message;
+    }
+    
+    public boolean isValid(){
+        return message.isEmpty();
     }
 }

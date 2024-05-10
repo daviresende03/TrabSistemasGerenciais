@@ -6,11 +6,9 @@ package controller;
 
 import controller.viewModels.ClientVM;
 import model.entities.ClientModel;
-import model.enums.DocumentType;
 import model.enums.PersonTypeEnum;
 import model.interfaces.services.IClientService;
 import model.valueObjects.Address;
-import model.valueObjects.Document;
 import service.ClientService;
 
 /**
@@ -25,12 +23,10 @@ public class ClientController {
     }
     
     public void insert(ClientVM clientVM){        
-        DocumentType documentType = clientVM.typeDocument.equals("CPF") ? DocumentType.CPF : DocumentType.CNPJ;
-        Document clientDocument = new Document(documentType, clientVM.numberDocument);
         PersonTypeEnum clientType = clientVM.type.equals("PF") ? PersonTypeEnum.PF : PersonTypeEnum.PJ;
         Address clientAddress = new Address(clientVM.street, clientVM.number,clientVM.neighborhood,clientVM.city,clientVM.state,clientVM.postalCode,clientVM.country);
         
-        ClientModel clientModel = new ClientModel(clientVM.name, clientDocument, clientType, clientAddress, clientVM.birthDate);
+        ClientModel clientModel = new ClientModel(clientVM.name, clientVM.document, clientType, clientAddress, clientVM.birthDate);
         clientService.insert(clientModel);
     }
 }

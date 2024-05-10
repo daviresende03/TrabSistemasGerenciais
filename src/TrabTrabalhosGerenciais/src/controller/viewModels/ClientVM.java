@@ -13,8 +13,7 @@ import java.util.Date;
 public class ClientVM {
     public int id;
     public String name;
-    public String typeDocument;
-    public String numberDocument;
+    public String document;
     public String type;
     public String street;
     public String number;

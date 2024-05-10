@@ -7,7 +7,6 @@ package model.entities;
 import java.util.Date;
 import model.enums.PersonTypeEnum;
 import model.valueObjects.Address;
-import model.valueObjects.Document;
 
 /**
  *
@@ -15,12 +14,12 @@ import model.valueObjects.Document;
  */
 public abstract class PersonModel extends BaseModel{
     private String name;
-    private Document document;
+    private String document;
     private PersonTypeEnum type;
     private Address address;
     private Date birthDate;
 
-    public PersonModel(String name, Document document, PersonTypeEnum type, Address address, Date birthDate) {
+    public PersonModel(String name, String document, PersonTypeEnum type, Address address, Date birthDate) {
         this.name = name;
         this.document = document;
         this.type = type;
@@ -44,11 +43,11 @@ public abstract class PersonModel extends BaseModel{
         this.name = name;
     }
 
-    public Document getDocument() {
+    public String getDocument() {
         return document;
     }
 
-    public void setDocument(Document document) {
+    public void setDocument(String document) {
         this.document = document;
     }
 

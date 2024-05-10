@@ -7,7 +7,6 @@ package model.entities;
 import java.util.Date;
 import model.enums.PersonTypeEnum;
 import model.valueObjects.Address;
-import model.valueObjects.Document;
 
 /**
  *
@@ -15,7 +14,7 @@ import model.valueObjects.Document;
  */
 public class ClientModel extends PersonModel{ 
 
-    public ClientModel(String name, Document document, PersonTypeEnum type, Address address, Date birthDate) {
+    public ClientModel(String name, String document, PersonTypeEnum type, Address address, Date birthDate) {
         super(name, document, type, address, birthDate);
     }
     

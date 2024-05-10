@@ -18,13 +18,15 @@ public abstract class PersonModel extends BaseModel{
     private PersonTypeEnum type;
     private Address address;
     private Date birthDate;
+    private String obersevation;
 
-    public PersonModel(String name, String document, PersonTypeEnum type, Address address, Date birthDate) {
+    public PersonModel(String name, String document, PersonTypeEnum type, Address address, Date birthDate, String obersevation) {
         this.name = name;
         this.document = document;
         this.type = type;
         this.address = address;
         this.birthDate = birthDate;
+        this.obersevation = obersevation;
     }
 
     public PersonTypeEnum getType() {
@@ -66,4 +68,13 @@ public abstract class PersonModel extends BaseModel{
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
+
+    public String getObersevation() {
+        return obersevation;
+    }
+
+    public void setObersevation(String obersevation) {
+        this.obersevation = obersevation;
+    }
+    
 }

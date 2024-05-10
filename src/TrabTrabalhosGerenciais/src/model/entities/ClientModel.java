@@ -14,8 +14,8 @@ import model.valueObjects.Address;
  */
 public class ClientModel extends PersonModel{ 
 
-    public ClientModel(String name, String document, PersonTypeEnum type, Address address, Date birthDate) {
-        super(name, document, type, address, birthDate);
+    public ClientModel(String name, String document, PersonTypeEnum type, Address address, Date birthDate, String obersevation) {
+        super(name, document, type, address, birthDate, obersevation);
     }
     
 }

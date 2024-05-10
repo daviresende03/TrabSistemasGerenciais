@@ -23,4 +23,5 @@ public class ClientVM {
     public String postalCode;
     public String country;
     public Date birthDate;
+    public String obersevation;
 }

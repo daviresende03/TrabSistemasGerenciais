@@ -25,7 +25,7 @@ public class ClientController {
     public String insert(ClientVM clientVM){        
         PersonTypeEnum clientType = clientVM.type.equals("PF") ? PersonTypeEnum.PF : PersonTypeEnum.PJ;
         Address clientAddress = new Address(clientVM.street, clientVM.number,clientVM.neighborhood,clientVM.city,clientVM.state,clientVM.postalCode,clientVM.country);
-        ClientModel clientModel = new ClientModel(clientVM.name, clientVM.document, clientType, clientAddress, clientVM.birthDate);
+        ClientModel clientModel = new ClientModel(clientVM.name, clientVM.document, clientType, clientAddress, clientVM.birthDate, clientVM.obersevation);
         
         String messageResponse = clientService.insert(clientModel);
         return (messageResponse.isBlank() ? "Cliente cadastrado com sucesso!" : messageResponse);

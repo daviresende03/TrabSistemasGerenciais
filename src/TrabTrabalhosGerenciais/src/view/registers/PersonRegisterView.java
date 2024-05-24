@@ -8,12 +8,12 @@ package view.registers;
  *
  * @author joaov
  */
-public class PersonRegister extends javax.swing.JInternalFrame {
+public class PersonRegisterView extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ClientRegister
      */
-    public PersonRegister() {
+    public PersonRegisterView() {
         initComponents();
         this.setVisible(true);
     }
@@ -80,8 +80,8 @@ public class PersonRegister extends javax.swing.JInternalFrame {
 
         jFormattedTextFieldBirthDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
 
-        jLabelNewClient.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabelNewClient.setText("NOVO USUÁRIO");
+        jLabelNewClient.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabelNewClient.setText("Novo Usuário");
 
         jLabelPersonalData.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelPersonalData.setText("DADOS PESSOAIS");
@@ -283,7 +283,7 @@ public class PersonRegister extends javax.swing.JInternalFrame {
                     .addComponent(jCheckBoxClient)
                     .addComponent(jCheckBoxStaff)
                     .addComponent(jCheckBoxSupplier))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

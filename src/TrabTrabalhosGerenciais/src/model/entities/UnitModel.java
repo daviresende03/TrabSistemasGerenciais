@@ -12,6 +12,11 @@ public class UnitModel extends BaseModel{
     private String name;
     private String symbol;
 
+    public UnitModel(String name, String symbol) {
+        this.name = name;
+        this.symbol = symbol;
+    }
+
     public String getName() {
         return name;
     }

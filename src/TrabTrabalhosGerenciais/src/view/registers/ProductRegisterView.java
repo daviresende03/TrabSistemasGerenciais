@@ -1,8 +1,12 @@
 package view.registers;
 
+import controller.ProductController;
+
 public class ProductRegisterView extends javax.swing.JInternalFrame {
 
     public ProductRegisterView() {
+        this.controller = new ProductController();
+        
         initComponents();
         this.setVisible(true);
     }
@@ -25,7 +29,7 @@ public class ProductRegisterView extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelNewClient)
-                .addContainerGap(563, Short.MAX_VALUE))
+                .addContainerGap(321, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -42,4 +46,5 @@ public class ProductRegisterView extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelNewClient;
     // End of variables declaration//GEN-END:variables
+    private final ProductController controller;
 }

@@ -1,15 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.entities;
 
 import model.enums.ProductTypeEnum;
 
-/**
- *
- * @author Davi
- */
+
 public class ProductModel extends BaseModel{
     private String name;
     private ProductTypeEnum type;
@@ -17,6 +10,15 @@ public class ProductModel extends BaseModel{
     private double costPrice;
     private double salePrice;
     private double stock;
+
+    public ProductModel(String name, ProductTypeEnum type, UnitModel unit, double costPrice, double salePrice, double stock) {
+        this.name = name;
+        this.type = type;
+        this.unit = unit;
+        this.costPrice = costPrice;
+        this.salePrice = salePrice;
+        this.stock = stock;
+    }
 
     public String getName() {
         return name;

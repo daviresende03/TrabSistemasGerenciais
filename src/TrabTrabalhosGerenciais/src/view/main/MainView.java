@@ -1,5 +1,6 @@
 package view.main;
 
+import controller.ProductController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -165,4 +166,5 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel panelHeader;
     private javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables
+
 }

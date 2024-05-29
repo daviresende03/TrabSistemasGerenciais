@@ -13,4 +13,14 @@ public enum ProductTypeEnum {
     public int getValue(){
         return value;
     }
+    
+    public static ProductTypeEnum fromInteger(int type){
+        switch(type){
+            case 1:
+                return PRODUCT_SALE;
+            case 2:
+                return PLATE_LUNCH;
+        }
+        return null;
+    }
 }

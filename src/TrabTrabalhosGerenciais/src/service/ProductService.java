@@ -2,6 +2,7 @@ package service;
 
 import java.util.ArrayList;
 import model.entities.ProductModel;
+import model.entities.UnitModel;
 import model.interfaces.repositories.IDataContext;
 import model.interfaces.repositories.IProductRepository;
 import model.interfaces.services.IProductService;
@@ -18,6 +19,12 @@ public class ProductService implements IProductService {
     @Override
     public String insert(ProductModel product){
         try{
+            
+            // Search in database product.unit.id by product.unit.name and product.unit.symbol
+            UnitModel unit = product.getUnit();
+            unit.setId(1);
+            product.setUnit(unit);
+            
             productRepository.insert(product);
             dataContext.commit();
             return "";

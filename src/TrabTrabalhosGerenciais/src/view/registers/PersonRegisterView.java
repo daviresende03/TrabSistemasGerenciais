@@ -80,7 +80,7 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
 
         jFormattedTextFieldBirthDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
 
-        jLabelNewClient.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabelNewClient.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelNewClient.setText("Novo Usuário");
 
         jLabelPersonalData.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -140,10 +140,6 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelNewClient)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +213,8 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
                                         .addComponent(jFormattedTextFieldBirthDate))
                                     .addComponent(jLabelPersonalData)
                                     .addComponent(jSeparatorPersonalDataAddress, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelNewClient))
                             .addComponent(jSeparatorAddressObservation, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jSeparatorAddressObservation1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,7 +280,7 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
                     .addComponent(jCheckBoxClient)
                     .addComponent(jCheckBoxStaff)
                     .addComponent(jCheckBoxSupplier))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();

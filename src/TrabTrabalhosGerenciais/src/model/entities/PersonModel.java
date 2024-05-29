@@ -18,15 +18,22 @@ public abstract class PersonModel extends BaseModel{
     private PersonTypeEnum type;
     private Address address;
     private Date birthDate;
-    private String obersevation;
+    private String observation;
+    private boolean customer;   
+    private boolean staff;
+    private boolean supplier;
 
-    public PersonModel(String name, String document, PersonTypeEnum type, Address address, Date birthDate, String obersevation) {
+
+    public PersonModel(String name, String document, PersonTypeEnum type, Address address, Date birthDate, String observation, boolean customer, boolean staff, boolean supplier) {
         this.name = name;
         this.document = document;
         this.type = type;
         this.address = address;
         this.birthDate = birthDate;
-        this.obersevation = obersevation;
+        this.observation = observation;
+        this.customer = customer;
+        this.staff = staff;
+        this.supplier = supplier;
     }
 
     public PersonTypeEnum getType() {
@@ -69,12 +76,36 @@ public abstract class PersonModel extends BaseModel{
         this.birthDate = birthDate;
     }
 
-    public String getObersevation() {
-        return obersevation;
+    public String getObservation() {
+        return observation;
     }
 
-    public void setObersevation(String obersevation) {
-        this.obersevation = obersevation;
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
+    
+    public boolean getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(boolean customer) {
+        this.customer = customer;
+    }
+    
+    public boolean getStaff() {
+        return staff;
+    }
+
+    public void setStaff(boolean staff) {
+        this.staff = staff;
+    }
+    
+    public boolean getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(boolean supplier) {
+        this.supplier = supplier;
     }
     
 }

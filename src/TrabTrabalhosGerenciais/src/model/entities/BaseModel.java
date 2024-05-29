@@ -33,6 +33,10 @@ public abstract class BaseModel {
         
         this.message += message;
     }
+    public int getId(){
+        return id;
+    }
+    
     public String getMessage(){
         return message;
     }

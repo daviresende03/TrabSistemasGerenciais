@@ -4,6 +4,7 @@
  */
 package model.interfaces.repositories;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  * @author Davi
  */
 public interface IBaseRepository<T> {
-    void insert(T model);
+    void insert(T model) throws SQLException;
     void update(T model);
     void delete(int id);
     T select(int id);

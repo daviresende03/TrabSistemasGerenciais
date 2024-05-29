@@ -2,14 +2,15 @@ package repository.context;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import model.interfaces.repositories.IDataContext;
 
 
-public class DataContext {
+public class DataContext implements IDataContext{
     private final String URL = "jdbc:mysql://localhost:";
     private final String USER = "root";
     private final String PASSWORD = "root";
     private final String PORT = "3307";
-    private final String DATABASE = "";
+    private final String DATABASE = "pallato";
     
     private Connection connection;
     
@@ -23,7 +24,7 @@ public class DataContext {
         }
     }
     
-    public Connection getConnection() {
+    public Connection getConnection(){
         return connection;
     }
     

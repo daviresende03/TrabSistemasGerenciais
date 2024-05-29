@@ -1,14 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.enums;
 
-/**
- *
- * @author Davi
- */
 public enum ProductTypeEnum {
-    PRODUCT_SALE,
-    PLATE_LUNCH
+    PRODUCT_SALE(1),
+    PLATE_LUNCH(2);
+    
+    private final int value;
+    
+    ProductTypeEnum(int value){
+        this.value = value;
+    }
+    
+    public int getValue(){
+        return value;
+    }
 }

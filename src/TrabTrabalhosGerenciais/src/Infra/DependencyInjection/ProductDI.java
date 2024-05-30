@@ -1,4 +1,3 @@
-
 package Infra.DependencyInjection;
 
 import java.sql.Connection;
@@ -7,7 +6,6 @@ import model.interfaces.repositories.IProductRepository;
 import model.interfaces.repositories.IUnitRepository;
 import model.interfaces.services.IProductService;
 import repository.ProductRepository;
-import repository.UnitRepository;
 import repository.context.DataContext;
 import service.ProductService;
 
@@ -18,10 +16,6 @@ public class ProductDI {
     
     public IProductRepository getProductRepository(Connection con){
         return new ProductRepository(con);
-    }
-    
-    public IUnitRepository getUnitRepository(Connection con){
-        return new UnitRepository(con);
     }
     
     public IProductService getProductService(IDataContext dataContext, IProductRepository productRepository, IUnitRepository unitRepository){

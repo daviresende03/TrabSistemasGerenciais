@@ -48,7 +48,7 @@ public class ProductRepository implements IProductRepository{
     }
 
     @Override
-    public ProductModel select(int id) {
+    public ProductModel select(int id) throws SQLException{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

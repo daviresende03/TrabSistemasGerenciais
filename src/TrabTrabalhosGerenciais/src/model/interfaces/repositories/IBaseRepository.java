@@ -15,6 +15,6 @@ public interface IBaseRepository<T> {
     void insert(T model) throws SQLException;
     void update(T model);
     void delete(int id);
-    T select(int id);
+    T select(int id) throws SQLException;
     ArrayList<T> select();
 }

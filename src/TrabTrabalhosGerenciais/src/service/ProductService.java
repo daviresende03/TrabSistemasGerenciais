@@ -8,26 +8,30 @@ import model.entities.UnitModel;
 import model.enums.ResponseTypeEnum;
 import model.interfaces.repositories.IDataContext;
 import model.interfaces.repositories.IProductRepository;
+import model.interfaces.repositories.IUnitRepository;
 import model.interfaces.services.IProductService;
 
 public class ProductService implements IProductService {
     private final IProductRepository productRepository;
+    private final IUnitRepository unitRepository;
     private final IDataContext dataContext;
     private ResponseService responseService;
     
-    public ProductService(IDataContext dataContext, IProductRepository productRepository){
+    public ProductService(IDataContext dataContext, IProductRepository productRepository, IUnitRepository unitRepository){
         this.dataContext = dataContext;
         this.productRepository = productRepository;
+        this.unitRepository = unitRepository;
         this.responseService = new ResponseService();
     }
     
     @Override
     public ResponseService insert(ProductModel product){
         try{
+            UnitModel unit = unitRepository.select(product.getUnit().getName());
+            if(unit.getId() == 0){
+                return responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível recuperar a unidade informada.");
+            }
             
-            // Search in database product.unit.id by product.unit.name and product.unit.symbol
-            UnitModel unit = product.getUnit();
-            unit.setId(1);
             product.setUnit(unit);
             
             Date dateNow = new Date();

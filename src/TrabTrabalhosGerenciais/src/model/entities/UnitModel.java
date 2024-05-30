@@ -10,6 +10,14 @@ public class UnitModel extends BaseModel{
         this.name = Objects.requireNonNullElse(name,"");
         this.symbol = Objects.requireNonNullElse(symbol,"");
     }
+    
+    public UnitModel(int id, String name, String symbol) {
+        setId(id);
+        this.name = Objects.requireNonNullElse(name,"");
+        this.symbol = Objects.requireNonNullElse(symbol,"");
+    }
+    
+    public UnitModel(){}
 
     public String getName() {
         return name;

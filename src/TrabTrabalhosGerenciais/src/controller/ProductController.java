@@ -18,7 +18,7 @@ public class ProductController {
     public ProductController(){
         productDependencyInjection = new ProductDI();
         dataContext = productDependencyInjection.getDataContext();
-        productService = new ProductService(dataContext, productDependencyInjection.getProductRepository(dataContext.getConnection()));
+        productService = new ProductService(dataContext, productDependencyInjection.getProductRepository(dataContext.getConnection()),productDependencyInjection.getUnitRepository(dataContext.getConnection()));
         productApplication = new ProductApplication(productService);
     }
     

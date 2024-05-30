@@ -1,6 +1,7 @@
 package service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import model.entities.ProductModel;
 import model.entities.ResponseService;
 import model.entities.UnitModel;
@@ -28,6 +29,10 @@ public class ProductService implements IProductService {
             UnitModel unit = product.getUnit();
             unit.setId(1);
             product.setUnit(unit);
+            
+            Date dateNow = new Date();
+            product.setUpdatedDate(dateNow);
+            product.setCreatedDate(dateNow);
             
             if(product.validate()){
                 productRepository.insert(product);

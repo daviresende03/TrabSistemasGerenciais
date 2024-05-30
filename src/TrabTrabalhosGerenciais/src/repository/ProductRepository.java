@@ -1,5 +1,6 @@
 package repository;
 
+import java.sql.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -17,7 +18,11 @@ public class ProductRepository implements IProductRepository{
     
     @Override
     public void insert(ProductModel product) throws SQLException { 
-        String query = "INSERT INTO product(product_unit_id, name, type, cost_price, sale_price, stock) VALUES(?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO product(product_unit_id, name, type, cost_price, sale_price, stock, created_date, updated_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        Date sqlCreatedDate = new Date(product.getCreatedDate().getTime());
+        Date sqUpdatedDate = new Date(product.getUpdatedDate().getTime());
+        
         PreparedStatement statement = connect.prepareStatement(query);
         
         statement.setInt(1, product.getUnit().getId());
@@ -26,6 +31,8 @@ public class ProductRepository implements IProductRepository{
         statement.setDouble(4, product.getCostPrice());
         statement.setDouble(5, product.getSalePrice());
         statement.setDouble(6, product.getStock());
+        statement.setDate(7, sqlCreatedDate);
+        statement.setDate(8, sqUpdatedDate);
         
         statement.executeUpdate();
     }

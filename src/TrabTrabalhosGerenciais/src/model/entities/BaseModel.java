@@ -32,4 +32,13 @@ public abstract class BaseModel {
     public String getMessage(){
         return message;
     }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+    
 }

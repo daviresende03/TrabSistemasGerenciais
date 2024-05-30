@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import model.entities.PersonModel;
 import model.interfaces.repositories.IPersonRepository;
 import java.sql.Date;
+import java.util.List;
 
 public class PersonRepository implements IPersonRepository{
     
@@ -60,7 +61,7 @@ public class PersonRepository implements IPersonRepository{
     }
 
     @Override
-    public ArrayList<PersonModel> select() {
+    public List<PersonModel> select() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

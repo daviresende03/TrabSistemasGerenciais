@@ -3,9 +3,13 @@ package repository;
 import java.sql.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import model.entities.ProductModel;
+import model.entities.UnitModel;
+import model.enums.ProductTypeEnum;
 import model.interfaces.repositories.IProductRepository;
 
 public class ProductRepository implements IProductRepository{
@@ -17,44 +21,113 @@ public class ProductRepository implements IProductRepository{
     }
     
     @Override
-    public void insert(ProductModel product) throws SQLException { 
-        String query = "INSERT INTO product(product_unit_id, name, type, cost_price, sale_price, stock, created_date, updated_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        Date sqlCreatedDate = new Date(product.getCreatedDate().getTime());
-        Date sqUpdatedDate = new Date(product.getUpdatedDate().getTime());
+    public void insert(ProductModel model) throws SQLException { 
+        String query = "INSERT INTO product("
+                        + "product_unit_id,"
+                        + "name,"
+                        + "type,"
+                        + "cost_price,"
+                        + "sale_price,"
+                        + "stock,"
+                        + "created_at,"
+                        + "updated_at)"
+                        + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         
         PreparedStatement statement = connect.prepareStatement(query);
-        
-        statement.setInt(1, product.getUnit().getId());
-        statement.setString(2, product.getName());
-        statement.setInt(3,product.getType().getValue());
-        statement.setDouble(4, product.getCostPrice());
-        statement.setDouble(5, product.getSalePrice());
-        statement.setDouble(6, product.getStock());
-        statement.setDate(7, sqlCreatedDate);
-        statement.setDate(8, sqUpdatedDate);
+        statement.setInt(1, model.getUnit().getId());
+        statement.setString(2, model.getName());
+        statement.setInt(3,model.getType().getValue());
+        statement.setDouble(4, model.getCostPrice());
+        statement.setDouble(5, model.getSalePrice());
+        statement.setDouble(6, model.getStock());
+        statement.setDate(7, new Date(model.getCreatedDate().getTime()));
+        statement.setDate(8, new Date(model.getUpdatedDate().getTime()));
         
         statement.executeUpdate();
     }
 
     @Override
-    public void update(ProductModel model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update(ProductModel model) throws SQLException {
+        String query = "UPDATE product SET"
+                        + "product_unit_id =  ?,"
+                        + "name =             ?,"
+                        + "type =             ?,"
+                        + "cost_price =       ?,"
+                        + "sale_price =       ?,"
+                        + "stock =            ?,"
+                        + "updated_at =       ?,"
+                        + "WHERE product_id = ?";
+        
+        PreparedStatement statement = connect.prepareStatement(query);
+        statement.setInt(1, model.getUnit().getId());
+        statement.setString(2, model.getName());
+        statement.setInt(3,model.getType().getValue());
+        statement.setDouble(4, model.getCostPrice());
+        statement.setDouble(5, model.getSalePrice());
+        statement.setDouble(6, model.getStock());
+        statement.setDate(7, new Date(model.getUpdatedDate().getTime()));
+        statement.setInt(8, model.getId());
+        statement.executeUpdate();
     }
 
     @Override
-    public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void delete(int id) throws SQLException {
+        String query = "DELETE FROM product WHERE id = ?";
+        
+        PreparedStatement statement = connect.prepareStatement(query);
+        statement.setInt(1, id);
+        statement.executeUpdate();
     }
 
     @Override
-    public ProductModel select(int id) throws SQLException{
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ProductModel select(int id) throws SQLException {
+        ProductModel product = new ProductModel();
+        try{
+            String query = "SELECT * FROM product WHERE id = ?";
+        
+        PreparedStatement statement = connect.prepareStatement(query);
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+        
+        if (resultSet.next()) {
+            int unit_id = resultSet.getInt("product_unit_id");
+            String name = resultSet.getString("name");
+            int type = resultSet.getInt("type");
+            double costPrice = resultSet.getDouble("cost_price");
+            double salePrice = resultSet.getDouble("sale_price");
+            double stock = resultSet.getDouble("stock");
+            
+            return new ProductModel(name, ProductTypeEnum.fromInteger(type), new UnitModel(unit_id), costPrice, salePrice, stock);
+        }
+        return product;
+        }catch(Exception ex){
+            return product;
+        }
     }
 
     @Override
-    public ArrayList<ProductModel> select() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<ProductModel> select() throws SQLException {
+        List<ProductModel> products = new ArrayList<ProductModel>();
+        try{
+            String query = "SELECT * FROM product";
+        
+        PreparedStatement statement = connect.prepareStatement(query);
+        ResultSet resultSet = statement.executeQuery();
+        
+        while (resultSet.next()) {
+            int unit_id = resultSet.getInt("product_unit_id");
+            String name = resultSet.getString("name");
+            int type = resultSet.getInt("type");
+            double costPrice = resultSet.getDouble("cost_price");
+            double salePrice = resultSet.getDouble("sale_price");
+            double stock = resultSet.getDouble("stock");
+            
+            products.add(new ProductModel(name, ProductTypeEnum.fromInteger(type), new UnitModel(unit_id), costPrice, salePrice, stock));
+        }
+        return products;
+        }catch(Exception ex){
+            return products;
+        }
     }
     
 }

@@ -20,6 +20,8 @@ public class ProductModel extends BaseModel{
         this.salePrice = salePrice;
         this.stock = stock;
     }
+    
+    public ProductModel(){}
 
     public String getName() {
         return name;

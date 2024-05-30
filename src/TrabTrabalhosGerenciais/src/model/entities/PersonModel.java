@@ -27,6 +27,8 @@ public class PersonModel extends BaseModel{
         this.staff = staff;
         this.supplier = supplier;
     }
+    
+    public PersonModel(){}
 
     public PersonTypeEnum getType() {
         return type;

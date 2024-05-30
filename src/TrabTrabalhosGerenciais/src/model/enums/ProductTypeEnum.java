@@ -1,6 +1,7 @@
 package model.enums;
 
 public enum ProductTypeEnum {
+    NONE(0),
     PRODUCT_SALE(1),
     PLATE_LUNCH(2);
     
@@ -21,6 +22,6 @@ public enum ProductTypeEnum {
             case 2:
                 return PLATE_LUNCH;
         }
-        return null;
+        return NONE;
     }
 }

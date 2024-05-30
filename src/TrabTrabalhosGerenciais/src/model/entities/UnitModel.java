@@ -1,20 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.entities;
 
-/**
- *
- * @author Davi
- */
+import java.util.Objects;
+
 public class UnitModel extends BaseModel{
     private String name;
     private String symbol;
 
     public UnitModel(String name, String symbol) {
-        this.name = name;
-        this.symbol = symbol;
+        this.name = Objects.requireNonNullElse(name,"");
+        this.symbol = Objects.requireNonNullElse(symbol,"");
     }
 
     public String getName() {
@@ -31,6 +25,20 @@ public class UnitModel extends BaseModel{
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
+    }
+    
+    public boolean validate(){
+        if(name.isEmpty()){
+            addMessage("Nome da unidade é obrigatório.");
+            return false;
+        }
+        
+        if(symbol.isEmpty()){
+            addMessage("Símbolo da unidade é obrigatório.");
+            return false;
+        }
+        
+        return true;
     }
     
 }

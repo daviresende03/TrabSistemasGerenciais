@@ -3,6 +3,7 @@ package controller;
 import Infra.DependencyInjection.ProductDI;
 import application.ProductApplication;
 import controller.viewModels.ProductVM;
+import model.entities.ResponseService;
 import model.interfaces.repositories.IDataContext;
 import model.interfaces.services.IProductService;
 import service.ProductService;
@@ -21,8 +22,8 @@ public class ProductController {
         productApplication = new ProductApplication(productService);
     }
     
-    public void create(ProductVM productVM){
-        productApplication.create(productVM);
+    public ResponseService create(ProductVM productVM){
+        return productApplication.create(productVM);
     }
     
 }

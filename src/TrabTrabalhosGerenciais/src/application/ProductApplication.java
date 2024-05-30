@@ -2,6 +2,7 @@ package application;
 
 import controller.viewModels.ProductVM;
 import model.entities.ProductModel;
+import model.entities.ResponseService;
 import model.entities.UnitModel;
 import model.enums.ProductTypeEnum;
 import model.interfaces.services.IProductService;
@@ -13,15 +14,15 @@ public class ProductApplication {
         this.productService = productService;
     }
     
-    public void create(ProductVM productVM){
+    public ResponseService create(ProductVM productVM){
         ProductModel productModel = new ProductModel(
                 productVM.name,
                 ProductTypeEnum.fromInteger(productVM.type),
-                new UnitModel(productVM.unit.name, productVM.unit.symbol),
+                new UnitModel(productVM.unitName, productVM.unitSymbol),
                 productVM.costPrice,
                 productVM.salePrice,
                 productVM.stock
         );
-        productService.insert(productModel);
+        return productService.insert(productModel);
     }
 }

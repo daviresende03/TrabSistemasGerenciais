@@ -75,7 +75,7 @@ public class PersonModel extends BaseModel{
     public void setObservation(String observation) {
         this.observation = observation;
     }
-    
+
     public boolean getCustomer() {
         return customer;
     }
@@ -83,7 +83,7 @@ public class PersonModel extends BaseModel{
     public void setCustomer(boolean customer) {
         this.customer = customer;
     }
-    
+
     public boolean getStaff() {
         return staff;
     }
@@ -91,7 +91,7 @@ public class PersonModel extends BaseModel{
     public void setStaff(boolean staff) {
         this.staff = staff;
     }
-    
+
     public boolean getSupplier() {
         return supplier;
     }
@@ -99,5 +99,38 @@ public class PersonModel extends BaseModel{
     public void setSupplier(boolean supplier) {
         this.supplier = supplier;
     }
-    
+
+    public boolean validate(){
+        if(name.isEmpty()){
+            addMessage("Nome do usuário é obrigatório.");
+            return false;
+        }
+        
+        if(document.isEmpty()){
+            addMessage("Documento do usuário é obrigatório.");
+            return false;
+        }
+        
+        if(type.getValue() == 0){
+            addMessage("Tipo de pessoa é obrigatório.");
+            return false;
+        }
+        
+        if(address.getStreet().isEmpty() || address.getNumber().isEmpty() || address.getNeighborhood().isEmpty() || address.getCity().isEmpty() || address.getState().isEmpty() || address.getPostalCode().isEmpty() || address.getCountry().isEmpty() ){
+            addMessage("Preencha todos os campos do endereço.");
+            return false;
+        }
+        
+        if(birthDate == null){
+            addMessage("Data de nascimento é obrigatória.");
+            return false;
+        }
+        
+        if(!customer && !staff && !supplier){
+            addMessage("O preenchimento de ao menos uma função é obrigatório.");
+            return false;
+        }
+        
+        return true;
+    }
 }

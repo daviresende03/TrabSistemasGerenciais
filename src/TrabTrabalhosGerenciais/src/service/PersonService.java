@@ -3,6 +3,8 @@ package service;
 import java.util.ArrayList;
 import java.util.Date;
 import model.entities.PersonModel;
+import model.entities.ResponseService;
+import model.enums.ResponseTypeEnum;
 import model.interfaces.repositories.IDataContext;
 import model.interfaces.repositories.IPersonRepository;
 import model.interfaces.services.IPersonService;
@@ -10,45 +12,51 @@ import model.interfaces.services.IPersonService;
 public class PersonService implements IPersonService {
     private final IPersonRepository personRepository;
     private final IDataContext dataContext;
+    private ResponseService responseService;
     
     public PersonService(IDataContext dataContext, IPersonRepository personRepository){
         this.dataContext = dataContext;
         this.personRepository = personRepository;
+        this.responseService = new ResponseService();
     }
     
     @Override
-    public String insert(PersonModel person){
+    public ResponseService insert(PersonModel person){
         try{
             Date date = new Date();
             person.setUpdatedDate(date);
             person.setCreatedDate(date);
             
-            personRepository.insert(person);
+            if(person.validate()){
+                personRepository.insert(person);
+            }else{
+                return responseService.setResponse(ResponseTypeEnum.ERROR, person.getMessage());
+            }
             dataContext.commit();
-            return "";
+            return responseService.setResponse(ResponseTypeEnum.SUCCESS, "Usuário cadastrado com sucesso!");
         }catch(Exception ex){
             dataContext.rollback();
-            return "";
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao realizar o cadastro do usuário.");
         }
     }
 
     @Override
-    public String remove(int id) {
+    public ResponseService remove(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public String update(PersonModel model) {
+    public ResponseService update(PersonModel model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public PersonModel get(int id) {
+    public ResponseService<PersonModel> get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<PersonModel> getAll() {
+    public ResponseService<ArrayList<PersonModel>> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

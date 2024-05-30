@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
 import Infra.DependencyInjection.PersonDI;
@@ -11,10 +7,6 @@ import model.interfaces.repositories.IDataContext;
 import model.interfaces.services.IPersonService;
 import service.PersonService;
 
-/**
- *
- * @author joaov
- */
 public class PersonController {
     private final PersonDI personDependencyInjection;
     private final IPersonService personService;

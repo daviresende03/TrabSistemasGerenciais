@@ -1,11 +1,12 @@
 package repository;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 import model.entities.UnitModel;
 import model.interfaces.repositories.IUnitRepository;
 
@@ -19,27 +20,43 @@ public class UnitRepository implements IUnitRepository{
 
     @Override
     public void insert(UnitModel model) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String query = "INSERT INTO product_unit("
+                        + "name,"
+                        + "symbol,"
+                        + "created_at,"
+                        + "updated_at)"
+                        + "VALUES(?, ?, ?, ?)";
+        
+        PreparedStatement statement = connect.prepareStatement(query);
+        statement.setString(1, model.getName());
+        statement.setString(2, model.getSymbol());
+        statement.setDate(3, new Date(model.getCreatedDate().getTime()));
+        statement.setDate(4, new Date(model.getUpdatedDate().getTime()));
+        statement.executeUpdate();
     }
 
     @Override
-    public void update(UnitModel model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update(UnitModel model) throws SQLException {
+        String query = "UPDATE product_unit SET"
+                        + "name =                  ?,"
+                        + "symbol =                ?,"
+                        + "updated_at =            ?,"
+                        + "WHERE product_unit_id = ?";
+        
+        PreparedStatement statement = connect.prepareStatement(query);
+        statement.setString(1, model.getName());
+        statement.setString(2, model.getSymbol());
+        statement.setDate(3, new Date(model.getUpdatedDate().getTime()));
+        statement.executeUpdate();
     }
 
     @Override
-    public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public UnitModel select(int id) throws SQLException{
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<UnitModel> select() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void delete(int id) throws SQLException {
+        String query = "DELETE FROM product_unit WHERE id = ?";
+        
+        PreparedStatement statement = connect.prepareStatement(query);
+        statement.setInt(1, id);
+        statement.executeUpdate();
     }
 
     @Override
@@ -58,6 +75,46 @@ public class UnitRepository implements IUnitRepository{
             return unit;
         }catch(Exception ex){
             return unit;
+        }
+    }
+    
+    @Override
+    public UnitModel select(int id) throws SQLException{
+        UnitModel unit = new UnitModel();
+        try{
+            String sql = "SELECT * FROM product_unit WHERE product_unit_id = ?";
+            PreparedStatement statement = connect.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String name = resultSet.getString("name");
+                String symbol = resultSet.getString("symbol");
+                return new UnitModel(id, name, symbol);
+            }
+            return unit;
+        }catch(Exception ex){
+            return unit;
+        }
+    }
+
+    @Override
+    public List<UnitModel> select() throws SQLException {
+        List<UnitModel> units = new ArrayList<UnitModel>();
+        try{
+            String sql = "SELECT * FROM product_unit";
+            PreparedStatement statement = connect.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            
+            while (resultSet.next()) {
+                int id = resultSet.getInt("product_unit_id");
+                String name = resultSet.getString("name");
+                String symbol = resultSet.getString("symbol");
+                
+                units.add(new UnitModel(id, name, symbol));
+            }
+            return units;
+        }catch(Exception ex){
+            return units;
         }
     }
     

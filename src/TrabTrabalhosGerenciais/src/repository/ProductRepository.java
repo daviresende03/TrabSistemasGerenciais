@@ -115,6 +115,7 @@ public class ProductRepository implements IProductRepository{
         ResultSet resultSet = statement.executeQuery();
         
         while (resultSet.next()) {
+            int id = resultSet.getInt("product_id");
             int unit_id = resultSet.getInt("product_unit_id");
             String name = resultSet.getString("name");
             int type = resultSet.getInt("type");
@@ -122,7 +123,7 @@ public class ProductRepository implements IProductRepository{
             double salePrice = resultSet.getDouble("sale_price");
             double stock = resultSet.getDouble("stock");
             
-            products.add(new ProductModel(name, ProductTypeEnum.fromInteger(type), new UnitModel(unit_id), costPrice, salePrice, stock));
+            products.add(new ProductModel(id, name, ProductTypeEnum.fromInteger(type), new UnitModel(unit_id), costPrice, salePrice, stock));
         }
         return products;
         }catch(Exception ex){

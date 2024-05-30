@@ -61,14 +61,21 @@ public class ProductRegisterView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-
-        /*ResponseService response = controller.create(p);
+        ProductVM p = new ProductVM();
+        p.name = "134";
+        p.costPrice = 12;
+        p.salePrice = 11;
+        p.unitName = "UNIDADE";
+        p.type = 1;
+        
+        
+        ResponseService response = controller.create(p);
         
         if(response.getType() == ResponseTypeEnum.SUCCESS){
             JOptionPane.showMessageDialog(null, response.getMessage(), "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(null, response.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }*/
+        }
     }//GEN-LAST:event_jButton1MouseClicked
 
 

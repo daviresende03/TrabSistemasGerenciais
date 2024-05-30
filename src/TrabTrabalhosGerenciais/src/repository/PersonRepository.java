@@ -19,8 +19,8 @@ public class PersonRepository implements IPersonRepository{
     @Override
     public void insert(PersonModel person) throws SQLException { 
         String query = "INSERT INTO person(name, document, type, address_street, address_number, address_neighborhood, address_city, "
-                + "address_state, address_postalCode, address_country, birthDate, observation, customer, staff, supplier, "
-                + "createdAt, updatedAt) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "address_state, address_postal_code, address_country, birth_date, observation, customer, staff, supplier, "
+                + "created_at, updated_at) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement statement = connect.prepareStatement(query);
         
         statement.setString(1, person.getName());

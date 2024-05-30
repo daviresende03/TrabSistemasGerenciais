@@ -12,6 +12,16 @@ public class ProductModel extends BaseModel{
     private double salePrice;
     private double stock;
 
+    public ProductModel(int id, String name, ProductTypeEnum type, UnitModel unit, double costPrice, double salePrice, double stock) {
+        setId(id);
+        this.name = Objects.requireNonNullElse(name, "");
+        this.type = Objects.requireNonNullElse(type, ProductTypeEnum.NONE);
+        this.unit = Objects.requireNonNullElse(unit, new UnitModel("",""));
+        this.costPrice = costPrice;
+        this.salePrice = salePrice;
+        this.stock = stock;
+    }
+    
     public ProductModel(String name, ProductTypeEnum type, UnitModel unit, double costPrice, double salePrice, double stock) {
         this.name = Objects.requireNonNullElse(name, "");
         this.type = Objects.requireNonNullElse(type, ProductTypeEnum.NONE);

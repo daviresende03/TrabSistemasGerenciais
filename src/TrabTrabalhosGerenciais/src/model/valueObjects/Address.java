@@ -77,5 +77,12 @@ public class Address extends BaseModel{
         this.country = country;
     }
     
+    public boolean validate(){
+        if(street.isEmpty() || number.isEmpty() || neighborhood.isEmpty() || city.isEmpty() || state.isEmpty() || postalCode.isEmpty() || country.isEmpty() ){
+            addMessage("Preencha todos os campos do endereço.");
+            return false;
+        }
+        return true;
+    }
     
 }

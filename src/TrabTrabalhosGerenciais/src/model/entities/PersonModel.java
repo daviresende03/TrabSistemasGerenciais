@@ -116,8 +116,8 @@ public class PersonModel extends BaseModel{
             return false;
         }
         
-        if(address.getStreet().isEmpty() || address.getNumber().isEmpty() || address.getNeighborhood().isEmpty() || address.getCity().isEmpty() || address.getState().isEmpty() || address.getPostalCode().isEmpty() || address.getCountry().isEmpty() ){
-            addMessage("Preencha todos os campos do endereço.");
+        if(!address.validate()){
+            addMessage(address.getMessage());
             return false;
         }
         

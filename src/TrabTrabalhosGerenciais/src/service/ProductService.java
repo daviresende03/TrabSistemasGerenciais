@@ -70,7 +70,7 @@ public class ProductService implements IProductService {
             return responseService.setResponse(ResponseTypeEnum.ERROR, "Produto deletado com sucesso.");
         }catch(Exception ex){
             dataContext.rollback();
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o produto.");
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao deletar o produto.");
         }
     }
 
@@ -96,7 +96,7 @@ public class ProductService implements IProductService {
             model.setUpdatedDate(dateNow);
             
             if(model.validate()){
-                productRepository.insert(model);
+                productRepository.update(model);
             }else{
                 return responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());
             }
@@ -104,7 +104,7 @@ public class ProductService implements IProductService {
             return responseService.setResponse(ResponseTypeEnum.SUCCESS, "Produto atualizado com sucesso!");
         }catch(Exception ex){
             dataContext.rollback();
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o produto.");
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao atualizar o produto.");
         }
     }
 

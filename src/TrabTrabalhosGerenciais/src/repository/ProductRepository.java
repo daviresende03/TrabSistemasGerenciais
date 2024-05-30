@@ -97,7 +97,7 @@ public class ProductRepository implements IProductRepository{
             double salePrice = resultSet.getDouble("sale_price");
             double stock = resultSet.getDouble("stock");
             
-            return new ProductModel(name, ProductTypeEnum.fromInteger(type), new UnitModel(unit_id), costPrice, salePrice, stock);
+            return new ProductModel(id, name, ProductTypeEnum.fromInteger(type), new UnitModel(unit_id), costPrice, salePrice, stock);
         }
         return product;
         }catch(Exception ex){

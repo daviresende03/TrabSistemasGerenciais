@@ -1,7 +1,7 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import model.entities.ProductModel;
 import model.entities.ResponseService;
 import model.entities.UnitModel;
@@ -25,23 +25,22 @@ public class ProductService implements IProductService {
     }
     
     @Override
-    public ResponseService insert(ProductModel product){
+    public ResponseService insert(ProductModel model){
         try{
-            UnitModel unit = unitRepository.select(product.getUnit().getName());
+            UnitModel unit = unitRepository.select(model.getUnit().getName());
             if(unit.getId() == 0){
                 return responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível recuperar a unidade informada.");
             }
-            
-            product.setUnit(unit);
+            model.setUnit(unit);
             
             Date dateNow = new Date();
-            product.setUpdatedDate(dateNow);
-            product.setCreatedDate(dateNow);
+            model.setUpdatedDate(dateNow);
+            model.setCreatedDate(dateNow);
             
-            if(product.validate()){
-                productRepository.insert(product);
+            if(model.validate()){
+                productRepository.insert(model);
             }else{
-                return responseService.setResponse(ResponseTypeEnum.ERROR, product.getMessage());
+                return responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());
             }
             dataContext.commit();
             return responseService.setResponse(ResponseTypeEnum.SUCCESS, "Produto cadastrado com sucesso!");
@@ -53,21 +52,88 @@ public class ProductService implements IProductService {
 
     @Override
     public ResponseService remove(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            if(id <= 0){
+                return responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+            }
+            
+            ProductModel product = productRepository.select(id);
+            
+            if(product.getId() <= 0){
+                return responseService.setResponse(ResponseTypeEnum.ERROR, "Produto não encontrado.");
+            }
+            
+            productRepository.delete(id);
+            
+            dataContext.commit();
+            
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Produto deletado com sucesso.");
+        }catch(Exception ex){
+            dataContext.rollback();
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o produto.");
+        }
     }
 
     @Override
     public ResponseService update(ProductModel model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            if(model.getId() <= 0){
+                return responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+            }
+            
+            ProductModel product = productRepository.select(model.getId());
+            if(product.getId() <= 0){
+                return responseService.setResponse(ResponseTypeEnum.ERROR, "Produto não encontrado.");
+            }
+            
+            UnitModel unit = unitRepository.select(model.getUnit().getName());
+            if(unit.getId() == 0){
+                return responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível recuperar a unidade informada.");
+            }
+            model.setUnit(unit);
+            
+            Date dateNow = new Date();
+            model.setUpdatedDate(dateNow);
+            
+            if(model.validate()){
+                productRepository.insert(model);
+            }else{
+                return responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());
+            }
+            dataContext.commit();
+            return responseService.setResponse(ResponseTypeEnum.SUCCESS, "Produto atualizado com sucesso!");
+        }catch(Exception ex){
+            dataContext.rollback();
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o produto.");
+        }
     }
 
     @Override
     public ResponseService<ProductModel> get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            if(id <= 0){
+                return responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+            }
+            
+            ProductModel product = productRepository.select(id);
+            
+            if(product.getId() >= 0){
+                return responseService.setResponse(ResponseTypeEnum.SUCCESS, "", product);
+            }
+            
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Produto não encontrado.");
+        }catch(Exception ex){
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o produto.");
+        }
     }
 
     @Override
-    public ResponseService<ArrayList<ProductModel>> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ResponseService<List<ProductModel>> getAll() {
+         try{            
+            List<ProductModel> products = productRepository.select();
+            return responseService.setResponse(ResponseTypeEnum.SUCCESS, "", products);
+        }catch(Exception ex){
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar todos os produtos.");
+        }
     }
 }

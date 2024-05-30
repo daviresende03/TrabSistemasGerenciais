@@ -1,7 +1,7 @@
 
 package model.interfaces.services;
 
-import java.util.ArrayList;
+import java.util.List;
 import model.entities.ResponseService;
 
 public interface IBaseService<T> {
@@ -9,5 +9,5 @@ public interface IBaseService<T> {
     ResponseService remove(int id);
     ResponseService update(T model);
     ResponseService<T> get(int id);
-    ResponseService<ArrayList<T>> getAll();
+    ResponseService<List<T>> getAll();
 }

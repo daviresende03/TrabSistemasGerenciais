@@ -2,6 +2,7 @@ package service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import model.entities.PersonModel;
 import model.entities.ResponseService;
 import model.enums.ResponseTypeEnum;
@@ -56,7 +57,7 @@ public class PersonService implements IPersonService {
     }
 
     @Override
-    public ResponseService<ArrayList<PersonModel>> getAll() {
+    public ResponseService<List<PersonModel>> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

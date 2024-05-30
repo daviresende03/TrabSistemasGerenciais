@@ -1,14 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.enums;
 
-/**
- *
- * @author Davi
- */
 public enum PersonTypeEnum {
-    PF,
-    PJ
+    PF(1),
+    PJ(2);
+    
+    private final int value;
+    
+    PersonTypeEnum(int value){
+        this.value = value;
+    }
+    
+    public int getValue(){
+        return value;
+    }
+    
+     public static PersonTypeEnum fromInteger(int type){
+        switch(type){
+            case 1:
+                return PF;
+            case 2:
+                return PJ;
+        }
+        return null;
+    }
 }
+

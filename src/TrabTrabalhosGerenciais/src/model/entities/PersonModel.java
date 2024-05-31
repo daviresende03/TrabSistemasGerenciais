@@ -28,6 +28,10 @@ public class PersonModel extends BaseModel{
         this.supplier = supplier;
     }
     
+    public PersonModel(int id){
+        this.setId(id);
+    }
+    
     public PersonModel(){}
 
     public PersonTypeEnum getType() {

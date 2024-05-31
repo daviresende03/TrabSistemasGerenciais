@@ -71,7 +71,7 @@ public class PersonRepository implements IPersonRepository{
                 + "document = ?"
                 + "type = ?"
                 + "address_street = ?"
-                + "address_numbe = ?,"
+                + "address_number = ?,"
                 + "address_neighborhood = ?"
                 + "address_city = ?"
                 + "address_state = ?"

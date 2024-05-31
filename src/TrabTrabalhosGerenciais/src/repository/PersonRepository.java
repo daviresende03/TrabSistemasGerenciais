@@ -106,7 +106,7 @@ public class PersonRepository implements IPersonRepository{
 
     @Override
     public void delete(int id) throws SQLException {
-        String query = "DELETE FROM person WHERE id = ?";
+        String query = "DELETE FROM person WHERE person_id = ?";
         
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, id);
@@ -117,10 +117,45 @@ public class PersonRepository implements IPersonRepository{
     public PersonModel select(int id) throws SQLException {
         PersonModel person = new PersonModel();
         try{
-            String query = "SELECT * FROM person WHERE id = ?";
+            String query = "SELECT * FROM person WHERE person_id = ?";
         
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+        
+        if (resultSet.next()) {
+            String name = resultSet.getString("name");
+            String document = resultSet.getString("document");
+            int type = resultSet.getInt("type");
+            String address_street = resultSet.getString("address_street");
+            String address_number = resultSet.getString("address_number");
+            String address_neighborhood = resultSet.getString("address_neighborhood");
+            String address_city = resultSet.getString("address_city");
+            String address_state = resultSet.getString("address_state");
+            String address_postal_code = resultSet.getString("address_postal_code");
+            String address_country = resultSet.getString("address_country");
+            Date birth_date = resultSet.getDate("birth_date");
+            String observation = resultSet.getString("observation");
+            boolean customer = resultSet.getBoolean("customer");
+            boolean staff = resultSet.getBoolean("staff");
+            boolean supplier = resultSet.getBoolean("supplier");
+            
+            return new PersonModel(name, document, PersonTypeEnum.fromInteger(type), new Address(address_street, address_number, address_neighborhood, address_city, address_state, address_postal_code, address_country), birth_date, observation, customer, staff, supplier);
+        }
+        return person;
+        }catch(Exception ex){
+            return person;
+        }
+    }
+    
+    @Override
+    public PersonModel select(String doc) throws SQLException {
+        PersonModel person = new PersonModel();
+        try{
+            String query = "SELECT * FROM person WHERE document = ?";
+        
+        PreparedStatement statement = connect.prepareStatement(query);
+        statement.setString(1, doc);
         ResultSet resultSet = statement.executeQuery();
         
         if (resultSet.next()) {

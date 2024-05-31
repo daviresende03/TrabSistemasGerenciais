@@ -27,6 +27,10 @@ public class PersonService implements IPersonService {
             person.setUpdatedDate(date);
             person.setCreatedDate(date);
             
+            if(personRepository.select(person.getDocument()).getId() > 0){
+                return responseService.setResponse(ResponseTypeEnum.ERROR, "Já existe um cadastro com este documento.");
+            }
+            
             if(person.validate()){
                 personRepository.insert(person);
             }else{

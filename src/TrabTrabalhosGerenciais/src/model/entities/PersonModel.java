@@ -1,6 +1,7 @@
 package model.entities;
 
 import java.util.Date;
+import java.util.Objects;
 import model.enums.PersonTypeEnum;
 import model.valueObjects.Address;
 
@@ -17,12 +18,12 @@ public class PersonModel extends BaseModel{
 
 
     public PersonModel(String name, String document, PersonTypeEnum type, Address address, Date birthDate, String observation, boolean customer, boolean staff, boolean supplier) {
-        this.name = name;
-        this.document = document;
-        this.type = type;
-        this.address = address;
-        this.birthDate = birthDate;
-        this.observation = observation;
+        this.name = Objects.requireNonNullElse(name,"");
+        this.document = Objects.requireNonNullElse(document,"");
+        this.type = Objects.requireNonNullElse(type,PersonTypeEnum.PF);
+        this.address = Objects.requireNonNullElse(address, new Address());
+        this.birthDate = Objects.requireNonNullElse(birthDate, new Date());
+        this.observation = Objects.requireNonNullElse(observation, "");
         this.customer = customer;
         this.staff = staff;
         this.supplier = supplier;

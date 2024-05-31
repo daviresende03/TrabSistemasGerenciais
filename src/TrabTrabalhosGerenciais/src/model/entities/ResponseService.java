@@ -1,15 +1,15 @@
 package model.entities;
 
+import java.util.Objects;
 import model.enums.ResponseTypeEnum;
 
 public class ResponseService {
     private ResponseTypeEnum type;
     private String message;
     
-    public ResponseService setResponse(ResponseTypeEnum type, String message){
-        this.type = type;
-        this.message = message;
-        return this;
+    public void setResponse(ResponseTypeEnum type, String message){
+        this.type = Objects.requireNonNullElse(type, ResponseTypeEnum.ERROR);
+        this.message = Objects.requireNonNullElse(message,"");
     }
 
     public ResponseTypeEnum getType() {

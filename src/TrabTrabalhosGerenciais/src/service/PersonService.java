@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import model.entities.PersonModel;
@@ -21,63 +22,74 @@ public class PersonService implements IPersonService {
     }
     
     @Override
-    public ResponseService insert(PersonModel person){
+    public ResponseService getResponseService(){
+        return responseService;
+    }
+    
+    @Override
+    public void insert(PersonModel person){
         try{
             Date date = new Date();
             person.setUpdatedDate(date);
             person.setCreatedDate(date);
             
             if(personRepository.select(person.getDocument()).getId() > 0){
-                return responseService.setResponse(ResponseTypeEnum.ERROR, "Já existe um cadastro com este documento.");
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Já existe um cadastro com este documento.");
+                return;
             }
             
             if(person.validate()){
                 personRepository.insert(person);
             }else{
-                return responseService.setResponse(ResponseTypeEnum.ERROR, person.getMessage());
+                responseService.setResponse(ResponseTypeEnum.ERROR, person.getMessage());
+                return;
             }
             dataContext.commit();
-            return responseService.setResponse(ResponseTypeEnum.SUCCESS, "Usuário cadastrado com sucesso!");
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Usuário cadastrado com sucesso!");
         }catch(Exception ex){
             dataContext.rollback();
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao realizar o cadastro do usuário.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao realizar o cadastro do usuário.");
         }
     }
 
     @Override
-    public ResponseService remove(int id) {
+    public void remove(int id) {
         try{
             if(id <= 0){
-                return responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+                responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+                return;
             }
             
             PersonModel person = personRepository.select(id);
             
             if(person.getId() <= 0){
-                return responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário não encontrado.");
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário não encontrado.");
+                return;
             }
             
             personRepository.delete(id);
             
             dataContext.commit();
             
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário deletado com sucesso.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário deletado com sucesso.");
         }catch(Exception ex){
             dataContext.rollback();
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o usuário.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o usuário.");
         }
     }
 
     @Override
-    public ResponseService update(PersonModel model) {
+    public void update(PersonModel model) {
         try{
             if(model.getId() <= 0){
-                return responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+                responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+                return;
             }
             
             PersonModel person = personRepository.select(model.getId());
             if(person.getId() <= 0){
-                return responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário não encontrado.");
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário não encontrado.");
+                return;
             }
             
             Date dateNow = new Date();
@@ -86,42 +98,48 @@ public class PersonService implements IPersonService {
             if(model.validate()){
                 personRepository.update(model);
             }else{
-                return responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());
+                responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());
+                return;
             }
             dataContext.commit();
-            return responseService.setResponse(ResponseTypeEnum.SUCCESS, "Usuário atualizado com sucesso!");
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Usuário atualizado com sucesso!");
         }catch(Exception ex){
             dataContext.rollback();
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o usuário.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o usuário.");
         }
     }
 
     @Override
-    public ResponseService<PersonModel> get(int id) {
+    public PersonModel get(int id) {
         try{
             if(id <= 0){
-                return responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+                responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+                return new PersonModel();
             }
             
             PersonModel person = personRepository.select(id);
             
             if(person.getId() >= 0){
-                return responseService.setResponse(ResponseTypeEnum.SUCCESS, "", person);
+                responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
+            }else{
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário não encontrado.");
             }
-            
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário não encontrado.");
+            return person;
         }catch(Exception ex){
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o usuário.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o usuário.");
+            return new PersonModel();
         }
     }
 
     @Override
-    public ResponseService<List<PersonModel>> getAll() {
+    public List<PersonModel> getAll() {
         try{            
             List<PersonModel> people = personRepository.select();
-            return responseService.setResponse(ResponseTypeEnum.SUCCESS, "", people);
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
+            return people;
         }catch(Exception ex){
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar todos os usuários.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar todos os usuários.");
+            return new ArrayList<PersonModel>();
         }
     }
 }

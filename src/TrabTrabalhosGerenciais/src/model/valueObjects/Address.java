@@ -1,5 +1,6 @@
 package model.valueObjects;
 
+import java.util.Objects;
 import model.entities.BaseModel;
 
 public class Address extends BaseModel{
@@ -12,14 +13,16 @@ public class Address extends BaseModel{
     private String country;
 
     public Address(String street, String number, String neighborhood, String city, String state, String postalCode, String country) {
-        this.street = street;
-        this.number = number;
-        this.neighborhood = neighborhood;
-        this.city = city;
-        this.state = state;
-        this.postalCode = postalCode;
-        this.country = country;
+        this.street = Objects.requireNonNullElse(street,"");
+        this.number = Objects.requireNonNullElse(number,"");
+        this.neighborhood = Objects.requireNonNullElse(neighborhood,"");
+        this.city = Objects.requireNonNullElse(city,"");
+        this.state = Objects.requireNonNullElse(state,"");
+        this.postalCode = Objects.requireNonNullElse(postalCode,"");
+        this.country = Objects.requireNonNullElse(country,"");
     }
+    
+    public Address(){}
 
     public String getStreet() {
         return street;

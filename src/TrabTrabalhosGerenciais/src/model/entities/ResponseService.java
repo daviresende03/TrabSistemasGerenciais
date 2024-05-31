@@ -1,22 +1,15 @@
 package model.entities;
 
+import java.util.Objects;
 import model.enums.ResponseTypeEnum;
 
-public class ResponseService<T> {
+public class ResponseService {
     private ResponseTypeEnum type;
     private String message;
-    private T data;
     
-    public ResponseService setResponse(ResponseTypeEnum type, String message){
-        this.type = type;
-        this.message = message;
-        return this;
-    }
-    public ResponseService setResponse(ResponseTypeEnum type, String message, T obj){
-        this.type = type;
-        this.message = message;
-        this.data = obj;
-        return this;
+    public void setResponse(ResponseTypeEnum type, String message){
+        this.type = Objects.requireNonNullElse(type, ResponseTypeEnum.ERROR);
+        this.message = Objects.requireNonNullElse(message,"");
     }
 
     public ResponseTypeEnum getType() {
@@ -25,9 +18,5 @@ public class ResponseService<T> {
 
     public String getMessage() {
         return message;
-    }
-
-    public T getData() {
-        return data;
     }
 }

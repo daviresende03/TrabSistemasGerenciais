@@ -25,11 +25,17 @@ public class ProductService implements IProductService {
     }
     
     @Override
-    public ResponseService insert(ProductModel model){
+    public ResponseService getResponseService(){
+        return this.responseService;
+    }
+    
+    @Override
+    public void insert(ProductModel model){
         try{
             UnitModel unit = unitRepository.select(model.getUnit().getName());
             if(unit.getId() == 0){
-                return responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível recuperar a unidade informada.");
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível recuperar a unidade informada.");
+                return;
             }
             model.setUnit(unit);
             
@@ -40,55 +46,61 @@ public class ProductService implements IProductService {
             if(model.validate()){
                 productRepository.insert(model);
             }else{
-                return responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());
+                responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());
+                return;
             }
             dataContext.commit();
-            return responseService.setResponse(ResponseTypeEnum.SUCCESS, "Produto cadastrado com sucesso!");
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Produto cadastrado com sucesso!");
         }catch(Exception ex){
             dataContext.rollback();
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao realizar o cadastro do produto.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao realizar o cadastro do produto.");
         }
     }
 
     @Override
-    public ResponseService remove(int id) {
+    public void remove(int id) {
         try{
             if(id <= 0){
-                return responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+                responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+                return;
             }
             
             ProductModel product = productRepository.select(id);
             
             if(product.getId() <= 0){
-                return responseService.setResponse(ResponseTypeEnum.ERROR, "Produto não encontrado.");
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Produto não encontrado.");
+                return;
             }
             
             productRepository.delete(id);
             
             dataContext.commit();
             
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Produto deletado com sucesso.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Produto deletado com sucesso.");
         }catch(Exception ex){
             dataContext.rollback();
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao deletar o produto.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao deletar o produto.");
         }
     }
 
     @Override
-    public ResponseService update(ProductModel model) {
+    public void update(ProductModel model) {
         try{
             if(model.getId() <= 0){
-                return responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+                responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+                return;
             }
             
             ProductModel product = productRepository.select(model.getId());
             if(product.getId() <= 0){
-                return responseService.setResponse(ResponseTypeEnum.ERROR, "Produto não encontrado.");
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Produto não encontrado.");
+                return;
             }
             
             UnitModel unit = unitRepository.select(model.getUnit().getName());
             if(unit.getId() == 0){
-                return responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível recuperar a unidade informada.");
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível recuperar a unidade informada.");
+                return;
             }
             model.setUnit(unit);
             
@@ -98,42 +110,48 @@ public class ProductService implements IProductService {
             if(model.validate()){
                 productRepository.update(model);
             }else{
-                return responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());
+                responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());
+                return;
             }
             dataContext.commit();
-            return responseService.setResponse(ResponseTypeEnum.SUCCESS, "Produto atualizado com sucesso!");
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Produto atualizado com sucesso!");
         }catch(Exception ex){
             dataContext.rollback();
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao atualizar o produto.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao atualizar o produto.");
         }
     }
 
     @Override
-    public ResponseService<ProductModel> get(int id) {
+    public ProductModel get(int id) {
         try{
             if(id <= 0){
-                return responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+                responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+                return new ProductModel();
             }
             
             ProductModel product = productRepository.select(id);
             
-            if(product.getId() >= 0){
-                return responseService.setResponse(ResponseTypeEnum.SUCCESS, "", product);
+            if(product.getId() <= 0){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Produto não encontrado.");
+            }else{
+                responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
             }
-            
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Produto não encontrado.");
+            return product;
         }catch(Exception ex){
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o produto.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o produto.");
+            return new ProductModel();
         }
     }
 
     @Override
-    public ResponseService<List<ProductModel>> getAll() {
+    public List<ProductModel> getAll() {
          try{            
             List<ProductModel> products = productRepository.select();
-            return responseService.setResponse(ResponseTypeEnum.SUCCESS, "", products);
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
+            return products;
         }catch(Exception ex){
-            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar todos os produtos.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar todos os produtos.");
+            return null;
         }
     }
 }

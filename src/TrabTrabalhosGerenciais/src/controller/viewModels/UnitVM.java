@@ -1,7 +1,15 @@
 package controller.viewModels;
 
+import model.entities.UnitModel;
+
 public class UnitVM {
     public int id;
     public String name;
     public String symbol;
+    
+    public UnitVM(UnitModel unitModel){
+        id = unitModel.getId();
+        name = unitModel.getName();
+        symbol = unitModel.getSymbol();
+    }
 }

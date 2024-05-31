@@ -32,8 +32,12 @@ public class ProductController {
         productApplication = new ProductApplication(productService);
     }
     
-    public ResponseService create(ProductVM productVM){
-        return productApplication.create(productVM);
+    public ResponseService getResponseService(){
+        return productApplication.getResponseService();
+    }
+    
+    public void create(ProductVM productVM){
+        productApplication.create(productVM);
     }
     
 }

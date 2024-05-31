@@ -32,6 +32,10 @@ public class ProductModel extends BaseModel{
     }
     
     public ProductModel(){}
+    
+    public ProductModel(int id){
+        setId(id);
+    }
 
     public String getName() {
         return name;

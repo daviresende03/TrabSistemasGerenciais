@@ -1,24 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.entities;
 
-import java.util.ArrayList;
+import java.util.List;
 
-/**
- *
- * @author joaov
- */
 public class OrderModel extends BaseModel{
         private PersonModel customer;
         private PersonModel waiter;
-        private ArrayList<ProductModel> products;
+        private List<OrderItemModel> products;
         private double orderTotal;
         private double discountTotal;
         private String observation;
 
-    public OrderModel(PersonModel customer, PersonModel waiter, ArrayList<ProductModel> products, double orderTotal, double discountTotal, String observation) {
+    public OrderModel(int id, PersonModel customer, PersonModel waiter, List<OrderItemModel> products, double orderTotal, double discountTotal, String observation) {
+        setId(id);
         this.customer = customer;
         this.waiter = waiter;
         this.products = products;
@@ -28,6 +21,10 @@ public class OrderModel extends BaseModel{
     }
 
     public OrderModel() {}
+    
+    public OrderModel(int id){
+        setId(id);
+    }
         
     public PersonModel getCustomer() {
         return customer;
@@ -37,11 +34,11 @@ public class OrderModel extends BaseModel{
         this.customer = customer;
     }
 
-    public ArrayList<ProductModel> getProducts() {
+    public List<OrderItemModel> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<ProductModel> products) {
+    public void setProducts(List<OrderItemModel> products) {
         this.products = products;
     }
 
@@ -75,6 +72,18 @@ public class OrderModel extends BaseModel{
 
     public void setObservation(String observation) {
         this.observation = observation;
+    }
+    
+    private double totalOrderItems(){
+        double total = 0;
+        for(OrderItemModel orderItemModel : products){
+            total+=orderItemModel.totalPrice();
+        }
+        return total;
+    }
+    
+    public void totalOrder(){
+        this.orderTotal = totalOrderItems() - discountTotal;
     }
         
 }

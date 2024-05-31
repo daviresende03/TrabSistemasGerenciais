@@ -22,12 +22,17 @@ public class UnitService implements IUnitService {
 
     @Override
     public ResponseService insert(UnitModel model) {
-        try{            
+        try{ 
             Date dateNow = new Date();
             model.setUpdatedDate(dateNow);
             model.setCreatedDate(dateNow);
             
             if(model.validate()){
+                UnitModel modelDataBase = unitRepository.select(model.getName());
+                if(modelDataBase.getId() > 0){
+                    return responseService.setResponse(ResponseTypeEnum.ERROR, "Unidade já cadastrada!");
+                }
+                
                 unitRepository.insert(model);
             }else{
                 return responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());

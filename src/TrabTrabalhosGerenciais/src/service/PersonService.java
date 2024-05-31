@@ -1,6 +1,5 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import model.entities.PersonModel;
@@ -43,21 +42,82 @@ public class PersonService implements IPersonService {
 
     @Override
     public ResponseService remove(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            if(id <= 0){
+                return responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+            }
+            
+            PersonModel person = personRepository.select(id);
+            
+            if(person.getId() <= 0){
+                return responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário não encontrado.");
+            }
+            
+            personRepository.delete(id);
+            
+            dataContext.commit();
+            
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário deletado com sucesso.");
+        }catch(Exception ex){
+            dataContext.rollback();
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o usuário.");
+        }
     }
 
     @Override
     public ResponseService update(PersonModel model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            if(model.getId() <= 0){
+                return responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+            }
+            
+            PersonModel person = personRepository.select(model.getId());
+            if(person.getId() <= 0){
+                return responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário não encontrado.");
+            }
+            
+            Date dateNow = new Date();
+            model.setUpdatedDate(dateNow);
+            
+            if(model.validate()){
+                personRepository.update(model);
+            }else{
+                return responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());
+            }
+            dataContext.commit();
+            return responseService.setResponse(ResponseTypeEnum.SUCCESS, "Usuário atualizado com sucesso!");
+        }catch(Exception ex){
+            dataContext.rollback();
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o usuário.");
+        }
     }
 
     @Override
     public ResponseService<PersonModel> get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            if(id <= 0){
+                return responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+            }
+            
+            PersonModel person = personRepository.select(id);
+            
+            if(person.getId() >= 0){
+                return responseService.setResponse(ResponseTypeEnum.SUCCESS, "", person);
+            }
+            
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário não encontrado.");
+        }catch(Exception ex){
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o usuário.");
+        }
     }
 
     @Override
     public ResponseService<List<PersonModel>> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{            
+            List<PersonModel> people = personRepository.select();
+            return responseService.setResponse(ResponseTypeEnum.SUCCESS, "", people);
+        }catch(Exception ex){
+            return responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar todos os usuários.");
+        }
     }
 }

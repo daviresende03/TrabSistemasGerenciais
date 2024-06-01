@@ -3,7 +3,6 @@ package service;
 import java.util.Date;
 import java.util.List;
 import model.entities.ProductModel;
-import model.entities.ResponseService;
 import model.entities.UnitModel;
 import model.enums.ResponseTypeEnum;
 import model.interfaces.repositories.IDataContext;
@@ -11,22 +10,14 @@ import model.interfaces.repositories.IProductRepository;
 import model.interfaces.repositories.IUnitRepository;
 import model.interfaces.services.IProductService;
 
-public class ProductService implements IProductService {
+public class ProductService extends BaseService implements IProductService {
     private final IProductRepository productRepository;
     private final IUnitRepository unitRepository;
-    private final IDataContext dataContext;
-    private ResponseService responseService;
     
     public ProductService(IDataContext dataContext, IProductRepository productRepository, IUnitRepository unitRepository){
-        this.dataContext = dataContext;
+        super(dataContext);
         this.productRepository = productRepository;
         this.unitRepository = unitRepository;
-        this.responseService = new ResponseService();
-    }
-    
-    @Override
-    public ResponseService getResponseService(){
-        return this.responseService;
     }
     
     @Override

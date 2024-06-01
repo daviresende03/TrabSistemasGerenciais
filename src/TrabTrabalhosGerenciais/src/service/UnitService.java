@@ -10,15 +10,12 @@ import model.interfaces.repositories.IDataContext;
 import model.interfaces.repositories.IUnitRepository;
 import model.interfaces.services.IUnitService;
 
-public class UnitService implements IUnitService {
+public class UnitService extends BaseService implements IUnitService {
     private final IUnitRepository unitRepository;
-    private final IDataContext dataContext;
-    private ResponseService responseService;
     
     public UnitService(IDataContext dataContext, IUnitRepository unitRepository){
-        this.dataContext = dataContext;
+        super(dataContext);
         this.unitRepository = unitRepository;
-        responseService = new ResponseService();
     }
     
     @Override

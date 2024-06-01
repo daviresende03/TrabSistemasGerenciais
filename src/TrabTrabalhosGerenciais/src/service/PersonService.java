@@ -4,26 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import model.entities.PersonModel;
-import model.entities.ResponseService;
 import model.enums.ResponseTypeEnum;
 import model.interfaces.repositories.IDataContext;
 import model.interfaces.repositories.IPersonRepository;
 import model.interfaces.services.IPersonService;
 
-public class PersonService implements IPersonService {
+public class PersonService extends BaseService implements IPersonService {
     private final IPersonRepository personRepository;
-    private final IDataContext dataContext;
-    private ResponseService responseService;
     
     public PersonService(IDataContext dataContext, IPersonRepository personRepository){
-        this.dataContext = dataContext;
+        super(dataContext);
         this.personRepository = personRepository;
-        this.responseService = new ResponseService();
-    }
-    
-    @Override
-    public ResponseService getResponseService(){
-        return responseService;
     }
     
     @Override

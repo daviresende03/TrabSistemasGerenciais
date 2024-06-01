@@ -31,8 +31,7 @@ public class UnitService extends BaseService implements IUnitService {
             model.setCreatedDate(dateNow);
             
             if(model.validate()){
-                UnitModel modelDataBase = unitRepository.select(model.getName());
-                if(modelDataBase.getId() > 0){
+                if(!unitRepository.exist(model.getId())){
                     responseService.setResponse(ResponseTypeEnum.ERROR, "Unidade já cadastrada!");
                     return;
                 }
@@ -58,9 +57,7 @@ public class UnitService extends BaseService implements IUnitService {
                 return;
             }
             
-            UnitModel unit = unitRepository.select(id);
-            
-            if(unit.getId() <= 0){
+            if(!unitRepository.exist(id)){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Unidade não encontrada.");
                 return;
             }
@@ -84,8 +81,7 @@ public class UnitService extends BaseService implements IUnitService {
                 return;
             }
             
-            UnitModel unit = unitRepository.select(model.getId());
-            if(unit.getId() <= 0){
+            if(!unitRepository.exist(model.getId())){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Unidade não encontrada.");
                 return;
             }

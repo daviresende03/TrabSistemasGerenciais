@@ -216,5 +216,20 @@ public class PersonRepository implements IPersonRepository{
             return people;
         }
     }
+
+    @Override
+    public boolean exist(int id) throws SQLException {
+        try{
+            String query = "SELECT null FROM person WHERE person_id = ?";
+            
+            PreparedStatement statement = connect.prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            
+            return resultSet.next();
+        }catch(Exception ex){
+            return false;
+        }
+    }
     
 }

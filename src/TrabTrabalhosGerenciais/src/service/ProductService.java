@@ -56,9 +56,7 @@ public class ProductService extends BaseService implements IProductService {
                 return;
             }
             
-            ProductModel product = productRepository.select(id);
-            
-            if(product.getId() <= 0){
+            if(!productRepository.exist(id)){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Produto não encontrado.");
                 return;
             }
@@ -82,8 +80,7 @@ public class ProductService extends BaseService implements IProductService {
                 return;
             }
             
-            ProductModel product = productRepository.select(model.getId());
-            if(product.getId() <= 0){
+            if(!productRepository.exist(model.getId())){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Produto não encontrado.");
                 return;
             }

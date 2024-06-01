@@ -145,4 +145,19 @@ public class ProductRepository implements IProductRepository{
         statement.executeUpdate();
     }
     
+    @Override
+    public boolean exist(int id) throws SQLException {
+        try{
+            String query = "SELECT null FROM product WHERE product_id = ?";
+            
+            PreparedStatement statement = connect.prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            
+            return resultSet.next();
+        }catch(Exception ex){
+            return false;
+        }
+    }
+    
 }

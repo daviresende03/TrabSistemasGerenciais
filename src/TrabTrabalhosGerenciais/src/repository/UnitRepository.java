@@ -118,4 +118,33 @@ public class UnitRepository implements IUnitRepository{
         }
     }
     
+    @Override
+    public boolean exist(String name) throws SQLException {
+        try{
+            String query = "SELECT null FROM product_unit WHERE name = ?";
+            
+            PreparedStatement statement = connect.prepareStatement(query);
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+            
+            return resultSet.next();
+        }catch(Exception ex){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean exist(int id) throws SQLException {
+        try{
+            String query = "SELECT null FROM product_unit WHERE product_unit = ?";
+            
+            PreparedStatement statement = connect.prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            
+            return resultSet.next();
+        }catch(Exception ex){
+            return false;
+        }
+    }
 }

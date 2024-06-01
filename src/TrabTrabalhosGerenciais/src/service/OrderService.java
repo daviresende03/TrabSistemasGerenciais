@@ -32,24 +32,19 @@ public class OrderService extends BaseService implements IOrderService{
     public void insert(OrderModel model) {
         try{
             PersonModel customer = model.getCustomer();
-            if(model.getId() > 0){
-                customer = personRepository.select(model.getId());
-                if(customer.getId()<=0){
-                    responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível recuperar o cliente informado.");
-                    return;
-                }
+            if(model.getId()>0 && !personRepository.exist(model.getId())){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível encontrar o cliente informado.");
+                return;
             }
             
             PersonModel waiter = model.getWaiter();
             if(waiter.getId()<=0){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Obrigatório informar o id do atendente.");
                 return;
-            }else{
-                waiter = personRepository.select(waiter.getId());
-                if(waiter.getId()<=0){
-                    responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível recuperar o atendente informado.");
-                    return;
-                }
+            }
+            if(!personRepository.exist(waiter.getId())){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível encontrar o atendente informado.");
+                return;
             }
             
             if(model.validate()){

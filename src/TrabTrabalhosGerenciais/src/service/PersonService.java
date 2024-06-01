@@ -51,9 +51,7 @@ public class PersonService extends BaseService implements IPersonService {
                 return;
             }
             
-            PersonModel person = personRepository.select(id);
-            
-            if(person.getId() <= 0){
+            if(!personRepository.exist(id)){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário não encontrado.");
                 return;
             }
@@ -77,8 +75,7 @@ public class PersonService extends BaseService implements IPersonService {
                 return;
             }
             
-            PersonModel person = personRepository.select(model.getId());
-            if(person.getId() <= 0){
+            if(!personRepository.exist(model.getId())){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário não encontrado.");
                 return;
             }

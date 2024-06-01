@@ -7,6 +7,7 @@ public class OrderItemModel extends BaseModel{
     private ProductModel product;
     private double quantity;
     private double salePrice;
+    private double totalItem;
 
     public OrderItemModel(int id, OrderModel order, ProductModel product, double quantity, double salePrice) {
         setId(id);
@@ -14,6 +15,7 @@ public class OrderItemModel extends BaseModel{
         this.product = Objects.requireNonNullElse(product, new ProductModel());;
         this.quantity = quantity;
         this.salePrice = salePrice;
+        totalItem();
     }   
     
     public OrderItemModel(){}
@@ -38,5 +40,7 @@ public class OrderItemModel extends BaseModel{
         return salePrice;
     }
     
-    
+    public void totalItem(){
+        totalItem = quantity * salePrice;
+    }
 }

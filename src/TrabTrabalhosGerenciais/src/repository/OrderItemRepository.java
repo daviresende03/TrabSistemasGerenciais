@@ -27,7 +27,7 @@ public class OrderItemRepository implements IOrderItemRepository{
                 + "product_id,"
                 + "quantity,"
                 + "sale_price,"
-                + "total_price,"
+                + "total_item,"
                 + "created_at,"
                 + "updated_at"
                 + "VALUES(?, ?, ?, ?, ?, ?, ?)";
@@ -51,7 +51,7 @@ public class OrderItemRepository implements IOrderItemRepository{
                 + "product_id = ?"
                 + "quantity = ?"
                 + "sale_price = ?,"
-                + "total_price = ?"
+                + "total_item = ?"
                 + "updated_at = ?"
                 + "WHERE order_id = ?";
         

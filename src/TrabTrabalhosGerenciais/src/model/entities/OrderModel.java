@@ -6,18 +6,18 @@ public class OrderModel extends BaseModel{
         private PersonModel customer;
         private PersonModel waiter;
         private List<OrderItemModel> products;
-        private double orderTotal;
         private double discountTotal;
+        private double orderTotal;
         private String observation;
 
-    public OrderModel(int id, PersonModel customer, PersonModel waiter, List<OrderItemModel> products, double orderTotal, double discountTotal, String observation) {
+    public OrderModel(int id, PersonModel customer, PersonModel waiter, List<OrderItemModel> products, double discountTotal, String observation) {
         setId(id);
         this.customer = customer;
         this.waiter = waiter;
         this.products = products;
-        this.orderTotal = orderTotal;
         this.discountTotal = discountTotal;
         this.observation = observation;
+        totalOrder();
     }
 
     public OrderModel() {}

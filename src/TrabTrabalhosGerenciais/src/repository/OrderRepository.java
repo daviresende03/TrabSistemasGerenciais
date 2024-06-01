@@ -22,10 +22,10 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public void insert(OrderModel order) throws SQLException { 
         String query = "INSERT INTO order("
-                + "customer,"
-                + "waiter,"
-                + "order_total,"
+                + "customer_id,"
+                + "waiter_id,"
                 + "discount_total,"
+                + "order_total,"                
                 + "observation,"
                 + "created_at,"
                 + "updated_at"
@@ -34,8 +34,8 @@ public class OrderRepository implements IOrderRepository {
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, order.getCustomer().getId());
         statement.setInt(2, order.getWaiter().getId());
-        statement.setDouble(3, order.getOrderTotal());
-        statement.setDouble(4, order.getDiscountTotal());
+        statement.setDouble(3, order.getDiscountTotal());
+        statement.setDouble(4, order.getOrderTotal());
         statement.setString(5, order.getObservation());
         statement.setDate(6, new Date(order.getCreatedDate().getTime()));
         statement.setDate(7, new Date(order.getUpdatedDate().getTime()));
@@ -46,10 +46,10 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public void update(OrderModel model) throws SQLException {
         String query = "UPDATE order SET"
-                + "customer = ?"
-                + "waiter = ?"
-                + "order_total = ?"
+                + "customer_id = ?"
+                + "waiter_id = ?"
                 + "discount_total = ?,"
+                + "order_total = ?"
                 + "observation = ?"
                 + "updated_at = ?"
                 + "WHERE order_id = ?";
@@ -57,8 +57,8 @@ public class OrderRepository implements IOrderRepository {
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, model.getCustomer().getId());
         statement.setInt(2, model.getWaiter().getId());
-        statement.setDouble(3, model.getOrderTotal());
-        statement.setDouble(4, model.getDiscountTotal());
+        statement.setDouble(3, model.getDiscountTotal());
+        statement.setDouble(4, model.getOrderTotal());
         statement.setString(5, model.getObservation());
         statement.setDate(6, new Date(model.getUpdatedDate().getTime()));
     }
@@ -83,13 +83,12 @@ public class OrderRepository implements IOrderRepository {
         ResultSet resultSet = statement.executeQuery();
         
         if (resultSet.next()) {
-            int customer = resultSet.getInt("customer");
-            int waiter = resultSet.getInt("waiter");
-            double order_total = resultSet.getDouble("order_total");
+            int customerId = resultSet.getInt("customer_id");
+            int waiterId = resultSet.getInt("waiter_id");
             double discount_total = resultSet.getDouble("discount_total");
             String observation = resultSet.getString("observation");
             
-            return new OrderModel(id, new PersonModel(customer), new PersonModel(waiter), new ArrayList<OrderItemModel>(), order_total, discount_total, observation);
+            return new OrderModel(id, new PersonModel(customerId), new PersonModel(waiterId), new ArrayList<OrderItemModel>(), discount_total, observation);
         }
         return order;
         }catch(Exception ex){
@@ -109,13 +108,12 @@ public class OrderRepository implements IOrderRepository {
         
         while (resultSet.next()) {
             int id = resultSet.getInt("order_id");
-            int customer = resultSet.getInt("customer");
-            int waiter = resultSet.getInt("waiter");
-            double order_total = resultSet.getDouble("order_total");
+            int customer_id = resultSet.getInt("customer_id");
+            int waiter_id = resultSet.getInt("waiter_id");
             double discount_total = resultSet.getDouble("discount_total");
             String observation = resultSet.getString("observation");
             
-            orders.add(new OrderModel(id, new PersonModel(customer), new PersonModel(waiter), new ArrayList<OrderItemModel>(), order_total, discount_total, observation));
+            orders.add(new OrderModel(id, new PersonModel(customer_id), new PersonModel(waiter_id), new ArrayList<OrderItemModel>(), discount_total, observation));
         }
         return orders;
         }catch(Exception ex){

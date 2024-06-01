@@ -1,4 +1,4 @@
-package Infra.DependencyInjection;
+package infra.DependencyInjection;
 
 import java.sql.Connection;
 import model.interfaces.repositories.IDataContext;

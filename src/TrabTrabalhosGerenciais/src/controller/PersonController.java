@@ -1,6 +1,6 @@
 package controller;
 
-import Infra.DependencyInjection.PersonDI;
+import infra.DependencyInjection.PersonDI;
 import application.PersonApplication;
 import controller.viewModels.PersonVM;
 import model.interfaces.repositories.IDataContext;

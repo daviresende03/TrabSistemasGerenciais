@@ -1,6 +1,8 @@
 package model.entities;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class OrderModel extends BaseModel{
         private PersonModel customer;
@@ -12,11 +14,11 @@ public class OrderModel extends BaseModel{
 
     public OrderModel(int id, PersonModel customer, PersonModel waiter, List<OrderItemModel> products, double discountTotal, String observation) {
         setId(id);
-        this.customer = customer;
-        this.waiter = waiter;
-        this.products = products;
+        this.customer = Objects.requireNonNullElse(customer, new PersonModel());
+        this.waiter = Objects.requireNonNullElse(waiter, new PersonModel());
+        this.products = Objects.requireNonNullElse(products, new ArrayList<OrderItemModel>());
         this.discountTotal = discountTotal;
-        this.observation = observation;
+        this.observation = Objects.requireNonNullElse(observation,"");
         totalOrder();
     }
 
@@ -85,5 +87,22 @@ public class OrderModel extends BaseModel{
     public void totalOrder(){
         this.orderTotal = totalOrderItems() - discountTotal;
     }
+    
+    public boolean validate(){
+        totalOrder();
         
+        if(products.size()==0){
+            addMessage("Pedido sem produtos registrados.");
+            return false;
+        }
+        if(discountTotal < 0 || discountTotal >= orderTotal){
+            addMessage("Desconto inválido.");
+            return false;
+        }
+        if(orderTotal != (totalOrderItems() - discountTotal)){
+            addMessage("Valor do pedido inválido.");
+            return false;
+        }
+        return true;
+    }        
 }

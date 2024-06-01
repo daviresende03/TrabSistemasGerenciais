@@ -23,6 +23,14 @@ public class OrderItemModel extends BaseModel{
     public double totalPrice(){
         return quantity*salePrice;
     }
+    
+    public void setOrder(OrderModel order){
+        this.order = order;
+    }
+    
+    public void setProduct(ProductModel product){
+        this.product = product;
+    }
 
     public OrderModel getOrder() {
         return order;
@@ -42,5 +50,23 @@ public class OrderItemModel extends BaseModel{
     
     public void totalItem(){
         totalItem = quantity * salePrice;
+    }
+    
+    public boolean validate(){
+        totalItem();
+        
+        if(quantity<=0){
+            addMessage("Quantidade vendida inválida.");
+            return false;
+        }
+        if(salePrice<=0){
+            addMessage("Preço de venda inválido.");
+            return false;
+        }
+        if(totalItem != (quantity*salePrice)){
+            addMessage("Valor total do item é inválido.");
+            return false;
+        }
+        return true;
     }
 }

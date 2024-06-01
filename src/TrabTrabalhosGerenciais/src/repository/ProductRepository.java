@@ -130,5 +130,19 @@ public class ProductRepository implements IProductRepository{
             return products;
         }
     }
+
+    @Override
+    public void updateStock(int id, double quantity) throws SQLException {
+        String query = "UPDATE product SET"
+                        + "stock =            ?,"
+                        + "updated_at =       ?,"
+                        + "WHERE product_id = ?";
+        
+        PreparedStatement statement = connect.prepareStatement(query);
+        statement.setDouble(1, quantity);
+        statement.setDate(2, new Date(new java.util.Date().getTime()));
+        statement.setInt(3, id);
+        statement.executeUpdate();
+    }
     
 }

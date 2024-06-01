@@ -85,6 +85,14 @@ public class ProductModel extends BaseModel{
         this.stock = stock;
     }
     
+    public void increaseStock(double quantity){
+        this.stock+=quantity;
+    }
+    
+    public void decreaseStock(double quantity){
+        this.stock-=quantity;
+    }
+    
     public boolean validate(){
         if(name.isEmpty()){
             addMessage("Nome do produto é obrigatório.");

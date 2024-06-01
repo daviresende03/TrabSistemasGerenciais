@@ -1,5 +1,6 @@
 package repository;
 
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -31,7 +32,7 @@ public class OrderRepository implements IOrderRepository {
                 + "updated_at"
                 + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         
-        PreparedStatement statement = connect.prepareStatement(query);
+        PreparedStatement statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, order.getCustomer().getId());
         statement.setInt(2, order.getWaiter().getId());
         statement.setDouble(3, order.getDiscountTotal());
@@ -41,6 +42,12 @@ public class OrderRepository implements IOrderRepository {
         statement.setDate(7, new Date(order.getUpdatedDate().getTime()));
         
         statement.executeUpdate();
+        
+        ResultSet generatedKeys = statement.getGeneratedKeys();
+        if(generatedKeys.next()){
+            int orderId = generatedKeys.getInt(1);
+            order.setId(orderId);
+        }
     }
 
     @Override

@@ -8,7 +8,13 @@ public class PersonVM {
     public String name;
     public String document;
     public int type;
-    public Address address;
+    public String street;
+    public String number;
+    public String neighborhood;
+    public String city;
+    public String state;
+    public String postalCode;
+    public String country;
     public Date birthDate;
     public String observation;
     public boolean customer;

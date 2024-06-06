@@ -5,6 +5,7 @@ import model.entities.PersonModel;
 import model.entities.ResponseService;
 import model.enums.PersonTypeEnum;
 import model.interfaces.services.IPersonService;
+import model.valueObjects.Address;
 
 public class PersonApplication {
     private final IPersonService personService;
@@ -22,7 +23,7 @@ public class PersonApplication {
                 personVM.name,
                 personVM.document,
                 PersonTypeEnum.fromInteger(personVM.type),
-                personVM.address,
+                new Address(personVM.street, personVM.number, personVM.neighborhood, personVM.city, personVM.state, personVM.postalCode, personVM.country),
                 personVM.birthDate,
                 personVM.observation,
                 personVM.customer,

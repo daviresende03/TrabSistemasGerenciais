@@ -2,9 +2,7 @@ package view.registers;
 
 import controller.PersonController;
 import controller.viewModels.PersonVM;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import domain.Utils.DateUtil;
 import javax.swing.JOptionPane;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ResponseTypeEnum;
@@ -398,7 +396,7 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
         
         personForm.name = this.jTextFieldName.getText();
         personForm.document = this.jTextFieldDocument.getText();
-        personForm.birthDate = dateToString(this.jTextFieldBirthDate.getText());
+        personForm.birthDate = DateUtil.dateToString(this.jTextFieldBirthDate.getText());
         personForm.street = this.jTextFieldStreet.getText();
         personForm.number = this.jTextFieldNumber.getText();
         personForm.neighborhood = this.jTextFieldNeighborhood.getText();
@@ -415,24 +413,7 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
         personForm.supplier = this.jCheckBoxSupplier.isSelected();
                 
         return personForm;
-    }
-    
-    private Date dateToString(String dateString){
-        Date date = new Date();
-        
-        String dateFormat = "dd/MM/yyyy";
-        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-        sdf.setLenient(false);
-        
-        try {
-            date = sdf.parse(dateString);
-        } catch (ParseException e) {
-            return date;
-        }
-        return date;
-    }
-    
-    
+    }   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClearFields;

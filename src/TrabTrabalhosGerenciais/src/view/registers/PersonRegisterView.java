@@ -6,6 +6,8 @@ package view.registers;
 
 import controller.PersonController;
 import controller.viewModels.PersonVM;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import model.entities.ResponseService;
@@ -23,7 +25,9 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
     public PersonRegisterView() {
         initComponents();
         this.setVisible(true);
+        
         this.personController = new PersonController();
+        this.clearForm();
     }
 
     /**
@@ -58,7 +62,7 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
         jLabelNeighborhood = new javax.swing.JLabel();
         jTextFieldNeighborhood = new javax.swing.JTextField();
         jLabelCountry = new javax.swing.JLabel();
-        jTextFieldComplement = new javax.swing.JTextField();
+        jTextFieldCountry = new javax.swing.JTextField();
         jLabelCity = new javax.swing.JLabel();
         jTextFieldCity = new javax.swing.JTextField();
         jLabelState = new javax.swing.JLabel();
@@ -107,12 +111,6 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
 
         jLabelName.setText("Nome");
 
-        jTextFieldName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNameActionPerformed(evt);
-            }
-        });
-
         jRadioButtonPJ.setText("PJ");
         jRadioButtonPJ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,9 +151,9 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
 
         jLabelCountry.setText("País");
 
-        jTextFieldComplement.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldCountry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldComplementActionPerformed(evt);
+                jTextFieldCountryActionPerformed(evt);
             }
         });
 
@@ -235,6 +233,11 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
         jButtonEditForm.setText("EDITAR");
 
         jButtonClearFields.setText("LIMPAR CAMPOS");
+        jButtonClearFields.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonClearFieldsMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -323,7 +326,7 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
                                 .addComponent(jTextFieldPostalCode, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
-                                .addComponent(jTextFieldComplement)))))
+                                .addComponent(jTextFieldCountry)))))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -362,7 +365,7 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
                     .addComponent(jLabelNeighborhood)
                     .addComponent(jTextFieldNeighborhood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelCountry)
-                    .addComponent(jTextFieldComplement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCity)
@@ -398,10 +401,6 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNameActionPerformed
-
     private void jRadioButtonPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPJActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonPJActionPerformed
@@ -418,9 +417,9 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNumberActionPerformed
 
-    private void jTextFieldComplementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldComplementActionPerformed
+    private void jTextFieldCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCountryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldComplementActionPerformed
+    }//GEN-LAST:event_jTextFieldCountryActionPerformed
 
     private void jCheckBoxCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxCustomerActionPerformed
         // TODO add your handling code here:
@@ -436,25 +435,74 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(null, "Pessoa inserida com sucesso!" , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            this.clearForm();
         }
     }//GEN-LAST:event_jButtonSaveFormMouseClicked
 
+    private void jButtonClearFieldsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonClearFieldsMouseClicked
+        this.clearForm();
+    }//GEN-LAST:event_jButtonClearFieldsMouseClicked
+
+    private void clearForm(){
+        this.jTextFieldName.setText("");
+        this.jTextFieldDocument.setText("");
+        this.jTextFieldBirthDate.setText("");
+        this.jTextFieldStreet.setText("");
+        this.jTextFieldNumber.setText("");
+        this.jTextFieldNeighborhood.setText("");
+        this.jTextFieldCity.setText("");
+        this.jTextFieldState.setText("");
+        this.jTextFieldCountry.setText("");
+        this.jTextFieldPostalCode.setText("");
+        this.jTextAreaObservations.setText("");
+        
+        this.jRadioButtonPF.setSelected(true);
+        this.jRadioButtonPJ.setSelected(false);
+        
+        this.jCheckBoxCustomer.setSelected(false);
+        this.jCheckBoxStaff.setSelected(false);
+        this.jCheckBoxSupplier.setSelected(false);
+        
+        this.jTextFieldName.requestFocusInWindow();
+    }
+    
     private PersonVM getPersonByForm(){
         PersonVM personForm = new PersonVM();
         
         personForm.name = this.jTextFieldName.getText();
         personForm.document = this.jTextFieldDocument.getText();
-        personForm.birthDate = new Date(this.jTextFieldBirthDate.getText());
+        personForm.birthDate = dateToString(this.jTextFieldBirthDate.getText());
         personForm.street = this.jTextFieldStreet.getText();
         personForm.number = this.jTextFieldNumber.getText();
         personForm.neighborhood = this.jTextFieldNeighborhood.getText();
         personForm.city = this.jTextFieldCity.getText();
         personForm.state = this.jTextFieldState.getText();
-        personForm.country = "Brazil";
+        personForm.country = this.jTextFieldCountry.getText();
         personForm.postalCode = this.jTextFieldPostalCode.getText();
         personForm.observation = this.jTextAreaObservations.getText();
+        
+        personForm.type = this.jRadioButtonPF.isSelected() ? 1 : 2;
+        
+        personForm.customer = this.jCheckBoxCustomer.isSelected();
+        personForm.staff = this.jCheckBoxStaff.isSelected();
+        personForm.supplier = this.jCheckBoxSupplier.isSelected();
                 
         return personForm;
+    }
+    
+    private Date dateToString(String dateString){
+        Date date = new Date();
+        
+        String dateFormat = "dd/MM/yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        sdf.setLenient(false);
+        
+        try {
+            date = sdf.parse(dateString);
+        } catch (ParseException e) {
+            return date;
+        }
+        return date;
     }
     
     
@@ -496,7 +544,7 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea jTextAreaObservations;
     private javax.swing.JTextField jTextFieldBirthDate;
     private javax.swing.JTextField jTextFieldCity;
-    private javax.swing.JTextField jTextFieldComplement;
+    private javax.swing.JTextField jTextFieldCountry;
     private javax.swing.JTextField jTextFieldDocument;
     private javax.swing.JTextField jTextFieldName;
     private javax.swing.JTextField jTextFieldNeighborhood;

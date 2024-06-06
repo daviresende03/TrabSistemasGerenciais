@@ -158,7 +158,7 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                              <Component id="jTextFieldComplement" max="32767" attributes="0"/>
+                              <Component id="jTextFieldCountry" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -207,7 +207,7 @@
                   <Component id="jLabelNeighborhood" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldNeighborhood" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelCountry" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldComplement" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldCountry" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -263,9 +263,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldName">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldNameActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButtonPJ">
       <Properties>
@@ -336,9 +333,9 @@
         <Property name="text" type="java.lang.String" value="Pa&#xed;s"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldComplement">
+    <Component class="javax.swing.JTextField" name="jTextFieldCountry">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldComplementActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldCountryActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelCity">
@@ -491,6 +488,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="LIMPAR CAMPOS"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonClearFieldsMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -35,8 +35,6 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
         jLabelPersonalData = new javax.swing.JLabel();
         jLabelName = new javax.swing.JLabel();
         jTextFieldName = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jTextFieldPhoneNumber = new javax.swing.JTextField();
         jRadioButtonPJ = new javax.swing.JRadioButton();
         jRadioButtonPF = new javax.swing.JRadioButton();
         jLabelDocument = new javax.swing.JLabel();
@@ -51,7 +49,7 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
         jTextFieldNumber = new javax.swing.JTextField();
         jLabelNeighborhood = new javax.swing.JLabel();
         jTextFieldNeighborhood = new javax.swing.JTextField();
-        jLabelComplement = new javax.swing.JLabel();
+        jLabelCountry = new javax.swing.JLabel();
         jTextFieldComplement = new javax.swing.JTextField();
         jLabelCity = new javax.swing.JLabel();
         jTextFieldCity = new javax.swing.JTextField();
@@ -107,14 +105,6 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Telefone");
-
-        jTextFieldPhoneNumber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPhoneNumberActionPerformed(evt);
-            }
-        });
-
         jRadioButtonPJ.setText("PJ");
         jRadioButtonPJ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +143,7 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
 
         jLabelNeighborhood.setText("Bairro");
 
-        jLabelComplement.setText("Complemento");
+        jLabelCountry.setText("País");
 
         jTextFieldComplement.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,14 +237,6 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonDeleteUser))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabelNeighborhood)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNeighborhood)
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabelComplement)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldComplement))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabelStreet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldStreet)
@@ -275,26 +257,10 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
                         .addComponent(jLabelName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldName)
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jRadioButtonPF)
                         .addGap(10, 10, 10)
                         .addComponent(jRadioButtonPJ))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelCity)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldCity)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelState)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldState, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldPostalCode, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -318,7 +284,33 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelNewUser)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonClearFields)))
+                        .addComponent(jButtonClearFields))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelCity)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldCity)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelState)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldState, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelNeighborhood)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldNeighborhood)
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabelCountry)
+                                .addGap(5, 5, 5)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldPostalCode, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jTextFieldComplement)))))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -334,8 +326,6 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelName)
                     .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonPJ)
                     .addComponent(jRadioButtonPF))
                 .addGap(15, 15, 15)
@@ -358,7 +348,7 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNeighborhood)
                     .addComponent(jTextFieldNeighborhood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelComplement)
+                    .addComponent(jLabelCountry)
                     .addComponent(jTextFieldComplement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -399,10 +389,6 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNameActionPerformed
 
-    private void jTextFieldPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPhoneNumberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPhoneNumberActionPerformed
-
     private void jRadioButtonPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPJActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonPJActionPerformed
@@ -436,12 +422,11 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckBoxCustomer;
     private javax.swing.JCheckBox jCheckBoxStaff;
     private javax.swing.JCheckBox jCheckBoxSupplier;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelBirthDate;
     private javax.swing.JLabel jLabelCity;
-    private javax.swing.JLabel jLabelComplement;
+    private javax.swing.JLabel jLabelCountry;
     private javax.swing.JLabel jLabelDocument;
     private javax.swing.JLabel jLabelFunction;
     private javax.swing.JLabel jLabelName;
@@ -471,7 +456,6 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldName;
     private javax.swing.JTextField jTextFieldNeighborhood;
     private javax.swing.JTextField jTextFieldNumber;
-    private javax.swing.JTextField jTextFieldPhoneNumber;
     private javax.swing.JTextField jTextFieldPostalCode;
     private javax.swing.JTextField jTextFieldState;
     private javax.swing.JTextField jTextFieldStreet;

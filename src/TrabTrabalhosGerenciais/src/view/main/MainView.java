@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import view.component.MenuItem;
-import view.registers.PersonView;
-import view.registers.ProductView;
+import view.entities.PersonView;
+import view.entities.ProductView;
 
 public class MainView extends javax.swing.JFrame {
 

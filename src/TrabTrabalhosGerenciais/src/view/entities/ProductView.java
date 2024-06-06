@@ -1,4 +1,4 @@
-package view.registers;
+package view.entities;
 
 import controller.ProductController;
 import controller.viewModels.ProductVM;

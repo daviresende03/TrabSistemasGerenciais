@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import view.component.MenuItem;
-import view.registers.PersonRegisterView;
-import view.registers.ProductRegisterView;
+import view.registers.PersonView;
+import view.registers.ProductView;
 
 public class MainView extends javax.swing.JFrame {
 
@@ -24,13 +24,13 @@ public class MainView extends javax.swing.JFrame {
         MenuItem subMenuRegisterPerson = new MenuItem(null, "Usuários", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                alterPanel(new PersonRegisterView());
+                alterPanel(new PersonView());
             }
         });
         MenuItem subMenuRegisterProduct = new MenuItem(null, "Produtos", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                alterPanel(new ProductRegisterView());
+                alterPanel(new ProductView());
             }
         });
         MenuItem menuRegister = new MenuItem(null, "Cadastros", null, subMenuRegisterPerson, subMenuRegisterProduct);
@@ -39,13 +39,13 @@ public class MainView extends javax.swing.JFrame {
         MenuItem subMenuSaleTableControl = new MenuItem(null, "Controle de Mesas", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                alterPanel(new PersonRegisterView());
+                alterPanel(new PersonView());
             }
         });
         MenuItem subMenuSaleOrder = new MenuItem(null, "Pedidos", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                alterPanel(new ProductRegisterView());
+                alterPanel(new ProductView());
             }
         });
         MenuItem menuSale = new MenuItem(null, "Vendas", null, subMenuSaleTableControl, subMenuSaleOrder);

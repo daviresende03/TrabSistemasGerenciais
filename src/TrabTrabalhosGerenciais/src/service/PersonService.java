@@ -38,8 +38,9 @@ public class PersonService extends BaseService implements IPersonService {
                 responseService.setResponse(ResponseTypeEnum.ERROR, person.getMessage());
                 return;
             }
+            
             dataContext.commit();
-            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Usuário cadastrado com sucesso!");
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Usuário cadastrado com sucesso.");
         }catch(Exception ex){
             dataContext.rollback();
             responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao realizar o cadastro do usuário.");
@@ -61,9 +62,8 @@ public class PersonService extends BaseService implements IPersonService {
             
             personRepository.delete(id);
             
-            dataContext.commit();
-            
-            responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário deletado com sucesso.");
+            dataContext.commit();            
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Usuário deletado com sucesso.");
         }catch(Exception ex){
             dataContext.rollback();
             responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o usuário.");

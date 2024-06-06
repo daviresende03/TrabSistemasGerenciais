@@ -8,12 +8,12 @@ package view.registers;
  *
  * @author joaov
  */
-public class OrderRegisterView extends javax.swing.JInternalFrame {
+public class OrderView extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ClientRegister
      */
-    public OrderRegisterView() {
+    public OrderView() {
         initComponents();
         this.setVisible(true);
     }

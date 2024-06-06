@@ -7,9 +7,9 @@ import javax.swing.JOptionPane;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ResponseTypeEnum;
 
-public class PersonRegisterView extends javax.swing.JInternalFrame {
+public class PersonView extends javax.swing.JInternalFrame {
 
-    public PersonRegisterView() {
+    public PersonView() {
         initComponents();
         this.setVisible(true);
         
@@ -359,7 +359,7 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
         if(response.getType() != ResponseTypeEnum.SUCCESS){
             JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
         }else{
-            JOptionPane.showMessageDialog(null, "Pessoa inserida com sucesso!" , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             this.clearForm();
         }
     }//GEN-LAST:event_jButtonSaveFormMouseClicked

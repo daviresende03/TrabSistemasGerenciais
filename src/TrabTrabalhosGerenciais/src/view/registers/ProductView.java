@@ -6,9 +6,9 @@ import javax.swing.JOptionPane;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ResponseTypeEnum;
 
-public class ProductRegisterView extends javax.swing.JInternalFrame {
+public class ProductView extends javax.swing.JInternalFrame {
 
-    public ProductRegisterView() {
+    public ProductView() {
         this.controller = new ProductController();
         
         initComponents();

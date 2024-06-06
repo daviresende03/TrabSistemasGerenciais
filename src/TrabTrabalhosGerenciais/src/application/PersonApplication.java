@@ -1,11 +1,11 @@
 package application;
 
 import controller.viewModels.PersonVM;
-import model.entities.PersonModel;
-import model.entities.ResponseService;
-import model.enums.PersonTypeEnum;
-import model.interfaces.services.IPersonService;
-import model.valueObjects.Address;
+import domain.model.entities.PersonModel;
+import domain.model.entities.ResponseService;
+import domain.model.enums.PersonTypeEnum;
+import domain.interfaces.services.IPersonService;
+import domain.model.valueObjects.Address;
 
 public class PersonApplication {
     private final IPersonService personService;

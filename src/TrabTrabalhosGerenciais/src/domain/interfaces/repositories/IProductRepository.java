@@ -1,7 +1,7 @@
-package model.interfaces.repositories;
+package domain.interfaces.repositories;
 
 import java.sql.SQLException;
-import model.entities.ProductModel;
+import domain.model.entities.ProductModel;
 
 public interface IProductRepository extends IBaseRepository<ProductModel>{
     void updateStock(int id, double quantity) throws SQLException;

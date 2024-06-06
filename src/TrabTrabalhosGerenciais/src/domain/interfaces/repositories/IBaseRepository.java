@@ -1,4 +1,4 @@
-package model.interfaces.repositories;
+package domain.interfaces.repositories;
 
 import java.sql.SQLException;
 import java.util.List;

@@ -268,17 +268,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="PJ"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonPJActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButtonPF">
       <Properties>
         <Property name="text" type="java.lang.String" value="PF"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonPFActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelDocument">
       <Properties>
@@ -307,9 +301,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldStreet">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldStreetActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelNumber">
       <Properties>
@@ -317,9 +308,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNumber">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldNumberActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelNeighborhood">
       <Properties>
@@ -334,9 +322,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldCountry">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldCountryActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelCity">
       <Properties>
@@ -392,9 +377,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cliente"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxCustomerActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBoxStaff">
       <Properties>

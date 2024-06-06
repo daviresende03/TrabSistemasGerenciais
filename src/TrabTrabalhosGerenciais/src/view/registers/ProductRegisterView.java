@@ -3,8 +3,8 @@ package view.registers;
 import controller.ProductController;
 import controller.viewModels.ProductVM;
 import javax.swing.JOptionPane;
-import model.entities.ResponseService;
-import model.enums.ResponseTypeEnum;
+import domain.model.entities.ResponseService;
+import domain.model.enums.ResponseTypeEnum;
 
 public class ProductRegisterView extends javax.swing.JInternalFrame {
 

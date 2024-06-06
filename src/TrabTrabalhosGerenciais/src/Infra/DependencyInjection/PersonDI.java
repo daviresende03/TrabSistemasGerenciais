@@ -1,9 +1,9 @@
 package infra.DependencyInjection;
 
 import java.sql.Connection;
-import model.interfaces.repositories.IDataContext;
-import model.interfaces.repositories.IPersonRepository;
-import model.interfaces.services.IPersonService;
+import domain.interfaces.repositories.IDataContext;
+import domain.interfaces.repositories.IPersonRepository;
+import domain.interfaces.services.IPersonService;
 import repository.PersonRepository;
 import repository.context.DataContext;
 import service.PersonService;

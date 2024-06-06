@@ -1,4 +1,4 @@
-package model.enums;
+package domain.model.enums;
 
 public enum ResponseTypeEnum {
     SUCCESS,

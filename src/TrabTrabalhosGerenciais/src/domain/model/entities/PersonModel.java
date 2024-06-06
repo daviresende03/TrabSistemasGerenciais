@@ -1,9 +1,9 @@
-package model.entities;
+package domain.model.entities;
 
 import java.util.Date;
 import java.util.Objects;
-import model.enums.PersonTypeEnum;
-import model.valueObjects.Address;
+import domain.model.enums.PersonTypeEnum;
+import domain.model.valueObjects.Address;
 
 public class PersonModel extends BaseModel{
     private String name;

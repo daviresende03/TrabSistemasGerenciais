@@ -3,9 +3,9 @@ package controller;
 import infra.DependencyInjection.PersonDI;
 import application.PersonApplication;
 import controller.viewModels.PersonVM;
-import model.entities.ResponseService;
-import model.interfaces.repositories.IDataContext;
-import model.interfaces.services.IPersonService;
+import domain.model.entities.ResponseService;
+import domain.interfaces.repositories.IDataContext;
+import domain.interfaces.services.IPersonService;
 import service.PersonService;
 
 public class PersonController {

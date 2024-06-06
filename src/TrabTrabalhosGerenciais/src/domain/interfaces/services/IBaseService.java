@@ -1,8 +1,8 @@
 
-package model.interfaces.services;
+package domain.interfaces.services;
 
 import java.util.List;
-import model.entities.ResponseService;
+import domain.model.entities.ResponseService;
 
 public interface IBaseService<T> {
     void insert(T model);

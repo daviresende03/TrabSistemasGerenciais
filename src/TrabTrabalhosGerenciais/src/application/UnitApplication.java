@@ -3,9 +3,9 @@ package application;
 import controller.viewModels.UnitVM;
 import java.util.ArrayList;
 import java.util.List;
-import model.entities.ResponseService;
-import model.entities.UnitModel;
-import model.interfaces.services.IUnitService;
+import domain.model.entities.ResponseService;
+import domain.model.entities.UnitModel;
+import domain.interfaces.services.IUnitService;
 
 public class UnitApplication {
     private final IUnitService unitService;

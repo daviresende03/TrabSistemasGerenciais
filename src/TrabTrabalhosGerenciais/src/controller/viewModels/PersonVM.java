@@ -1,7 +1,7 @@
 package controller.viewModels;
 
 import java.util.Date;
-import model.valueObjects.Address;
+import domain.model.valueObjects.Address;
 
 public class PersonVM {
     public int id;

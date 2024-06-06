@@ -2,17 +2,17 @@ package service;
 
 import java.util.Date;
 import java.util.List;
-import model.entities.OrderItemModel;
-import model.entities.OrderModel;
-import model.entities.PersonModel;
-import model.entities.ProductModel;
-import model.enums.ResponseTypeEnum;
-import model.interfaces.repositories.IDataContext;
-import model.interfaces.repositories.IOrderItemRepository;
-import model.interfaces.repositories.IOrderRepository;
-import model.interfaces.repositories.IPersonRepository;
-import model.interfaces.repositories.IProductRepository;
-import model.interfaces.services.IOrderService;
+import domain.model.entities.OrderItemModel;
+import domain.model.entities.OrderModel;
+import domain.model.entities.PersonModel;
+import domain.model.entities.ProductModel;
+import domain.model.enums.ResponseTypeEnum;
+import domain.interfaces.repositories.IDataContext;
+import domain.interfaces.repositories.IOrderItemRepository;
+import domain.interfaces.repositories.IOrderRepository;
+import domain.interfaces.repositories.IPersonRepository;
+import domain.interfaces.repositories.IProductRepository;
+import domain.interfaces.services.IOrderService;
 
 public class OrderService extends BaseService implements IOrderService{
     private final IOrderRepository orderRepository;

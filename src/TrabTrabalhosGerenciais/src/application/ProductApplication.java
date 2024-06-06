@@ -3,11 +3,11 @@ package application;
 import controller.viewModels.ProductVM;
 import java.util.ArrayList;
 import java.util.List;
-import model.entities.ProductModel;
-import model.entities.ResponseService;
-import model.entities.UnitModel;
-import model.enums.ProductTypeEnum;
-import model.interfaces.services.IProductService;
+import domain.model.entities.ProductModel;
+import domain.model.entities.ResponseService;
+import domain.model.entities.UnitModel;
+import domain.model.enums.ProductTypeEnum;
+import domain.interfaces.services.IProductService;
 
 public class ProductApplication {
     private final IProductService productService;

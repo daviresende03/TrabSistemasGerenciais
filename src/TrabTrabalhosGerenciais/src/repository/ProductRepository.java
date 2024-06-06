@@ -7,10 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.entities.ProductModel;
-import model.entities.UnitModel;
-import model.enums.ProductTypeEnum;
-import model.interfaces.repositories.IProductRepository;
+import domain.model.entities.ProductModel;
+import domain.model.entities.UnitModel;
+import domain.model.enums.ProductTypeEnum;
+import domain.interfaces.repositories.IProductRepository;
 
 public class ProductRepository implements IProductRepository{
     

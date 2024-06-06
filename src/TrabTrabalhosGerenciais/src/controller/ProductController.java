@@ -4,9 +4,9 @@ import infra.DependencyInjection.ProductDI;
 import infra.DependencyInjection.UnitDI;
 import application.ProductApplication;
 import controller.viewModels.ProductVM;
-import model.entities.ResponseService;
-import model.interfaces.repositories.IDataContext;
-import model.interfaces.services.IProductService;
+import domain.model.entities.ResponseService;
+import domain.interfaces.repositories.IDataContext;
+import domain.interfaces.services.IProductService;
 import service.ProductService;
 
 public class ProductController {

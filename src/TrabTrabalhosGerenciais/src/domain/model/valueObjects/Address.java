@@ -1,7 +1,7 @@
-package model.valueObjects;
+package domain.model.valueObjects;
 
 import java.util.Objects;
-import model.entities.BaseModel;
+import domain.model.entities.BaseModel;
 
 public class Address extends BaseModel{
     private String street;

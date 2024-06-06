@@ -8,10 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.entities.OrderItemModel;
-import model.entities.OrderModel;
-import model.entities.PersonModel;
-import model.interfaces.repositories.IOrderRepository;
+import domain.model.entities.OrderItemModel;
+import domain.model.entities.OrderModel;
+import domain.model.entities.PersonModel;
+import domain.interfaces.repositories.IOrderRepository;
 
 public class OrderRepository implements IOrderRepository {
     private final Connection connect;

@@ -1,7 +1,7 @@
-package model.entities;
+package domain.model.entities;
 
 import java.util.Objects;
-import model.enums.ProductTypeEnum;
+import domain.model.enums.ProductTypeEnum;
 
 
 public class ProductModel extends BaseModel{

@@ -1,6 +1,6 @@
 package controller.viewModels;
 
-import model.entities.UnitModel;
+import domain.model.entities.UnitModel;
 
 public class UnitVM {
     public int id;

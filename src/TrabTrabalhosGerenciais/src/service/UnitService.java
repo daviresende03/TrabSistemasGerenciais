@@ -3,12 +3,12 @@ package service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import model.entities.ResponseService;
-import model.entities.UnitModel;
-import model.enums.ResponseTypeEnum;
-import model.interfaces.repositories.IDataContext;
-import model.interfaces.repositories.IUnitRepository;
-import model.interfaces.services.IUnitService;
+import domain.model.entities.ResponseService;
+import domain.model.entities.UnitModel;
+import domain.model.enums.ResponseTypeEnum;
+import domain.interfaces.repositories.IDataContext;
+import domain.interfaces.repositories.IUnitRepository;
+import domain.interfaces.services.IUnitService;
 
 public class UnitService extends BaseService implements IUnitService {
     private final IUnitRepository unitRepository;

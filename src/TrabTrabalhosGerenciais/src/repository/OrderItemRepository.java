@@ -7,10 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.entities.OrderItemModel;
-import model.entities.OrderModel;
-import model.entities.ProductModel;
-import model.interfaces.repositories.IOrderItemRepository;
+import domain.model.entities.OrderItemModel;
+import domain.model.entities.OrderModel;
+import domain.model.entities.ProductModel;
+import domain.interfaces.repositories.IOrderItemRepository;
 
 
 public class OrderItemRepository implements IOrderItemRepository{

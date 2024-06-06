@@ -1,10 +1,10 @@
 package infra.DependencyInjection;
 
 import java.sql.Connection;
-import model.interfaces.repositories.IDataContext;
-import model.interfaces.repositories.IProductRepository;
-import model.interfaces.repositories.IUnitRepository;
-import model.interfaces.services.IProductService;
+import domain.interfaces.repositories.IDataContext;
+import domain.interfaces.repositories.IProductRepository;
+import domain.interfaces.repositories.IUnitRepository;
+import domain.interfaces.services.IProductService;
 import repository.ProductRepository;
 import repository.context.DataContext;
 import service.ProductService;

@@ -3,11 +3,11 @@ package service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import model.entities.PersonModel;
-import model.enums.ResponseTypeEnum;
-import model.interfaces.repositories.IDataContext;
-import model.interfaces.repositories.IPersonRepository;
-import model.interfaces.services.IPersonService;
+import domain.model.entities.PersonModel;
+import domain.model.enums.ResponseTypeEnum;
+import domain.interfaces.repositories.IDataContext;
+import domain.interfaces.repositories.IPersonRepository;
+import domain.interfaces.services.IPersonService;
 
 public class PersonService extends BaseService implements IPersonService {
     private final IPersonRepository personRepository;

@@ -1,7 +1,7 @@
-package model.interfaces.repositories;
+package domain.interfaces.repositories;
 
 import java.sql.SQLException;
-import model.entities.PersonModel;
+import domain.model.entities.PersonModel;
 
 public interface IPersonRepository extends IBaseRepository<PersonModel>{
     PersonModel select(String document) throws SQLException;

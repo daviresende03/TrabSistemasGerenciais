@@ -1,6 +1,6 @@
 package controller.viewModels;
 
-import model.entities.ProductModel;
+import domain.model.entities.ProductModel;
 
 public class ProductVM {
     public int id;

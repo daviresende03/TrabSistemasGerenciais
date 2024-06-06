@@ -1,7 +1,7 @@
 
-package model.interfaces.services;
+package domain.interfaces.services;
 
-import model.entities.ProductModel;
+import domain.model.entities.ProductModel;
 
 public interface IProductService extends IBaseService<ProductModel>{
     

@@ -1,7 +1,7 @@
-package model.entities;
+package domain.model.entities;
 
 import java.util.Objects;
-import model.enums.ResponseTypeEnum;
+import domain.model.enums.ResponseTypeEnum;
 
 public class ResponseService {
     private ResponseTypeEnum type;

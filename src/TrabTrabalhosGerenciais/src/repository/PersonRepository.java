@@ -5,12 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.entities.PersonModel;
-import model.interfaces.repositories.IPersonRepository;
+import domain.model.entities.PersonModel;
+import domain.interfaces.repositories.IPersonRepository;
 import java.sql.Date;
 import java.util.List;
-import model.enums.PersonTypeEnum;
-import model.valueObjects.Address;
+import domain.model.enums.PersonTypeEnum;
+import domain.model.valueObjects.Address;
 
 public class PersonRepository implements IPersonRepository{
     

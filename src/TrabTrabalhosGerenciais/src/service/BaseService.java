@@ -1,8 +1,8 @@
 
 package service;
 
-import model.entities.ResponseService;
-import model.interfaces.repositories.IDataContext;
+import domain.model.entities.ResponseService;
+import domain.interfaces.repositories.IDataContext;
 
 
 public abstract class BaseService {

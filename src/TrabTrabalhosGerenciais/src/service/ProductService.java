@@ -2,13 +2,13 @@ package service;
 
 import java.util.Date;
 import java.util.List;
-import model.entities.ProductModel;
-import model.entities.UnitModel;
-import model.enums.ResponseTypeEnum;
-import model.interfaces.repositories.IDataContext;
-import model.interfaces.repositories.IProductRepository;
-import model.interfaces.repositories.IUnitRepository;
-import model.interfaces.services.IProductService;
+import domain.model.entities.ProductModel;
+import domain.model.entities.UnitModel;
+import domain.model.enums.ResponseTypeEnum;
+import domain.interfaces.repositories.IDataContext;
+import domain.interfaces.repositories.IProductRepository;
+import domain.interfaces.repositories.IUnitRepository;
+import domain.interfaces.services.IProductService;
 
 public class ProductService extends BaseService implements IProductService {
     private final IProductRepository productRepository;

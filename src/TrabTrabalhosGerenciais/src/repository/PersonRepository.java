@@ -140,7 +140,7 @@ public class PersonRepository implements IPersonRepository{
             boolean staff = resultSet.getBoolean("staff");
             boolean supplier = resultSet.getBoolean("supplier");
             
-            return new PersonModel(name, document, PersonTypeEnum.fromInteger(type), new Address(address_street, address_number, address_neighborhood, address_city, address_state, address_postal_code, address_country), birth_date, observation, customer, staff, supplier);
+            return new PersonModel(id, name, document, PersonTypeEnum.fromInteger(type), new Address(address_street, address_number, address_neighborhood, address_city, address_state, address_postal_code, address_country), birth_date, observation, customer, staff, supplier);
         }
         return person;
         }catch(Exception ex){
@@ -159,8 +159,8 @@ public class PersonRepository implements IPersonRepository{
         ResultSet resultSet = statement.executeQuery();
         
         if (resultSet.next()) {
+            int id = resultSet.getInt("person_id");
             String name = resultSet.getString("name");
-            String document = resultSet.getString("document");
             int type = resultSet.getInt("type");
             String address_street = resultSet.getString("address_street");
             String address_number = resultSet.getString("address_number");
@@ -175,7 +175,7 @@ public class PersonRepository implements IPersonRepository{
             boolean staff = resultSet.getBoolean("staff");
             boolean supplier = resultSet.getBoolean("supplier");
             
-            return new PersonModel(name, document, PersonTypeEnum.fromInteger(type), new Address(address_street, address_number, address_neighborhood, address_city, address_state, address_postal_code, address_country), birth_date, observation, customer, staff, supplier);
+            return new PersonModel(id, name, doc, PersonTypeEnum.fromInteger(type), new Address(address_street, address_number, address_neighborhood, address_city, address_state, address_postal_code, address_country), birth_date, observation, customer, staff, supplier);
         }
         return person;
         }catch(Exception ex){
@@ -193,6 +193,7 @@ public class PersonRepository implements IPersonRepository{
         ResultSet resultSet = statement.executeQuery();
         
         while (resultSet.next()) {
+            int id = resultSet.getInt("person_id");
             String name = resultSet.getString("name");
             String document = resultSet.getString("document");
             int type = resultSet.getInt("type");
@@ -209,7 +210,7 @@ public class PersonRepository implements IPersonRepository{
             boolean staff = resultSet.getBoolean("staff");
             boolean supplier = resultSet.getBoolean("supplier");
             
-            people.add(new PersonModel(name, document, PersonTypeEnum.fromInteger(type), new Address(address_street, address_number, address_neighborhood, address_city, address_state, address_postal_code, address_country), birth_date, observation, customer, staff, supplier));
+            people.add(new PersonModel(id, name, document, PersonTypeEnum.fromInteger(type), new Address(address_street, address_number, address_neighborhood, address_city, address_state, address_postal_code, address_country), birth_date, observation, customer, staff, supplier));
         }
         return people;
         }catch(Exception ex){

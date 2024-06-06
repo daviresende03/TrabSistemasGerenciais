@@ -29,6 +29,19 @@ public class PersonModel extends BaseModel{
         this.supplier = supplier;
     }
     
+    public PersonModel(int id, String name, String document, PersonTypeEnum type, Address address, Date birthDate, String observation, boolean customer, boolean staff, boolean supplier) {
+        this.name = Objects.requireNonNullElse(name,"");
+        this.document = Objects.requireNonNullElse(document,"");
+        this.type = Objects.requireNonNullElse(type,PersonTypeEnum.PF);
+        this.address = Objects.requireNonNullElse(address, new Address());
+        this.birthDate = Objects.requireNonNullElse(birthDate, new Date());
+        this.observation = Objects.requireNonNullElse(observation, "");
+        this.customer = customer;
+        this.staff = staff;
+        this.supplier = supplier;
+        this.setId(id);
+    }
+    
     public PersonModel(int id){
         this.setId(id);
     }

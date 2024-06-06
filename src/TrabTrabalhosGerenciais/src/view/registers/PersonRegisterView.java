@@ -4,6 +4,13 @@
  */
 package view.registers;
 
+import controller.PersonController;
+import controller.viewModels.PersonVM;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import model.entities.ResponseService;
+import model.enums.ResponseTypeEnum;
+
 /**
  *
  * @author joaov
@@ -16,6 +23,7 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
     public PersonRegisterView() {
         initComponents();
         this.setVisible(true);
+        this.personController = new PersonController();
     }
 
     /**
@@ -228,6 +236,11 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
         }
 
         jButtonSaveForm.setText("SALVAR");
+        jButtonSaveForm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonSaveFormMouseClicked(evt);
+            }
+        });
 
         jButtonEditForm.setText("EDITAR");
 
@@ -427,6 +440,38 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxCustomerActionPerformed
 
+    private void jButtonSaveFormMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveFormMouseClicked
+        PersonVM personForm = getPersonByForm();
+        this.personController.create(personForm);
+        
+        ResponseService response = this.personController.getResponseService();
+        
+        if(response.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Pessoa inserida com sucesso!" , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonSaveFormMouseClicked
+
+    private PersonVM getPersonByForm(){
+        PersonVM personForm = new PersonVM();
+        
+        personForm.name = this.jTextFieldName.getText();
+        personForm.document = this.jTextFieldDocument.getText();
+        personForm.birthDate = new Date(this.jTextFieldBirthDate.getText());
+        personForm.street = this.jTextFieldStreet.getText();
+        personForm.number = this.jTextFieldNumber.getText();
+        personForm.neighborhood = this.jTextFieldNeighborhood.getText();
+        personForm.city = this.jTextFieldCity.getText();
+        personForm.state = this.jTextFieldState.getText();
+        personForm.country = "Brazil";
+        personForm.postalCode = this.jTextFieldPostalCode.getText();
+        personForm.observation = this.jTextAreaObservations.getText();
+                
+        return personForm;
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClearFields;
@@ -477,4 +522,5 @@ public class PersonRegisterView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldStreet;
     private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
+    private PersonController personController;
 }

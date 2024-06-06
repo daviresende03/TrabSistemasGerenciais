@@ -1,5 +1,6 @@
 package service;
 
+import domain.Utils.StringUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,8 @@ public class PersonService extends BaseService implements IPersonService {
             Date date = new Date();
             person.setUpdatedDate(date);
             person.setCreatedDate(date);
+            
+            person.setDocument(StringUtil.RemoveMask(person.getDocument()));
             
             if(personRepository.select(person.getDocument()).getId() > 0){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Já existe um cadastro com este documento.");

@@ -1,7 +1,7 @@
 package controller.viewModels;
 
+import domain.model.entities.PersonModel;
 import java.util.Date;
-import domain.model.valueObjects.Address;
 
 public class PersonVM {
     public int id;
@@ -20,4 +20,25 @@ public class PersonVM {
     public boolean customer;
     public boolean staff;
     public boolean supplier;
+    
+    public PersonVM(){}
+    
+    public PersonVM(PersonModel model){
+        id = model.getId();
+        name = model.getName();
+        document = model.getDocument();
+        type = model.getType().getValue();
+        street = model.getAddress().getStreet();
+        number = model.getAddress().getNumber();
+        neighborhood = model.getAddress().getNeighborhood();
+        city = model.getAddress().getCity();
+        state = model.getAddress().getState();
+        postalCode = model.getAddress().getPostalCode();
+        country = model.getAddress().getCountry();
+        birthDate = model.getBirthDate();
+        observation = model.getObservation();
+        customer = model.getCustomer();
+        staff = model.getStaff();
+        supplier = model.getSupplier();
+    }
 }

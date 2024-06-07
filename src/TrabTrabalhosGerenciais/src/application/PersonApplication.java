@@ -6,6 +6,8 @@ import domain.model.entities.ResponseService;
 import domain.model.enums.PersonTypeEnum;
 import domain.interfaces.services.IPersonService;
 import domain.model.valueObjects.Address;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PersonApplication {
     private final IPersonService personService;
@@ -31,5 +33,15 @@ public class PersonApplication {
                 personVM.supplier
         );
         personService.insert(personModel);
+    }
+    
+    public List<PersonVM> getAll(){
+        List<PersonModel> peopleModel = personService.getAll();
+        List<PersonVM> peopleVM = new ArrayList<PersonVM>();
+        
+        for(PersonModel personModel : peopleModel){
+            peopleVM.add(new PersonVM(personModel));
+        }
+        return peopleVM;
     }
 }

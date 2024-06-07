@@ -6,6 +6,8 @@ import domain.Utils.DateUtil;
 import javax.swing.JOptionPane;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ResponseTypeEnum;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 public class PersonView extends javax.swing.JInternalFrame {
 
@@ -15,6 +17,7 @@ public class PersonView extends javax.swing.JInternalFrame {
         
         this.personController = new PersonController();
         this.clearForm();
+        this.loadPersonTableByDataBase();
     }
     
     @SuppressWarnings("unchecked")
@@ -62,7 +65,7 @@ public class PersonView extends javax.swing.JInternalFrame {
         jCheckBoxSupplier = new javax.swing.JCheckBox();
         jButtonDeleteUser = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        usersTable = new javax.swing.JTable();
+        jTableUsers = new javax.swing.JTable();
         jButtonSaveForm = new javax.swing.JButton();
         jButtonEditForm = new javax.swing.JButton();
         jButtonClearFields = new javax.swing.JButton();
@@ -132,8 +135,9 @@ public class PersonView extends javax.swing.JInternalFrame {
         jCheckBoxSupplier.setText("Fornecedor");
 
         jButtonDeleteUser.setText("EXCLUIR");
+        jButtonDeleteUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        usersTable.setModel(new javax.swing.table.DefaultTableModel(
+        jTableUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -156,23 +160,24 @@ public class PersonView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(usersTable);
-        if (usersTable.getColumnModel().getColumnCount() > 0) {
-            usersTable.getColumnModel().getColumn(0).setResizable(false);
-            usersTable.getColumnModel().getColumn(0).setPreferredWidth(5);
-            usersTable.getColumnModel().getColumn(1).setResizable(false);
-            usersTable.getColumnModel().getColumn(1).setPreferredWidth(200);
-            usersTable.getColumnModel().getColumn(2).setResizable(false);
-            usersTable.getColumnModel().getColumn(2).setPreferredWidth(10);
-            usersTable.getColumnModel().getColumn(3).setResizable(false);
-            usersTable.getColumnModel().getColumn(3).setPreferredWidth(10);
-            usersTable.getColumnModel().getColumn(4).setResizable(false);
-            usersTable.getColumnModel().getColumn(4).setPreferredWidth(10);
-            usersTable.getColumnModel().getColumn(5).setResizable(false);
-            usersTable.getColumnModel().getColumn(5).setPreferredWidth(10);
+        jScrollPane4.setViewportView(jTableUsers);
+        if (jTableUsers.getColumnModel().getColumnCount() > 0) {
+            jTableUsers.getColumnModel().getColumn(0).setResizable(false);
+            jTableUsers.getColumnModel().getColumn(0).setPreferredWidth(5);
+            jTableUsers.getColumnModel().getColumn(1).setResizable(false);
+            jTableUsers.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jTableUsers.getColumnModel().getColumn(2).setResizable(false);
+            jTableUsers.getColumnModel().getColumn(2).setPreferredWidth(10);
+            jTableUsers.getColumnModel().getColumn(3).setResizable(false);
+            jTableUsers.getColumnModel().getColumn(3).setPreferredWidth(10);
+            jTableUsers.getColumnModel().getColumn(4).setResizable(false);
+            jTableUsers.getColumnModel().getColumn(4).setPreferredWidth(10);
+            jTableUsers.getColumnModel().getColumn(5).setResizable(false);
+            jTableUsers.getColumnModel().getColumn(5).setPreferredWidth(10);
         }
 
         jButtonSaveForm.setText("SALVAR");
+        jButtonSaveForm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonSaveForm.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonSaveFormMouseClicked(evt);
@@ -180,6 +185,7 @@ public class PersonView extends javax.swing.JInternalFrame {
         });
 
         jButtonEditForm.setText("EDITAR");
+        jButtonEditForm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jButtonClearFields.setText("LIMPAR CAMPOS");
         jButtonClearFields.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -361,6 +367,7 @@ public class PersonView extends javax.swing.JInternalFrame {
         }else{
             JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             this.clearForm();
+            this.loadPersonTableByDataBase();
         }
     }//GEN-LAST:event_jButtonSaveFormMouseClicked
 
@@ -413,7 +420,24 @@ public class PersonView extends javax.swing.JInternalFrame {
         personForm.supplier = this.jCheckBoxSupplier.isSelected();
                 
         return personForm;
-    }   
+    }
+    
+    private void loadPersonTableByDataBase(){
+        DefaultTableModel tableModel = (DefaultTableModel) this.jTableUsers.getModel();
+        tableModel.setRowCount(0);
+        
+        List<PersonVM> people = this.personController.getAll();
+        for (PersonVM person : people) {
+            String personType = person.type == 1 ? "PF" : "PJ";
+            String isCustomer = person.customer ? "SIM" : "NÃO";
+            String isStaff = person.staff ? "SIM" : "NÃO";
+            String isSupplier = person.supplier ? "SIM" : "NÃO";
+            
+            Object[] row = {person.id, person.name, personType, isCustomer, isSupplier, isStaff};
+
+            tableModel.addRow(row);
+        }        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClearFields;
@@ -448,6 +472,7 @@ public class PersonView extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableUsers;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextAreaObservations;
     private javax.swing.JTextField jTextFieldBirthDate;
@@ -460,7 +485,6 @@ public class PersonView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldPostalCode;
     private javax.swing.JTextField jTextFieldState;
     private javax.swing.JTextField jTextFieldStreet;
-    private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
     private PersonController personController;
 }

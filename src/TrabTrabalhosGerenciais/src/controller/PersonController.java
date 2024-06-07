@@ -6,6 +6,7 @@ import controller.viewModels.PersonVM;
 import domain.model.entities.ResponseService;
 import domain.interfaces.repositories.IDataContext;
 import domain.interfaces.services.IPersonService;
+import java.util.List;
 import service.PersonService;
 
 public class PersonController {
@@ -27,5 +28,9 @@ public class PersonController {
     
     public void create(PersonVM personVM){
         personApplication.create(personVM);
+    }
+    
+    public List<PersonVM> getAll(){
+        return this.personApplication.getAll();
     }
 }

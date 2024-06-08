@@ -66,4 +66,8 @@ public class PersonApplication {
         
         personService.update(personModel);
     }
+    
+    public void delete(int id){
+        personService.remove(id);
+    }
 }

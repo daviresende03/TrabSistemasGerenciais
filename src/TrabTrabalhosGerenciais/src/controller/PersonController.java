@@ -41,4 +41,8 @@ public class PersonController {
     public void update(PersonVM personVM){
         this.personApplication.update(personVM);
     }
+    
+    public void delete(int id){
+        this.personApplication.delete(id);
+    }
 }

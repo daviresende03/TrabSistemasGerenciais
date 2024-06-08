@@ -138,6 +138,11 @@ public class PersonView extends javax.swing.JInternalFrame {
 
         jButtonDeleteUser.setText("EXCLUIR");
         jButtonDeleteUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonDeleteUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonDeleteUserMouseClicked(evt);
+            }
+        });
 
         jTableUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -427,6 +432,27 @@ public class PersonView extends javax.swing.JInternalFrame {
         this.jButtonEditForm.setEnabled(false);
         
     }//GEN-LAST:event_jButtonEditFormMouseClicked
+
+    private void jButtonDeleteUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteUserMouseClicked
+        int lineSelected = this.jTableUsers.getSelectedRow();
+        if(lineSelected<0){
+            JOptionPane.showMessageDialog(null, "Primeiramente é necessário selecionar o registro que deseja deletar." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        int id = (int)this.jTableUsers.getValueAt(lineSelected, 0);
+        this.personController.delete(id);
+        
+        ResponseService response = this.personController.getResponseService();
+        
+        if(response.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            this.loadPersonTableByDataBase();
+        }
+        
+    }//GEN-LAST:event_jButtonDeleteUserMouseClicked
 
     private void completeForm(PersonVM person){
         this.jTextFieldId.setText(Integer.toString(person.id));        

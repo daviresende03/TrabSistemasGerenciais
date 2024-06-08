@@ -66,7 +66,7 @@ public class PersonService extends BaseService implements IPersonService {
             responseService.setResponse(ResponseTypeEnum.SUCCESS, "Usuário deletado com sucesso.");
         }catch(Exception ex){
             dataContext.rollback();
-            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o usuário.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao deletar o usuário.");
         }
     }
 

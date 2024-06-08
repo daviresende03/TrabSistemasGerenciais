@@ -9,6 +9,9 @@ import javax.swing.JInternalFrame;
 import view.component.MenuItem;
 import view.entities.PersonView;
 import view.entities.ProductView;
+import view.entities.NewOrderView;
+import view.entities.OrdersView;
+
 
 public class MainView extends javax.swing.JFrame {
 
@@ -39,13 +42,13 @@ public class MainView extends javax.swing.JFrame {
         MenuItem subMenuSaleTableControl = new MenuItem(null, "Controle de Mesas", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                alterPanel(new PersonView());
+                alterPanel(new OrdersView());
             }
         });
         MenuItem subMenuSaleOrder = new MenuItem(null, "Pedidos", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                alterPanel(new ProductView());
+                alterPanel(new NewOrderView());
             }
         });
         MenuItem menuSale = new MenuItem(null, "Vendas", null, subMenuSaleTableControl, subMenuSaleOrder);

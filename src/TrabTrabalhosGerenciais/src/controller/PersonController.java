@@ -37,4 +37,8 @@ public class PersonController {
     public PersonVM get(int id){
         return this.personApplication.get(id);
     }
+    
+    public void update(PersonVM personVM){
+        this.personApplication.update(personVM);
+    }
 }

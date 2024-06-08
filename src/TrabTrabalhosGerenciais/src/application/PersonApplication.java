@@ -49,4 +49,21 @@ public class PersonApplication {
         PersonModel personModel = personService.get(id);
         return new PersonVM(personModel);
     }
+    
+    public void update(PersonVM personVM){
+        PersonModel personModel = new PersonModel(
+                personVM.id,
+                personVM.name,
+                personVM.document,
+                PersonTypeEnum.fromInteger(personVM.type),
+                new Address(personVM.street, personVM.number, personVM.neighborhood, personVM.city, personVM.state, personVM.postalCode, personVM.country),
+                personVM.birthDate,
+                personVM.observation,
+                personVM.customer,
+                personVM.staff,
+                personVM.supplier
+        );
+        
+        personService.update(personModel);
+    }
 }

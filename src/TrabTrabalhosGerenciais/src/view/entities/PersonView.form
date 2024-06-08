@@ -91,6 +91,10 @@
                       <Component id="jTextFieldBirthDate" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabelId" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jTextFieldId" min="-2" pref="90" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabelName" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTextFieldName" max="32767" attributes="0"/>
@@ -187,6 +191,8 @@
                   <Component id="jTextFieldName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jRadioButtonPJ" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jRadioButtonPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelId" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -489,6 +495,16 @@
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonClearFieldsMouseClicked"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldId">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelId">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="C&#xf3;digo"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

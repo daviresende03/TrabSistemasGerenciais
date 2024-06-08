@@ -69,6 +69,8 @@ public class PersonView extends javax.swing.JInternalFrame {
         jButtonSaveForm = new javax.swing.JButton();
         jButtonEditForm = new javax.swing.JButton();
         jButtonClearFields = new javax.swing.JButton();
+        jTextFieldId = new javax.swing.JTextField();
+        jLabelId = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -199,6 +201,10 @@ public class PersonView extends javax.swing.JInternalFrame {
             }
         });
 
+        jTextFieldId.setEnabled(false);
+
+        jLabelId.setText("Código");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -230,6 +236,10 @@ public class PersonView extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldBirthDate))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabelId)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldName)
@@ -306,7 +316,9 @@ public class PersonView extends javax.swing.JInternalFrame {
                     .addComponent(jLabelName)
                     .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRadioButtonPJ)
-                    .addComponent(jRadioButtonPF))
+                    .addComponent(jRadioButtonPF)
+                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelId))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDocument)
@@ -366,10 +378,17 @@ public class PersonView extends javax.swing.JInternalFrame {
 
     private void jButtonSaveFormMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveFormMouseClicked
         PersonVM personForm = getPersonByForm();
-        this.personController.create(personForm);
+        int personId = Integer.parseInt(this.jTextFieldId.getText().isEmpty() ? "0" : this.jTextFieldId.getText());
+        
+        if(personId == 0){
+            this.personController.create(personForm);
+        }else{
+            personForm.id = personId;
+            this.personController.update(personForm);
+        }
         
         ResponseService response = this.personController.getResponseService();
-        
+
         if(response.getType() != ResponseTypeEnum.SUCCESS){
             JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
         }else{
@@ -391,6 +410,8 @@ public class PersonView extends javax.swing.JInternalFrame {
             return;
         }
         
+        this.clearForm();
+        
         int id = (int)this.jTableUsers.getValueAt(lineSelected, 0);
         
         PersonVM person = this.personController.get(id);
@@ -408,6 +429,7 @@ public class PersonView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonEditFormMouseClicked
 
     private void completeForm(PersonVM person){
+        this.jTextFieldId.setText(Integer.toString(person.id));        
         this.jTextFieldName.setText(person.name);
         this.jTextFieldDocument.setText(person.document);
         this.jTextFieldBirthDate.setText(DateUtil.dateToString(person.birthDate));
@@ -429,6 +451,7 @@ public class PersonView extends javax.swing.JInternalFrame {
     }
     
     private void clearForm(){
+        this.jTextFieldId.setText("");
         this.jTextFieldName.setText("");
         this.jTextFieldDocument.setText("");
         this.jTextFieldBirthDate.setText("");
@@ -510,6 +533,7 @@ public class PersonView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelCountry;
     private javax.swing.JLabel jLabelDocument;
     private javax.swing.JLabel jLabelFunction;
+    private javax.swing.JLabel jLabelId;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelNeighborhood;
     private javax.swing.JLabel jLabelNumber;
@@ -535,6 +559,7 @@ public class PersonView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldCity;
     private javax.swing.JTextField jTextFieldCountry;
     private javax.swing.JTextField jTextFieldDocument;
+    private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldName;
     private javax.swing.JTextField jTextFieldNeighborhood;
     private javax.swing.JTextField jTextFieldNumber;

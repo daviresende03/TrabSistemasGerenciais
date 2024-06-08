@@ -96,7 +96,7 @@ public class PersonService extends BaseService implements IPersonService {
             responseService.setResponse(ResponseTypeEnum.SUCCESS, "Usuário atualizado com sucesso!");
         }catch(Exception ex){
             dataContext.rollback();
-            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o usuário.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao atualizar o usuário.");
         }
     }
 

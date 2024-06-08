@@ -66,23 +66,23 @@ public class PersonRepository implements IPersonRepository{
 
     @Override
     public void update(PersonModel model) throws SQLException {
-        String query = "UPDATE person SET"
-                + "name = ?"
-                + "document = ?"
-                + "type = ?"
-                + "address_street = ?"
+        String query = "UPDATE person SET "
+                + "name = ?,"
+                + "document = ?,"
+                + "type = ?,"
+                + "address_street = ?,"
                 + "address_number = ?,"
-                + "address_neighborhood = ?"
-                + "address_city = ?"
-                + "address_state = ?"
-                + "address_postal_code = ?"
-                + "address_country = ?"
-                + "birth_date = ?"
-                + "observation = ?"
-                + "customer = ?"
-                + "staff = ?"
-                + "supplier = ?"
-                + "updated_at = ?"
+                + "address_neighborhood = ?,"
+                + "address_city = ?,"
+                + "address_state = ?,"
+                + "address_postal_code = ?,"
+                + "address_country = ?,"
+                + "birth_date = ?,"
+                + "observation = ?,"
+                + "customer = ?,"
+                + "staff = ?,"
+                + "supplier = ?,"
+                + "updated_at = ? "
                 + "WHERE person_id = ?";
         
         PreparedStatement statement = connect.prepareStatement(query);
@@ -101,7 +101,9 @@ public class PersonRepository implements IPersonRepository{
         statement.setBoolean(13, model.getCustomer());
         statement.setBoolean(14, model.getStaff());
         statement.setBoolean(15, model.getSupplier());
-        statement.setDate(17, new Date(model.getUpdatedDate().getTime()));
+        statement.setDate(16, new Date(model.getUpdatedDate().getTime()));
+        statement.setInt(17, model.getId());
+         statement.executeUpdate();
     }
 
     @Override

@@ -9,7 +9,7 @@ public class DataContext implements IDataContext{
     private final String URL = "jdbc:mysql://localhost:";
     private final String USER = "root";
     private final String PASSWORD = "root";
-    private final String PORT = "3307";
+    private final String PORT = "3306";
     private final String DATABASE = "pallato";
     
     private Connection connection;

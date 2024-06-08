@@ -129,7 +129,7 @@
                   <Component id="jSeparator3" alignment="0" max="32767" attributes="0"/>
                   <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="jLabelNewUser" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelTitle" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButtonClearFields" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -177,7 +177,7 @@
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonClearFields" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelNewUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelTitle" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jLabelPersonalData" min="-2" max="-2" attributes="0"/>
@@ -251,7 +251,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabelNewUser">
+    <Component class="javax.swing.JLabel" name="jLabelTitle">
       <Properties>
         <Property name="text" type="java.lang.String" value="NOVO USU&#xc1;RIO"/>
       </Properties>
@@ -478,6 +478,9 @@
           <Color id="Hand Cursor"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonEditFormMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonClearFields">
       <Properties>

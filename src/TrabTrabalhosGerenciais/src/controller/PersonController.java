@@ -33,4 +33,8 @@ public class PersonController {
     public List<PersonVM> getAll(){
         return this.personApplication.getAll();
     }
+    
+    public PersonVM get(int id){
+        return this.personApplication.get(id);
+    }
 }

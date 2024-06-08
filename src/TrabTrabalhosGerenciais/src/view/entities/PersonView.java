@@ -28,7 +28,7 @@ public class PersonView extends javax.swing.JInternalFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabelNewUser = new javax.swing.JLabel();
+        jLabelTitle = new javax.swing.JLabel();
         jLabelPersonalData = new javax.swing.JLabel();
         jLabelName = new javax.swing.JLabel();
         jTextFieldName = new javax.swing.JTextField();
@@ -90,7 +90,7 @@ public class PersonView extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Novo usuário");
 
-        jLabelNewUser.setText("NOVO USUÁRIO");
+        jLabelTitle.setText("NOVO USUÁRIO");
 
         jLabelPersonalData.setText("DADOS PESSOAIS");
 
@@ -186,6 +186,11 @@ public class PersonView extends javax.swing.JInternalFrame {
 
         jButtonEditForm.setText("EDITAR");
         jButtonEditForm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonEditForm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonEditFormMouseClicked(evt);
+            }
+        });
 
         jButtonClearFields.setText("LIMPAR CAMPOS");
         jButtonClearFields.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -256,7 +261,7 @@ public class PersonView extends javax.swing.JInternalFrame {
                     .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelNewUser)
+                        .addComponent(jLabelTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonClearFields))
                     .addGroup(layout.createSequentialGroup()
@@ -293,7 +298,7 @@ public class PersonView extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonClearFields)
-                    .addComponent(jLabelNewUser))
+                    .addComponent(jLabelTitle))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelPersonalData)
                 .addGap(15, 15, 15)
@@ -371,6 +376,7 @@ public class PersonView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             this.clearForm();
             this.loadPersonTableByDataBase();
+            this.jButtonEditForm.setEnabled(true);
         }
     }//GEN-LAST:event_jButtonSaveFormMouseClicked
 
@@ -378,6 +384,50 @@ public class PersonView extends javax.swing.JInternalFrame {
         this.clearForm();
     }//GEN-LAST:event_jButtonClearFieldsMouseClicked
 
+    private void jButtonEditFormMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEditFormMouseClicked
+        int lineSelected = this.jTableUsers.getSelectedRow();
+        if(lineSelected<0){
+            JOptionPane.showMessageDialog(null, "Primeiramente é necessário selecionar o registro que deseja alterar." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        int id = (int)this.jTableUsers.getValueAt(lineSelected, 0);
+        
+        PersonVM person = this.personController.get(id);
+        ResponseService response = this.personController.getResponseService();
+        
+        if(response.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        completeForm(person);
+        this.jLabelTitle.setText("Edição de Usuário");
+        this.jButtonEditForm.setEnabled(false);
+        
+    }//GEN-LAST:event_jButtonEditFormMouseClicked
+
+    private void completeForm(PersonVM person){
+        this.jTextFieldName.setText(person.name);
+        this.jTextFieldDocument.setText(person.document);
+        this.jTextFieldBirthDate.setText(DateUtil.dateToString(person.birthDate));
+        this.jTextFieldStreet.setText(person.street);
+        this.jTextFieldNumber.setText(person.number);
+        this.jTextFieldNeighborhood.setText(person.neighborhood);
+        this.jTextFieldCity.setText(person.city);
+        this.jTextFieldState.setText(person.state);
+        this.jTextFieldCountry.setText(person.country);
+        this.jTextFieldPostalCode.setText(person.postalCode);
+        this.jTextAreaObservations.setText(person.observation);
+        
+        this.jRadioButtonPF.setSelected(person.type == 1);
+        this.jRadioButtonPJ.setSelected(!this.jRadioButtonPF.isSelected());
+        
+        this.jCheckBoxCustomer.setSelected(person.customer);
+        this.jCheckBoxStaff.setSelected(person.staff);
+        this.jCheckBoxSupplier.setSelected(person.supplier);
+    }
+    
     private void clearForm(){
         this.jTextFieldName.setText("");
         this.jTextFieldDocument.setText("");
@@ -399,6 +449,9 @@ public class PersonView extends javax.swing.JInternalFrame {
         this.jCheckBoxSupplier.setSelected(false);
         
         this.jTextFieldName.requestFocusInWindow();
+        
+        this.jLabelTitle.setText("Novo Usuário");
+        this.jButtonEditForm.setEnabled(true);
     }
     
     private PersonVM getPersonByForm(){
@@ -406,7 +459,7 @@ public class PersonView extends javax.swing.JInternalFrame {
         
         personForm.name = this.jTextFieldName.getText();
         personForm.document = this.jTextFieldDocument.getText();
-        personForm.birthDate = DateUtil.dateToString(this.jTextFieldBirthDate.getText());
+        personForm.birthDate = DateUtil.stringToDate(this.jTextFieldBirthDate.getText());
         personForm.street = this.jTextFieldStreet.getText();
         personForm.number = this.jTextFieldNumber.getText();
         personForm.neighborhood = this.jTextFieldNeighborhood.getText();
@@ -459,12 +512,12 @@ public class PersonView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelFunction;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelNeighborhood;
-    private javax.swing.JLabel jLabelNewUser;
     private javax.swing.JLabel jLabelNumber;
     private javax.swing.JLabel jLabelObservations;
     private javax.swing.JLabel jLabelPersonalData;
     private javax.swing.JLabel jLabelState;
     private javax.swing.JLabel jLabelStreet;
+    private javax.swing.JLabel jLabelTitle;
     private javax.swing.JRadioButton jRadioButtonPF;
     private javax.swing.JRadioButton jRadioButtonPJ;
     private javax.swing.JScrollPane jScrollPane1;

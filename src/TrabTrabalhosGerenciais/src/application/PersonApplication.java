@@ -44,4 +44,9 @@ public class PersonApplication {
         }
         return peopleVM;
     }
+    
+    public PersonVM get(int id){
+        PersonModel personModel = personService.get(id);
+        return new PersonVM(personModel);
+    }
 }

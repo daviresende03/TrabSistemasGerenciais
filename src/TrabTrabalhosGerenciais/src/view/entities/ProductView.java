@@ -1,6 +1,10 @@
 package view.entities;
 
 import controller.ProductController;
+import controller.viewModels.ProductVM;
+import domain.model.enums.ProductTypeEnum;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 public class ProductView extends javax.swing.JInternalFrame {
 
@@ -9,6 +13,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         
         initComponents();
         this.setVisible(true);
+        this.clearForm();
     }
 
     @SuppressWarnings("unchecked")
@@ -30,7 +35,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         jTextFieldStock = new javax.swing.JTextField();
         jComboBoxType = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        productsTable = new javax.swing.JTable();
+        jProductTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -71,7 +76,7 @@ public class ProductView extends javax.swing.JInternalFrame {
 
         jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        productsTable.setModel(new javax.swing.table.DefaultTableModel(
+        jProductTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -94,16 +99,16 @@ public class ProductView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(productsTable);
-        if (productsTable.getColumnModel().getColumnCount() > 0) {
-            productsTable.getColumnModel().getColumn(0).setResizable(false);
-            productsTable.getColumnModel().getColumn(1).setResizable(false);
-            productsTable.getColumnModel().getColumn(1).setPreferredWidth(200);
-            productsTable.getColumnModel().getColumn(2).setResizable(false);
-            productsTable.getColumnModel().getColumn(3).setResizable(false);
-            productsTable.getColumnModel().getColumn(4).setResizable(false);
-            productsTable.getColumnModel().getColumn(5).setResizable(false);
-            productsTable.getColumnModel().getColumn(6).setResizable(false);
+        jScrollPane2.setViewportView(jProductTable);
+        if (jProductTable.getColumnModel().getColumnCount() > 0) {
+            jProductTable.getColumnModel().getColumn(0).setResizable(false);
+            jProductTable.getColumnModel().getColumn(1).setResizable(false);
+            jProductTable.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jProductTable.getColumnModel().getColumn(2).setResizable(false);
+            jProductTable.getColumnModel().getColumn(3).setResizable(false);
+            jProductTable.getColumnModel().getColumn(4).setResizable(false);
+            jProductTable.getColumnModel().getColumn(5).setResizable(false);
+            jProductTable.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jButton1.setText("SALVAR");
@@ -202,6 +207,21 @@ public class ProductView extends javax.swing.JInternalFrame {
         this.jComboBoxType.setSelectedIndex(0);
         this.jComboBoxUnit.setSelectedIndex(0);
         this.jTextFieldProductName.requestFocusInWindow();
+        
+        this.loadProductTableByDataBase();
+    }
+    
+    private void loadProductTableByDataBase(){
+        DefaultTableModel tableModel = (DefaultTableModel) this.jProductTable.getModel();
+        tableModel.setRowCount(0);
+        
+        List<ProductVM> products = this.productController.getAll();
+        for (ProductVM product : products){
+            String typeDescription = product.type == ProductTypeEnum.PRODUCT_SALE.getValue() ? "Produto" : "Prato Feito";
+            
+            Object[] row = {product.id, product.name, product.unitName, typeDescription, product.stock, product.costPrice, product.salePrice};
+            tableModel.addRow(row);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -216,6 +236,7 @@ public class ProductView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelNewProduct;
     private javax.swing.JLabel jLabelSalePrice;
     private javax.swing.JLabel jLabelStock;
+    private javax.swing.JTable jProductTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
@@ -223,7 +244,6 @@ public class ProductView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldProductName;
     private javax.swing.JTextField jTextFieldSalePrice;
     private javax.swing.JTextField jTextFieldStock;
-    private javax.swing.JTable productsTable;
     // End of variables declaration//GEN-END:variables
     private final ProductController productController;
 }

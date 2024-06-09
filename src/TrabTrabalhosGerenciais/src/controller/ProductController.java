@@ -7,6 +7,7 @@ import controller.viewModels.ProductVM;
 import domain.model.entities.ResponseService;
 import domain.interfaces.repositories.IDataContext;
 import domain.interfaces.services.IProductService;
+import java.util.List;
 import service.ProductService;
 
 public class ProductController {
@@ -38,6 +39,10 @@ public class ProductController {
     
     public void create(ProductVM productVM){
         productApplication.create(productVM);
+    }
+    
+    public List<ProductVM> getAll(){
+        return productApplication.getAll();
     }
     
 }

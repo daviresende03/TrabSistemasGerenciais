@@ -2,7 +2,6 @@ package views.entities;
 
 import controllers.ProductController;
 import application.viewModels.ProductVM;
-import application.viewModels.UnitVM;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ProductTypeEnum;
 import domain.model.enums.ResponseTypeEnum;
@@ -40,9 +39,9 @@ public class ProductView extends javax.swing.JInternalFrame {
         jComboBoxType = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jProductTable = new javax.swing.JTable();
-        jButtonSave = new javax.swing.JButton();
-        jButtonEdit = new javax.swing.JButton();
-        jButtonDelete = new javax.swing.JButton();
+        jButtonDeleteProduct = new javax.swing.JButton();
+        jButtonEditProduct = new javax.swing.JButton();
+        jButtonSaveProduct = new javax.swing.JButton();
         jTextFieldProductId = new javax.swing.JTextField();
         jLabelProductId = new javax.swing.JLabel();
 
@@ -78,7 +77,7 @@ public class ProductView extends javax.swing.JInternalFrame {
 
         jLabelStock.setText("Estoque");
 
-        jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Produto", "Prato Feito" }));
+        jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Produto Final", "Prato Feito" }));
 
         jProductTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,7 +124,7 @@ public class ProductView extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonEdit.setText("EDITAR");
+        jButtonEditProduct.setText("EDITAR");
 
         jButtonSaveProduct.setText("SALVAR");
         jButtonSaveProduct.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,7 +147,7 @@ public class ProductView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonDeleteProduct)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonEdit)
+                        .addComponent(jButtonEditProduct)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonSaveProduct))
                     .addComponent(jScrollPane2)
@@ -212,9 +211,9 @@ public class ProductView extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSave)
-                    .addComponent(jButtonEdit)
-                    .addComponent(jButtonDelete))
+                    .addComponent(jButtonDeleteProduct)
+                    .addComponent(jButtonEditProduct)
+                    .addComponent(jButtonSaveProduct))
                 .addGap(20, 20, 20))
         );
 
@@ -245,7 +244,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonSaveProductMouseClicked
 
-    private void jButtonDeleteProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteProductMouseClicked
+    private void jButtonDeleteProductMouseClicked(java.awt.event.MouseEvent evt) {                                                  
         ProductVM productVM = getProductByForm();
         int productId = Integer.parseInt(this.jTextFieldProductId.getText().isEmpty() ? "0" : this.jTextFieldProductId.getText());
         
@@ -260,9 +259,9 @@ public class ProductView extends javax.swing.JInternalFrame {
         }else{
             JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             this.clearForm();
-            this.jButtonEdit.setEnabled(true);
-        }
-    }//GEN-LAST:event_jButtonSaveMouseClicked
+            this.jButtonEditProduct.setEnabled(true);
+        } 
+    }                                        
 
     private ProductVM getProductByForm(){
         ProductVM productForm = new ProductVM();
@@ -311,9 +310,9 @@ public class ProductView extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClearFields;
-    private javax.swing.JButton jButtonDelete;
-    private javax.swing.JButton jButtonEdit;
-    private javax.swing.JButton jButtonSave;
+    private javax.swing.JButton jButtonDeleteProduct;
+    private javax.swing.JButton jButtonEditProduct;
+    private javax.swing.JButton jButtonSaveProduct;
     private javax.swing.JComboBox<String> jComboBoxType;
     private javax.swing.JComboBox<String> jComboBoxUnit;
     private javax.swing.JLabel jLabel1;

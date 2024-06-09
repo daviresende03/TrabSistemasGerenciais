@@ -1,15 +1,11 @@
 package view.entities;
 
 import controller.ProductController;
-import controller.viewModels.ProductVM;
-import javax.swing.JOptionPane;
-import domain.model.entities.ResponseService;
-import domain.model.enums.ResponseTypeEnum;
 
 public class ProductView extends javax.swing.JInternalFrame {
 
     public ProductView() {
-        this.controller = new ProductController();
+        this.productController = new ProductController();
         
         initComponents();
         this.setVisible(true);
@@ -57,10 +53,9 @@ public class ProductView extends javax.swing.JInternalFrame {
         jLabelNewProduct.setText("NOVO PRODUTO");
 
         jButtonClearFields.setText("LIMPAR CAMPOS");
-
-        jTextFieldProductName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldProductNameActionPerformed(evt);
+        jButtonClearFields.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonClearFieldsMouseClicked(evt);
             }
         });
 
@@ -194,10 +189,20 @@ public class ProductView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldProductNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProductNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldProductNameActionPerformed
+    private void jButtonClearFieldsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonClearFieldsMouseClicked
+        this.clearForm();
+    }//GEN-LAST:event_jButtonClearFieldsMouseClicked
 
+    
+    private void clearForm(){
+        this.jTextFieldProductName.setText("");
+        this.jTextFieldSalePrice.setText("");
+        this.jTextFieldCostPrice.setText("");
+        this.jTextFieldStock.setText("");
+        this.jComboBoxType.setSelectedIndex(0);
+        this.jComboBoxUnit.setSelectedIndex(0);
+        this.jTextFieldProductName.requestFocusInWindow();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -220,5 +225,5 @@ public class ProductView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldStock;
     private javax.swing.JTable productsTable;
     // End of variables declaration//GEN-END:variables
-    private final ProductController controller;
+    private final ProductController productController;
 }

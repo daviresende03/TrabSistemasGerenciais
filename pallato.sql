@@ -1,9 +1,9 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3307
+Source Server         : localhost_3306
 Source Server Version : 80032
-Source Host           : localhost:3307
+Source Host           : localhost:3306
 Source Database       : pallato
 
 Target Server Type    : MYSQL

@@ -1,4 +1,4 @@
-package view.main;
+package views.main;
 
 import controllers.ProductController;
 import java.awt.event.ActionEvent;

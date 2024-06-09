@@ -246,6 +246,8 @@ public class ProductView extends javax.swing.JInternalFrame {
     private void jButtonSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveMouseClicked
         ProductVM productVM = getProductByForm();
         
+        
+        
     }//GEN-LAST:event_jButtonSaveMouseClicked
 
     private ProductVM getProductByForm(){

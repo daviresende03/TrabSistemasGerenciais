@@ -2,6 +2,7 @@ package views.entities;
 
 import controllers.ProductController;
 import application.viewModels.ProductVM;
+import application.viewModels.UnitVM;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ProductTypeEnum;
 import domain.model.enums.ResponseTypeEnum;
@@ -40,7 +41,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jProductTable = new javax.swing.JTable();
         jButtonSave = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonEdit = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
         jTextFieldProductId = new javax.swing.JTextField();
         jLabelProductId = new javax.swing.JLabel();
@@ -71,15 +72,13 @@ public class ProductView extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Nome");
 
-        jComboBoxUnit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabelCostPrice.setText("Preço de Custo");
 
         jLabelSalePrice.setText("Preço de Venda");
 
         jLabelStock.setText("Estoque");
 
-        jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Produto", "Prato Feito" }));
 
         jProductTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,7 +122,7 @@ public class ProductView extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("EDITAR");
+        jButtonEdit.setText("EDITAR");
 
         jButtonDelete.setText("EXCLUIR");
         jButtonDelete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -146,7 +145,7 @@ public class ProductView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(jButtonEdit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonDelete))
                     .addComponent(jScrollPane2)
@@ -211,7 +210,7 @@ public class ProductView extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSave)
-                    .addComponent(jButton2)
+                    .addComponent(jButtonEdit)
                     .addComponent(jButtonDelete))
                 .addGap(20, 20, 20))
         );
@@ -245,16 +244,28 @@ public class ProductView extends javax.swing.JInternalFrame {
 
     private void jButtonSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveMouseClicked
         ProductVM productVM = getProductByForm();
+        int productId = Integer.parseInt(this.jTextFieldProductId.getText().isEmpty() ? "0" : this.jTextFieldProductId.getText());
         
+        if(productId == 0){
+            this.productController.create(productVM);
+        }
         
+        ResponseService response = this.productController.getResponseService();
         
+        if(response.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            this.clearForm();
+            this.jButtonEdit.setEnabled(true);
+        }
     }//GEN-LAST:event_jButtonSaveMouseClicked
 
     private ProductVM getProductByForm(){
         ProductVM productForm = new ProductVM();
         
         productForm.name = this.jTextFieldProductName.getText();
-        productForm.type = this.jComboBoxType.getSelectedIndex();
+        productForm.type = this.jComboBoxType.getSelectedIndex()+1;
         productForm.unitName = (String)this.jComboBoxUnit.getSelectedItem();
         productForm.costPrice = Double.parseDouble(this.jTextFieldCostPrice.getText());
         productForm.salePrice = Double.parseDouble(this.jTextFieldSalePrice.getText());
@@ -264,6 +275,8 @@ public class ProductView extends javax.swing.JInternalFrame {
     }
     
     private void clearForm(){
+        this.loadUnitComboBox();
+        
         this.jTextFieldProductName.setText("");
         this.jTextFieldSalePrice.setText("");
         this.jTextFieldCostPrice.setText("");
@@ -287,11 +300,16 @@ public class ProductView extends javax.swing.JInternalFrame {
             tableModel.addRow(row);
         }
     }
+    
+    private void loadUnitComboBox(){
+        this.jComboBoxUnit.addItem("UNIDADE");
+        this.jComboBoxUnit.addItem("KG");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonClearFields;
     private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonEdit;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JComboBox<String> jComboBoxType;
     private javax.swing.JComboBox<String> jComboBoxUnit;

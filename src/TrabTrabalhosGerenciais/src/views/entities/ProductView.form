@@ -51,7 +51,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jButtonSave" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonEdit" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButtonDelete" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -129,7 +129,7 @@
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonSave" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonEdit" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonDelete" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -161,12 +161,7 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxUnit">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -197,11 +192,9 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxType">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="2">
+            <StringItem index="0" value="Produto"/>
+            <StringItem index="1" value="Prato Feito"/>
           </StringArray>
         </Property>
       </Properties>
@@ -283,7 +276,7 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonSaveMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="jButtonEdit">
       <Properties>
         <Property name="text" type="java.lang.String" value="EDITAR"/>
       </Properties>

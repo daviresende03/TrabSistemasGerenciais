@@ -2,6 +2,8 @@ package views.entities;
 
 import controllers.ProductController;
 import application.viewModels.ProductVM;
+import application.viewModels.UnitVM;
+import controllers.UnitController;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ProductTypeEnum;
 import domain.model.enums.ResponseTypeEnum;
@@ -13,6 +15,7 @@ public class ProductView extends javax.swing.JInternalFrame {
 
     public ProductView() {
         this.productController = new ProductController();
+        this.unitController = new UnitController();
         
         initComponents();
         this.setVisible(true);
@@ -303,9 +306,13 @@ public class ProductView extends javax.swing.JInternalFrame {
         }
     }
     
-    private void loadUnitComboBox(){
-        this.jComboBoxUnit.addItem("UNIDADE");
-        this.jComboBoxUnit.addItem("KG");
+    private void loadUnitComboBox(){ 
+        this.jComboBoxUnit.removeAllItems();
+        
+        List<UnitVM> unitsVM = this.unitController.getAll();
+        for(UnitVM unit : unitsVM){
+            this.jComboBoxUnit.addItem(unit.name);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -332,4 +339,5 @@ public class ProductView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldStock;
     // End of variables declaration//GEN-END:variables
     private final ProductController productController;
+    private final UnitController unitController;
 }

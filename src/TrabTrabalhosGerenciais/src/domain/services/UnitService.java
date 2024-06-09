@@ -130,6 +130,7 @@ public class UnitService extends BaseService implements IUnitService {
         try{            
             List<UnitModel> units = unitRepository.select();
             responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
+            dataContext.commit(); //Commit performed to finalize the transaction and avoid discrepancies
             return units;
         }catch(Exception ex){
             responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar todas as unidades.");

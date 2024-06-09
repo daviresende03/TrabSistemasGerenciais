@@ -48,14 +48,14 @@ public class ProductRepository implements IProductRepository{
 
     @Override
     public void update(ProductModel model) throws SQLException {
-        String query = "UPDATE product SET"
+        String query = "UPDATE product SET "
                         + "product_unit_id =  ?,"
                         + "name =             ?,"
                         + "type =             ?,"
                         + "cost_price =       ?,"
                         + "sale_price =       ?,"
                         + "stock =            ?,"
-                        + "updated_at =       ?,"
+                        + "updated_at =       ? "
                         + "WHERE product_id = ?";
         
         PreparedStatement statement = connect.prepareStatement(query);

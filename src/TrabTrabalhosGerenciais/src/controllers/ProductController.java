@@ -49,4 +49,12 @@ public class ProductController {
         this.productApplication.delete(id);
     }
     
+    public void update(ProductVM productVM){
+        this.productApplication.update(productVM);
+    }
+    
+    public ProductVM get(int id){
+        return this.productApplication.get(id);
+    }
+    
 }

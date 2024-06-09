@@ -28,7 +28,7 @@ public class ProductView extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabelNewProduct = new javax.swing.JLabel();
+        jLabelTitle = new javax.swing.JLabel();
         jButtonClearFields = new javax.swing.JButton();
         jTextFieldProductName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -63,7 +63,7 @@ public class ProductView extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
-        jLabelNewProduct.setText("NOVO PRODUTO");
+        jLabelTitle.setText("NOVO PRODUTO");
 
         jButtonClearFields.setText("LIMPAR CAMPOS");
         jButtonClearFields.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,6 +128,11 @@ public class ProductView extends javax.swing.JInternalFrame {
         });
 
         jButtonEditProduct.setText("EDITAR");
+        jButtonEditProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonEditProductMouseClicked(evt);
+            }
+        });
 
         jButtonSaveProduct.setText("SALVAR");
         jButtonSaveProduct.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -169,7 +174,7 @@ public class ProductView extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelNewProduct)
+                                .addComponent(jLabelTitle)
                                 .addGap(174, 174, 174))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelProductId)
@@ -193,7 +198,7 @@ public class ProductView extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonClearFields)
-                    .addComponent(jLabelNewProduct))
+                    .addComponent(jLabelTitle))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,6 +233,67 @@ public class ProductView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonClearFieldsMouseClicked
 
     private void jButtonSaveProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveProductMouseClicked
+        ProductVM productVM = getProductByForm();
+        int productId = Integer.parseInt(this.jTextFieldProductId.getText().isEmpty() ? "0" : this.jTextFieldProductId.getText());
+        
+        if(productId == 0){
+            this.productController.create(productVM);
+        }else{
+            productVM.id = productId;
+            this.productController.update(productVM);
+        }
+        
+        ResponseService response = this.productController.getResponseService();
+        
+        if(response.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            this.clearForm();
+            this.jButtonEditProduct.setEnabled(true);
+        }
+    }//GEN-LAST:event_jButtonSaveProductMouseClicked
+
+    private void jButtonEditProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEditProductMouseClicked
+        int lineSelected = this.jProductTable.getSelectedRow();
+        if(lineSelected<0){
+            JOptionPane.showMessageDialog(null, "Primeiramente é necessário selecionar o registro que deseja alterar." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        this.clearForm();
+        
+        int id = (int)this.jProductTable.getValueAt(lineSelected, 0);
+        
+        ProductVM product = this.productController.get(id);
+        ResponseService response = this.productController.getResponseService();
+        
+        if(response.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        completeForm(product);
+        this.jLabelTitle.setText("Edição de Usuário");
+        this.jButtonEditProduct.setEnabled(false);
+        
+        
+        
+    }//GEN-LAST:event_jButtonEditProductMouseClicked
+
+    private void completeForm(ProductVM product){
+        this.jTextFieldProductId.setText(Integer.toString(product.id));
+        this.jTextFieldProductName.setText(product.name);
+        this.jTextFieldCostPrice.setText(Double.toString(product.costPrice));
+        this.jTextFieldSalePrice.setText(Double.toString(product.salePrice));
+        this.jTextFieldStock.setText(Double.toString(product.stock));
+        
+        this.jComboBoxType.setSelectedIndex(product.type-1);
+        this.jComboBoxUnit.setSelectedItem(product.unitName);
+    }
+    
+    
+    private void jButtonDeleteProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteProductMouseClicked
         int lineSelected = this.jProductTable.getSelectedRow();
         if(lineSelected<0){
             JOptionPane.showMessageDialog(null, "Primeiramente é necessário selecionar o registro que deseja deletar." , "Atenção", JOptionPane.WARNING_MESSAGE);
@@ -245,26 +311,7 @@ public class ProductView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             this.loadProductTableByDataBase();
         }
-    }//GEN-LAST:event_jButtonSaveProductMouseClicked
-
-    private void jButtonDeleteProductMouseClicked(java.awt.event.MouseEvent evt) {                                                  
-        ProductVM productVM = getProductByForm();
-        int productId = Integer.parseInt(this.jTextFieldProductId.getText().isEmpty() ? "0" : this.jTextFieldProductId.getText());
-        
-        if(productId == 0){
-            this.productController.create(productVM);
-        }
-        
-        ResponseService response = this.productController.getResponseService();
-        
-        if(response.getType() != ResponseTypeEnum.SUCCESS){
-            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            this.clearForm();
-            this.jButtonEditProduct.setEnabled(true);
-        } 
-    }                                        
+    }//GEN-LAST:event_jButtonDeleteProductMouseClicked
 
     private ProductVM getProductByForm(){
         ProductVM productForm = new ProductVM();
@@ -324,10 +371,10 @@ public class ProductView extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jComboBoxUnit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelCostPrice;
-    private javax.swing.JLabel jLabelNewProduct;
     private javax.swing.JLabel jLabelProductId;
     private javax.swing.JLabel jLabelSalePrice;
     private javax.swing.JLabel jLabelStock;
+    private javax.swing.JLabel jLabelTitle;
     private javax.swing.JTable jProductTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

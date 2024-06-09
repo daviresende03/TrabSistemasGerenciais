@@ -72,7 +72,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabelNewProduct" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelTitle" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="174" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -104,7 +104,7 @@
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonClearFields" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelNewProduct" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelTitle" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -138,7 +138,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabelNewProduct">
+    <Component class="javax.swing.JLabel" name="jLabelTitle">
       <Properties>
         <Property name="text" type="java.lang.String" value="NOVO PRODUTO"/>
       </Properties>
@@ -281,6 +281,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="EDITAR"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonEditProductMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSaveProduct">
       <Properties>

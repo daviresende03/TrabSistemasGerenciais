@@ -118,6 +118,7 @@ public class ProductService extends BaseService implements IProductService {
             }
             
             ProductModel product = productRepository.select(id);
+            product.setUnit(unitRepository.select(product.getUnit().getId()));
             
             if(product.getId() <= 0){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Produto não encontrado.");

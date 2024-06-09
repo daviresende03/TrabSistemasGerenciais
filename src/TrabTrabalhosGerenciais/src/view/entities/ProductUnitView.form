@@ -24,28 +24,37 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jButtonDeleteProductUnit" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButtonEditProductUnit" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButtonSaveProductUnit" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jButtonDeleteProductUnit" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jButtonEditProductUnit" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jButtonSaveProductUnit" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane1" alignment="1" pref="720" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabelProductUnit" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
-                  <Component id="jScrollPane1" alignment="1" pref="720" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="jLabelProductUnitId" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jTextFieldProductUnitId" min="-2" pref="90" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabelProductUnitName" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTextFieldProductUnitName" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="jLabelProductUnitSymbol" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextFieldProductUnitSymbol" min="-2" pref="139" max="-2" attributes="0"/>
+                      <Component id="jTextFieldProductUnitSymbol" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -56,21 +65,27 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabelProductUnit" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelProductUnitName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldProductUnitName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelProductUnitSymbol" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldProductUnitSymbol" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="jTextFieldProductUnitId" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelProductUnitId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelProductUnitName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldProductUnitName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelProductUnitSymbol" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldProductUnitSymbol" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="169" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="154" max="32767" attributes="0"/>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButtonDeleteProductUnit" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonEditProductUnit" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonSaveProductUnit" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" max="-2" attributes="0">
+                  <Component id="jButtonEditProductUnit" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jButtonDeleteProductUnit" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jButtonSaveProductUnit" alignment="1" min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
@@ -78,14 +93,14 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="jLabelProductUnit">
       <Properties>
-        <Property name="text" type="java.lang.String" value="C&#xd3;DIGO DA UNIDADE"/>
+        <Property name="text" type="java.lang.String" value="UNIDADE DE PRODUTO"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelProductUnitName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="NOME"/>
+        <Property name="text" type="java.lang.String" value="Nome"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldProductUnitName">
@@ -95,7 +110,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelProductUnitSymbol">
       <Properties>
-        <Property name="text" type="java.lang.String" value="S&#xcd;MBOLO"/>
+        <Property name="text" type="java.lang.String" value="S&#xed;mbolo"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldProductUnitSymbol">
@@ -114,13 +129,13 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="3" rowCount="0">
-                <Column editable="false" title="C&#xd3;DIGO" type="java.lang.Integer"/>
-                <Column editable="false" title="NOME" type="java.lang.String"/>
-                <Column editable="false" title="S&#xcd;MBOLO" type="java.lang.String"/>
+                <Column editable="false" title="C&#xf3;digo" type="java.lang.Integer"/>
+                <Column editable="false" title="Nome" type="java.lang.String"/>
+                <Column editable="false" title="S&#xed;mbolo" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-              <TableColumnModel selectionModel="0">
+              <TableColumnModel selectionModel="1">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>
@@ -138,8 +153,9 @@
                 </Column>
               </TableColumnModel>
             </Property>
+            <Property name="columnSelectionAllowed" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
         </Component>
@@ -157,7 +173,20 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSaveProductUnit">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="sansserif" size="12" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="SALVAR"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelProductUnitId">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="C&#xf3;digo"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldProductUnitId">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
   </SubComponents>

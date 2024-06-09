@@ -42,6 +42,8 @@ public class ProductView extends javax.swing.JInternalFrame {
         jButtonSave = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
+        jTextFieldProductId = new javax.swing.JTextField();
+        jLabelProductId = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -130,6 +132,10 @@ public class ProductView extends javax.swing.JInternalFrame {
             }
         });
 
+        jTextFieldProductId.setEnabled(false);
+
+        jLabelProductId.setText("Código");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,6 +168,10 @@ public class ProductView extends javax.swing.JInternalFrame {
                                 .addComponent(jLabelNewProduct)
                                 .addGap(174, 174, 174))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelProductId)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldProductId, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldProductName)
@@ -185,7 +195,9 @@ public class ProductView extends javax.swing.JInternalFrame {
                     .addComponent(jTextFieldProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jComboBoxUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldProductId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelProductId))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCostPrice)
@@ -284,6 +296,7 @@ public class ProductView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelCostPrice;
     private javax.swing.JLabel jLabelNewProduct;
+    private javax.swing.JLabel jLabelProductId;
     private javax.swing.JLabel jLabelSalePrice;
     private javax.swing.JLabel jLabelStock;
     private javax.swing.JTable jProductTable;
@@ -291,6 +304,7 @@ public class ProductView extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextFieldCostPrice;
+    private javax.swing.JTextField jTextFieldProductId;
     private javax.swing.JTextField jTextFieldProductName;
     private javax.swing.JTextField jTextFieldSalePrice;
     private javax.swing.JTextField jTextFieldStock;

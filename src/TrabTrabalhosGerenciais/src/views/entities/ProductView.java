@@ -103,7 +103,10 @@ public class ProductView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jProductTable.setColumnSelectionAllowed(true);
+        jProductTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jProductTable);
+        jProductTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (jProductTable.getColumnModel().getColumnCount() > 0) {
             jProductTable.getColumnModel().getColumn(0).setResizable(false);
             jProductTable.getColumnModel().getColumn(1).setResizable(false);
@@ -115,19 +118,19 @@ public class ProductView extends javax.swing.JInternalFrame {
             jProductTable.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        jButtonSave.setText("SALVAR");
-        jButtonSave.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonDeleteProduct.setText("EXCLUIR");
+        jButtonDeleteProduct.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonSaveMouseClicked(evt);
+                jButtonDeleteProductMouseClicked(evt);
             }
         });
 
         jButtonEdit.setText("EDITAR");
 
-        jButtonDelete.setText("EXCLUIR");
-        jButtonDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonSaveProduct.setText("SALVAR");
+        jButtonSaveProduct.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonDeleteMouseClicked(evt);
+                jButtonSaveProductMouseClicked(evt);
             }
         });
 
@@ -143,11 +146,11 @@ public class ProductView extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonSave)
+                        .addComponent(jButtonDeleteProduct)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonEdit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonDelete))
+                        .addComponent(jButtonSaveProduct))
                     .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabelCostPrice)
@@ -222,7 +225,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         this.clearForm();
     }//GEN-LAST:event_jButtonClearFieldsMouseClicked
 
-    private void jButtonDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteMouseClicked
+    private void jButtonSaveProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveProductMouseClicked
         int lineSelected = this.jProductTable.getSelectedRow();
         if(lineSelected<0){
             JOptionPane.showMessageDialog(null, "Primeiramente é necessário selecionar o registro que deseja deletar." , "Atenção", JOptionPane.WARNING_MESSAGE);
@@ -240,9 +243,9 @@ public class ProductView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             this.loadProductTableByDataBase();
         }
-    }//GEN-LAST:event_jButtonDeleteMouseClicked
+    }//GEN-LAST:event_jButtonSaveProductMouseClicked
 
-    private void jButtonSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveMouseClicked
+    private void jButtonDeleteProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteProductMouseClicked
         ProductVM productVM = getProductByForm();
         int productId = Integer.parseInt(this.jTextFieldProductId.getText().isEmpty() ? "0" : this.jTextFieldProductId.getText());
         

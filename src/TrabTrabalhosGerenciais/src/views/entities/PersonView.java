@@ -63,10 +63,10 @@ public class PersonView extends javax.swing.JInternalFrame {
         jCheckBoxCustomer = new javax.swing.JCheckBox();
         jCheckBoxStaff = new javax.swing.JCheckBox();
         jCheckBoxSupplier = new javax.swing.JCheckBox();
-        jButtonDeleteUser = new javax.swing.JButton();
+        jButtonSaveUser = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableUsers = new javax.swing.JTable();
-        jButtonSaveForm = new javax.swing.JButton();
+        jButtonDeleteForm = new javax.swing.JButton();
         jButtonEditForm = new javax.swing.JButton();
         jButtonClearFields = new javax.swing.JButton();
         jTextFieldId = new javax.swing.JTextField();
@@ -122,7 +122,7 @@ public class PersonView extends javax.swing.JInternalFrame {
 
         jLabel3.setText("CEP");
 
-        jLabelObservations.setText("OBSERVAÇÕES");
+        jLabelObservations.setText("Observações");
 
         jTextAreaObservations.setColumns(20);
         jTextAreaObservations.setRows(5);
@@ -136,11 +136,17 @@ public class PersonView extends javax.swing.JInternalFrame {
 
         jCheckBoxSupplier.setText("Fornecedor");
 
-        jButtonDeleteUser.setText("EXCLUIR");
-        jButtonDeleteUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButtonDeleteUser.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonSaveUser.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jButtonSaveUser.setText("SALVAR");
+        jButtonSaveUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonSaveUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonDeleteUserMouseClicked(evt);
+                jButtonSaveUserMouseClicked(evt);
+            }
+        });
+        jButtonSaveUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveUserActionPerformed(evt);
             }
         });
 
@@ -167,7 +173,10 @@ public class PersonView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableUsers.setColumnSelectionAllowed(true);
+        jTableUsers.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(jTableUsers);
+        jTableUsers.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (jTableUsers.getColumnModel().getColumnCount() > 0) {
             jTableUsers.getColumnModel().getColumn(0).setResizable(false);
             jTableUsers.getColumnModel().getColumn(0).setPreferredWidth(5);
@@ -183,11 +192,11 @@ public class PersonView extends javax.swing.JInternalFrame {
             jTableUsers.getColumnModel().getColumn(5).setPreferredWidth(10);
         }
 
-        jButtonSaveForm.setText("SALVAR");
-        jButtonSaveForm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButtonSaveForm.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonDeleteForm.setText("EXCLUIR");
+        jButtonDeleteForm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonDeleteForm.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonSaveFormMouseClicked(evt);
+                jButtonDeleteFormMouseClicked(evt);
             }
         });
 
@@ -218,11 +227,11 @@ public class PersonView extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonSaveForm)
+                        .addComponent(jButtonDeleteForm)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonEditForm)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonDeleteUser))
+                        .addComponent(jButtonSaveUser))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabelStreet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -370,18 +379,18 @@ public class PersonView extends javax.swing.JInternalFrame {
                     .addComponent(jCheckBoxSupplier))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonDeleteUser)
-                    .addComponent(jButtonSaveForm)
-                    .addComponent(jButtonEditForm))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButtonDeleteForm, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(jButtonEditForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonSaveUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonSaveFormMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveFormMouseClicked
+    private void jButtonDeleteFormMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteFormMouseClicked
         PersonVM personForm = getPersonByForm();
         int personId = Integer.parseInt(this.jTextFieldId.getText().isEmpty() ? "0" : this.jTextFieldId.getText());
         
@@ -402,7 +411,7 @@ public class PersonView extends javax.swing.JInternalFrame {
             this.loadPersonTableByDataBase();
             this.jButtonEditForm.setEnabled(true);
         }
-    }//GEN-LAST:event_jButtonSaveFormMouseClicked
+    }//GEN-LAST:event_jButtonDeleteFormMouseClicked
 
     private void jButtonClearFieldsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonClearFieldsMouseClicked
         this.clearForm();
@@ -433,7 +442,7 @@ public class PersonView extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jButtonEditFormMouseClicked
 
-    private void jButtonDeleteUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteUserMouseClicked
+    private void jButtonSaveUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveUserMouseClicked
         int lineSelected = this.jTableUsers.getSelectedRow();
         if(lineSelected<0){
             JOptionPane.showMessageDialog(null, "Primeiramente é necessário selecionar o registro que deseja deletar." , "Atenção", JOptionPane.WARNING_MESSAGE);
@@ -452,7 +461,11 @@ public class PersonView extends javax.swing.JInternalFrame {
             this.loadPersonTableByDataBase();
         }
         
-    }//GEN-LAST:event_jButtonDeleteUserMouseClicked
+    }//GEN-LAST:event_jButtonSaveUserMouseClicked
+
+    private void jButtonSaveUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSaveUserActionPerformed
 
     private void completeForm(PersonVM person){
         this.jTextFieldId.setText(Integer.toString(person.id));        
@@ -546,9 +559,9 @@ public class PersonView extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClearFields;
-    private javax.swing.JButton jButtonDeleteUser;
+    private javax.swing.JButton jButtonDeleteForm;
     private javax.swing.JButton jButtonEditForm;
-    private javax.swing.JButton jButtonSaveForm;
+    private javax.swing.JButton jButtonSaveUser;
     private javax.swing.JCheckBox jCheckBoxCustomer;
     private javax.swing.JCheckBox jCheckBoxStaff;
     private javax.swing.JCheckBox jCheckBoxSupplier;

@@ -53,6 +53,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jLabelDiscount = new javax.swing.JLabel();
         jTextFieldDiscount = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jTextFieldOrderStatus = new javax.swing.JTextField();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -116,7 +117,10 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableProductsList.setColumnSelectionAllowed(true);
+        jTableProductsList.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTableProductsList);
+        jTableProductsList.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (jTableProductsList.getColumnModel().getColumnCount() > 0) {
             jTableProductsList.getColumnModel().getColumn(0).setResizable(false);
             jTableProductsList.getColumnModel().getColumn(1).setResizable(false);
@@ -148,7 +152,10 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableSelectedProductsList.setColumnSelectionAllowed(true);
+        jTableSelectedProductsList.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(jTableSelectedProductsList);
+        jTableSelectedProductsList.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (jTableSelectedProductsList.getColumnModel().getColumnCount() > 0) {
             jTableSelectedProductsList.getColumnModel().getColumn(0).setResizable(false);
             jTableSelectedProductsList.getColumnModel().getColumn(1).setResizable(false);
@@ -157,8 +164,11 @@ public class NewOrderView extends javax.swing.JInternalFrame {
             jTableSelectedProductsList.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        jButtonConcludeOrder.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jButtonConcludeOrder.setText("FECHAR PEDIDO");
         jButtonConcludeOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonConcludeOrder.setMaximumSize(new java.awt.Dimension(128, 30));
+        jButtonConcludeOrder.setMinimumSize(new java.awt.Dimension(128, 30));
         jButtonConcludeOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConcludeOrderActionPerformed(evt);
@@ -190,9 +200,9 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jTextAreaObservations.setRows(5);
         jScrollPane5.setViewportView(jTextAreaObservations);
 
-        jLabelObservations.setText("OBSERVAÇÕES");
+        jLabelObservations.setText("Observações");
 
-        jLabelDiscount.setText("DESCONTO");
+        jLabelDiscount.setText("Desconto");
 
         jTextFieldDiscount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,7 +210,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("STATUS");
+        jLabel1.setText("Status");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,7 +231,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonSaveOrder)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonConcludeOrder))
+                                .addComponent(jButtonConcludeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelProductsList)
@@ -232,7 +242,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                                         .addComponent(jComboBoxCustomer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(12, 12, 12)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -251,19 +261,21 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                                                         .addComponent(jLabelDiscount)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                         .addComponent(jTextFieldDiscount))))))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel1)
-                                        .addGap(146, 146, 146)))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(20, 20, 20))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNewOrder)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCustomer)
@@ -276,7 +288,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                     .addComponent(jLabelSelectedProductsList))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(20, 20, 20)
                 .addComponent(jLabelObservations)
@@ -291,10 +303,10 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonConcludeOrder)
-                    .addComponent(jButtonDeleteOrder)
-                    .addComponent(jButtonEditOrder)
-                    .addComponent(jButtonSaveOrder))
+                    .addComponent(jButtonConcludeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonDeleteOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEditOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSaveOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
@@ -349,5 +361,6 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextAreaObservations;
     private javax.swing.JTextField jTextFieldDiscount;
+    private javax.swing.JTextField jTextFieldOrderStatus;
     // End of variables declaration//GEN-END:variables
 }

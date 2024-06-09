@@ -65,11 +65,11 @@
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jButtonSaveForm" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonDeleteForm" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButtonEditForm" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButtonDeleteUser" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonSaveUser" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabelStreet" min="-2" max="-2" attributes="0"/>
@@ -245,11 +245,11 @@
               </Group>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Component id="jScrollPane4" pref="153" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButtonDeleteUser" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonSaveForm" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonEditForm" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="jButtonDeleteForm" pref="37" max="32767" attributes="0"/>
+                  <Component id="jButtonEditForm" alignment="1" max="32767" attributes="0"/>
+                  <Component id="jButtonSaveUser" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
@@ -358,7 +358,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelObservations">
       <Properties>
-        <Property name="text" type="java.lang.String" value="OBSERVA&#xc7;&#xd5;ES"/>
+        <Property name="text" type="java.lang.String" value="Observa&#xe7;&#xf5;es"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -398,15 +398,19 @@
         <Property name="text" type="java.lang.String" value="Fornecedor"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonDeleteUser">
+    <Component class="javax.swing.JButton" name="jButtonSaveUser">
       <Properties>
-        <Property name="text" type="java.lang.String" value="EXCLUIR"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="sansserif" size="12" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="SALVAR"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonDeleteUserMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonSaveUserMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSaveUserActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane4">
@@ -429,7 +433,7 @@
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-              <TableColumnModel selectionModel="0">
+              <TableColumnModel selectionModel="1">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="5" resizable="false">
                   <Title/>
                   <Editor/>
@@ -462,22 +466,23 @@
                 </Column>
               </TableColumnModel>
             </Property>
+            <Property name="columnSelectionAllowed" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButtonSaveForm">
+    <Component class="javax.swing.JButton" name="jButtonDeleteForm">
       <Properties>
-        <Property name="text" type="java.lang.String" value="SALVAR"/>
+        <Property name="text" type="java.lang.String" value="EXCLUIR"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonSaveFormMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonDeleteFormMouseClicked"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonEditForm">

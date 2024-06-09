@@ -39,7 +39,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         jComboBoxType = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jProductTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonSave = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
 
@@ -114,7 +114,12 @@ public class ProductView extends javax.swing.JInternalFrame {
             jProductTable.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        jButton1.setText("SALVAR");
+        jButtonSave.setText("SALVAR");
+        jButtonSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonSaveMouseClicked(evt);
+            }
+        });
 
         jButton2.setText("EDITAR");
 
@@ -133,7 +138,7 @@ public class ProductView extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jButtonSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -193,7 +198,7 @@ public class ProductView extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jButtonSave)
                     .addComponent(jButton2)
                     .addComponent(jButtonDelete))
                 .addGap(20, 20, 20))
@@ -226,6 +231,23 @@ public class ProductView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonDeleteMouseClicked
 
+    private void jButtonSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveMouseClicked
+        ProductVM productVM = getProductByForm();
+        
+    }//GEN-LAST:event_jButtonSaveMouseClicked
+
+    private ProductVM getProductByForm(){
+        ProductVM productForm = new ProductVM();
+        
+        productForm.name = this.jTextFieldProductName.getText();
+        productForm.type = this.jComboBoxType.getSelectedIndex();
+        productForm.unitName = (String)this.jComboBoxUnit.getSelectedItem();
+        productForm.costPrice = Double.parseDouble(this.jTextFieldCostPrice.getText());
+        productForm.salePrice = Double.parseDouble(this.jTextFieldSalePrice.getText());
+        productForm.stock = Double.parseDouble(this.jTextFieldStock.getText());
+
+        return productForm;
+    }
     
     private void clearForm(){
         this.jTextFieldProductName.setText("");
@@ -253,10 +275,10 @@ public class ProductView extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonClearFields;
     private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonSave;
     private javax.swing.JComboBox<String> jComboBoxType;
     private javax.swing.JComboBox<String> jComboBoxUnit;
     private javax.swing.JLabel jLabel1;

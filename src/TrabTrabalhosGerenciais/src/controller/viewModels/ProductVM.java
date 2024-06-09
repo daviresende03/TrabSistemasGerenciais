@@ -22,4 +22,6 @@ public class ProductVM {
         salePrice = productModel.getSalePrice();
         stock = productModel.getStock();
     }
+    
+    public ProductVM(){}
 }

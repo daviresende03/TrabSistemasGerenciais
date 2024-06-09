@@ -2,9 +2,12 @@ package view.entities;
 
 import controller.ProductController;
 import controller.viewModels.ProductVM;
+import domain.model.entities.ResponseService;
 import domain.model.enums.ProductTypeEnum;
+import domain.model.enums.ResponseTypeEnum;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class ProductView extends javax.swing.JInternalFrame {
 
@@ -38,7 +41,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         jProductTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -115,7 +118,12 @@ public class ProductView extends javax.swing.JInternalFrame {
 
         jButton2.setText("EDITAR");
 
-        jButton3.setText("EXCLUIR");
+        jButtonDelete.setText("EXCLUIR");
+        jButtonDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonDeleteMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,7 +137,7 @@ public class ProductView extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3))
+                        .addComponent(jButtonDelete))
                     .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabelCostPrice)
@@ -187,7 +195,7 @@ public class ProductView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButtonDelete))
                 .addGap(20, 20, 20))
         );
 
@@ -197,6 +205,26 @@ public class ProductView extends javax.swing.JInternalFrame {
     private void jButtonClearFieldsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonClearFieldsMouseClicked
         this.clearForm();
     }//GEN-LAST:event_jButtonClearFieldsMouseClicked
+
+    private void jButtonDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteMouseClicked
+        int lineSelected = this.jProductTable.getSelectedRow();
+        if(lineSelected<0){
+            JOptionPane.showMessageDialog(null, "Primeiramente é necessário selecionar o registro que deseja deletar." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        int id = (int)this.jProductTable.getValueAt(lineSelected, 0);
+        this.productController.delete(id);
+        
+        ResponseService response = this.productController.getResponseService();
+        
+        if(response.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            this.loadProductTableByDataBase();
+        }
+    }//GEN-LAST:event_jButtonDeleteMouseClicked
 
     
     private void clearForm(){
@@ -227,8 +255,8 @@ public class ProductView extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonClearFields;
+    private javax.swing.JButton jButtonDelete;
     private javax.swing.JComboBox<String> jComboBoxType;
     private javax.swing.JComboBox<String> jComboBoxUnit;
     private javax.swing.JLabel jLabel1;

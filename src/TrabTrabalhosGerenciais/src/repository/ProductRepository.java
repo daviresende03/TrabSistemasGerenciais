@@ -72,7 +72,7 @@ public class ProductRepository implements IProductRepository{
 
     @Override
     public void delete(int id) throws SQLException {
-        String query = "DELETE FROM product WHERE id = ?";
+        String query = "DELETE FROM product WHERE product_id = ?";
         
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, id);
@@ -83,7 +83,7 @@ public class ProductRepository implements IProductRepository{
     public ProductModel select(int id) throws SQLException {
         ProductModel product = new ProductModel();
         try{
-            String query = "SELECT * FROM product WHERE id = ?";
+            String query = "SELECT * FROM product WHERE product_id = ?";
         
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, id);

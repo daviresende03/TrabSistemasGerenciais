@@ -45,4 +45,8 @@ public class ProductController {
         return productApplication.getAll();
     }
     
+    public void delete(int id){
+        this.productApplication.delete(id);
+    }
+    
 }

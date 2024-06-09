@@ -65,7 +65,7 @@ public class ProductService extends BaseService implements IProductService {
             
             dataContext.commit();
             
-            responseService.setResponse(ResponseTypeEnum.ERROR, "Produto deletado com sucesso.");
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Produto deletado com sucesso.");
         }catch(Exception ex){
             dataContext.rollback();
             responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao deletar o produto.");

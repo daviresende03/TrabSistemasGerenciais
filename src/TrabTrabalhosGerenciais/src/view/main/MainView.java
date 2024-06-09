@@ -1,16 +1,16 @@
 package view.main;
 
-import controller.ProductController;
+import controllers.ProductController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
-import view.component.MenuItem;
-import view.entities.PersonView;
-import view.entities.ProductView;
-import view.entities.NewOrderView;
-import view.entities.OrdersView;
+import views.components.MenuItem;
+import views.entities.PersonView;
+import views.entities.ProductView;
+import views.entities.NewOrderView;
+import views.entities.OrdersView;
 
 
 public class MainView extends javax.swing.JFrame {

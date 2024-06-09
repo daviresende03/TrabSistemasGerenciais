@@ -18,6 +18,9 @@ public class ProductUnitView extends javax.swing.JFrame {
         jTextFieldProductUnitSymbol = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProductUnits = new javax.swing.JTable();
+        jButtonDeleteProductUnit = new javax.swing.JButton();
+        jButtonEditProductUnit = new javax.swing.JButton();
+        jButtonSaveProductUnit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,18 +73,30 @@ public class ProductUnitView extends javax.swing.JFrame {
             jTableProductUnits.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        jButtonDeleteProductUnit.setText("EXCLUIR");
+
+        jButtonEditProductUnit.setText("EDITAR");
+
+        jButtonSaveProductUnit.setText("SALVAR");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonDeleteProductUnit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonEditProductUnit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSaveProductUnit))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelProductUnitName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldProductUnitName)
@@ -104,6 +119,11 @@ public class ProductUnitView extends javax.swing.JFrame {
                     .addComponent(jTextFieldProductUnitSymbol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonDeleteProductUnit)
+                    .addComponent(jButtonEditProductUnit)
+                    .addComponent(jButtonSaveProductUnit))
                 .addGap(20, 20, 20))
         );
 
@@ -119,6 +139,9 @@ public class ProductUnitView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldProductUnitNameActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonDeleteProductUnit;
+    private javax.swing.JButton jButtonEditProductUnit;
+    private javax.swing.JButton jButtonSaveProductUnit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelProductUnitName;
     private javax.swing.JLabel jLabelProductUnitSymbol;

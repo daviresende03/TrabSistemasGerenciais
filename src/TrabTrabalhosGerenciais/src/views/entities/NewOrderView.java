@@ -326,7 +326,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     private void loadCustomerComboBox(){
         this.jComboBoxCustomer.removeAllItems();
         
-        List<PersonVM> people = this.personController.getAll();
+        List<PersonVM> people = this.personController.getAll(true, false, false);
         for(PersonVM person : people){
             this.jComboBoxCustomer.addItem(person.name);
         }

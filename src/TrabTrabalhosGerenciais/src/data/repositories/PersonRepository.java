@@ -245,12 +245,18 @@ public class PersonRepository implements IPersonRepository{
                 query+="customer=?";
             }else if(isStaff){
                 query+="staff=?";
-            }else {
+            }else if(isSupplier){
                 query+="supplier=?";
+            }else{
+                query = query.replace(query, " WHERE ");
             }
         
             PreparedStatement statement = connect.prepareStatement(query);
-            statement.setBoolean(1, true);
+            
+            if(query.contains("WHERE")){
+                statement.setBoolean(1, true);
+            }
+            
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {

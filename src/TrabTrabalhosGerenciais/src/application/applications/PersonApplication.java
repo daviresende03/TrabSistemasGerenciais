@@ -35,16 +35,6 @@ public class PersonApplication {
         personService.insert(personModel);
     }
     
-    public List<PersonVM> getAll(){
-        List<PersonModel> peopleModel = personService.getAll();
-        List<PersonVM> peopleVM = new ArrayList<PersonVM>();
-        
-        for(PersonModel personModel : peopleModel){
-            peopleVM.add(new PersonVM(personModel));
-        }
-        return peopleVM;
-    }
-    
     public List<PersonVM> getAll(boolean isCustomer, boolean isStaff, boolean isSupplier) {
         List<PersonModel> peopleModel = personService.getAll(isCustomer, isStaff, isSupplier);
         List<PersonVM> peopleVM = new ArrayList<PersonVM>();

@@ -31,7 +31,7 @@ public class PersonController {
     }
     
     public List<PersonVM> getAll(){
-        return this.personApplication.getAll();
+        return this.personApplication.getAll(false, false, false);
     }
     
     public List<PersonVM> getAll(boolean isCustomer, boolean isStaff, boolean isSupplier){

@@ -234,5 +234,49 @@ public class PersonRepository implements IPersonRepository{
             return false;
         }
     }
+
+    @Override
+    public List<PersonModel> select(boolean isCustomer, boolean isStaff, boolean isSupplier) throws SQLException {
+        List<PersonModel> people = new ArrayList<PersonModel>();
+        try {
+            String query = "SELECT * FROM person WHERE ";
+            
+            if(isCustomer){
+                query+="customer=?";
+            }else if(isStaff){
+                query+="staff=?";
+            }else {
+                query+="supplier=?";
+            }
+        
+            PreparedStatement statement = connect.prepareStatement(query);
+            statement.setBoolean(1, true);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("person_id");
+                String name = resultSet.getString("name");
+                String document = resultSet.getString("document");
+                int type = resultSet.getInt("type");
+                String address_street = resultSet.getString("address_street");
+                String address_number = resultSet.getString("address_number");
+                String address_neighborhood = resultSet.getString("address_neighborhood");
+                String address_city = resultSet.getString("address_city");
+                String address_state = resultSet.getString("address_state");
+                String address_postal_code = resultSet.getString("address_postal_code");
+                String address_country = resultSet.getString("address_country");
+                Date birth_date = resultSet.getDate("birth_date");
+                String observation = resultSet.getString("observation");
+                boolean customer = resultSet.getBoolean("customer");
+                boolean staff = resultSet.getBoolean("staff");
+                boolean supplier = resultSet.getBoolean("supplier");
+
+                people.add(new PersonModel(id, name, document, PersonTypeEnum.fromInteger(type), new Address(address_street, address_number, address_neighborhood, address_city, address_state, address_postal_code, address_country), birth_date, observation, customer, staff, supplier));
+            }
+            return people;
+        }catch(Exception ex){
+            return people;
+        }
+    }
     
 }

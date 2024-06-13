@@ -77,7 +77,6 @@ public class NewOrderView extends javax.swing.JInternalFrame {
 
         jLabelStaff.setText("Atendente");
 
-        jComboBoxStaff.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default" }));
         jComboBoxStaff.setToolTipText("");
 
         jLabelProductsList.setText("Produtos");
@@ -293,9 +292,9 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     private void clearForm(){
         this.loadProductTableByDataBase();
         this.loadCustomerComboBox();
+        this.loadStaffComboBox();
         
         ((DefaultTableModel)this.jTableSelectedProductsList.getModel()).setRowCount(0);
-        this.jComboBoxStaff.setSelectedIndex(0);
         this.jTextAreaObservations.setText("");
         this.jTextFieldDiscount.setText("");
         this.jTextFieldOrderStatus.setText("");
@@ -326,6 +325,19 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         
         if(!people.isEmpty()){
             this.jComboBoxCustomer.setSelectedIndex(0);
+        }
+    }
+    
+    private void loadStaffComboBox(){
+        this.jComboBoxStaff.removeAllItems();
+        
+        List<PersonVM> staffs = this.personController.getAll(false, true, false);
+        for(PersonVM person : staffs){
+            this.jComboBoxStaff.addItem(person.name);
+        }
+        
+        if(!staffs.isEmpty()){
+            this.jComboBoxStaff.setSelectedIndex(0);
         }
     }
 

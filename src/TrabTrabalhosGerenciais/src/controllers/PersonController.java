@@ -34,6 +34,10 @@ public class PersonController {
         return this.personApplication.getAll();
     }
     
+    public List<PersonVM> getAll(boolean isCustomer, boolean isStaff, boolean isSupplier){
+        return this.personApplication.getAll(isCustomer, isStaff, isSupplier);
+    }
+    
     public PersonVM get(int id){
         return this.personApplication.get(id);
     }

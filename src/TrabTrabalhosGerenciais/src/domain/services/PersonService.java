@@ -9,6 +9,7 @@ import domain.model.enums.ResponseTypeEnum;
 import domain.interfaces.repositories.IDataContext;
 import domain.interfaces.repositories.IPersonRepository;
 import domain.interfaces.services.IPersonService;
+import domain.model.enums.PersonTypeEnum;
 
 public class PersonService extends BaseService implements IPersonService {
     private final IPersonRepository personRepository;
@@ -130,6 +131,18 @@ public class PersonService extends BaseService implements IPersonService {
             return people;
         }catch(Exception ex){
             responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar todos os usuários.");
+            return new ArrayList<PersonModel>();
+        }
+    }
+    
+    @Override
+    public List<PersonModel> getAll(boolean isCustomer, boolean isStaff, boolean isSupplier) {
+        try{            
+            List<PersonModel> people = personRepository.select(isCustomer, isStaff, isSupplier);
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
+            return people;
+        }catch(Exception ex){
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar usuários específicos.");
             return new ArrayList<PersonModel>();
         }
     }

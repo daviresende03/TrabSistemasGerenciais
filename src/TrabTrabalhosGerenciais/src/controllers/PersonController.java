@@ -1,6 +1,6 @@
 package controllers;
 
-import Infra.DependencyInjections.PersonDI;
+import infra.dependencyInjections.PersonDI;
 import application.applications.PersonApplication;
 import application.viewModels.PersonVM;
 import domain.model.entities.ResponseService;

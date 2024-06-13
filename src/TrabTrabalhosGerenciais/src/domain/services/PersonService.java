@@ -1,6 +1,6 @@
 package domain.services;
 
-import domain.Utils.StringUtil;
+import domain.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

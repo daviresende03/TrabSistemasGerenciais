@@ -1,7 +1,7 @@
 package controllers;
 
-import Infra.DependencyInjections.ProductDI;
-import Infra.DependencyInjections.UnitDI;
+import infra.dependencyInjections.ProductDI;
+import infra.dependencyInjections.UnitDI;
 import application.applications.ProductApplication;
 import application.viewModels.ProductVM;
 import domain.model.entities.ResponseService;

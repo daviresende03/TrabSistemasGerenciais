@@ -2,7 +2,7 @@ package views.entities;
 
 import controllers.PersonController;
 import application.viewModels.PersonVM;
-import domain.Utils.DateUtil;
+import domain.utils.DateUtil;
 import javax.swing.JOptionPane;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ResponseTypeEnum;

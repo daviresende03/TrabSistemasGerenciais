@@ -144,11 +144,6 @@ public class PersonView extends javax.swing.JInternalFrame {
                 jButtonSaveUserMouseClicked(evt);
             }
         });
-        jButtonSaveUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveUserActionPerformed(evt);
-            }
-        });
 
         jTableUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -462,10 +457,6 @@ public class PersonView extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_jButtonSaveUserMouseClicked
-
-    private void jButtonSaveUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonSaveUserActionPerformed
 
     private void completeForm(PersonVM person){
         this.jTextFieldId.setText(Integer.toString(person.id));        

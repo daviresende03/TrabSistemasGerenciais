@@ -185,6 +185,10 @@ public class NewOrderView extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Status");
 
+        jTextFieldOrderStatus.setEnabled(false);
+
+        jTextField1.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

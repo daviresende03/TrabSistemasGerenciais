@@ -70,19 +70,13 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jButtonDeleteOrder" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jButtonEditOrder" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="jButtonSaveOrder" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jButtonConcludeOrder" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabelProductsList" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelNewOrder" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabelCustomer" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -90,6 +84,17 @@
                                   </Group>
                                   <Component id="jScrollPane2" alignment="0" pref="0" max="32767" attributes="0"/>
                                   <Component id="jScrollPane5" alignment="0" pref="376" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabelProductsList" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelNewOrder" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
@@ -161,8 +166,12 @@
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane2" pref="410" max="32767" attributes="0"/>
-                  <Component id="jScrollPane4" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane4" pref="410" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Component id="jLabelObservations" min="-2" max="-2" attributes="0"/>
@@ -184,8 +193,6 @@
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonConcludeOrder" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                  <Component id="jButtonDeleteOrder" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                  <Component id="jButtonEditOrder" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="jButtonSaveOrder" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -354,25 +361,6 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonDeleteOrder">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="EXCLUIR"/>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Hand Cursor"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonDeleteOrderMouseClicked"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButtonEditOrder">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="EDITAR"/>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Hand Cursor"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabelOrderTotal">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -426,6 +414,11 @@
     <Component class="javax.swing.JTextField" name="jTextField1">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ADICIONAR AO PEDIDO"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -39,8 +39,6 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableSelectedProductsList = new javax.swing.JTable();
         jButtonConcludeOrder = new javax.swing.JButton();
-        jButtonDeleteOrder = new javax.swing.JButton();
-        jButtonEditOrder = new javax.swing.JButton();
         jLabelOrderTotal = new javax.swing.JLabel();
         jButtonSaveOrder = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -51,6 +49,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextFieldOrderStatus = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -159,17 +158,6 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jButtonConcludeOrder.setMaximumSize(new java.awt.Dimension(128, 30));
         jButtonConcludeOrder.setMinimumSize(new java.awt.Dimension(128, 30));
 
-        jButtonDeleteOrder.setText("EXCLUIR");
-        jButtonDeleteOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButtonDeleteOrder.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonDeleteOrderMouseClicked(evt);
-            }
-        });
-
-        jButtonEditOrder.setText("EDITAR");
-        jButtonEditOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         jLabelOrderTotal.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabelOrderTotal.setText("Total do Pedido");
 
@@ -189,6 +177,8 @@ public class NewOrderView extends javax.swing.JInternalFrame {
 
         jTextField1.setEnabled(false);
 
+        jButton1.setText("ADICIONAR AO PEDIDO");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,23 +192,25 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonDeleteOrder)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonEditOrder)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonSaveOrder)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonConcludeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelProductsList)
-                                    .addComponent(jLabelNewOrder)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabelCustomer)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jComboBoxCustomer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jButton1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelProductsList)
+                                            .addComponent(jLabelNewOrder))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(12, 12, 12)
@@ -270,8 +262,11 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                     .addComponent(jLabelSelectedProductsList))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
                 .addGap(20, 20, 20)
                 .addComponent(jLabelObservations)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -288,18 +283,12 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConcludeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonDeleteOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonEditOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonSaveOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonDeleteOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteOrderMouseClicked
-
-    }//GEN-LAST:event_jButtonDeleteOrderMouseClicked
 
     private void clearForm(){
         this.loadProductTableByDataBase();
@@ -354,9 +343,8 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonConcludeOrder;
-    private javax.swing.JButton jButtonDeleteOrder;
-    private javax.swing.JButton jButtonEditOrder;
     private javax.swing.JButton jButtonSaveOrder;
     private javax.swing.JComboBox<String> jComboBoxCustomer;
     private javax.swing.JComboBox<String> jComboBoxStaff;

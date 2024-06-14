@@ -248,7 +248,7 @@ public class PersonRepository implements IPersonRepository{
             }else if(isSupplier){
                 query+="supplier=?";
             }else{
-                query = query.replace(query, " WHERE ");
+                query = query.replace(" WHERE ", "");
             }
         
             PreparedStatement statement = connect.prepareStatement(query);

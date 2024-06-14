@@ -23,6 +23,16 @@ public class OrderModel extends BaseModel{
         this.observation = Objects.requireNonNullElse(observation,"");
         totalOrder();
     }
+    
+    public OrderModel(PersonModel customer, PersonModel waiter, List<OrderItemModel> products, boolean invoiced, double discountTotal, String observation) {
+        this.customer = Objects.requireNonNullElse(customer, new PersonModel());
+        this.waiter = Objects.requireNonNullElse(waiter, new PersonModel());
+        this.products = Objects.requireNonNullElse(products, new ArrayList<OrderItemModel>());
+        this.invoiced = invoiced;
+        this.discountTotal = discountTotal;
+        this.observation = Objects.requireNonNullElse(observation,"");
+        totalOrder();
+    }
 
     public OrderModel() {}
     

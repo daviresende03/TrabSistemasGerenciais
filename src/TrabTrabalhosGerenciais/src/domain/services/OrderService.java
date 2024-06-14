@@ -67,7 +67,7 @@ public class OrderService extends BaseService implements IOrderService{
             }
             
             dataContext.commit();
-            responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Pedido realizado com sucesso.");
         }catch(Exception ex){
             dataContext.rollback();
             responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao realizar a gravação do pedido.");

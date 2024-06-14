@@ -4,6 +4,7 @@ import application.viewModels.OrderItemVM;
 import application.viewModels.OrderVM;
 import application.viewModels.PersonVM;
 import application.viewModels.ProductVM;
+import controllers.OrderController;
 import controllers.PersonController;
 import controllers.ProductController;
 import domain.model.entities.ResponseService;
@@ -20,6 +21,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     public NewOrderView() {
         this.productController = new ProductController();
         this.personController = new PersonController();
+        this.orderController = new OrderController();
         
         initComponents();
         this.setVisible(true);
@@ -407,10 +409,10 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         return orderItems;
     }
     
-    private PersonVM getPersonComboBoxSelected(JComboBox comboBox){
+    private PersonVM getPersonComboBoxSelected(JComboBox comboBox, String objectName){
         int personId = getComboBoxSelectedId(comboBox);
         if(personId<=0){
-            JOptionPane.showMessageDialog(null, "Não foi possível obter o id do cliene selecionado." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Não foi possível obter o id do "+objectName+" selecionado." , "Atenção", JOptionPane.WARNING_MESSAGE);
             return null;
         }
         
@@ -418,7 +420,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         ResponseService response = this.personController.getResponseService();
         
         if(response.getType() != ResponseTypeEnum.SUCCESS){
-            JOptionPane.showMessageDialog(null, "Não foi possível obter o cliene selecionado." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Não foi possível obter o "+objectName+" selecionado." , "Atenção", JOptionPane.WARNING_MESSAGE);
             return null;
         }
         
@@ -426,12 +428,12 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     }
     
     private void jButtonConcludeOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConcludeOrderMouseClicked
-        PersonVM customer = getPersonComboBoxSelected(this.jComboBoxCustomer);
+        PersonVM customer = getPersonComboBoxSelected(this.jComboBoxCustomer,"cliente");
         if(customer==null){
             return;
         }
         
-        PersonVM staff = getPersonComboBoxSelected(this.jComboBoxStaff);
+        PersonVM staff = getPersonComboBoxSelected(this.jComboBoxStaff,"funcionário");
         if(staff==null){
             return;
         }
@@ -445,7 +447,16 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         String obs = this.jTextAreaObservations.getText();
         
         OrderVM order = new OrderVM(customer, staff, orderItems, discount, obs);
-        //InsertOrder        
+        
+        this.orderController.create(order);
+        ResponseService responseService = this.orderController.getResponseService();
+        
+        if(responseService.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, responseService.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, responseService.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            this.clearForm();
+        }
     }//GEN-LAST:event_jButtonConcludeOrderMouseClicked
 
     private void jButtonRemoveProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveProductActionPerformed
@@ -560,5 +571,5 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
     private ProductController productController;
     private PersonController personController;
-
+    private OrderController orderController;
 }

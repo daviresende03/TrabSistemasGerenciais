@@ -22,7 +22,7 @@ public class OrderRepository implements IOrderRepository {
     
     @Override
     public void insert(OrderModel order) throws SQLException { 
-        String query = "INSERT INTO order("
+        String query = "INSERT INTO `order`("
                 + "customer_id,"
                 + "waiter_id,"
                 + "invoiced,"
@@ -30,14 +30,14 @@ public class OrderRepository implements IOrderRepository {
                 + "order_total,"                
                 + "observation,"
                 + "created_at,"
-                + "updated_at) "
-                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "updated_at)"
+                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         
         PreparedStatement statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, order.getCustomer().getId());
         statement.setInt(2, order.getWaiter().getId());
-        statement.setDouble(3, order.getDiscountTotal());
-        statement.setInt(4, order.getInvoiced() ? 1 : 0);
+        statement.setInt(3, order.getInvoiced() ? 1 : 0);
+        statement.setDouble(4, order.getDiscountTotal());
         statement.setDouble(5, order.getOrderTotal());
         statement.setString(6, order.getObservation());
         statement.setDate(7, new Date(order.getCreatedDate().getTime()));

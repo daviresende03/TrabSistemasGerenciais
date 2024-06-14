@@ -133,9 +133,9 @@ public class ProductRepository implements IProductRepository{
 
     @Override
     public void updateStock(int id, double quantity) throws SQLException {
-        String query = "UPDATE product SET"
+        String query = "UPDATE product SET "
                         + "stock =            ?,"
-                        + "updated_at =       ?,"
+                        + "updated_at =       ? "
                         + "WHERE product_id = ?";
         
         PreparedStatement statement = connect.prepareStatement(query);

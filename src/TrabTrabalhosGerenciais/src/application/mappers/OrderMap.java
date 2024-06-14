@@ -27,6 +27,7 @@ public class OrderMap {
         }
 
         PersonModel customerModel = new PersonModel(
+                orderVM.customer.id,
                 orderVM.customer.name,
                 orderVM.customer.document,
                 PersonTypeEnum.fromInteger(orderVM.customer.type),
@@ -39,6 +40,7 @@ public class OrderMap {
         );
 
         PersonModel staffModel = new PersonModel(
+                orderVM.waiter.id,
                 orderVM.waiter.name,
                 orderVM.waiter.document,
                 PersonTypeEnum.fromInteger(orderVM.waiter.type),

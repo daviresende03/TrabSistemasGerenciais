@@ -66,7 +66,7 @@ public class PersonView extends javax.swing.JInternalFrame {
         jButtonSaveUser = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableUsers = new javax.swing.JTable();
-        jButtonDeleteForm = new javax.swing.JButton();
+        jButtonDeleteUser = new javax.swing.JButton();
         jButtonEditForm = new javax.swing.JButton();
         jButtonClearFields = new javax.swing.JButton();
         jTextFieldId = new javax.swing.JTextField();
@@ -168,7 +168,8 @@ public class PersonView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTableUsers.setColumnSelectionAllowed(true);
+        jTableUsers.setCellSelectionEnabled(false);
+        jTableUsers.setRowSelectionAllowed(true);
         jTableUsers.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(jTableUsers);
         jTableUsers.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -187,11 +188,11 @@ public class PersonView extends javax.swing.JInternalFrame {
             jTableUsers.getColumnModel().getColumn(5).setPreferredWidth(10);
         }
 
-        jButtonDeleteForm.setText("EXCLUIR");
-        jButtonDeleteForm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButtonDeleteForm.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonDeleteUser.setText("EXCLUIR");
+        jButtonDeleteUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonDeleteUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonDeleteFormMouseClicked(evt);
+                jButtonDeleteUserMouseClicked(evt);
             }
         });
 
@@ -222,7 +223,7 @@ public class PersonView extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonDeleteForm)
+                        .addComponent(jButtonDeleteUser)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonEditForm)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -376,7 +377,7 @@ public class PersonView extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButtonDeleteForm, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(jButtonDeleteUser, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                     .addComponent(jButtonEditForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonSaveUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
@@ -384,29 +385,6 @@ public class PersonView extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonDeleteFormMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteFormMouseClicked
-        PersonVM personForm = getPersonByForm();
-        int personId = Integer.parseInt(this.jTextFieldId.getText().isEmpty() ? "0" : this.jTextFieldId.getText());
-        
-        if(personId == 0){
-            this.personController.create(personForm);
-        }else{
-            personForm.id = personId;
-            this.personController.update(personForm);
-        }
-        
-        ResponseService response = this.personController.getResponseService();
-
-        if(response.getType() != ResponseTypeEnum.SUCCESS){
-            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            this.clearForm();
-            this.loadPersonTableByDataBase();
-            this.jButtonEditForm.setEnabled(true);
-        }
-    }//GEN-LAST:event_jButtonDeleteFormMouseClicked
 
     private void jButtonClearFieldsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonClearFieldsMouseClicked
         this.clearForm();
@@ -437,7 +415,7 @@ public class PersonView extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jButtonEditFormMouseClicked
 
-    private void jButtonSaveUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveUserMouseClicked
+    private void jButtonDeleteUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteUserMouseClicked
         int lineSelected = this.jTableUsers.getSelectedRow();
         if(lineSelected<0){
             JOptionPane.showMessageDialog(null, "Primeiramente é necessário selecionar o registro que deseja deletar." , "Atenção", JOptionPane.WARNING_MESSAGE);
@@ -455,7 +433,29 @@ public class PersonView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             this.loadPersonTableByDataBase();
         }
+    }//GEN-LAST:event_jButtonDeleteUserMouseClicked
+
+    private void jButtonSaveUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveUserMouseClicked
+        PersonVM personForm = getPersonByForm();
+        int personId = Integer.parseInt(this.jTextFieldId.getText().isEmpty() ? "0" : this.jTextFieldId.getText());
         
+        if(personId == 0){
+            this.personController.create(personForm);
+        }else{
+            personForm.id = personId;
+            this.personController.update(personForm);
+        }
+        
+        ResponseService response = this.personController.getResponseService();
+
+        if(response.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            this.clearForm();
+            this.loadPersonTableByDataBase();
+            this.jButtonEditForm.setEnabled(true);
+        }
     }//GEN-LAST:event_jButtonSaveUserMouseClicked
 
     private void completeForm(PersonVM person){
@@ -550,7 +550,7 @@ public class PersonView extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClearFields;
-    private javax.swing.JButton jButtonDeleteForm;
+    private javax.swing.JButton jButtonDeleteUser;
     private javax.swing.JButton jButtonEditForm;
     private javax.swing.JButton jButtonSaveUser;
     private javax.swing.JCheckBox jCheckBoxCustomer;

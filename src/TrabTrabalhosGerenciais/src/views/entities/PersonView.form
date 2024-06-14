@@ -65,7 +65,7 @@
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jButtonDeleteForm" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonDeleteUser" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButtonEditForm" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
@@ -247,7 +247,7 @@
               <Component id="jScrollPane4" pref="142" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jButtonDeleteForm" pref="37" max="32767" attributes="0"/>
+                  <Component id="jButtonDeleteUser" pref="37" max="32767" attributes="0"/>
                   <Component id="jButtonEditForm" alignment="1" max="32767" attributes="0"/>
                   <Component id="jButtonSaveUser" alignment="1" max="32767" attributes="0"/>
               </Group>
@@ -431,6 +431,7 @@
                 <Column editable="false" title="Colaborador" type="java.lang.String"/>
               </Table>
             </Property>
+            <Property name="cellSelectionEnabled" type="boolean" value="false"/>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="1">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="5" resizable="false">
@@ -465,7 +466,7 @@
                 </Column>
               </TableColumnModel>
             </Property>
-            <Property name="columnSelectionAllowed" type="boolean" value="true"/>
+            <Property name="rowSelectionAllowed" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
@@ -473,7 +474,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButtonDeleteForm">
+    <Component class="javax.swing.JButton" name="jButtonDeleteUser">
       <Properties>
         <Property name="text" type="java.lang.String" value="EXCLUIR"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -481,7 +482,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonDeleteFormMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonDeleteUserMouseClicked"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonEditForm">

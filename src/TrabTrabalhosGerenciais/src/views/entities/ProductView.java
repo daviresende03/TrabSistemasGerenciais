@@ -236,6 +236,11 @@ public class ProductView extends javax.swing.JInternalFrame {
         ProductVM productVM = getProductByForm();
         int productId = Integer.parseInt(this.jTextFieldProductId.getText().isEmpty() ? "0" : this.jTextFieldProductId.getText());
         
+        if(productVM.name.isBlank() || productVM.costPrice  == 0 || productVM.salePrice == 0 || productVM.stock == 0 || productVM.type == 0 || productVM.unitName.equals("0") || productVM.unitSymbol == null){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         if(productId == 0){
             this.productController.create(productVM);
         }else{
@@ -275,10 +280,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         
         completeForm(product);
         this.jLabelTitle.setText("Edição de Usuário");
-        this.jButtonEditProduct.setEnabled(false);
-        
-        
-        
+        this.jButtonEditProduct.setEnabled(false); 
     }//GEN-LAST:event_jButtonEditProductMouseClicked
 
     private void completeForm(ProductVM product){
@@ -319,25 +321,37 @@ public class ProductView extends javax.swing.JInternalFrame {
         productForm.name = this.jTextFieldProductName.getText();
         productForm.type = this.jComboBoxType.getSelectedIndex()+1;
         productForm.unitName = (String)this.jComboBoxUnit.getSelectedItem();
-        productForm.costPrice = Double.parseDouble(this.jTextFieldCostPrice.getText());
-        productForm.salePrice = Double.parseDouble(this.jTextFieldSalePrice.getText());
-        productForm.stock = Double.parseDouble(this.jTextFieldStock.getText());
+        productForm.costPrice = Double.parseDouble(this.jTextFieldCostPrice.getText().isBlank() ? "0" : this.jTextFieldCostPrice.getText());
+        productForm.salePrice = Double.parseDouble(this.jTextFieldSalePrice.getText().isBlank() ? "0" : this.jTextFieldSalePrice.getText());
+        productForm.stock = Double.parseDouble(this.jTextFieldStock.getText().isBlank() ? "0" : this.jTextFieldStock.getText());
 
         return productForm;
     }
     
     private void clearForm(){
         this.loadUnitComboBox();
-        
+
         this.jTextFieldProductName.setText("");
         this.jTextFieldSalePrice.setText("");
         this.jTextFieldCostPrice.setText("");
         this.jTextFieldStock.setText("");
         this.jComboBoxType.setSelectedIndex(0);
-        this.jComboBoxUnit.setSelectedIndex(0);
         this.jTextFieldProductName.requestFocusInWindow();
-        
+
         this.loadProductTableByDataBase();
+    }
+
+    private void loadUnitComboBox(){ 
+        this.jComboBoxUnit.removeAllItems();
+
+        List<UnitVM> unitsVM = this.unitController.getAll();
+        for(UnitVM unit : unitsVM){
+            this.jComboBoxUnit.addItem(unit.name);
+        }
+
+        if(!unitsVM.isEmpty()){
+            this.jComboBoxUnit.setSelectedIndex(0);
+        }
     }
     
     private void loadProductTableByDataBase(){
@@ -350,15 +364,6 @@ public class ProductView extends javax.swing.JInternalFrame {
             
             Object[] row = {product.id, product.name, product.unitName, typeDescription, product.stock, product.costPrice, product.salePrice};
             tableModel.addRow(row);
-        }
-    }
-    
-    private void loadUnitComboBox(){ 
-        this.jComboBoxUnit.removeAllItems();
-        
-        List<UnitVM> unitsVM = this.unitController.getAll();
-        for(UnitVM unit : unitsVM){
-            this.jComboBoxUnit.addItem(unit.name);
         }
     }
 

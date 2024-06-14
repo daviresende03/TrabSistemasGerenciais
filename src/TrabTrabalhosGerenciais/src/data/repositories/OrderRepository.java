@@ -25,21 +25,23 @@ public class OrderRepository implements IOrderRepository {
         String query = "INSERT INTO order("
                 + "customer_id,"
                 + "waiter_id,"
+                + "invoiced,"
                 + "discount_total,"
                 + "order_total,"                
                 + "observation,"
                 + "created_at,"
-                + "updated_at"
-                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+                + "updated_at) "
+                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         PreparedStatement statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, order.getCustomer().getId());
         statement.setInt(2, order.getWaiter().getId());
         statement.setDouble(3, order.getDiscountTotal());
-        statement.setDouble(4, order.getOrderTotal());
-        statement.setString(5, order.getObservation());
-        statement.setDate(6, new Date(order.getCreatedDate().getTime()));
-        statement.setDate(7, new Date(order.getUpdatedDate().getTime()));
+        statement.setInt(4, order.getInvoiced() ? 1 : 0);
+        statement.setDouble(5, order.getOrderTotal());
+        statement.setString(6, order.getObservation());
+        statement.setDate(7, new Date(order.getCreatedDate().getTime()));
+        statement.setDate(8, new Date(order.getUpdatedDate().getTime()));
         
         statement.executeUpdate();
         
@@ -52,22 +54,25 @@ public class OrderRepository implements IOrderRepository {
 
     @Override
     public void update(OrderModel model) throws SQLException {
-        String query = "UPDATE order SET"
-                + "customer_id = ?"
-                + "waiter_id = ?"
+        String query = "UPDATE order SET "
+                + "customer_id = ?,"
+                + "waiter_id = ?,"
+                + "invoiced = ?,"
                 + "discount_total = ?,"
-                + "order_total = ?"
-                + "observation = ?"
-                + "updated_at = ?"
+                + "order_total = ?,"
+                + "observation = ?,"
+                + "updated_at = ? "
                 + "WHERE order_id = ?";
         
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, model.getCustomer().getId());
         statement.setInt(2, model.getWaiter().getId());
-        statement.setDouble(3, model.getDiscountTotal());
-        statement.setDouble(4, model.getOrderTotal());
-        statement.setString(5, model.getObservation());
-        statement.setDate(6, new Date(model.getUpdatedDate().getTime()));
+        statement.setDouble(3, model.getInvoiced() ? 1 : 0);
+        statement.setDouble(4, model.getDiscountTotal());
+        statement.setDouble(5, model.getOrderTotal());
+        statement.setString(6, model.getObservation());
+        statement.setDate(7, new Date(model.getUpdatedDate().getTime()));
+        statement.setInt(8, model.getId());
     }
 
     @Override
@@ -94,8 +99,9 @@ public class OrderRepository implements IOrderRepository {
             int waiterId = resultSet.getInt("waiter_id");
             double discount_total = resultSet.getDouble("discount_total");
             String observation = resultSet.getString("observation");
+            boolean invoiced = resultSet.getInt("invoiced")==1;
             
-            return new OrderModel(id, new PersonModel(customerId), new PersonModel(waiterId), new ArrayList<OrderItemModel>(), discount_total, observation);
+            return new OrderModel(id, new PersonModel(customerId), new PersonModel(waiterId), new ArrayList<OrderItemModel>(), invoiced, discount_total, observation);
         }
         return order;
         }catch(Exception ex){
@@ -119,8 +125,9 @@ public class OrderRepository implements IOrderRepository {
             int waiter_id = resultSet.getInt("waiter_id");
             double discount_total = resultSet.getDouble("discount_total");
             String observation = resultSet.getString("observation");
+            boolean invoiced = resultSet.getInt("invoiced")==1;
             
-            orders.add(new OrderModel(id, new PersonModel(customer_id), new PersonModel(waiter_id), new ArrayList<OrderItemModel>(), discount_total, observation));
+            orders.add(new OrderModel(id, new PersonModel(customer_id), new PersonModel(waiter_id), new ArrayList<OrderItemModel>(), invoiced, discount_total, observation));
         }
         return orders;
         }catch(Exception ex){

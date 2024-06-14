@@ -53,6 +53,14 @@ public class OrderModel extends BaseModel{
     public void setOrderTotal(double orderTotal) {
         this.orderTotal = orderTotal;
     }
+    
+    public boolean getInvoiced(){
+        return invoiced;
+    }
+    
+    public void setInvoiced(boolean invoiced){
+        this.invoiced = invoiced;
+    }
 
     public double getDiscountTotal() {
         return discountTotal;

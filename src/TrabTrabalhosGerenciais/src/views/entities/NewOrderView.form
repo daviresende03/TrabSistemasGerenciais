@@ -131,11 +131,16 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextFieldOrderStatus" min="-2" pref="140" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jTextFieldOrderStatus" min="-2" pref="140" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jButtonRemoveProduct" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -167,18 +172,17 @@
                   <Component id="jLabelProductsList" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelSelectedProductsList" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextFieldQuantity" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jLabelQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonSaleProduct" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="jScrollPane4" pref="414" max="32767" attributes="0"/>
+                  <Component id="jScrollPane4" pref="365" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jTextFieldQuantity" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jLabelQuantity" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonSaleProduct" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jButtonRemoveProduct" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Component id="jLabelObservations" min="-2" max="-2" attributes="0"/>
@@ -319,6 +323,8 @@
                 <Column editable="false" title="Pre&#xe7;o" type="java.lang.Double"/>
               </Table>
             </Property>
+            <Property name="autoscrolls" type="boolean" value="false"/>
+            <Property name="cellSelectionEnabled" type="boolean" value="false"/>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="1">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
@@ -343,7 +349,7 @@
                 </Column>
               </TableColumnModel>
             </Property>
-            <Property name="columnSelectionAllowed" type="boolean" value="true"/>
+            <Property name="rowSelectionAllowed" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
@@ -441,6 +447,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldQuantity">
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonRemoveProduct">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="REMOVER ITEM"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRemoveProductActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

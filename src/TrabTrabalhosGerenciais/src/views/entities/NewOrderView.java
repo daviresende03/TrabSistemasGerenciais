@@ -60,6 +60,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jButtonSaleProduct = new javax.swing.JButton();
         jLabelQuantity = new javax.swing.JLabel();
         jTextFieldQuantity = new javax.swing.JTextField();
+        jButtonRemoveProduct = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -149,7 +150,9 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTableSelectedProductsList.setColumnSelectionAllowed(true);
+        jTableSelectedProductsList.setAutoscrolls(false);
+        jTableSelectedProductsList.setCellSelectionEnabled(false);
+        jTableSelectedProductsList.setRowSelectionAllowed(true);
         jTableSelectedProductsList.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(jTableSelectedProductsList);
         jTableSelectedProductsList.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -200,6 +203,13 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         });
 
         jLabelQuantity.setText("Quantidade");
+
+        jButtonRemoveProduct.setText("REMOVER ITEM");
+        jButtonRemoveProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoveProductActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -263,9 +273,12 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                                                         .addComponent(jTextFieldAmountOrder))))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextFieldOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jButtonRemoveProduct))))))
                         .addGap(20, 20, 20))))
         );
         layout.setVerticalGroup(
@@ -288,14 +301,14 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                     .addComponent(jLabelSelectedProductsList))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelQuantity)
-                            .addComponent(jButtonSaleProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelQuantity)
+                    .addComponent(jButtonSaleProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRemoveProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addComponent(jLabelObservations)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -358,9 +371,9 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         String prefix = "R$ ";
         
         String amountString = this.jTextFieldAmountOrder.getText().replace(prefix, "");
-        Double amount = Double.parseDouble(amountString.isEmpty()?"0":amountString);
+        Double amount = Double.parseDouble(amountString.isEmpty()?"0":amountString) + value;
         
-        String newAmountString = prefix + Double.toString(amount+value);
+        String newAmountString = prefix + Double.toString(amount<0 ? 0 : amount);
         this.jTextFieldAmountOrder.setText(newAmountString);
     }
     
@@ -436,6 +449,22 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         //InsertOrder        
     }//GEN-LAST:event_jButtonConcludeOrderMouseClicked
 
+    private void jButtonRemoveProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveProductActionPerformed
+        int lineSelected = this.jTableSelectedProductsList.getSelectedRow();
+        if(lineSelected<0){
+            JOptionPane.showMessageDialog(null, "Primeiramente é necessário selecionar o registro que deseja remover." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        double quantity  = (double)this.jTableSelectedProductsList.getValueAt(lineSelected, 2);
+        double salePrice = (double)this.jTableSelectedProductsList.getValueAt(lineSelected, 3);
+        
+        this.updateTotalOrder(-(quantity*salePrice));
+        
+        DefaultTableModel model = (DefaultTableModel)this.jTableSelectedProductsList.getModel();
+        model.removeRow(lineSelected);
+    }//GEN-LAST:event_jButtonRemoveProductActionPerformed
+
     private void clearForm(){
         this.loadProductTableByDataBase();
         this.loadCustomerComboBox();
@@ -500,6 +529,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConcludeOrder;
+    private javax.swing.JButton jButtonRemoveProduct;
     private javax.swing.JButton jButtonSaleProduct;
     private javax.swing.JButton jButtonSaveOrder;
     private javax.swing.JComboBox<String> jComboBoxCustomer;

@@ -52,6 +52,6 @@ public class OrderMap {
                 orderVM.waiter.supplier
         );
 
-        return new OrderModel(customerModel,staffModel,orderItemsModel,false,orderVM.discount, orderVM.observation);
+        return new OrderModel(customerModel,staffModel,orderItemsModel,orderVM.invoiced,orderVM.discount, orderVM.observation);
     }
 }

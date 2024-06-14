@@ -152,8 +152,6 @@ public class NewOrderView extends javax.swing.JInternalFrame {
             }
         });
         jTableSelectedProductsList.setAutoscrolls(false);
-        jTableSelectedProductsList.setCellSelectionEnabled(false);
-        jTableSelectedProductsList.setRowSelectionAllowed(true);
         jTableSelectedProductsList.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(jTableSelectedProductsList);
         jTableSelectedProductsList.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -180,6 +178,11 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jLabelOrderTotal.setText("Total do Pedido");
 
         jButtonSaveOrder.setText("SALVAR");
+        jButtonSaveOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonSaveOrderMouseClicked(evt);
+            }
+        });
 
         jTextAreaObservations.setColumns(20);
         jTextAreaObservations.setRows(5);
@@ -428,35 +431,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     }
     
     private void jButtonConcludeOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConcludeOrderMouseClicked
-        PersonVM customer = getPersonComboBoxSelected(this.jComboBoxCustomer,"cliente");
-        if(customer==null){
-            return;
-        }
-        
-        PersonVM staff = getPersonComboBoxSelected(this.jComboBoxStaff,"funcionário");
-        if(staff==null){
-            return;
-        }
-        
-        List<OrderItemVM> orderItems = getOrderItems();
-        if(orderItems==null){
-            return;
-        }
-        
-        double discount = Double.parseDouble(this.jTextFieldDiscount.getText().isEmpty() ? "0" : this.jTextFieldDiscount.getText());
-        String obs = this.jTextAreaObservations.getText();
-        
-        OrderVM order = new OrderVM(customer, staff, orderItems, discount, obs);
-        
-        this.orderController.create(order);
-        ResponseService responseService = this.orderController.getResponseService();
-        
-        if(responseService.getType() != ResponseTypeEnum.SUCCESS){
-            JOptionPane.showMessageDialog(null, responseService.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(null, responseService.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            this.clearForm();
-        }
+        this.createOrder(true);
     }//GEN-LAST:event_jButtonConcludeOrderMouseClicked
 
     private void jButtonRemoveProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveProductActionPerformed
@@ -475,6 +450,42 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         model.removeRow(lineSelected);
     }//GEN-LAST:event_jButtonRemoveProductActionPerformed
 
+    private void jButtonSaveOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveOrderMouseClicked
+        this.createOrder(false);
+    }//GEN-LAST:event_jButtonSaveOrderMouseClicked
+
+    private void createOrder(boolean invoiced){
+        PersonVM customer = getPersonComboBoxSelected(this.jComboBoxCustomer,"cliente");
+        if(customer==null){
+            return;
+        }
+        
+        PersonVM staff = getPersonComboBoxSelected(this.jComboBoxStaff,"funcionário");
+        if(staff==null){
+            return;
+        }
+        
+        List<OrderItemVM> orderItems = getOrderItems();
+        if(orderItems==null){
+            return;
+        }
+        
+        double discount = Double.parseDouble(this.jTextFieldDiscount.getText().isEmpty() ? "0" : this.jTextFieldDiscount.getText());
+        String obs = this.jTextAreaObservations.getText();
+        
+        OrderVM order = new OrderVM(customer, staff, orderItems, invoiced, discount, obs);
+        
+        this.orderController.create(order);
+        ResponseService responseService = this.orderController.getResponseService();
+        
+        if(responseService.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, responseService.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, responseService.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            this.clearForm();
+        }
+    }
+    
     private void clearForm(){
         this.loadProductTableByDataBase();
         this.loadCustomerComboBox();

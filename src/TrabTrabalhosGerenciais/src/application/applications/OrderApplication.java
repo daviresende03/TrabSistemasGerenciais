@@ -19,8 +19,6 @@ public class OrderApplication {
     
     public void create(OrderVM orderVM){
         OrderModel orderModel = OrderMap.getOrderModel(orderVM);
-        orderModel.setInvoiced(false);
-
         this.orderService.insert(orderModel);
     }
 }

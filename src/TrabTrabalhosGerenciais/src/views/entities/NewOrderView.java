@@ -9,7 +9,6 @@ import controllers.ProductController;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ProductTypeEnum;
 import domain.model.enums.ResponseTypeEnum;
-import java.net.ResponseCache;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;

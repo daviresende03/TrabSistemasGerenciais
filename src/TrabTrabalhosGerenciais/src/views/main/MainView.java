@@ -11,6 +11,7 @@ import views.entities.PersonView;
 import views.entities.ProductView;
 import views.entities.NewOrderView;
 import views.entities.OrdersView;
+import views.entities.ProductUnitView;
 
 
 public class MainView extends javax.swing.JFrame {
@@ -36,7 +37,13 @@ public class MainView extends javax.swing.JFrame {
                 alterPanel(new ProductView());
             }
         });
-        MenuItem menuRegister = new MenuItem(null, "Cadastros", null, subMenuRegisterPerson, subMenuRegisterProduct);
+        MenuItem subMenuRegisterProductUnit = new MenuItem(null, "Unidades de Produtos", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                alterPanel(new ProductUnitView());
+            }
+        });
+        MenuItem menuRegister = new MenuItem(null, "Cadastros", null, subMenuRegisterPerson, subMenuRegisterProduct, subMenuRegisterProductUnit);
         
         // Sale Menu
         MenuItem subMenuSaleTableControl = new MenuItem(null, "Controle de Mesas", new ActionListener() {

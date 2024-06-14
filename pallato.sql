@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
-Source Server Version : 80032
+Source Server Version : 80037
 Source Host           : localhost:3306
 Source Database       : pallato
 
 Target Server Type    : MYSQL
-Target Server Version : 80032
+Target Server Version : 80037
 File Encoding         : 65001
 
-Date: 2024-06-01 09:54:00
+Date: 2024-06-13 22:56:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,6 +23,7 @@ CREATE TABLE `order` (
   `order_id` int NOT NULL AUTO_INCREMENT,
   `customer_id` int DEFAULT NULL,
   `waiter_id` int NOT NULL,
+  `invoiced` int NOT NULL,
   `discount_total` double(15,4) NOT NULL,
   `order_total` double(15,4) NOT NULL,
   `observation` varchar(120) NOT NULL,
@@ -31,6 +32,7 @@ CREATE TABLE `order` (
   PRIMARY KEY (`order_id`),
   KEY `fk_order_1` (`customer_id`),
   KEY `fk_order_2` (`waiter_id`),
+  KEY `k_order_1` (`invoiced`) USING BTREE,
   CONSTRAINT `fk_order_1` FOREIGN KEY (`customer_id`) REFERENCES `person` (`person_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_order_2` FOREIGN KEY (`waiter_id`) REFERENCES `person` (`person_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

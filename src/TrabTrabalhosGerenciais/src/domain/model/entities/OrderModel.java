@@ -8,15 +8,17 @@ public class OrderModel extends BaseModel{
         private PersonModel customer;
         private PersonModel waiter;
         private List<OrderItemModel> products;
+        private boolean invoiced;
         private double discountTotal;
         private double orderTotal;
         private String observation;
 
-    public OrderModel(int id, PersonModel customer, PersonModel waiter, List<OrderItemModel> products, double discountTotal, String observation) {
+    public OrderModel(int id, PersonModel customer, PersonModel waiter, List<OrderItemModel> products, boolean invoiced, double discountTotal, String observation) {
         setId(id);
         this.customer = Objects.requireNonNullElse(customer, new PersonModel());
         this.waiter = Objects.requireNonNullElse(waiter, new PersonModel());
         this.products = Objects.requireNonNullElse(products, new ArrayList<OrderItemModel>());
+        this.invoiced = invoiced;
         this.discountTotal = discountTotal;
         this.observation = Objects.requireNonNullElse(observation,"");
         totalOrder();

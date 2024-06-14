@@ -7,6 +7,8 @@ public class UnitVM {
     public String name;
     public String symbol;
     
+    public UnitVM(){}
+    
     public UnitVM(UnitModel unitModel){
         id = unitModel.getId();
         name = unitModel.getName();

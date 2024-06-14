@@ -8,6 +8,7 @@ import domain.model.enums.ResponseTypeEnum;
 import domain.utils.DateUtil;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import javax.swing.ButtonGroup;
 
 public class PersonView extends javax.swing.JInternalFrame {
 
@@ -28,6 +29,7 @@ public class PersonView extends javax.swing.JInternalFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        buttonGroupPersonType = new javax.swing.ButtonGroup();
         jLabelTitle = new javax.swing.JLabel();
         jLabelPersonalData = new javax.swing.JLabel();
         jLabelName = new javax.swing.JLabel();
@@ -88,6 +90,9 @@ public class PersonView extends javax.swing.JInternalFrame {
             }
         ));
         jScrollPane3.setViewportView(jTable1);
+
+        buttonGroupPersonType.add(jRadioButtonPF);
+        buttonGroupPersonType.add(jRadioButtonPJ);
 
         setClosable(true);
         setTitle("Novo usuário");
@@ -168,8 +173,6 @@ public class PersonView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTableUsers.setCellSelectionEnabled(false);
-        jTableUsers.setRowSelectionAllowed(true);
         jTableUsers.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(jTableUsers);
         jTableUsers.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -437,6 +440,11 @@ public class PersonView extends javax.swing.JInternalFrame {
 
     private void jButtonSaveUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveUserMouseClicked
         PersonVM personForm = getPersonByForm();
+        
+        if(personForm.name.isBlank() || personForm.document.isBlank() || personForm.type < 0 || personForm.street.isBlank() || personForm.number.isBlank() || personForm.neighborhood.isBlank() || personForm.city.isBlank() || personForm.state.isBlank() || personForm.postalCode.isBlank() || personForm.country.isBlank() || personForm.birthDate == null || (!personForm.customer && !personForm.staff && !personForm.supplier)){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         int personId = Integer.parseInt(this.jTextFieldId.getText().isEmpty() ? "0" : this.jTextFieldId.getText());
         
         if(personId == 0){
@@ -549,6 +557,7 @@ public class PersonView extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroupPersonType;
     private javax.swing.JButton jButtonClearFields;
     private javax.swing.JButton jButtonDeleteUser;
     private javax.swing.JButton jButtonEditForm;

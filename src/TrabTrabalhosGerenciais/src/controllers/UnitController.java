@@ -30,8 +30,19 @@ public class UnitController {
         unitApplication.create(unitVM);
     }
     
+    public void update(UnitVM unitVM){
+        this.unitApplication.update(unitVM);
+    }
+    
     public List<UnitVM> getAll(){
         return unitApplication.getAll();
     }
     
+    public UnitVM get(int id){
+        return this.unitApplication.get(id);
+    }
+    
+    public void delete(int id){
+        this.unitApplication.delete(id);
+    }
 }

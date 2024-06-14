@@ -8,7 +8,6 @@ import domain.model.enums.ResponseTypeEnum;
 import domain.utils.DateUtil;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
-import javax.swing.ButtonGroup;
 
 public class PersonView extends javax.swing.JInternalFrame {
 

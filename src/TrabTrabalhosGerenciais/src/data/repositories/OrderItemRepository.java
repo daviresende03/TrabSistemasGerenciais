@@ -29,7 +29,7 @@ public class OrderItemRepository implements IOrderItemRepository{
                 + "sale_price,"
                 + "total_item,"
                 + "created_at,"
-                + "updated_at"
+                + "updated_at) "
                 + "VALUES(?, ?, ?, ?, ?, ?, ?)";
         
         PreparedStatement statement = connect.prepareStatement(query);

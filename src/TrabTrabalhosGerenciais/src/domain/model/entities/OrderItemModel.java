@@ -18,6 +18,14 @@ public class OrderItemModel extends BaseModel{
         totalItem();
     }
     
+    public OrderItemModel(ProductModel product, double quantity, double salePrice) {
+        this.order = new OrderModel();
+        this.product = Objects.requireNonNullElse(product, new ProductModel());;
+        this.quantity = quantity;
+        this.salePrice = salePrice;
+        totalItem();
+    }
+    
     public OrderItemModel(){}
     
     public double totalPrice(){

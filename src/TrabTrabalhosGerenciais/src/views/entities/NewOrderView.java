@@ -1,5 +1,7 @@
 package views.entities;
 
+import application.viewModels.OrderItemVM;
+import application.viewModels.OrderVM;
 import application.viewModels.PersonVM;
 import application.viewModels.ProductVM;
 import controllers.PersonController;
@@ -7,7 +9,10 @@ import controllers.ProductController;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ProductTypeEnum;
 import domain.model.enums.ResponseTypeEnum;
+import java.net.ResponseCache;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -74,7 +79,6 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(jTable1);
 
         setClosable(true);
-        setTitle("Novo pedido");
 
         jLabelNewOrder.setText("NOVO PEDIDO");
 
@@ -127,7 +131,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Quantidade", "Total"
+                "Código", "Nome", "Quantidade", "Preço"
             }
         ) {
             Class[] types = new Class [] {
@@ -162,6 +166,11 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jButtonConcludeOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonConcludeOrder.setMaximumSize(new java.awt.Dimension(128, 30));
         jButtonConcludeOrder.setMinimumSize(new java.awt.Dimension(128, 30));
+        jButtonConcludeOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonConcludeOrderMouseClicked(evt);
+            }
+        });
 
         jLabelOrderTotal.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jLabelOrderTotal.setText("Total do Pedido");
@@ -178,6 +187,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Status");
 
+        jTextFieldOrderStatus.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldOrderStatus.setEnabled(false);
 
         jTextFieldAmountOrder.setEnabled(false);
@@ -341,7 +351,90 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         }
         
         this.addProductToSaleTable(product, quantity);
+        this.updateTotalOrder(product.salePrice*quantity);
     }//GEN-LAST:event_jButtonSaleProductMouseClicked
+
+    private void updateTotalOrder(double value){
+        String prefix = "R$ ";
+        
+        String amountString = this.jTextFieldAmountOrder.getText().replace(prefix, "");
+        Double amount = Double.parseDouble(amountString.isEmpty()?"0":amountString);
+        
+        String newAmountString = prefix + Double.toString(amount+value);
+        this.jTextFieldAmountOrder.setText(newAmountString);
+    }
+    
+    private int getComboBoxSelectedId(JComboBox comboBox){
+        try{
+            String selectedItem = (String)comboBox.getSelectedItem();
+            return Integer.parseInt(selectedItem.split("-")[0]);
+        } catch(Exception ex){
+            return -1;
+        }
+    }
+    
+    private List<OrderItemVM> getOrderItems(){
+        int quantityProducts = this.jTableSelectedProductsList.getRowCount();
+        if(quantityProducts<=0){
+            JOptionPane.showMessageDialog(null, "Nenhum item foi vendido!" , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+        List<OrderItemVM> orderItems = new ArrayList<OrderItemVM>();
+        
+        for(int i=0;i<quantityProducts;i++){
+            int productId = (int)this.jTableSelectedProductsList.getValueAt(i, 0);
+            double quantity = (double)this.jTableSelectedProductsList.getValueAt(i, 2);
+            double salePrice = (double)this.jTableSelectedProductsList.getValueAt(i, 3);
+            ProductVM product = this.productController.get(productId);
+            
+            ResponseService response = this.productController.getResponseService();
+            if(response.getType()==ResponseTypeEnum.SUCCESS){
+                orderItems.add(new OrderItemVM(product, quantity, salePrice));
+            }
+        }
+        return orderItems;
+    }
+    
+    private PersonVM getPersonComboBoxSelected(JComboBox comboBox){
+        int personId = getComboBoxSelectedId(comboBox);
+        if(personId<=0){
+            JOptionPane.showMessageDialog(null, "Não foi possível obter o id do cliene selecionado." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+        
+        PersonVM person = this.personController.get(personId);
+        ResponseService response = this.personController.getResponseService();
+        
+        if(response.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, "Não foi possível obter o cliene selecionado." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+        
+        return person;
+    }
+    
+    private void jButtonConcludeOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConcludeOrderMouseClicked
+        PersonVM customer = getPersonComboBoxSelected(this.jComboBoxCustomer);
+        if(customer==null){
+            return;
+        }
+        
+        PersonVM staff = getPersonComboBoxSelected(this.jComboBoxStaff);
+        if(staff==null){
+            return;
+        }
+        
+        List<OrderItemVM> orderItems = getOrderItems();
+        if(orderItems==null){
+            return;
+        }
+        
+        double discount = Double.parseDouble(this.jTextFieldDiscount.getText().isEmpty() ? "0" : this.jTextFieldDiscount.getText());
+        String obs = this.jTextAreaObservations.getText();
+        
+        OrderVM order = new OrderVM(customer, staff, orderItems, discount, obs);
+        //InsertOrder        
+    }//GEN-LAST:event_jButtonConcludeOrderMouseClicked
 
     private void clearForm(){
         this.loadProductTableByDataBase();
@@ -354,6 +447,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         this.jTextFieldOrderStatus.setText("");
         this.jTextFieldQuantity.setText("1.00");
         this.jTextFieldAmountOrder.setText("R$ 0.00");
+        this.jTextFieldOrderStatus.setText("NOVO");
         
         this.jComboBoxCustomer.requestFocus();
     }
@@ -361,9 +455,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     private void addProductToSaleTable(ProductVM product, double quantity){
         DefaultTableModel tableModel = (DefaultTableModel) this.jTableSelectedProductsList.getModel();
         
-        double amount = quantity * product.salePrice;
-        
-        Object[] row = {product.id, product.name, quantity, amount};
+        Object[] row = {product.id, product.name, quantity, product.salePrice};
         tableModel.addRow(row);
     }
     
@@ -385,7 +477,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         
         List<PersonVM> people = this.personController.getAll(true, false, false);
         for(PersonVM person : people){
-            this.jComboBoxCustomer.addItem(person.name);
+            this.jComboBoxCustomer.addItem(person.id+"-"+person.name);
         }
         
         if(!people.isEmpty()){
@@ -398,7 +490,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         
         List<PersonVM> staffs = this.personController.getAll(false, true, false);
         for(PersonVM person : staffs){
-            this.jComboBoxStaff.addItem(person.name);
+            this.jComboBoxStaff.addItem(person.id+"-"+person.name);
         }
         
         if(!staffs.isEmpty()){

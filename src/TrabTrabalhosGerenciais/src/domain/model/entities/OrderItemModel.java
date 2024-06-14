@@ -16,7 +16,7 @@ public class OrderItemModel extends BaseModel{
         this.quantity = quantity;
         this.salePrice = salePrice;
         totalItem();
-    }   
+    }
     
     public OrderItemModel(){}
     

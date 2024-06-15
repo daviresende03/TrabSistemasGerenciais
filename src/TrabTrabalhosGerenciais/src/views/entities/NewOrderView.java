@@ -496,6 +496,8 @@ public class NewOrderView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, responseService.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(null, responseService.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            
+            this.productController = new ProductController();
             this.clearForm();
         }
     }

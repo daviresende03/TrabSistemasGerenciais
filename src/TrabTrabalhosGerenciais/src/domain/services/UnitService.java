@@ -31,7 +31,7 @@ public class UnitService extends BaseService implements IUnitService {
             model.setCreatedDate(dateNow);
             
             if(model.validate()){
-                if(!unitRepository.exist(model.getId())){
+                if(unitRepository.exist(model.getId())){
                     responseService.setResponse(ResponseTypeEnum.ERROR, "Unidade já cadastrada!");
                     return;
                 }

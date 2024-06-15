@@ -24,7 +24,7 @@ public class UnitRepository implements IUnitRepository{
                         + "name,"
                         + "symbol,"
                         + "created_at,"
-                        + "updated_at)"
+                        + "updated_at) "
                         + "VALUES(?, ?, ?, ?)";
         
         PreparedStatement statement = connect.prepareStatement(query);

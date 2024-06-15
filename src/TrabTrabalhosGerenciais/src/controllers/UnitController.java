@@ -9,16 +9,14 @@ import domain.model.entities.ResponseService;
 import java.util.List;
 
 public class UnitController {
-    private final IDataContext dataContext;
-    private final UnitDI unitDependencyInjection;
-    private final IUnitService unitService;
     private final UnitApplication unitApplication;
 
     public UnitController() {
-        unitDependencyInjection = new UnitDI();
-        dataContext = unitDependencyInjection.getDataContext();
+        UnitDI unitDependencyInjection = new UnitDI();
+        IDataContext dataContext = unitDependencyInjection.getDataContext();
+        IUnitService unitService = unitDependencyInjection.getUnitService(dataContext,
+                unitDependencyInjection.getUnitRepository(dataContext.getConnection()));
         
-        unitService = unitDependencyInjection.getUnitService(dataContext, unitDependencyInjection.getUnitRepository(dataContext.getConnection()));
         unitApplication = new UnitApplication(unitService);
     }
     

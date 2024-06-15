@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import views.components.MenuItem;
+import views.entities.FinancesView;
 import views.entities.PersonView;
 import views.entities.ProductView;
 import views.entities.NewOrderView;
@@ -61,8 +62,17 @@ public class MainView extends javax.swing.JFrame {
             }
         });
         MenuItem menuSale = new MenuItem(null, "Vendas", false, null, subMenuSaleTableControl, subMenuSaleOrder);
+        //Finance Menu
+        MenuItem subMenuFinanceCashControl = new MenuItem(null, "Controle de Caixa", true, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                        alterPanel(new FinancesView());
+                }
+        });
+        MenuItem menuFinance = new MenuItem(null, "Finanças", false, null, subMenuFinanceCashControl);
         
-        addMenu(menuRegister, menuSale);
+        
+        addMenu(menuRegister, menuSale, menuFinance);
     }
 
     private void addMenu(MenuItem... menu) {
@@ -136,7 +146,7 @@ public class MainView extends javax.swing.JFrame {
         getContentPane().add(panelBody, java.awt.BorderLayout.CENTER);
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
     public static void main(String args[]) {
         try {

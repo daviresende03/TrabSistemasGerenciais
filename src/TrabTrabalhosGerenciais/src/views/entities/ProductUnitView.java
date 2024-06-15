@@ -189,21 +189,21 @@ public class ProductUnitView extends javax.swing.JInternalFrame {
         
         unitForm.id = Integer.parseInt(this.jTextFieldProductUnitId.getText().isEmpty() ? "0" : this.jTextFieldProductUnitId.getText());
         
-        if(unitForm.id == 0){
-            this.unitController.create(unitForm);
-        } else {
-            this.unitController.update(unitForm);
-        }
-        
-        ResponseService response = this.unitController.getResponseService();
-        
-        if(response.getType() != ResponseTypeEnum.SUCCESS){
-            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            this.clearForm();
-            this.loadUnitTableByDataBase();
-        }
+            if(unitForm.id == 0){
+                this.unitController.create(unitForm);
+            } else {
+                this.unitController.update(unitForm);
+            }
+
+            ResponseService response = this.unitController.getResponseService();
+
+            if(response.getType() != ResponseTypeEnum.SUCCESS){
+                JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                this.clearForm();
+                this.loadUnitTableByDataBase();
+            }
     }//GEN-LAST:event_jButtonSaveProductUnitMouseClicked
 
     private void jButtonEditProductUnitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEditProductUnitMouseClicked
@@ -276,7 +276,7 @@ public class ProductUnitView extends javax.swing.JInternalFrame {
         this.jTextFieldProductUnitName.setText("");
         this.jTextFieldProductUnitSymbol.setText("");
         this.jTextFieldProductUnitName.requestFocusInWindow();
-        this.jLabelProductUnit.setText("Nova Unidade de Produto");
+        this.jLabelProductUnit.setText("NOVA UNIDADE DE PRODUTO");
         this.jButtonEditProductUnit.setEnabled(true);
     }
     

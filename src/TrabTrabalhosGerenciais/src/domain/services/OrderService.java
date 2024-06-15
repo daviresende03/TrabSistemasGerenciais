@@ -88,7 +88,7 @@ public class OrderService extends BaseService implements IOrderService{
             for(OrderItemModel itemDataBase : itemsInDataBase){
                 existInBothLocales = item.getId() == itemDataBase.getId();
                 if(existInBothLocales){
-                    continue;
+                    break;
                 }
             }
 
@@ -102,7 +102,7 @@ public class OrderService extends BaseService implements IOrderService{
             for(OrderItemModel item : orderItems){
                 existInBothLocales = item.getId() == itemDataBase.getId();
                 if(existInBothLocales){
-                    continue;
+                    break;
                 }
             }
 
@@ -294,9 +294,11 @@ public class OrderService extends BaseService implements IOrderService{
 
             order.setInvoiced(true);
             order.setUpdatedDate(new Date());
+            
+            orderRepository.invoice(order);
 
             dataContext.commit();
-            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Pedido faturado com sucesso,");
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Pedido faturado com sucesso.");
         }catch(Exception ex){
             dataContext.rollback();
             responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao faturar o pedido.");

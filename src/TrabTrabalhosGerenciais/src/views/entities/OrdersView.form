@@ -81,7 +81,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jButtonEditOrder" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jButtonConcludeOrder1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonConcludeOrder" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane2" pref="753" max="32767" attributes="0"/>
@@ -121,7 +121,7 @@
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="jButtonEditOrder" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="jButtonConcludeOrder1" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="jButtonConcludeOrder" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -243,13 +243,16 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonEditOrderMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonConcludeOrder1">
+    <Component class="javax.swing.JButton" name="jButtonConcludeOrder">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="sansserif" size="12" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="FECHAR PEDIDO"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonConcludeOrderMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

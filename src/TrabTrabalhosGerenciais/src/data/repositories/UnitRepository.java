@@ -37,22 +37,23 @@ public class UnitRepository implements IUnitRepository{
 
     @Override
     public void update(UnitModel model) throws SQLException {
-        String query = "UPDATE product_unit SET"
+        String query = "UPDATE product_unit SET "
                         + "name =                  ?,"
                         + "symbol =                ?,"
-                        + "updated_at =            ?,"
+                        + "updated_at =            ? "
                         + "WHERE product_unit_id = ?";
         
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setString(1, model.getName());
         statement.setString(2, model.getSymbol());
         statement.setDate(3, new Date(model.getUpdatedDate().getTime()));
+        statement.setInt(4, model.getId());
         statement.executeUpdate();
     }
 
     @Override
     public void delete(int id) throws SQLException {
-        String query = "DELETE FROM product_unit WHERE id = ?";
+        String query = "DELETE FROM product_unit WHERE product_unit_id = ?";
         
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, id);
@@ -136,7 +137,7 @@ public class UnitRepository implements IUnitRepository{
     @Override
     public boolean exist(int id) throws SQLException {
         try{
-            String query = "SELECT null FROM product_unit WHERE product_unit = ?";
+            String query = "SELECT null FROM product_unit WHERE product_unit_id = ?";
             
             PreparedStatement statement = connect.prepareStatement(query);
             statement.setInt(1, id);

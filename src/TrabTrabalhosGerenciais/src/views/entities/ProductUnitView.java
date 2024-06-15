@@ -187,9 +187,9 @@ public class ProductUnitView extends javax.swing.JInternalFrame {
             return;
         }
         
-        int unitId = Integer.parseInt(this.jTextFieldProductUnitId.getText().isEmpty() ? "0" : this.jTextFieldProductUnitId.getText());
+        unitForm.id = Integer.parseInt(this.jTextFieldProductUnitId.getText().isEmpty() ? "0" : this.jTextFieldProductUnitId.getText());
         
-        if(unitId == 0){
+        if(unitForm.id == 0){
             this.unitController.create(unitForm);
         } else {
             this.unitController.update(unitForm);

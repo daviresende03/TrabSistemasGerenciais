@@ -57,7 +57,7 @@ public class UnitService extends BaseService implements IUnitService {
                 return;
             }
             
-            if(!unitRepository.exist(id)){
+            if(unitRepository.exist(id)){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Unidade não encontrada.");
                 return;
             }
@@ -66,7 +66,7 @@ public class UnitService extends BaseService implements IUnitService {
             
             dataContext.commit();
             
-            responseService.setResponse(ResponseTypeEnum.ERROR, "Unidade deletada com sucesso.");
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Unidade deletada com sucesso.");
         }catch(Exception ex){
             dataContext.rollback();
             responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao deletar a unidade.");

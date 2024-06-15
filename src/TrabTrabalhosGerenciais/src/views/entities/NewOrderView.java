@@ -530,7 +530,29 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                 this.jTextFieldDiscount.setText(Double.toString(order.discount));
                 this.loadProductSelectedTable(order.products);
                 this.updateTotalOrder(order.amount, true);
-                //COMBO BOXES
+                this.selectedComboBox(this.jComboBoxCustomer, order.customer.id);
+                this.selectedComboBox(this.jComboBoxStaff, order.waiter.id);
+            }
+        }
+    }
+    
+    private void selectedComboBox(JComboBox comboBox, int modelId){
+        for (int i = 0; i < comboBox.getItemCount(); i++) {
+            String item = (String)comboBox.getItemAt(i);
+            String[] parts = item.split("-");
+            if (parts.length > 1) {
+                int id = 0;
+                
+                try{
+                    id = Integer.parseInt(parts[0].trim());
+                }catch(Exception ex){
+                    id = 0;
+                }
+                
+                if (id == modelId) {
+                    comboBox.setSelectedIndex(i);
+                    break;
+                }
             }
         }
     }

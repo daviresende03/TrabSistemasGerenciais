@@ -259,7 +259,7 @@ public class PersonRepository implements IPersonRepository{
             
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 int id = resultSet.getInt("person_id");
                 String name = resultSet.getString("name");
                 String document = resultSet.getString("document");

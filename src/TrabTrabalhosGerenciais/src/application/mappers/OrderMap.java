@@ -11,7 +11,6 @@ import domain.model.valueObjects.Address;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class OrderMap {
     public static OrderModel getOrderModel(OrderVM orderVM){
@@ -26,7 +25,8 @@ public class OrderMap {
                     itemVM.product.salePrice,
                     itemVM.product.stock
             );
-            orderItemsModel.add(new OrderItemModel(productModel, itemVM.quantity,itemVM.salePrice));
+            
+            orderItemsModel.add(new OrderItemModel(itemVM.id, productModel, itemVM.quantity,itemVM.salePrice));
         }
 
         PersonModel customerModel = new PersonModel(
@@ -55,7 +55,7 @@ public class OrderMap {
                 orderVM.waiter.supplier
         );
 
-        return new OrderModel(customerModel,staffModel,orderItemsModel,orderVM.invoiced,orderVM.discount, orderVM.observation);
+        return new OrderModel(orderVM.id,customerModel,staffModel,orderItemsModel,orderVM.invoiced,orderVM.discount, orderVM.observation);
     }
 
     public static OrderVM getOrderVM(OrderModel orderModel){
@@ -98,6 +98,7 @@ public class OrderMap {
 
     private static OrderItemVM getOrderItemVM(OrderItemModel orderItemModel){
         return new OrderItemVM(
+                orderItemModel.getId(),
                 new ProductVM(orderItemModel.getProduct()),
                 orderItemModel.getQuantity(),
                 orderItemModel.getSalePrice());

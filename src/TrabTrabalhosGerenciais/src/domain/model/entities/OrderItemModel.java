@@ -12,15 +12,16 @@ public class OrderItemModel extends BaseModel{
     public OrderItemModel(int id, OrderModel order, ProductModel product, double quantity, double salePrice) {
         setId(id);
         this.order = Objects.requireNonNullElse(order, new OrderModel());
-        this.product = Objects.requireNonNullElse(product, new ProductModel());;
+        this.product = Objects.requireNonNullElse(product, new ProductModel());
         this.quantity = quantity;
         this.salePrice = salePrice;
         totalItem();
     }
     
-    public OrderItemModel(ProductModel product, double quantity, double salePrice) {
+    public OrderItemModel(int id, ProductModel product, double quantity, double salePrice) {
+        setId(id);
         this.order = new OrderModel();
-        this.product = Objects.requireNonNullElse(product, new ProductModel());;
+        this.product = Objects.requireNonNullElse(product, new ProductModel());
         this.quantity = quantity;
         this.salePrice = salePrice;
         totalItem();

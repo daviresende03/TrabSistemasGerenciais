@@ -137,14 +137,14 @@ public class NewOrderView extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Quantidade", "Preço"
+                "Id", "Código", "Nome", "Quantidade", "Preço"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -182,6 +182,11 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jLabelOrderTotal.setText("Total dos Produtos");
 
         jButtonSaveOrder.setText("SALVAR");
+        jButtonSaveOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonSaveOrderMouseClicked(evt);
+            }
+        });
 
         jTextAreaObservations.setColumns(20);
         jTextAreaObservations.setRows(5);
@@ -417,14 +422,15 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         List<OrderItemVM> orderItems = new ArrayList<OrderItemVM>();
         
         for(int i=0;i<quantityProducts;i++){
-            int productId = (int)this.jTableSelectedProductsList.getValueAt(i, 0);
-            double quantity = (double)this.jTableSelectedProductsList.getValueAt(i, 2);
-            double salePrice = (double)this.jTableSelectedProductsList.getValueAt(i, 3);
+            int id = (int)this.jTableSelectedProductsList.getValueAt(i, 0);
+            int productId = (int)this.jTableSelectedProductsList.getValueAt(i, 1);
+            double quantity = (double)this.jTableSelectedProductsList.getValueAt(i, 3);
+            double salePrice = (double)this.jTableSelectedProductsList.getValueAt(i, 4);
             ProductVM product = this.productController.get(productId);
             
             ResponseService response = this.productController.getResponseService();
             if(response.getType()==ResponseTypeEnum.SUCCESS){
-                orderItems.add(new OrderItemVM(product, quantity, salePrice));
+                orderItems.add(new OrderItemVM(id, product, quantity, salePrice));
             }
         }
         return orderItems;
@@ -449,7 +455,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     }
     
     private void jButtonConcludeOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConcludeOrderMouseClicked
-        this.createOrder(true);
+        this.createOrder(true,"Pedido faturado com sucesso.");
     }//GEN-LAST:event_jButtonConcludeOrderMouseClicked
 
     private void jButtonRemoveProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveProductActionPerformed
@@ -459,8 +465,8 @@ public class NewOrderView extends javax.swing.JInternalFrame {
             return;
         }
         
-        double quantity  = (double)this.jTableSelectedProductsList.getValueAt(lineSelected, 2);
-        double salePrice = (double)this.jTableSelectedProductsList.getValueAt(lineSelected, 3);
+        double quantity  = (double)this.jTableSelectedProductsList.getValueAt(lineSelected, 3);
+        double salePrice = (double)this.jTableSelectedProductsList.getValueAt(lineSelected, 4);
         
         this.updateTotalOrder(-(quantity*salePrice), false);
         
@@ -468,7 +474,11 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         model.removeRow(lineSelected);
     }//GEN-LAST:event_jButtonRemoveProductActionPerformed
 
-    private void createOrder(boolean invoiced){
+    private void jButtonSaveOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveOrderMouseClicked
+        this.createOrder(false,"Pedido salvo com sucesso.");
+    }//GEN-LAST:event_jButtonSaveOrderMouseClicked
+
+    private void createOrder(boolean invoiced, String successMessage){
         PersonVM customer = getPersonComboBoxSelected(this.jComboBoxCustomer,"cliente");
         if(customer==null){
             return;
@@ -486,8 +496,9 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         
         double discount = Double.parseDouble(this.jTextFieldDiscount.getText().isEmpty() ? "0" : this.jTextFieldDiscount.getText());
         String obs = this.jTextAreaObservations.getText();
+        int id = Integer.parseInt(this.jTextFieldOrderId.getText().isEmpty() ? "0" : this.jTextFieldOrderId.getText());
         
-        OrderVM order = new OrderVM(customer, staff, orderItems, invoiced, discount,0, obs);
+        OrderVM order = new OrderVM(id, customer, staff, orderItems, invoiced, discount,0, obs);
         
         this.orderController.create(order);
         ResponseService responseService = this.orderController.getResponseService();
@@ -495,7 +506,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         if(responseService.getType() != ResponseTypeEnum.SUCCESS){
             JOptionPane.showMessageDialog(null, responseService.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
         }else{
-            JOptionPane.showMessageDialog(null, responseService.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, successMessage , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             
             this.productController = new ProductController();
             this.clearForm();
@@ -565,7 +576,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         DefaultTableModel tableModel = (DefaultTableModel) this.jTableSelectedProductsList.getModel();
         
         for(OrderItemVM order : orderItems){
-            Object[] row = {order.product.id, order.product.name, order.quantity, order.salePrice};
+            Object[] row = {order.id, order.product.id, order.product.name, order.quantity, order.salePrice};
             tableModel.addRow(row);
         }
     }
@@ -573,7 +584,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     private void addProductToSaleTable(ProductVM product, double quantity){
         DefaultTableModel tableModel = (DefaultTableModel) this.jTableSelectedProductsList.getModel();
         
-        Object[] row = {product.id, product.name, quantity, product.salePrice};
+        Object[] row = {0, product.id, product.name, quantity, product.salePrice};
         tableModel.addRow(row);
     }
     

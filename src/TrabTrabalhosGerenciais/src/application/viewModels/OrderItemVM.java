@@ -1,6 +1,6 @@
 package application.viewModels;
 
-public class OrderItemVM {    
+public class OrderItemVM {
     public ProductVM product;
     public double quantity;
     public double salePrice;

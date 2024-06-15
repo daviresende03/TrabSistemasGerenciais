@@ -3,6 +3,7 @@ package application.mappers;
 import application.viewModels.OrderItemVM;
 import application.viewModels.OrderVM;
 import application.viewModels.PersonVM;
+import application.viewModels.ProductVM;
 import domain.model.entities.*;
 import domain.model.enums.PersonTypeEnum;
 import domain.model.enums.ProductTypeEnum;
@@ -10,6 +11,7 @@ import domain.model.valueObjects.Address;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class OrderMap {
     public static OrderModel getOrderModel(OrderVM orderVM){
@@ -65,11 +67,20 @@ public class OrderMap {
         staffVM.id = orderModel.getWaiter().getId();
         staffVM.name = orderModel.getWaiter().getName();
 
+        List<OrderItemModel> itemsModel = orderModel.getProducts();
+        List<OrderItemVM> itemsVM;
+
+        if(itemsModel == null || itemsModel.isEmpty()){
+            itemsVM = new ArrayList<OrderItemVM>();
+        }else{
+            itemsVM = getOrderItemVM(itemsModel);
+        }
+
         return new OrderVM(
                 orderModel.getId(),
                 customerVM,
                 staffVM,
-                new ArrayList<OrderItemVM>(),
+                itemsVM,
                 orderModel.getInvoiced(),
                 orderModel.getDiscountTotal(),
                 orderModel.getAmount(),
@@ -83,5 +94,20 @@ public class OrderMap {
             ordersVM.add(getOrderVM(model));
         }
         return ordersVM;
+    }
+
+    private static OrderItemVM getOrderItemVM(OrderItemModel orderItemModel){
+        return new OrderItemVM(
+                new ProductVM(orderItemModel.getProduct()),
+                orderItemModel.getQuantity(),
+                orderItemModel.getSalePrice());
+    }
+
+    private static List<OrderItemVM> getOrderItemVM(List<OrderItemModel> orderItemsModel){
+        List<OrderItemVM> orderItemsVM = new ArrayList<>();
+        for(OrderItemModel item : orderItemsModel){
+            orderItemsVM.add(getOrderItemVM(item));
+        }
+        return orderItemsVM;
     }
 }

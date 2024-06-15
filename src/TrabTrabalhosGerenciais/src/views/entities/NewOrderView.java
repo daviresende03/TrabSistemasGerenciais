@@ -26,6 +26,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         initComponents();
         this.setVisible(true);
         this.clearForm();
+        this.loadOrder(id);
     }
     
     @SuppressWarnings("unchecked")
@@ -62,6 +63,8 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jLabelQuantity = new javax.swing.JLabel();
         jTextFieldQuantity = new javax.swing.JTextField();
         jButtonRemoveProduct = new javax.swing.JButton();
+        jTextFieldOrderId = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -210,6 +213,11 @@ public class NewOrderView extends javax.swing.JInternalFrame {
             }
         });
 
+        jTextFieldOrderId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldOrderId.setEnabled(false);
+
+        jLabel2.setText("Código");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,7 +241,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jComboBoxCustomer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabelProductsList)
@@ -258,7 +266,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(14, 14, 14)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addComponent(jLabelDiscount)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -271,9 +279,13 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                         .addComponent(jTextFieldAmountOrder))))))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextFieldOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(32, 32, 32)
                                                 .addComponent(jLabel1)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jTextFieldOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -287,7 +299,10 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNewOrder)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jTextFieldOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCustomer)
@@ -363,14 +378,20 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         }
         
         this.addProductToSaleTable(product, quantity);
-        this.updateTotalOrder(product.salePrice*quantity);
+        this.updateTotalOrder(product.salePrice*quantity, false);
     }//GEN-LAST:event_jButtonSaleProductMouseClicked
 
-    private void updateTotalOrder(double value){
+    private void updateTotalOrder(double value, boolean finalValue){
         String prefix = "R$ ";
         
         String amountString = this.jTextFieldAmountOrder.getText().replace(prefix, "");
-        Double amount = Double.parseDouble(amountString.isEmpty()?"0":amountString) + value;
+        Double amount;
+        
+        if(!finalValue){
+            amount = Double.parseDouble(amountString.isEmpty()?"0":amountString) + value;
+        }else{
+            amount = value;
+        }
         
         String newAmountString = String.format("R$ %.2f", amount < 0 ? 0 : amount);
         this.jTextFieldAmountOrder.setText(newAmountString);
@@ -439,7 +460,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         double quantity  = (double)this.jTableSelectedProductsList.getValueAt(lineSelected, 2);
         double salePrice = (double)this.jTableSelectedProductsList.getValueAt(lineSelected, 3);
         
-        this.updateTotalOrder(-(quantity*salePrice));
+        this.updateTotalOrder(-(quantity*salePrice), false);
         
         DefaultTableModel model = (DefaultTableModel)this.jTableSelectedProductsList.getModel();
         model.removeRow(lineSelected);
@@ -489,8 +510,38 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         this.jTextFieldQuantity.setText("1.00");
         this.jTextFieldAmountOrder.setText("R$ 0.00");
         this.jTextFieldOrderStatus.setText("NOVO");
+        this.jTextFieldOrderId.setText("");
         
         this.jComboBoxCustomer.requestFocus();
+    }
+    
+    private void loadOrder(int id){
+        if(id>0){
+            OrderVM order = this.orderController.get(id);
+            
+            ResponseService response = this.orderController.getResponseService();
+            if(response.getType() != ResponseTypeEnum.SUCCESS){
+                JOptionPane.showMessageDialog(null, "Não foi possível carregar o produto selecionado." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            }else{
+                this.jTextFieldOrderId.setText(Integer.toString(order.id));
+                this.jTextFieldOrderStatus.setText("EDIÇÃO");
+                this.jLabelNewOrder.setText("EDIÇÃO");
+                this.jTextAreaObservations.setText(order.observation);
+                this.jTextFieldDiscount.setText(Double.toString(order.discount));
+                this.loadProductSelectedTable(order.products);
+                this.updateTotalOrder(order.amount, true);
+                //COMBO BOXES
+            }
+        }
+    }
+    
+    private void loadProductSelectedTable(List<OrderItemVM> orderItems){
+        DefaultTableModel tableModel = (DefaultTableModel) this.jTableSelectedProductsList.getModel();
+        
+        for(OrderItemVM order : orderItems){
+            Object[] row = {order.product.id, order.product.name, order.quantity, order.salePrice};
+            tableModel.addRow(row);
+        }
     }
     
     private void addProductToSaleTable(ProductVM product, double quantity){
@@ -547,6 +598,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jComboBoxCustomer;
     private javax.swing.JComboBox<String> jComboBoxStaff;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelCustomer;
     private javax.swing.JLabel jLabelDiscount;
     private javax.swing.JLabel jLabelNewOrder;
@@ -568,6 +620,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea jTextAreaObservations;
     private javax.swing.JTextField jTextFieldAmountOrder;
     private javax.swing.JTextField jTextFieldDiscount;
+    private javax.swing.JTextField jTextFieldOrderId;
     private javax.swing.JTextField jTextFieldOrderStatus;
     private javax.swing.JTextField jTextFieldQuantity;
     // End of variables declaration//GEN-END:variables

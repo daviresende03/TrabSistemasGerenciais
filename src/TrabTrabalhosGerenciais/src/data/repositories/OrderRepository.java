@@ -65,20 +65,38 @@ public class OrderRepository implements IOrderRepository {
     public OrderModel select(int id) throws SQLException {
         OrderModel order = new OrderModel();
         try{
-            String query = "SELECT * FROM `order` WHERE order_id = ?";
+            String query = "SELECT "
+                    + "customer_id,"
+                    + "(SELECT name FROM person WHERE person_id = customer_id) AS customer_name,"
+                    + "waiter_id,"
+                    + "(SELECT name FROM person WHERE person_id = waiter_id) AS waiter_name,"
+                    + "invoiced,"
+                    + "discount_total,"
+                    + "order_total,"
+                    + "observation "
+                    + "FROM `order` WHERE order_id = ?";
         
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
         
         if (resultSet.next()) {
-            int customerId = resultSet.getInt("customer_id");
-            int waiterId = resultSet.getInt("waiter_id");
-            double discount_total = resultSet.getDouble("discount_total");
-            String observation = resultSet.getString("observation");
+            int customer_id = resultSet.getInt("customer_id");
+            String customer_name = resultSet.getString("customer_name");
+            int waiter_id = resultSet.getInt("waiter_id");
+            String waiter_name = resultSet.getString("waiter_name");
             boolean invoiced = resultSet.getInt("invoiced")==1;
-            
-            return new OrderModel(id, new PersonModel(customerId), new PersonModel(waiterId), new ArrayList<OrderItemModel>(), invoiced, discount_total, observation);
+            double discount_total = resultSet.getDouble("discount_total");
+            double amount = resultSet.getDouble("order_total");
+            String observation = resultSet.getString("observation");
+
+            PersonModel customer = new PersonModel(customer_id);
+            customer.setName(customer_name);
+            PersonModel waiter = new PersonModel(waiter_id);
+            waiter.setName(waiter_name);
+
+            order = new OrderModel(id, customer, waiter, new ArrayList<OrderItemModel>(), invoiced, discount_total, observation);
+            order.setAmount(amount);
         }
         return order;
         }catch(Exception ex){

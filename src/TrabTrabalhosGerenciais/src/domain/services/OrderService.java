@@ -163,7 +163,30 @@ public class OrderService extends BaseService implements IOrderService{
 
     @Override
     public OrderModel get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            if(id <= 0){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "O id informado é inválido.");
+                return new OrderModel();
+            }
+
+            OrderModel order = orderRepository.select(id);
+            order.setProducts(orderItemRepository.selectByOrderId(id));
+
+            for(OrderItemModel item : order.getProducts()){
+                ProductModel product = productRepository.select(item.getProduct().getId());
+                item.setProduct(product);
+            }
+
+            if(order.getId() <= 0){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Produto não encontrado.");
+            }else{
+                responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
+            }
+            return order;
+        }catch(Exception ex){
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar o produto.");
+            return new OrderModel();
+        }
     }
 
     @Override

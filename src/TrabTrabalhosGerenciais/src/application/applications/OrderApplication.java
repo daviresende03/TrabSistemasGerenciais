@@ -35,4 +35,8 @@ public class OrderApplication {
     public int count(boolean invoiced){
         return this.orderService.count(invoiced);
     }
+
+    public OrderVM get(int id){
+        return OrderMap.getOrderVM(this.orderService.get(id));
+    }
 }

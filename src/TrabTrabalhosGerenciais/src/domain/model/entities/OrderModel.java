@@ -103,7 +103,7 @@ public class OrderModel extends BaseModel{
     public void setAmount(double amount){
         this.orderTotal = amount;
     }
-    
+
     private double totalOrderItems(){
         double total = 0;
         for(OrderItemModel orderItemModel : products){

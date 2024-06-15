@@ -48,4 +48,8 @@ public class OrderController {
     public int count(boolean invoiced){
         return orderApplication.count(invoiced);
     }
+
+    public OrderVM get(int id){
+        return orderApplication.get(id);
+    }
 }

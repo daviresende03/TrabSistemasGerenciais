@@ -28,43 +28,40 @@ public class MainView extends javax.swing.JFrame {
 
     private void buildMenu() {
 
-        // Register Menu
-        MenuItem subMenuRegisterPerson = new MenuItem(null, "Usuários", new ActionListener() {
+        MenuItem subMenuRegisterPerson = new MenuItem(null, "Usuários", true, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 alterPanel(new PersonView());
             }
         });
-        MenuItem subMenuRegisterProduct = new MenuItem(null, "Produtos", new ActionListener() {
+        MenuItem subMenuRegisterProduct = new MenuItem(null, "Produtos", true, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 alterPanel(new ProductView());
             }
         });
-        MenuItem subMenuRegisterProductUnit = new MenuItem(null, "Unidades de Produtos", new ActionListener() {
+        MenuItem subMenuRegisterProductUnit = new MenuItem(null, "Unidades de Produtos", true, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 alterPanel(new ProductUnitView());
             }
         });
-        MenuItem menuRegister = new MenuItem(null, "Cadastros", null, subMenuRegisterPerson, subMenuRegisterProduct, subMenuRegisterProductUnit);
-        
-        // Sale Menu
-        MenuItem subMenuSaleTableControl = new MenuItem(null, "Controle de Pedidos", new ActionListener() {
+        MenuItem menuRegister = new MenuItem(null, "Cadastros", false, null, subMenuRegisterPerson, subMenuRegisterProduct, subMenuRegisterProductUnit);
+
+        MenuItem subMenuSaleTableControl = new MenuItem(null, "Controle de Pedidos", true, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 alterPanel(new OrdersView());
             }
         });
-        MenuItem subMenuSaleOrder = new MenuItem(null, "Pedidos", new ActionListener() {
+        MenuItem subMenuSaleOrder = new MenuItem(null, "Pedidos", true, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 alterPanel(new NewOrderView(0));
             }
         });
-        MenuItem menuSale = new MenuItem(null, "Vendas", null, subMenuSaleTableControl, subMenuSaleOrder);
+        MenuItem menuSale = new MenuItem(null, "Vendas", false, null, subMenuSaleTableControl, subMenuSaleOrder);
         
-        // Build Menu
         addMenu(menuRegister, menuSale);
     }
 
@@ -87,9 +84,7 @@ public class MainView extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         panelHeader = new javax.swing.JPanel();
         panelMenu = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -98,14 +93,14 @@ public class MainView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panelHeader.setBackground(new java.awt.Color(45, 113, 248));
+        panelHeader.setBackground(new java.awt.Color(173, 148, 100));
         panelHeader.setPreferredSize(new java.awt.Dimension(561, 50));
 
         javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
         panelHeader.setLayout(panelHeaderLayout);
         panelHeaderLayout.setHorizontalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 855, Short.MAX_VALUE)
+            .addGap(0, 1035, Short.MAX_VALUE)
         );
         panelHeaderLayout.setVerticalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,12 +109,12 @@ public class MainView extends javax.swing.JFrame {
 
         getContentPane().add(panelHeader, java.awt.BorderLayout.PAGE_START);
 
-        panelMenu.setBackground(new java.awt.Color(115, 120, 230));
+        panelMenu.setBackground(new java.awt.Color(173, 148, 100));
         panelMenu.setPreferredSize(new java.awt.Dimension(250, 384));
 
         jScrollPane1.setBorder(null);
 
-        menus.setBackground(new java.awt.Color(255, 255, 255));
+        menus.setBackground(new java.awt.Color(173, 148, 100));
         menus.setLayout(new javax.swing.BoxLayout(menus, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane1.setViewportView(menus);
 
@@ -131,7 +126,7 @@ public class MainView extends javax.swing.JFrame {
         );
         panelMenuLayout.setVerticalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
         );
 
         getContentPane().add(panelMenu, java.awt.BorderLayout.LINE_START);
@@ -144,10 +139,6 @@ public class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public static void main(String args[]) {
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

@@ -18,12 +18,16 @@ public class MenuItem extends javax.swing.JPanel {
     private final ArrayList<MenuItem> subMenu = new ArrayList<>();
     private ActionListener act;
 
-    public MenuItem(Icon icon, String menuName, ActionListener act, MenuItem... subMenu) {
+    public MenuItem(Icon icon, String menuName, boolean isChild, ActionListener act, MenuItem... subMenu) {
         initComponents();
         lbIcon.setIcon(icon);
         lbName.setText(menuName);
+        setBackground(new java.awt.Color(173, 148, 100));
         if (act != null) {
             this.act = act;
+        }
+        if(isChild) {
+            lbName.setText("       " + menuName);
         }
         this.setSize(new Dimension(Integer.MAX_VALUE, 45));
         this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
@@ -49,6 +53,8 @@ public class MenuItem extends javax.swing.JPanel {
             }
         });
 
+        lbName.setBackground(new java.awt.Color(51, 51, 255));
+        lbName.setForeground(new java.awt.Color(0, 0, 0));
         lbName.setText("Menu Name Here ...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

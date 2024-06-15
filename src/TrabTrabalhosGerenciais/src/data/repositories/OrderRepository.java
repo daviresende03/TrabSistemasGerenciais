@@ -199,6 +199,20 @@ public class OrderRepository implements IOrderRepository {
     }
 
     @Override
+    public void invoice(OrderModel order) throws SQLException {
+        String query = "UPDATE `order` SET "
+                + "invoiced =       ?,"
+                + "updated_at =     ? "
+                + "WHERE order_id = ?";
+
+        PreparedStatement statement = connect.prepareStatement(query);
+        statement.setInt(1, order.getInvoiced() ? 1 : 0);
+        statement.setDate(2, new Date(order.getUpdatedDate().getTime()));
+        statement.setInt(3, order.getId());
+        statement.executeUpdate();
+    }
+
+    @Override
     public int count(boolean invoiced) throws SQLException {
         try{
             String query = "SELECT COUNT(*) FROM `order` WHERE invoiced = ?";

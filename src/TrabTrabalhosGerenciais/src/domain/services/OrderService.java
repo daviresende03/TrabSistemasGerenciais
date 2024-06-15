@@ -88,7 +88,7 @@ public class OrderService extends BaseService implements IOrderService{
             for(OrderItemModel itemDataBase : itemsInDataBase){
                 existInBothLocales = item.getId() == itemDataBase.getId();
                 if(existInBothLocales){
-                    continue;
+                    break;
                 }
             }
 
@@ -102,7 +102,7 @@ public class OrderService extends BaseService implements IOrderService{
             for(OrderItemModel item : orderItems){
                 existInBothLocales = item.getId() == itemDataBase.getId();
                 if(existInBothLocales){
-                    continue;
+                    break;
                 }
             }
 

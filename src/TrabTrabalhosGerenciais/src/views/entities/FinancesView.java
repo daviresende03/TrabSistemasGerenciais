@@ -1,38 +1,64 @@
 package views.entities;
 
+import application.viewModels.CashRegisterVM;
 import application.viewModels.FinanceVM;
+import controllers.CashRegisterController;
 import controllers.FinanceController;
+import domain.model.entities.ResponseService;
+import domain.model.enums.ResponseTypeEnum;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class FinancesView extends javax.swing.JInternalFrame {
 
-    public FinancesView() {
+    public FinancesView() {        
         this.financeController = new FinanceController();
+        this.cashRegisterController = new CashRegisterController();
         
         initComponents();
-        this.getRegisters();
+        this.setVisible(true);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabelTitle = new javax.swing.JLabel();
         jLabelStatus = new javax.swing.JLabel();
         jTextFieldStatus = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jTableRegisters = new javax.swing.JTable();
         jTextFieldValue = new javax.swing.JTextField();
-        jButtonValue = new javax.swing.JButton();
+        jButtonOpen = new javax.swing.JButton();
         jButtonNewRegister = new javax.swing.JButton();
         jButtonDeleteRegister = new javax.swing.JButton();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        setClosable(true);
+        setFrameIcon(null);
 
         jLabelTitle.setText("CONTROLE DE CAIXA");
 
         jLabelStatus.setText("STATUS");
 
         jTextFieldStatus.setEditable(false);
+        jTextFieldStatus.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldStatus.setEnabled(false);
 
         jTableRegisters.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -57,18 +83,17 @@ public class FinancesView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTableRegisters.setColumnSelectionAllowed(true);
-        jScrollPane1.setViewportView(jTableRegisters);
-        jTableRegisters.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (jTableRegisters.getColumnModel().getColumnCount() > 0) {
-            jTableRegisters.getColumnModel().getColumn(0).setResizable(false);
-            jTableRegisters.getColumnModel().getColumn(1).setResizable(false);
-            jTableRegisters.getColumnModel().getColumn(1).setPreferredWidth(250);
-            jTableRegisters.getColumnModel().getColumn(2).setResizable(false);
-            jTableRegisters.getColumnModel().getColumn(3).setResizable(false);
-        }
+        jScrollPane2.setViewportView(jTableRegisters);
 
-        jButtonValue.setText("ABRIR CAIXA");
+        jTextFieldValue.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldValue.setEnabled(false);
+
+        jButtonOpen.setText("ABRIR CAIXA");
+        jButtonOpen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonOpenMouseClicked(evt);
+            }
+        });
 
         jButtonNewRegister.setText("NOVO REGISTRO");
 
@@ -93,8 +118,8 @@ public class FinancesView extends javax.swing.JInternalFrame {
                         .addGap(67, 67, 67)
                         .addComponent(jTextFieldValue, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonValue))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
+                        .addComponent(jButtonOpen))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -112,11 +137,11 @@ public class FinancesView extends javax.swing.JInternalFrame {
                     .addComponent(jLabelStatus)
                     .addComponent(jTextFieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonValue)
+                    .addComponent(jButtonOpen)
                     .addComponent(jButtonNewRegister)
                     .addComponent(jButtonDeleteRegister))
                 .addGap(20, 20, 20))
@@ -129,7 +154,18 @@ public class FinancesView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonDeleteRegisterMouseClicked
 
-    private void getRegisters(){
+    private void jButtonOpenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOpenMouseClicked
+        CashRegisterVM cashRegister = this.cashRegisterController.open();
+        
+        ResponseService responseService = this.cashRegisterController.getResponseService();
+        if(responseService.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, responseService.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, responseService.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonOpenMouseClicked
+
+     private void getRegisters(){
         this.loadRegisterTableByDataBase();
     }
     
@@ -150,13 +186,16 @@ public class FinancesView extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDeleteRegister;
     private javax.swing.JButton jButtonNewRegister;
-    private javax.swing.JButton jButtonValue;
+    private javax.swing.JButton jButtonOpen;
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableRegisters;
     private javax.swing.JTextField jTextFieldStatus;
     private javax.swing.JTextField jTextFieldValue;
     // End of variables declaration//GEN-END:variables
     private FinanceController financeController;
+    private CashRegisterController cashRegisterController;
 }

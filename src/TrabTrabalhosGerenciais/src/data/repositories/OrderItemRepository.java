@@ -47,13 +47,13 @@ public class OrderItemRepository implements IOrderItemRepository{
     @Override
     public void update(OrderItemModel model) throws SQLException {
         String query = "UPDATE order_item SET"
-                + "order_id = ?"
-                + "product_id = ?"
-                + "quantity = ?"
+                + "order_id = ?,"
+                + "product_id = ?,"
+                + "quantity = ?,"
                 + "sale_price = ?,"
-                + "total_item = ?"
-                + "updated_at = ?"
-                + "WHERE order_id = ?";
+                + "total_item = ?,"
+                + "updated_at = ? "
+                + "WHERE order_item_id = ?";
         
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, model.getOrder().getId());
@@ -62,6 +62,7 @@ public class OrderItemRepository implements IOrderItemRepository{
         statement.setDouble(4, model.getSalePrice());
         statement.setDouble(5, model.totalPrice());
         statement.setDate(6, new Date(model.getUpdatedDate().getTime()));
+        statement.setInt(7, model.getId());
     }
 
     @Override

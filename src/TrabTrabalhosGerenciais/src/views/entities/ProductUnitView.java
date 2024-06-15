@@ -40,6 +40,7 @@ public class ProductUnitView extends javax.swing.JInternalFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Unidade de Produto");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ProductUnitIcon.png"))); // NOI18N
 
         jLabelProductUnit.setText("UNIDADE DE PRODUTO");
 
@@ -70,7 +71,6 @@ public class ProductUnitView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTableProductUnits.setColumnSelectionAllowed(true);
         jTableProductUnits.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTableProductUnits);
         jTableProductUnits.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);

@@ -177,14 +177,24 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public void update(OrderModel order) throws SQLException {
         String query = "UPDATE `order` SET "
-                + "invoiced = ?,"
-                + "updated_at = ? "
+                + "customer_id =    ?,"
+                + "waiter_id =      ?,"
+                + "invoiced =       ?,"
+                + "discount_total = ?,"
+                + "order_total =    ?,"
+                + "observation =    ?,"
+                + "updated_at =     ? "
                 + "WHERE order_id = ?";
 
         PreparedStatement statement = connect.prepareStatement(query);
-        statement.setInt(1, 1);
-        statement.setDate(2, new Date(order.getUpdatedDate().getTime()));
-        statement.setInt(3, order.getId());
+        statement.setInt(1, order.getCustomer().getId());
+        statement.setInt(2, order.getWaiter().getId());
+        statement.setInt(3, order.getInvoiced() ? 1 : 0);
+        statement.setDouble(4, order.getDiscountTotal());
+        statement.setDouble(5, order.getOrderTotal());
+        statement.setString(6, order.getObservation());
+        statement.setDate(7, new Date(order.getUpdatedDate().getTime()));
+        statement.setInt(8, order.getId());
         statement.executeUpdate();
     }
 

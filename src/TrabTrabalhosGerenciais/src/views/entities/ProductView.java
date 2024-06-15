@@ -62,6 +62,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setClosable(true);
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ProductViewIcon.png"))); // NOI18N
 
         jLabelTitle.setText("NOVO PRODUTO");
 

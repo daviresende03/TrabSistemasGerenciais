@@ -84,6 +84,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(jTable1);
 
         setClosable(true);
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/images/NewOrderViewIcon.png"))); // NOI18N
 
         jLabelNewOrder.setText("NOVO PEDIDO");
 
@@ -296,13 +297,14 @@ public class NewOrderView extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNewOrder)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(jTextFieldOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelNewOrder)
+                        .addComponent(jLabel1)
+                        .addComponent(jTextFieldOrderStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCustomer)
@@ -494,6 +496,8 @@ public class NewOrderView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, responseService.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(null, responseService.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            
+            this.productController = new ProductController();
             this.clearForm();
         }
     }
@@ -530,7 +534,29 @@ public class NewOrderView extends javax.swing.JInternalFrame {
                 this.jTextFieldDiscount.setText(Double.toString(order.discount));
                 this.loadProductSelectedTable(order.products);
                 this.updateTotalOrder(order.amount, true);
-                //COMBO BOXES
+                this.selectedComboBox(this.jComboBoxCustomer, order.customer.id);
+                this.selectedComboBox(this.jComboBoxStaff, order.waiter.id);
+            }
+        }
+    }
+    
+    private void selectedComboBox(JComboBox comboBox, int modelId){
+        for (int i = 0; i < comboBox.getItemCount(); i++) {
+            String item = (String)comboBox.getItemAt(i);
+            String[] parts = item.split("-");
+            if (parts.length > 1) {
+                int id = 0;
+                
+                try{
+                    id = Integer.parseInt(parts[0].trim());
+                }catch(Exception ex){
+                    id = 0;
+                }
+                
+                if (id == modelId) {
+                    comboBox.setSelectedIndex(i);
+                    break;
+                }
             }
         }
     }

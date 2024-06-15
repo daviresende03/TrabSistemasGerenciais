@@ -21,7 +21,7 @@ public class OrderApplication {
     
     public void create(OrderVM orderVM){
         OrderModel orderModel = OrderMap.getOrderModel(orderVM);
-        this.orderService.insert(orderModel);
+        this.orderService.save(orderModel);
     }
 
     public List<OrderVM> getAll(boolean invoiced){

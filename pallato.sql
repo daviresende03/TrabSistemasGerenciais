@@ -16,6 +16,23 @@ Date: 2024-06-13 22:56:39
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
+-- Table structure for `finance`
+-- ----------------------------
+DROP TABLE IF EXISTS `finance`;
+CREATE TABLE `finance` (
+  `finance_id` int NOT NULL AUTO_INCREMENT,
+  `type` int NOT NULL,
+  `value` double(15,4) NOT NULL,
+  `description` varchar(120) NOT NULL,
+  PRIMARY KEY (`finance_id`),
+  KEY `k_finance_1` (`type`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of finance
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `order`
 -- ----------------------------
 DROP TABLE IF EXISTS `order`;

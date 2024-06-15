@@ -1,5 +1,7 @@
 package domain.services;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import domain.model.entities.OrderItemModel;
@@ -26,37 +28,38 @@ public class OrderService extends BaseService implements IOrderService{
         this.orderItemRepository = orderItemRepository;
         this.personRepository = personRepository;
         this.productRepository = productRepository;
-    }    
-    
-    @Override
-    public void insert(OrderModel model) {
+    }
+
+    public void save(OrderModel model){
         try{
             PersonModel customer = model.getCustomer();
-            if(model.getId()>0 && !personRepository.exist(model.getId())){
+            if(customer.getId() <= 0 || !personRepository.exist(customer.getId())){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível encontrar o cliente informado.");
                 return;
             }
-            
+
             PersonModel waiter = model.getWaiter();
-            if(waiter.getId()<=0){
-                responseService.setResponse(ResponseTypeEnum.ERROR, "Obrigatório informar o id do atendente.");
-                return;
-            }
-            if(!personRepository.exist(waiter.getId())){
+            if(waiter.getId() <= 0 || !personRepository.exist(waiter.getId())){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível encontrar o atendente informado.");
                 return;
             }
-            
+
             if(model.validate()){
-                
                 model.setUpdatedDate(new Date());
-                model.setCreatedDate(new Date());
-                
-                orderRepository.insert(model);
-                int orderId = model.getId();
-                
-                if(orderId>0){
-                    insertOrderItems(orderId, model.getProducts());
+                if(model.getId() <= 0){ //New Order
+                    model.setCreatedDate(new Date());
+                    orderRepository.insert(model);
+                    int orderId = model.getId();
+
+                    if(orderId>0){
+                        insertOrderItems(orderId, model.getProducts());
+                        if(responseService.getType() == ResponseTypeEnum.ERROR){
+                            return;
+                        }
+                    }
+                }else{ //Existing Order
+                    orderRepository.update(model);
+                    updateOrderItems(model.getId(), model.getProducts());
                     if(responseService.getType() == ResponseTypeEnum.ERROR){
                         return;
                     }
@@ -65,12 +68,81 @@ public class OrderService extends BaseService implements IOrderService{
                 responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());
                 return;
             }
-            
+
             dataContext.commit();
-            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Pedido realizado com sucesso.");
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Pedido salvo com sucesso.");
         }catch(Exception ex){
             dataContext.rollback();
             responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao realizar a gravação do pedido.");
+        }
+    }
+
+    private void updateOrderItems(int orderId, List<OrderItemModel> orderItems) throws SQLException {
+        List<OrderItemModel> itemsInDataBase = orderItemRepository.selectByOrderId(orderId);
+
+        List<OrderItemModel> onlyInDataBase = new ArrayList<>();
+        List<OrderItemModel> onlyInCurrentFunction = new ArrayList<>();
+
+        for(OrderItemModel item : orderItems){
+            boolean existInBothLocales = false;
+            for(OrderItemModel itemDataBase : itemsInDataBase){
+                existInBothLocales = item.getId() == itemDataBase.getId();
+                if(existInBothLocales){
+                    continue;
+                }
+            }
+
+            if(!existInBothLocales){
+                onlyInCurrentFunction.add(item);
+            }
+        }
+
+        for(OrderItemModel itemDataBase : itemsInDataBase){
+            boolean existInBothLocales = false;
+            for(OrderItemModel item : orderItems){
+                existInBothLocales = item.getId() == itemDataBase.getId();
+                if(existInBothLocales){
+                    continue;
+                }
+            }
+
+            if(!existInBothLocales){
+                onlyInDataBase.add(itemDataBase);
+            }
+        }
+
+        deleteOrderItemsInDataBase(onlyInDataBase);
+        insertOrderItemsInDataBase(orderId, onlyInCurrentFunction);
+    }
+
+    private void deleteOrderItemsInDataBase(List<OrderItemModel> orderItems) throws SQLException {
+        for(OrderItemModel model : orderItems){
+            ProductModel product = productRepository.select(model.getProduct().getId());
+            product.increaseStock(model.getQuantity());
+            productRepository.updateStock(product.getId(), product.getStock());
+
+            orderItemRepository.delete(model.getId());
+        }
+    }
+
+    private void insertOrderItemsInDataBase(int orderId, List<OrderItemModel> orderItems) throws SQLException {
+        for(OrderItemModel model : orderItems){
+
+            if(!model.validate()){
+                responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());
+                return;
+            }
+
+            ProductModel product = productRepository.select(model.getProduct().getId());
+            product.decreaseStock(model.getQuantity());
+            productRepository.updateStock(product.getId(), product.getStock());
+
+            model.setProduct(product);
+            model.setOrder(new OrderModel(orderId));
+            model.setUpdatedDate(new Date());
+            model.setCreatedDate(new Date());
+
+            orderItemRepository.insert(model);
         }
     }
     
@@ -158,6 +230,11 @@ public class OrderService extends BaseService implements IOrderService{
 
     @Override
     public void update(OrderModel model) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void insert(OrderModel model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

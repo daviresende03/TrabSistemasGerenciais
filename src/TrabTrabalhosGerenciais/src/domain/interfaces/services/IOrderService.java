@@ -9,4 +9,5 @@ public interface IOrderService extends IBaseService<OrderModel>{
     List<OrderModel> getAll(boolean invoiced);
     void invoice(int id);
     int count(boolean invoiced);
+    void save(OrderModel model);
 }

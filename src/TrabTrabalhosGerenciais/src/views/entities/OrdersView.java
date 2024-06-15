@@ -2,12 +2,8 @@ package views.entities;
 
 import application.viewModels.OrderVM;
 import controllers.OrderController;
-import domain.model.entities.ResponseService;
-import domain.model.enums.ResponseTypeEnum;
 import java.util.List;
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import views.main.MainView;
 

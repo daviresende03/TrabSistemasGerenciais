@@ -1,9 +1,17 @@
 package views.entities;
 
+import application.viewModels.FinanceVM;
+import controllers.FinanceController;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
 public class FinancesView extends javax.swing.JInternalFrame {
 
     public FinancesView() {
+        this.financeController = new FinanceController();
+        
         initComponents();
+        this.getRegisters();
     }
     
     @SuppressWarnings("unchecked")
@@ -18,6 +26,7 @@ public class FinancesView extends javax.swing.JInternalFrame {
         jTextFieldValue = new javax.swing.JTextField();
         jButtonValue = new javax.swing.JButton();
         jButtonNewRegister = new javax.swing.JButton();
+        jButtonDeleteRegister = new javax.swing.JButton();
 
         jLabelTitle.setText("CONTROLE DE CAIXA");
 
@@ -63,6 +72,13 @@ public class FinancesView extends javax.swing.JInternalFrame {
 
         jButtonNewRegister.setText("NOVO REGISTRO");
 
+        jButtonDeleteRegister.setText("APAGAR REGISTRO");
+        jButtonDeleteRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonDeleteRegisterMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,6 +89,8 @@ public class FinancesView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonNewRegister)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonDeleteRegister)
+                        .addGap(67, 67, 67)
                         .addComponent(jTextFieldValue, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonValue))
@@ -99,15 +117,38 @@ public class FinancesView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonValue)
-                    .addComponent(jButtonNewRegister))
+                    .addComponent(jButtonNewRegister)
+                    .addComponent(jButtonDeleteRegister))
                 .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonDeleteRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteRegisterMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonDeleteRegisterMouseClicked
+
+    private void getRegisters(){
+        this.loadRegisterTableByDataBase();
+    }
+    
+    private void loadRegisterTableByDataBase(){
+        List<FinanceVM> registers = this.financeController.getAll();
+        
+        DefaultTableModel tableModel = (DefaultTableModel) this.jTableRegisters.getModel();
+        tableModel.setRowCount(0);
+        
+        for(FinanceVM register : registers){
+            String type = register.type == 1 ? "RECEBIMENTO" : "PAGAMENTO";
+            String value = String.format("R$ %.2f", register.value);
+            Object[] row = { register.id, register.description, type, value };
+            tableModel.addRow(row);
+        } 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonDeleteRegister;
     private javax.swing.JButton jButtonNewRegister;
     private javax.swing.JButton jButtonValue;
     private javax.swing.JLabel jLabelStatus;
@@ -117,4 +158,5 @@ public class FinancesView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldStatus;
     private javax.swing.JTextField jTextFieldValue;
     // End of variables declaration//GEN-END:variables
+    private FinanceController financeController;
 }

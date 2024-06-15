@@ -25,6 +25,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jButtonNewRegister" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jButtonDeleteRegister" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                       <Component id="jTextFieldValue" min="-2" pref="130" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButtonValue" min="-2" max="-2" attributes="0"/>
@@ -58,6 +60,7 @@
                   <Component id="jTextFieldValue" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonValue" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonNewRegister" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonDeleteRegister" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
@@ -140,6 +143,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="NOVO REGISTRO"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonDeleteRegister">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="APAGAR REGISTRO"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonDeleteRegisterMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

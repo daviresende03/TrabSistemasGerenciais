@@ -6,6 +6,7 @@ import domain.interfaces.repositories.IDataContext;
 import domain.interfaces.services.IFinanceService;
 import domain.model.entities.ResponseService;
 import infra.dependencyInjections.FinanceDI;
+import java.util.List;
 
 public class FinanceController {
     private final FinanceApplication financeApplication;
@@ -28,5 +29,9 @@ public class FinanceController {
     
     public void delete(int id){
         this.financeApplication.delete(id);
+    }
+    
+    public List<FinanceVM> getAll(){
+        return financeApplication.getAll();
     }
 }

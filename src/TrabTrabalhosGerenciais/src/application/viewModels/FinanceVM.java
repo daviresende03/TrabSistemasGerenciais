@@ -3,6 +3,7 @@ package application.viewModels;
 import domain.model.entities.FinanceModel;
 
 public class FinanceVM {
+    public int id;
     public int type;
     public double value;
     public String description;

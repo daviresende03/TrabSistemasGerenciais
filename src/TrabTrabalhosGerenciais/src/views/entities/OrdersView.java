@@ -3,6 +3,7 @@ package views.entities;
 import application.viewModels.OrderVM;
 import controllers.OrderController;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class OrdersView extends javax.swing.JInternalFrame {
@@ -58,6 +59,11 @@ public class OrdersView extends javax.swing.JInternalFrame {
         jLabel2.setText("Filtrar pedidos");
 
         jComboBoxOrdersFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aberto", "Faturado" }));
+        jComboBoxOrdersFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxOrdersFilterActionPerformed(evt);
+            }
+        });
 
         jTableOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -68,7 +74,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
@@ -82,7 +88,9 @@ public class OrdersView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTableOrder.setColumnSelectionAllowed(true);
+        jTableOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTableOrder.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableOrder.setShowGrid(false);
         jTableOrder.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTableOrder);
         jTableOrder.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -157,6 +165,10 @@ public class OrdersView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBoxOrdersFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOrdersFilterActionPerformed
+        this.loadOrderTableByDataBase();
+    }//GEN-LAST:event_jComboBoxOrdersFilterActionPerformed
+
     private void resetScreen(){
         this.jComboBoxOrdersFilter.setSelectedIndex(0);
         this.loadOrderTableByDataBase();
@@ -171,7 +183,8 @@ public class OrdersView extends javax.swing.JInternalFrame {
         
         for(OrderVM order : orders){
             String status = order.invoiced ? "FATURADO" : "ABERTO";
-            Object[] row = { order.id, order.customer.name, order.waiter.name, status, order.amount };
+            String amount = String.format("R$ %.2f", order.amount);
+            Object[] row = { order.id, order.customer.name, order.waiter.name, status, amount };
             tableModel.addRow(row);
         }
     }

@@ -13,6 +13,10 @@ public class ProductUnitView extends javax.swing.JInternalFrame {
     public ProductUnitView() {
         initComponents();
         this.setVisible(true);
+        
+        this.unitController = new UnitController();
+        this.clearForm();
+        this.loadUnitTableByDataBase();
     }
 
     @SuppressWarnings("unchecked")

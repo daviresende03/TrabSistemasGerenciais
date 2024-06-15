@@ -2,6 +2,8 @@ package views.entities;
 
 import application.viewModels.OrderVM;
 import controllers.OrderController;
+import domain.model.entities.ResponseService;
+import domain.model.enums.ResponseTypeEnum;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +16,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
         initComponents();
         this.setVisible(true);
         this.resetScreen();
+        this.updateTotalLabels();
     }
 
     @SuppressWarnings("unchecked")
@@ -29,8 +32,8 @@ public class OrdersView extends javax.swing.JInternalFrame {
         jComboBoxOrdersFilter = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableOrder = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelTotalOpenOrders = new javax.swing.JLabel();
+        jLabelTotalInvoicedOrders = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButtonConcludeOrder = new javax.swing.JButton();
 
@@ -104,9 +107,9 @@ public class OrdersView extends javax.swing.JInternalFrame {
             jTableOrder.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jLabel1.setText("TOTAL DE PEDIDOS EM ABERTO");
+        jLabelTotalOpenOrders.setText("TOTAL DE PEDIDOS EM ABERTO");
 
-        jLabel3.setText("TOTAL DE PEDIDOS CONCLUÍDOS");
+        jLabelTotalInvoicedOrders.setText("TOTAL DE PEDIDOS CONCLUÍDOS");
 
         jLabel4.setText("TOTAL DE PEDIDOS CANCELADOS");
 
@@ -121,14 +124,14 @@ public class OrdersView extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(jLabelTotalOpenOrders)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel3))
+                                    .addComponent(jLabelTotalInvoicedOrders))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonConcludeOrder))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
@@ -151,11 +154,11 @@ public class OrdersView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
                 .addGap(25, 25, 25)
-                .addComponent(jLabel1)
+                .addComponent(jLabelTotalOpenOrders)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(jLabelTotalInvoicedOrders)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButtonConcludeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -174,6 +177,14 @@ public class OrdersView extends javax.swing.JInternalFrame {
         this.loadOrderTableByDataBase();
     }
     
+    private void updateTotalLabels(){
+        int totalCountOpenOrders = this.orderController.count(false);
+        int totalCountInvoicedOrders = this.orderController.count(true);
+        
+        this.jLabelTotalOpenOrders.setText("TOTAL DE PEDIDOS EM ABERTO: "+totalCountOpenOrders);
+        this.jLabelTotalInvoicedOrders.setText("TOTAL DE PEDIDOS CONCLUÍDOS: "+totalCountInvoicedOrders);
+    }
+    
     private void loadOrderTableByDataBase(){
         boolean invoiced = this.jComboBoxOrdersFilter.getSelectedIndex()==1;
         List<OrderVM> orders = this.orderController.getAll(invoiced);
@@ -186,18 +197,17 @@ public class OrdersView extends javax.swing.JInternalFrame {
             String amount = String.format("R$ %.2f", order.amount);
             Object[] row = { order.id, order.customer.name, order.waiter.name, status, amount };
             tableModel.addRow(row);
-        }
+        }        
     }
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConcludeOrder;
     private javax.swing.JComboBox<String> jComboBoxOrdersFilter;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelNewOrder;
+    private javax.swing.JLabel jLabelTotalInvoicedOrders;
+    private javax.swing.JLabel jLabelTotalOpenOrders;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

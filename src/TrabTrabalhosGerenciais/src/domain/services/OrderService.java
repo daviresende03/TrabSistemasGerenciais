@@ -202,4 +202,16 @@ public class OrderService extends BaseService implements IOrderService{
             responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao faturar o pedido.");
         }
     }
+
+    @Override
+    public int count(boolean invoiced) {
+        try{
+            int count = orderRepository.count(invoiced);
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
+            return count;
+        }catch(Exception ex){
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao contabilizar os pedidos filtrados.");
+            return 0;
+        }
+    }
 }

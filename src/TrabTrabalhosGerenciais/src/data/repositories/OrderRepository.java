@@ -169,4 +169,23 @@ public class OrderRepository implements IOrderRepository {
         statement.setInt(3, order.getId());
         statement.executeUpdate();
     }
+
+    @Override
+    public int count(boolean invoiced) throws SQLException {
+        try{
+            String query = "SELECT COUNT(*) FROM `order` WHERE invoiced = ?";
+
+            PreparedStatement statement = connect.prepareStatement(query);
+            statement.setInt(1,invoiced ? 1 : 0);
+            ResultSet resultSet = statement.executeQuery();
+
+            int count = 0;
+            if (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+            return count;
+        }catch(Exception ex){
+            return 0;
+        }
+    }
 }

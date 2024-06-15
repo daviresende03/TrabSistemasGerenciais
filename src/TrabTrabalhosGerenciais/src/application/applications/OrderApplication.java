@@ -31,4 +31,8 @@ public class OrderApplication {
     public void invoice(int id){
         this.orderService.invoice(id);
     }
+
+    public int count(boolean invoiced){
+        return this.orderService.count(invoiced);
+    }
 }

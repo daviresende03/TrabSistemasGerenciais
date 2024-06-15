@@ -44,4 +44,8 @@ public class OrderController {
     public void invoice(int id){
         orderApplication.invoice(id);
     }
+
+    public int count(boolean invoiced){
+        return orderApplication.count(invoiced);
+    }
 }

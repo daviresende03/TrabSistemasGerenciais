@@ -356,7 +356,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     private void jButtonSaleProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaleProductMouseClicked
         int lineSelected = this.jTableProductsList.getSelectedRow();
         if(lineSelected<0){
-            JOptionPane.showMessageDialog(null, "Primeiramente é necessário selecionar o registro que deseja vender." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Primeiramente é necessário selecionar o produto que deseja vender." , "Atenção", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -481,16 +481,19 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     private void createOrder(boolean invoiced, String successMessage){
         PersonVM customer = getPersonComboBoxSelected(this.jComboBoxCustomer,"cliente");
         if(customer==null){
+            JOptionPane.showMessageDialog(null, "Selecione o cliente." , "Atenção", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         PersonVM staff = getPersonComboBoxSelected(this.jComboBoxStaff,"funcionário");
         if(staff==null){
+            JOptionPane.showMessageDialog(null, "Selecione o atendente." , "Atenção", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         List<OrderItemVM> orderItems = getOrderItems();
         if(orderItems==null){
+            JOptionPane.showMessageDialog(null, "Adicione itens ao pedido." , "Atenção", JOptionPane.WARNING_MESSAGE);
             return;
         }
         

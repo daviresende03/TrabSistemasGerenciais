@@ -384,7 +384,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
     private void updateTotalOrder(double value, boolean finalValue){
         String prefix = "R$ ";
         
-        String amountString = this.jTextFieldAmountOrder.getText().replace(prefix, "");
+        String amountString = this.jTextFieldAmountOrder.getText().replace(prefix, "").replace(",", ".");
         Double amount;
         
         if(!finalValue){

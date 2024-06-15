@@ -60,6 +60,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("LISTA DE PEDIDOS");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/images/OrdersViewIcon.png"))); // NOI18N
 
         jLabelNewOrder.setText("PEDIDOS");
 

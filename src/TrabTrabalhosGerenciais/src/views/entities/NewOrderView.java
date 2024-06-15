@@ -84,6 +84,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(jTable1);
 
         setClosable(true);
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/images/NewOrderViewIcon.png"))); // NOI18N
 
         jLabelNewOrder.setText("NOVO PEDIDO");
 

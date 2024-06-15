@@ -2,6 +2,7 @@ package application.mappers;
 
 import application.viewModels.OrderItemVM;
 import application.viewModels.OrderVM;
+import application.viewModels.PersonVM;
 import domain.model.entities.*;
 import domain.model.enums.PersonTypeEnum;
 import domain.model.enums.ProductTypeEnum;
@@ -53,5 +54,32 @@ public class OrderMap {
         );
 
         return new OrderModel(customerModel,staffModel,orderItemsModel,orderVM.invoiced,orderVM.discount, orderVM.observation);
+    }
+
+    public static OrderVM getOrderVM(OrderModel orderModel){
+        PersonVM customerVM = new PersonVM();
+        customerVM.id = orderModel.getCustomer().getId();
+        customerVM.name = orderModel.getCustomer().getName();
+
+        PersonVM staffVM = new PersonVM();
+        staffVM.id = orderModel.getWaiter().getId();
+        staffVM.name = orderModel.getWaiter().getName();
+
+        return new OrderVM(
+                customerVM,
+                staffVM,
+                new ArrayList<OrderItemVM>(),
+                orderModel.getInvoiced(),
+                orderModel.getDiscountTotal(),
+                orderModel.getObservation()
+        );
+    }
+
+    public static List<OrderVM> getOrderVM(List<OrderModel> ordersModel){
+        List<OrderVM> ordersVM = new ArrayList<>();
+        for(OrderModel model : ordersModel){
+            ordersVM.add(getOrderVM(model));
+        }
+        return ordersVM;
     }
 }

@@ -11,6 +11,8 @@ public class OrderVM {
     public double discount;
     public String observation;
 
+    public OrderVM(){}
+
     public OrderVM(PersonVM customer, PersonVM waiter, List<OrderItemVM> products, boolean invoiced, double discount, String observation) {
         this.customer = customer;
         this.waiter = waiter;

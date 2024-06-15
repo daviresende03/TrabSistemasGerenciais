@@ -6,6 +6,8 @@ import domain.interfaces.services.IOrderService;
 import domain.model.entities.OrderModel;
 import domain.model.entities.ResponseService;
 
+import java.util.List;
+
 public class OrderApplication {
     private final IOrderService orderService;
     
@@ -20,5 +22,13 @@ public class OrderApplication {
     public void create(OrderVM orderVM){
         OrderModel orderModel = OrderMap.getOrderModel(orderVM);
         this.orderService.insert(orderModel);
+    }
+
+    public List<OrderVM> getAll(boolean invoiced){
+        return OrderMap.getOrderVM(this.orderService.getAll(invoiced));
+    }
+
+    public void invoice(int id){
+        this.orderService.invoice(id);
     }
 }

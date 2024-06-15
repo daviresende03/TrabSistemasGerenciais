@@ -175,14 +175,9 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         });
 
         jLabelOrderTotal.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        jLabelOrderTotal.setText("Total do Pedido");
+        jLabelOrderTotal.setText("Total dos Produtos");
 
         jButtonSaveOrder.setText("SALVAR");
-        jButtonSaveOrder.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonSaveOrderMouseClicked(evt);
-            }
-        });
 
         jTextAreaObservations.setColumns(20);
         jTextAreaObservations.setRows(5);
@@ -449,10 +444,6 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         DefaultTableModel model = (DefaultTableModel)this.jTableSelectedProductsList.getModel();
         model.removeRow(lineSelected);
     }//GEN-LAST:event_jButtonRemoveProductActionPerformed
-
-    private void jButtonSaveOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveOrderMouseClicked
-        this.createOrder(false);
-    }//GEN-LAST:event_jButtonSaveOrderMouseClicked
 
     private void createOrder(boolean invoiced){
         PersonVM customer = getPersonComboBoxSelected(this.jComboBoxCustomer,"cliente");

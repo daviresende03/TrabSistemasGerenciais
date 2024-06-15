@@ -170,4 +170,36 @@ public class OrderService extends BaseService implements IOrderService{
     public List<OrderModel> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public List<OrderModel> getAll(boolean invoiced) {
+        try{
+            List<OrderModel> orders = orderRepository.select(invoiced);
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
+            return orders;
+        }catch(Exception ex){
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar os pedidos filtrados.");
+            return null;
+        }
+    }
+
+    @Override
+    public void invoice(int id) {
+        try{
+            OrderModel order = orderRepository.select(id);
+            if(order.getId()<=0){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Pedido não encontrado.");
+                return;
+            }
+
+            order.setInvoiced(true);
+            order.setUpdatedDate(new Date());
+
+            dataContext.commit();
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Pedido faturado com sucesso,");
+        }catch(Exception ex){
+            dataContext.rollback();
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao faturar o pedido.");
+        }
+    }
 }

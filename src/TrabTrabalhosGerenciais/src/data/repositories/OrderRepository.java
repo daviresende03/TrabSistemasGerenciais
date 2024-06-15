@@ -53,29 +53,6 @@ public class OrderRepository implements IOrderRepository {
     }
 
     @Override
-    public void update(OrderModel model) throws SQLException {
-        String query = "UPDATE order SET "
-                + "customer_id = ?,"
-                + "waiter_id = ?,"
-                + "invoiced = ?,"
-                + "discount_total = ?,"
-                + "order_total = ?,"
-                + "observation = ?,"
-                + "updated_at = ? "
-                + "WHERE order_id = ?";
-        
-        PreparedStatement statement = connect.prepareStatement(query);
-        statement.setInt(1, model.getCustomer().getId());
-        statement.setInt(2, model.getWaiter().getId());
-        statement.setDouble(3, model.getInvoiced() ? 1 : 0);
-        statement.setDouble(4, model.getDiscountTotal());
-        statement.setDouble(5, model.getOrderTotal());
-        statement.setString(6, model.getObservation());
-        statement.setDate(7, new Date(model.getUpdatedDate().getTime()));
-        statement.setInt(8, model.getId());
-    }
-
-    @Override
     public void delete(int id) throws SQLException {
         String query = "DELETE FROM order WHERE order_id = ?";
         
@@ -133,5 +110,44 @@ public class OrderRepository implements IOrderRepository {
         }catch(Exception ex){
             return orders;
         }
+    }
+
+    @Override
+    public List<OrderModel> select(boolean invoiced) throws SQLException {
+        List <OrderModel> orders = new ArrayList<OrderModel>();
+        try{
+            String query = "SELECT * FROM order WHERE invoiced = ?";
+
+            PreparedStatement statement = connect.prepareStatement(query);
+            statement.setInt(1,invoiced ? 1 : 0);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("order_id");
+                int customer_id = resultSet.getInt("customer_id");
+                int waiter_id = resultSet.getInt("waiter_id");
+                double discount_total = resultSet.getDouble("discount_total");
+                String observation = resultSet.getString("observation");
+
+                orders.add(new OrderModel(id, new PersonModel(customer_id), new PersonModel(waiter_id), new ArrayList<OrderItemModel>(), invoiced, discount_total, observation));
+            }
+            return orders;
+        }catch(Exception ex){
+            return orders;
+        }
+    }
+
+    @Override
+    public void update(OrderModel order) throws SQLException {
+        String query = "UPDATE order SET "
+                + "invoiced = ?,"
+                + "updated_at = ? "
+                + "WHERE order_id = ?";
+
+        PreparedStatement statement = connect.prepareStatement(query);
+        statement.setInt(1, 1);
+        statement.setDate(2, new Date(order.getUpdatedDate().getTime()));
+        statement.setInt(3, order.getId());
+        statement.executeUpdate();
     }
 }

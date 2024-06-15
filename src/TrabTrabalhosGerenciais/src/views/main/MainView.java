@@ -46,7 +46,7 @@ public class MainView extends javax.swing.JFrame {
         MenuItem menuRegister = new MenuItem(null, "Cadastros", null, subMenuRegisterPerson, subMenuRegisterProduct, subMenuRegisterProductUnit);
         
         // Sale Menu
-        MenuItem subMenuSaleTableControl = new MenuItem(null, "Controle de Mesas", new ActionListener() {
+        MenuItem subMenuSaleTableControl = new MenuItem(null, "Controle de Pedidos", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 alterPanel(new OrdersView());

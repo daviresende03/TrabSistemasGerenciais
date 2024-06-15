@@ -95,6 +95,7 @@ public class PersonView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("Novo usuário");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PersonIcon.png"))); // NOI18N
 
         jLabelTitle.setText("NOVO USUÁRIO");
 

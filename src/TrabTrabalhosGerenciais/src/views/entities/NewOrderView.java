@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class NewOrderView extends javax.swing.JInternalFrame {
 
-    public NewOrderView() {
+    public NewOrderView(int id) {
         this.productController = new ProductController();
         this.personController = new PersonController();
         this.orderController = new OrderController();
@@ -372,7 +372,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         String amountString = this.jTextFieldAmountOrder.getText().replace(prefix, "");
         Double amount = Double.parseDouble(amountString.isEmpty()?"0":amountString) + value;
         
-        String newAmountString = prefix + Double.toString(amount<0 ? 0 : amount);
+        String newAmountString = String.format("R$ %.2f", amount < 0 ? 0 : amount);
         this.jTextFieldAmountOrder.setText(newAmountString);
     }
     

@@ -1,6 +1,5 @@
 package views.main;
 
-import controllers.ProductController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -17,9 +16,14 @@ import views.entities.ProductUnitView;
 public class MainView extends javax.swing.JFrame {
 
     public MainView() {
+        instance = this;
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         buildMenu();
+    }
+    
+    public static MainView getInstance() {
+        return instance;
     }
 
     private void buildMenu() {
@@ -55,7 +59,7 @@ public class MainView extends javax.swing.JFrame {
         MenuItem subMenuSaleOrder = new MenuItem(null, "Pedidos", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                alterPanel(new NewOrderView());
+                alterPanel(new NewOrderView(0));
             }
         });
         MenuItem menuSale = new MenuItem(null, "Vendas", null, subMenuSaleTableControl, subMenuSaleOrder);
@@ -75,7 +79,7 @@ public class MainView extends javax.swing.JFrame {
         menus.revalidate();
     }
     
-    private void alterPanel(JInternalFrame panel){
+    public void alterPanel(JInternalFrame panel){
         panelBody.removeAll();
         panelBody.add(panel);
         panelBody.repaint();
@@ -176,5 +180,5 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel panelHeader;
     private javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables
-
+    private static MainView instance;
 }

@@ -5,8 +5,11 @@ import controllers.OrderController;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ResponseTypeEnum;
 import java.util.List;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import views.main.MainView;
 
 public class OrdersView extends javax.swing.JInternalFrame {
 
@@ -35,7 +38,8 @@ public class OrdersView extends javax.swing.JInternalFrame {
         jLabelTotalOpenOrders = new javax.swing.JLabel();
         jLabelTotalInvoicedOrders = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButtonConcludeOrder = new javax.swing.JButton();
+        jButtonEditOrder = new javax.swing.JButton();
+        jButtonConcludeOrder1 = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -113,8 +117,16 @@ public class OrdersView extends javax.swing.JInternalFrame {
 
         jLabel4.setText("TOTAL DE PEDIDOS CANCELADOS");
 
-        jButtonConcludeOrder.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jButtonConcludeOrder.setText("FECHAR PEDIDO");
+        jButtonEditOrder.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jButtonEditOrder.setText("EDITAR PEDIDO");
+        jButtonEditOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonEditOrderMouseClicked(evt);
+            }
+        });
+
+        jButtonConcludeOrder1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jButtonConcludeOrder1.setText("FECHAR PEDIDO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,7 +145,10 @@ public class OrdersView extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabelTotalInvoicedOrders))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonConcludeOrder))
+                                .addComponent(jButtonEditOrder)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonConcludeOrder1)
+                                .addGap(4, 4, 4))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelNewOrder)
@@ -161,7 +176,9 @@ public class OrdersView extends javax.swing.JInternalFrame {
                         .addComponent(jLabelTotalInvoicedOrders)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButtonConcludeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonEditOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonConcludeOrder1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
 
@@ -171,6 +188,19 @@ public class OrdersView extends javax.swing.JInternalFrame {
     private void jComboBoxOrdersFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOrdersFilterActionPerformed
         this.loadOrderTableByDataBase();
     }//GEN-LAST:event_jComboBoxOrdersFilterActionPerformed
+
+    private void jButtonEditOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEditOrderMouseClicked
+        int lineSelected = this.jTableOrder.getSelectedRow();
+        if(lineSelected<0){
+            JOptionPane.showMessageDialog(null, "Primeiramente é necessário selecionar o registro que deseja editar." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        int orderId = (int)this.jTableOrder.getValueAt(lineSelected, 0);
+        
+        MainView mainView = MainView.getInstance();
+        mainView.alterPanel(new NewOrderView(orderId));
+    }//GEN-LAST:event_jButtonEditOrderMouseClicked
 
     private void resetScreen(){
         this.jComboBoxOrdersFilter.setSelectedIndex(0);
@@ -201,7 +231,8 @@ public class OrdersView extends javax.swing.JInternalFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonConcludeOrder;
+    private javax.swing.JButton jButtonConcludeOrder1;
+    private javax.swing.JButton jButtonEditOrder;
     private javax.swing.JComboBox<String> jComboBoxOrdersFilter;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

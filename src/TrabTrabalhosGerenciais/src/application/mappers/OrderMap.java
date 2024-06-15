@@ -66,11 +66,13 @@ public class OrderMap {
         staffVM.name = orderModel.getWaiter().getName();
 
         return new OrderVM(
+                orderModel.getId(),
                 customerVM,
                 staffVM,
                 new ArrayList<OrderItemVM>(),
                 orderModel.getInvoiced(),
                 orderModel.getDiscountTotal(),
+                orderModel.getAmount(),
                 orderModel.getObservation()
         );
     }

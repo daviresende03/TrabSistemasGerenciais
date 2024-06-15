@@ -54,7 +54,7 @@ public class OrderRepository implements IOrderRepository {
 
     @Override
     public void delete(int id) throws SQLException {
-        String query = "DELETE FROM order WHERE order_id = ?";
+        String query = "DELETE FROM `order` WHERE order_id = ?";
         
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, id);
@@ -65,7 +65,7 @@ public class OrderRepository implements IOrderRepository {
     public OrderModel select(int id) throws SQLException {
         OrderModel order = new OrderModel();
         try{
-            String query = "SELECT * FROM order WHERE order_id = ?";
+            String query = "SELECT * FROM `order` WHERE order_id = ?";
         
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, id);
@@ -91,7 +91,7 @@ public class OrderRepository implements IOrderRepository {
         List <OrderModel> orders = new ArrayList<OrderModel>();
         
         try{
-            String query = "SELECT * FROM order";
+            String query = "SELECT * FROM `order`";
         
         PreparedStatement statement = connect.prepareStatement(query);
         ResultSet resultSet = statement.executeQuery();
@@ -116,7 +116,16 @@ public class OrderRepository implements IOrderRepository {
     public List<OrderModel> select(boolean invoiced) throws SQLException {
         List <OrderModel> orders = new ArrayList<OrderModel>();
         try{
-            String query = "SELECT * FROM order WHERE invoiced = ?";
+            String query = "SELECT "
+                    +"order_id,"
+                    + "customer_id,"
+                    + "(SELECT name FROM person WHERE person_id = customer_id) AS customer_name,"
+                    + "waiter_id,"
+                    + "(SELECT name FROM person WHERE person_id = waiter_id) AS waiter_name,"
+                    + "discount_total,"
+                    + "order_total,"
+                    + "observation "
+                    + "FROM `order` WHERE invoiced = ?";
 
             PreparedStatement statement = connect.prepareStatement(query);
             statement.setInt(1,invoiced ? 1 : 0);
@@ -125,11 +134,21 @@ public class OrderRepository implements IOrderRepository {
             while (resultSet.next()) {
                 int id = resultSet.getInt("order_id");
                 int customer_id = resultSet.getInt("customer_id");
+                String customer_name = resultSet.getString("customer_name");
                 int waiter_id = resultSet.getInt("waiter_id");
+                String waiter_name = resultSet.getString("waiter_name");
                 double discount_total = resultSet.getDouble("discount_total");
+                double amount = resultSet.getDouble("order_total");
                 String observation = resultSet.getString("observation");
 
-                orders.add(new OrderModel(id, new PersonModel(customer_id), new PersonModel(waiter_id), new ArrayList<OrderItemModel>(), invoiced, discount_total, observation));
+                PersonModel customer = new PersonModel(customer_id);
+                customer.setName(customer_name);
+                PersonModel waiter = new PersonModel(waiter_id);
+                waiter.setName(waiter_name);
+                
+                OrderModel order = new OrderModel(id, customer, waiter, new ArrayList<OrderItemModel>(), invoiced, discount_total, observation);
+                order.setAmount(amount);
+                orders.add(order);
             }
             return orders;
         }catch(Exception ex){
@@ -139,7 +158,7 @@ public class OrderRepository implements IOrderRepository {
 
     @Override
     public void update(OrderModel order) throws SQLException {
-        String query = "UPDATE order SET "
+        String query = "UPDATE `order` SET "
                 + "invoiced = ?,"
                 + "updated_at = ? "
                 + "WHERE order_id = ?";

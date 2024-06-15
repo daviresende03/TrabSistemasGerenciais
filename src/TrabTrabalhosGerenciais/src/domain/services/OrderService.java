@@ -174,7 +174,7 @@ public class OrderService extends BaseService implements IOrderService{
     @Override
     public List<OrderModel> getAll(boolean invoiced) {
         try{
-            List<OrderModel> orders = orderRepository.select(invoiced);
+            List<OrderModel> orders = orderRepository.select(invoiced);            
             responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
             return orders;
         }catch(Exception ex){

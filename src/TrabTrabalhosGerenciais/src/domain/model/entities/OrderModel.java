@@ -96,6 +96,14 @@ public class OrderModel extends BaseModel{
         this.observation = observation;
     }
     
+    public double getAmount(){
+        return orderTotal;
+    }
+    
+    public void setAmount(double amount){
+        this.orderTotal = amount;
+    }
+    
     private double totalOrderItems(){
         double total = 0;
         for(OrderItemModel orderItemModel : products){

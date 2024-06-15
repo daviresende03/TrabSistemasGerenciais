@@ -464,7 +464,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         double discount = Double.parseDouble(this.jTextFieldDiscount.getText().isEmpty() ? "0" : this.jTextFieldDiscount.getText());
         String obs = this.jTextAreaObservations.getText();
         
-        OrderVM order = new OrderVM(customer, staff, orderItems, invoiced, discount, obs);
+        OrderVM order = new OrderVM(customer, staff, orderItems, invoiced, discount,0, obs);
         
         this.orderController.create(order);
         ResponseService responseService = this.orderController.getResponseService();

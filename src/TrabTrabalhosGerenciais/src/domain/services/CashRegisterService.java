@@ -45,6 +45,11 @@ public class CashRegisterService extends BaseService implements ICashRegisterSer
     
     public CashRegisterModel open(){
         try{
+            if(cashRegisterRepository.existOpenCashRegister()){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "É necessário primeiramente fechar o caixa em aberto.");
+                return new CashRegisterModel();
+            }
+
             CashRegisterModel cashReg = new CashRegisterModel();
             cashReg.setIsClosed(false);
             cashReg.setOpenedDate(new Date());

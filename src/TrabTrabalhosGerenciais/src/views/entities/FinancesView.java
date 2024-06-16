@@ -161,10 +161,14 @@ public class FinancesView extends javax.swing.JInternalFrame {
         if(responseService.getType() != ResponseTypeEnum.SUCCESS){
             JOptionPane.showMessageDialog(null, responseService.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
         }else{
-            JOptionPane.showMessageDialog(null, responseService.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, responseService.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonOpenMouseClicked
 
+    private void updateCashRegisterStatus(){
+        
+    }
+    
      private void getRegisters(){
         this.loadRegisterTableByDataBase();
     }

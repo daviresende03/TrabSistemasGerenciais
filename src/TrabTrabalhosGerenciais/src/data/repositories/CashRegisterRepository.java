@@ -3,6 +3,7 @@ package data.repositories;
 import domain.interfaces.repositories.ICashRegisterRepository;
 import domain.model.entities.CashRegisterModel;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.time.Instant;
 import java.util.List;
@@ -26,7 +27,7 @@ public class CashRegisterRepository implements ICashRegisterRepository {
         PreparedStatement statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, model.getIsClosed() ? 1 : 0);
         statement.setDate(2, new Date(model.getOpenedDate().getTime()));
-        statement.setTime(3, model.getOpenedTime());
+        statement.setTime(3, new Time(model.getOpenedDate().getTime()));
         statement.setDouble(4, model.getAmount());
         statement.setDate(5, new Date(model.getCreatedDate().getTime()));
         statement.setDate(6, new Date(model.getUpdatedDate().getTime()));
@@ -51,7 +52,7 @@ public class CashRegisterRepository implements ICashRegisterRepository {
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, model.getIsClosed() ? 1 : 0);
         statement.setDate(2, new Date(model.getClosedDate().getTime()));
-        statement.setTime(3, new Time(Instant.now().toEpochMilli()));
+        statement.setTime(3, new Time(model.getOpenedDate().getTime()));
         statement.setDate(4, new Date(model.getUpdatedDate().getTime()));
         statement.setInt(5, model.getId());
         statement.executeUpdate();
@@ -69,5 +70,19 @@ public class CashRegisterRepository implements ICashRegisterRepository {
     @Override
     public List<CashRegisterModel> select() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean existOpenCashRegister() {
+        try{
+            String query = "SELECT null FROM cash_register WHERE closed = ? AND opened_date = ?";
+            PreparedStatement statement = connect.prepareStatement(query);
+            statement.setInt(1, 0);
+            statement.setDate(2, new java.sql.Date(new java.util.Date().getTime()));
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet.next();
+        }catch (Exception ex){
+            return false;
+        }
     }
 }

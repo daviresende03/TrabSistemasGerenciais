@@ -4,6 +4,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import java.awt.*;
 import javax.swing.JLabel;
+import views.main.MainView;
 
 public class LoginView extends javax.swing.JFrame {
 
@@ -60,7 +61,7 @@ public class LoginView extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jPasswordField = new javax.swing.JPasswordField();
         jPanel3 = new javax.swing.JPanel();
-        jLabelButton = new javax.swing.JLabel();
+        jLabelAccess = new javax.swing.JLabel();
         jLabelPasswordIcon = new javax.swing.JLabel();
         jLabelDisabledPassword = new javax.swing.JLabel();
 
@@ -110,21 +111,26 @@ public class LoginView extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(173, 148, 100));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(217, 217, 217)));
 
-        jLabelButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelButton.setForeground(new java.awt.Color(217, 217, 217));
-        jLabelButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelButton.setText("ACESSAR");
-        jLabelButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelAccess.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelAccess.setForeground(new java.awt.Color(217, 217, 217));
+        jLabelAccess.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelAccess.setText("ACESSAR");
+        jLabelAccess.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelAccess.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelAccessMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+            .addComponent(jLabelAccess, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+            .addComponent(jLabelAccess, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
         );
 
         jLabelDisabledPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -205,6 +211,13 @@ public class LoginView extends javax.swing.JFrame {
         this.jLabelShowPassword.setVisible(false);
     }//GEN-LAST:event_jLabelShowPasswordMouseClicked
 
+    private void jLabelAccessMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAccessMouseClicked
+        this.dispose();
+        
+        MainView mainView = new MainView();
+        mainView.setVisible(true);
+    }//GEN-LAST:event_jLabelAccessMouseClicked
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -214,7 +227,7 @@ public class LoginView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabelButton;
+    private javax.swing.JLabel jLabelAccess;
     private javax.swing.JLabel jLabelDisabledPassword;
     private javax.swing.JLabel jLabelPasswordIcon;
     private javax.swing.JLabel jLabelShowPassword;

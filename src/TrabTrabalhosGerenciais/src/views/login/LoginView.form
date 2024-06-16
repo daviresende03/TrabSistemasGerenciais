@@ -207,17 +207,17 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabelButton" alignment="0" pref="209" max="32767" attributes="0"/>
+                  <Component id="jLabelAccess" alignment="0" pref="209" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabelButton" alignment="1" pref="47" max="32767" attributes="0"/>
+                  <Component id="jLabelAccess" alignment="1" pref="47" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabelButton">
+            <Component class="javax.swing.JLabel" name="jLabelAccess">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="0"/>
@@ -231,6 +231,9 @@
                   <Color id="Hand Cursor"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelAccessMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

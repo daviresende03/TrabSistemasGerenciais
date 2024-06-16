@@ -52,7 +52,7 @@ public class CashRegisterRepository implements ICashRegisterRepository {
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, model.getIsClosed() ? 1 : 0);
         statement.setDate(2, new Date(model.getClosedDate().getTime()));
-        statement.setTime(3, new Time(model.getOpenedDate().getTime()));
+        statement.setTime(3, new Time(model.getClosedDate().getTime()));
         statement.setDate(4, new Date(model.getUpdatedDate().getTime()));
         statement.setInt(5, model.getId());
         statement.executeUpdate();
@@ -73,16 +73,20 @@ public class CashRegisterRepository implements ICashRegisterRepository {
     }
 
     @Override
-    public boolean existOpenCashRegister() {
+    public int selectIdThatStatusIsOpen() {
         try{
-            String query = "SELECT null FROM cash_register WHERE closed = ? AND opened_date = ?";
+            String query = "SELECT cash_register_id FROM cash_register WHERE closed = ? AND opened_date = ? LIMIT 1";
             PreparedStatement statement = connect.prepareStatement(query);
             statement.setInt(1, 0);
             statement.setDate(2, new java.sql.Date(new java.util.Date().getTime()));
             ResultSet resultSet = statement.executeQuery();
-            return resultSet.next();
+
+            if (resultSet.next()) {
+                return resultSet.getInt("cash_register_id");
+            }
+            return 0;
         }catch (Exception ex){
-            return false;
+            return 0;
         }
     }
 }

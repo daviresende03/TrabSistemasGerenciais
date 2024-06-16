@@ -35,4 +35,12 @@ public class CashRegisterController {
         return this.cashRegisterApplication.open();
     }
 
+    public boolean existOpen(){
+        return this.cashRegisterApplication.existOpen();
+    }
+
+    public int getIdCashIsOpen(){
+        return this.cashRegisterApplication.getIdCashIsOpen();
+    }
+
 }

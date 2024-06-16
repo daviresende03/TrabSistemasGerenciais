@@ -39,7 +39,7 @@ public class CashRegisterModel extends BaseModel{
         return closedDate;
     }
 
-    public void setCloedDate(Date closedDate) {
+    public void setClosedDate(Date closedDate) {
         this.closedDate = closedDate;
     }
 

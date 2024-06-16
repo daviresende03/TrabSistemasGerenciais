@@ -23,4 +23,12 @@ public class CashRegisterApplication {
     public CashRegisterVM open(){
         return CashRegisterMap.getCashRegisterVM(this.cashRegisterService.open());
     }
+
+    public boolean existOpen(){
+        return this.cashRegisterService.existCashRegisterOpen();
+    }
+
+    public int getIdCashIsOpen(){
+        return this.cashRegisterService.selectIdThatStatusIsOpen();
+    }
 }

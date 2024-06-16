@@ -6,6 +6,7 @@ import controllers.CashRegisterController;
 import controllers.FinanceController;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ResponseTypeEnum;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -17,8 +18,8 @@ public class FinancesView extends javax.swing.JInternalFrame {
         this.cashRegisterController = new CashRegisterController();
         
         initComponents();
-        this.setVisible(true);
-        this.updateCashRegisterStatus();
+        this.setVisible(true);     
+        this.resetScreen();
     }
 
     @SuppressWarnings("unchecked")
@@ -70,7 +71,7 @@ public class FinancesView extends javax.swing.JInternalFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -164,6 +165,44 @@ public class FinancesView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonOpenAndCloseMouseClicked
 
+    private void resetScreen(){
+        int cashRegisterOpenId = this.cashRegisterController.getIdCashIsOpen();        
+        this.updateCashRegisterStatus(cashRegisterOpenId>0);
+        this.updateFinanceTable(cashRegisterOpenId);        
+    }
+    
+    private void updateFinanceTable(int cashRegisterOpenId){
+        if(cashRegisterOpenId<=0){
+            loadFinanceTableByDataBase(new ArrayList<FinanceVM>());
+            return;
+        }
+        
+        List<FinanceVM> finances = this.financeController.getAllByCashRegisterId(cashRegisterOpenId);
+        ResponseService response = this.financeController.getResponseService();
+        if(response.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+        loadFinanceTableByDataBase(finances);
+    }
+    
+    private void loadFinanceTableByDataBase(List<FinanceVM> finances){
+        double amount = 0;
+        DefaultTableModel model = (DefaultTableModel)this.jTableRegisters.getModel();
+        model.setRowCount(0);
+        
+        for(FinanceVM finance : finances){            
+            amount+= (finance.type == 0 ? finance.value : (-finance.value));
+            
+            String type = finance.type == 0 ? "Recebimento" : "Pagamento";
+            String valueString = String.format("R$ %.2f", finance.value);
+            Object[] row = {finance.id, finance.description, type, valueString};
+            model.addRow(row);
+        }
+        
+        String amountString = String.format("R$ %.2f", amount);
+        this.jTextFieldValue.setText(amountString);
+    }
+    
     private void openCashRegister(){
         CashRegisterVM cashRegister = this.cashRegisterController.open();
         
@@ -191,16 +230,8 @@ public class FinancesView extends javax.swing.JInternalFrame {
         }else{
             JOptionPane.showMessageDialog(null, responseService.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             updateCashRegisterStatus(false);
+            updateFinanceTable(0);
         }
-    }
-    
-    
-    private void updateCashRegisterStatus(){
-        boolean isOpen = this.cashRegisterController.existOpen();
-        String statusLabel = isOpen ? "ABERTO" : "FECHADO";
-        this.jTextFieldStatus.setText(statusLabel);
-        String buttonLabel = (isOpen ? "FECHAR" : "ABRIR")+" CAIXA";
-        this.jButtonOpenAndClose.setText(buttonLabel);
     }
     
     private void updateCashRegisterStatus(boolean isOpen){

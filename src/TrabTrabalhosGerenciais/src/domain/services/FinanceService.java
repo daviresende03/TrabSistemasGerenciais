@@ -70,10 +70,10 @@ public class FinanceService extends BaseService implements IFinanceService {
     @Override
     public List<FinanceModel> getAll() {
         try{            
-            List<FinanceModel> units = financeRepository.select();
+            List<FinanceModel> financeList = financeRepository.select();
             responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
             dataContext.commit();
-            return units;
+            return financeList;
         }catch(Exception ex){
             responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar todos os registros.");
             return new ArrayList<FinanceModel>();
@@ -88,5 +88,18 @@ public class FinanceService extends BaseService implements IFinanceService {
     @Override
     public FinanceModel get(int id) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<FinanceModel> getAllByCashRegisterId(int cashRegisterId){
+        try{
+            List<FinanceModel> financeList = financeRepository.select();
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
+            dataContext.commit();
+            return financeList;
+        }catch(Exception ex){
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao buscar os lançamentos do caixa.");
+            return new ArrayList<FinanceModel>();
+        }
     }
 }

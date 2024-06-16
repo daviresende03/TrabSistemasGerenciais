@@ -1,5 +1,6 @@
 package application.applications;
 
+import application.mappers.FinanceMap;
 import application.viewModels.FinanceVM;
 import domain.interfaces.services.IFinanceService;
 import domain.model.entities.FinanceModel;
@@ -20,7 +21,7 @@ public class FinanceApplication {
     }
     
     public void create(FinanceVM financeVM){
-        FinanceModel financeModel = new FinanceModel(financeVM.type, financeVM.value, financeVM.description);
+        FinanceModel financeModel = new FinanceModel(financeVM.cashRegisterId, financeVM.type, financeVM.value, financeVM.description);
         financeService.insert(financeModel);
     }
     
@@ -29,11 +30,10 @@ public class FinanceApplication {
     }
     
     public List<FinanceVM> getAll(){
-        List<FinanceModel> registersModel = financeService.getAll();
-        List<FinanceVM> registersVM = new ArrayList<FinanceVM>();
-        for(FinanceModel financeModel : registersModel){
-            registersVM.add(new FinanceVM(financeModel));
-        }
-        return registersVM;
+        return FinanceMap.getFinancesVM(this.financeService.getAll());
+    }
+
+    public List<FinanceVM> getAllByCashRegisterId(int cashRegisterId){
+        return FinanceMap.getFinancesVM(this.financeService.getAllByCashRegisterId(cashRegisterId));
     }
 }

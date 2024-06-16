@@ -4,18 +4,22 @@ import java.util.Date;
 
 public class FinanceModel extends BaseModel{
     private int financeId;
+    private int cashRegisterId;
     private int type;
     private double value;
     private String description;
     private Date createdAt;
     
-    public FinanceModel(int type, double value, String description){
+    public FinanceModel(int cashRegisterId, int type, double value, String description){
+        this.cashRegisterId = cashRegisterId;
         this.type = type;
         this.value = value;
         this.description = description;
     }
     
-    public FinanceModel(int financeId, int type, double value, String description){
+    public FinanceModel(int financeId, int cashRegisterId, int type, double value, String description){
+        setId(financeId);
+        this.cashRegisterId = cashRegisterId;
         this.financeId = financeId;
         this.type = type;
         this.value = value;
@@ -55,14 +59,21 @@ public class FinanceModel extends BaseModel{
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
+
     public Date getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public void setCashRegisterId(int cashRegisterId){
+        this.cashRegisterId = cashRegisterId;
+    }
+
+    public int getCashRegisterId(){
+        return cashRegisterId;
     }
     
     public boolean validate(){

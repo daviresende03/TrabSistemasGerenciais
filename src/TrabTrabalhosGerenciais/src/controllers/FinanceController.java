@@ -34,4 +34,8 @@ public class FinanceController {
     public List<FinanceVM> getAll(){
         return financeApplication.getAll();
     }
+
+    public List<FinanceVM> getAllByCashRegisterId(int cashRegisterId){
+        return this.financeApplication.getAllByCashRegisterId(cashRegisterId);
+    }
 }

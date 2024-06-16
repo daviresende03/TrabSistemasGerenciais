@@ -5,6 +5,7 @@ import application.viewModels.FinanceVM;
 import domain.interfaces.repositories.IDataContext;
 import domain.interfaces.services.IFinanceService;
 import domain.model.entities.ResponseService;
+import infra.dependencyInjections.CashRegisterDI;
 import infra.dependencyInjections.FinanceDI;
 import java.util.List;
 
@@ -13,8 +14,12 @@ public class FinanceController {
     
     public FinanceController() {
         FinanceDI financeDependencyInjection = new FinanceDI();
+        CashRegisterDI cashRegisterDependencyInjection = new CashRegisterDI();
         IDataContext dataContext = financeDependencyInjection.getDataContext();
-        IFinanceService financeService = financeDependencyInjection.getFinanceService(dataContext, financeDependencyInjection.getFinanceRepository(dataContext.getConnection()));
+        IFinanceService financeService = financeDependencyInjection.getFinanceService(
+                dataContext,
+                financeDependencyInjection.getFinanceRepository(dataContext.getConnection()),
+                cashRegisterDependencyInjection.getCashRegisterRepository(dataContext.getConnection()));
         
         financeApplication = new FinanceApplication(financeService);
     }

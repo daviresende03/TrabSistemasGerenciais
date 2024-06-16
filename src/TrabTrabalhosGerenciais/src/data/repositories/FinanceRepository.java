@@ -27,15 +27,17 @@ public class FinanceRepository implements IFinanceRepository {
                 + "type,"
                 + "value,"
                 + "description,"
-                + "createdAt) "
-                + "VALUES(?, ?, ?, ?)";
+                + "created_at, "
+                + "updated_at) "
+                + "VALUES(?, ?, ?, ?, ?, ?)";
         
         PreparedStatement statement = connect.prepareStatement(query);
         statement.setInt(1, model.getCashRegisterId());
         statement.setInt(2, model.getType().getValue());
-        statement.setDouble(2, model.getValue());
-        statement.setString(3, model.getDescription());
-        statement.setDate(4, new Date(model.getCreatedDate().getTime()));
+        statement.setDouble(3, model.getValue());
+        statement.setString(4, model.getDescription());
+        statement.setDate(5, new Date(model.getCreatedDate().getTime()));
+        statement.setDate(6, new Date(model.getUpdatedDate().getTime()));
         statement.executeUpdate();
     }
 
@@ -55,7 +57,20 @@ public class FinanceRepository implements IFinanceRepository {
 
     @Override
     public FinanceModel select(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String sql = "SELECT * FROM finance WHERE finance_id = ?";
+        PreparedStatement statement = connect.prepareStatement(sql);
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+
+        if(resultSet.next()) {
+            int cashRegisterId = resultSet.getInt("cash_register_id");
+            int type = resultSet.getInt("type");
+            double value = resultSet.getDouble("value");
+            String description = resultSet.getString("description");
+
+            return new FinanceModel(id, cashRegisterId, FinanceTypeEnum.fromInteger(type), value, description);
+        }
+        return new FinanceModel();
     }
 
     @Override

@@ -2,6 +2,8 @@ package data.repositories;
 
 import domain.interfaces.repositories.ICashRegisterRepository;
 import domain.model.entities.CashRegisterModel;
+import domain.model.entities.FinanceModel;
+import domain.model.enums.FinanceTypeEnum;
 
 import javax.xml.transform.Result;
 import java.sql.*;
@@ -59,13 +61,40 @@ public class CashRegisterRepository implements ICashRegisterRepository {
     }
 
     @Override
+    public void updateAmount(CashRegisterModel model) throws SQLException {
+        String query = "UPDATE cash_register SET "
+                + "amount = ?,"
+                + "updated_at = ? "
+                + "WHERE cash_register_id = ?";
+
+        PreparedStatement statement = connect.prepareStatement(query);
+        statement.setDouble(1, model.getAmount());
+        statement.setDate(2, new Date(model.getUpdatedDate().getTime()));
+        statement.setInt(3, model.getId());
+        statement.executeUpdate();
+    }
+
+    @Override
     public void delete(int id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public CashRegisterModel select(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "SELECT * FROM cash_register WHERE cash_register_id = ?";
+        PreparedStatement statement = connect.prepareStatement(sql);
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+
+        if(resultSet.next()) {
+            boolean isClosed = resultSet.getInt("closed")==1;
+            java.util.Date openedDate = resultSet.getDate("opened_date");
+            Time openedTime = resultSet.getTime("opened_time");
+            double amount = resultSet.getDouble("amount");
+
+            return new CashRegisterModel(id, isClosed, openedDate, openedTime, null, null, amount);
+        }
+        return new CashRegisterModel();
     }
     @Override
     public List<CashRegisterModel> select() throws SQLException {

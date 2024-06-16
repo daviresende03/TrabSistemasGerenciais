@@ -1,8 +1,10 @@
 package domain.services;
 
+import domain.interfaces.repositories.ICashRegisterRepository;
 import domain.interfaces.repositories.IDataContext;
 import domain.interfaces.repositories.IFinanceRepository;
 import domain.interfaces.services.IFinanceService;
+import domain.model.entities.CashRegisterModel;
 import domain.model.entities.FinanceModel;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ResponseTypeEnum;
@@ -12,34 +14,48 @@ import java.util.List;
 
 public class FinanceService extends BaseService implements IFinanceService {
     private final IFinanceRepository financeRepository;
+    private final ICashRegisterRepository cashRegisterRepository;
     
-    public FinanceService(IDataContext dataContext, IFinanceRepository financeRepository){
+    public FinanceService(IDataContext dataContext, IFinanceRepository financeRepository, ICashRegisterRepository cashRegisterRepository){
         super(dataContext);
         this.financeRepository = financeRepository;
+        this.cashRegisterRepository = cashRegisterRepository;
     }
     
     @Override
     public ResponseService getResponseService(){
         return responseService;
     }
-   
+
     @Override
     public void insert(FinanceModel model) {
-        try{ 
-            Date dateNow = new Date();
-            model.setCreatedDate(dateNow);
-            
-            if(model.validate()){                
+        try{
+            CashRegisterModel cashRegister = cashRegisterRepository.select(model.getCashRegisterId());
+            if(cashRegister.getId()>=0){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível encontrar o caixa relacionado.");
+                return;
+            }
+            if(cashRegister.getIsClosed()){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "O caixa relacionado está fechado, não será possível realizar o lançamento.");
+                return;
+            }
+
+            model.setCreatedDate(new Date());
+            model.setUpdatedDate(new Date());
+
+            if(model.validate()){
                 financeRepository.insert(model);
+                cashRegister.increaseValue(model.getValue());
+                cashRegisterRepository.updateAmount(cashRegister);
             }else{
                 responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());
                 return;
             }
             dataContext.commit();
-            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Registro cadastrado com sucesso!");
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Registro lançado com sucesso.");
         }catch(Exception ex){
             dataContext.rollback();
-            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao realizar o cadastro do registro.");
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao realizar o lançamento do registro.");
         }
     }
     

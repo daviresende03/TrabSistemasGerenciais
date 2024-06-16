@@ -4,16 +4,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import domain.model.entities.OrderItemModel;
-import domain.model.entities.OrderModel;
-import domain.model.entities.PersonModel;
-import domain.model.entities.ProductModel;
+
+import domain.interfaces.repositories.*;
+import domain.model.entities.*;
 import domain.model.enums.ResponseTypeEnum;
-import domain.interfaces.repositories.IDataContext;
-import domain.interfaces.repositories.IOrderItemRepository;
-import domain.interfaces.repositories.IOrderRepository;
-import domain.interfaces.repositories.IPersonRepository;
-import domain.interfaces.repositories.IProductRepository;
 import domain.interfaces.services.IOrderService;
 
 public class OrderService extends BaseService implements IOrderService{
@@ -21,13 +15,15 @@ public class OrderService extends BaseService implements IOrderService{
     private final IOrderItemRepository orderItemRepository;
     private final IPersonRepository personRepository;
     private final IProductRepository productRepository;
+    private final ICashRegisterRepository cashRepository;
 
-    public OrderService(IDataContext dataContext, IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IPersonRepository personRepository, IProductRepository productRepository) {
+    public OrderService(IDataContext dataContext, IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IPersonRepository personRepository, IProductRepository productRepository, ICashRegisterRepository cashRegisterRepository) {
         super(dataContext);
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.personRepository = personRepository;
         this.productRepository = productRepository;
+        this.cashRepository = cashRegisterRepository;
     }
 
     public void save(OrderModel model){
@@ -292,10 +288,25 @@ public class OrderService extends BaseService implements IOrderService{
                 return;
             }
 
+            int cashRegisterId = cashRepository.selectIdThatStatusIsOpen();
+            if(cashRegisterId<=0){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "É necessário primeiramente abrir o caixa.");
+                return;
+            }
+
             order.setInvoiced(true);
             order.setUpdatedDate(new Date());
-            
+
             orderRepository.invoice(order);
+            CashRegisterModel cashReg = cashRepository.select(cashRegisterId);
+            if(cashReg.getId()<=0){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível obter o caixa em aberto.");
+                return;
+            }
+
+            cashReg.increaseValue(order.getAmount());
+            cashReg.setUpdatedDate(new Date());
+            cashRepository.updateAmount(cashReg);
 
             dataContext.commit();
             responseService.setResponse(ResponseTypeEnum.SUCCESS, "Pedido faturado com sucesso.");

@@ -20,7 +20,8 @@ public class OrderDI {
                                          IOrderRepository orderRepository,
                                          IOrderItemRepository orderItemRepository,
                                          IPersonRepository personRepository,
-                                         IProductRepository productRepository){
-        return new OrderService(dataContext, orderRepository, orderItemRepository, personRepository, productRepository);
+                                         IProductRepository productRepository,
+                                         ICashRegisterRepository cashRegisterRepository){
+        return new OrderService(dataContext, orderRepository, orderItemRepository, personRepository, productRepository, cashRegisterRepository);
     }
 }

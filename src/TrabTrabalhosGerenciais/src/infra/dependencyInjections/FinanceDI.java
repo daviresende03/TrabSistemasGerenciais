@@ -2,6 +2,7 @@ package infra.dependencyInjections;
 
 import data.context.DataContext;
 import data.repositories.FinanceRepository;
+import domain.interfaces.repositories.ICashRegisterRepository;
 import domain.interfaces.repositories.IDataContext;
 import domain.interfaces.repositories.IFinanceRepository;
 import domain.interfaces.services.IFinanceService;
@@ -17,7 +18,7 @@ public class FinanceDI {
         return new FinanceRepository(con);
     }
     
-    public IFinanceService getFinanceService(IDataContext dataContext, IFinanceRepository unitRepository){
-        return new FinanceService(dataContext, unitRepository);
+    public IFinanceService getFinanceService(IDataContext dataContext, IFinanceRepository unitRepository, ICashRegisterRepository cashRegisterRepository){
+        return new FinanceService(dataContext, unitRepository, cashRegisterRepository);
     }
 }

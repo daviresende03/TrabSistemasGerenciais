@@ -1,5 +1,7 @@
 package domain.model.entities;
 
+import domain.services.CashRegisterService;
+
 import java.sql.Time;
 import java.util.Date;
 
@@ -10,6 +12,18 @@ public class CashRegisterModel extends BaseModel{
     private Date closedDate;
     private Time closedTime;
     private double amount;
+
+    public CashRegisterModel(){}
+
+    public CashRegisterModel(int id, boolean isClosed, Date openedDate, Time openedTime, Date closedDate, Time closedTime, double amount){
+        setId(id);
+        this.isClosed = isClosed;
+        this.openedDate = openedDate;
+        this.openedTime = openedTime;
+        this.closedDate = closedDate;
+        this.closedTime = closedTime;
+        this.amount = amount;
+    }
 
     public boolean getIsClosed() {
         return isClosed;
@@ -57,5 +71,13 @@ public class CashRegisterModel extends BaseModel{
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public void increaseValue(double value){
+        this.amount+=value;
+    }
+
+    public void decreaseValue(double value){
+        this.amount-=value;
     }
 }

@@ -54,4 +54,8 @@ public class OrderController {
     public OrderVM get(int id){
         return orderApplication.get(id);
     }
+
+    public void cancel(int id){
+        orderApplication.cancel(id);
+    }
 }

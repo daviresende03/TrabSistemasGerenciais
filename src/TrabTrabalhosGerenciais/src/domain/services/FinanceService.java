@@ -109,7 +109,7 @@ public class FinanceService extends BaseService implements IFinanceService {
     @Override
     public List<FinanceModel> getAllByCashRegisterId(int cashRegisterId){
         try{
-            List<FinanceModel> financeList = financeRepository.select();
+            List<FinanceModel> financeList = financeRepository.selectByCashRegisterId(cashRegisterId);
             responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
             dataContext.commit();
             return financeList;

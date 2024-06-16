@@ -25,6 +25,7 @@ public class OrderRepository implements IOrderRepository {
         String query = "INSERT INTO `order`("
                 + "customer_id,"
                 + "waiter_id,"
+                + "canceled,"
                 + "invoiced,"
                 + "discount_total,"
                 + "order_total,"                
@@ -36,12 +37,13 @@ public class OrderRepository implements IOrderRepository {
         PreparedStatement statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, order.getCustomer().getId());
         statement.setInt(2, order.getWaiter().getId());
-        statement.setInt(3, order.getInvoiced() ? 1 : 0);
-        statement.setDouble(4, order.getDiscountTotal());
-        statement.setDouble(5, order.getOrderTotal());
-        statement.setString(6, order.getObservation());
-        statement.setDate(7, new Date(order.getCreatedDate().getTime()));
-        statement.setDate(8, new Date(order.getUpdatedDate().getTime()));
+        statement.setInt(3, order.getIsCanceled() ? 1 : 0);
+        statement.setInt(4, order.getInvoiced() ? 1 : 0);
+        statement.setDouble(5, order.getDiscountTotal());
+        statement.setDouble(6, order.getOrderTotal());
+        statement.setString(7, order.getObservation());
+        statement.setDate(8, new Date(order.getCreatedDate().getTime()));
+        statement.setDate(9, new Date(order.getUpdatedDate().getTime()));
         
         statement.executeUpdate();
         
@@ -70,6 +72,7 @@ public class OrderRepository implements IOrderRepository {
                     + "(SELECT name FROM person WHERE person_id = customer_id) AS customer_name,"
                     + "waiter_id,"
                     + "(SELECT name FROM person WHERE person_id = waiter_id) AS waiter_name,"
+                    + "canceled,"
                     + "invoiced,"
                     + "discount_total,"
                     + "order_total,"
@@ -85,6 +88,7 @@ public class OrderRepository implements IOrderRepository {
             String customer_name = resultSet.getString("customer_name");
             int waiter_id = resultSet.getInt("waiter_id");
             String waiter_name = resultSet.getString("waiter_name");
+            boolean isCanceled = resultSet.getInt("canceled")==1;
             boolean invoiced = resultSet.getInt("invoiced")==1;
             double discount_total = resultSet.getDouble("discount_total");
             double amount = resultSet.getDouble("order_total");
@@ -95,7 +99,7 @@ public class OrderRepository implements IOrderRepository {
             PersonModel waiter = new PersonModel(waiter_id);
             waiter.setName(waiter_name);
 
-            order = new OrderModel(id, customer, waiter, new ArrayList<OrderItemModel>(), invoiced, discount_total, observation);
+            order = new OrderModel(id, customer, waiter, new ArrayList<OrderItemModel>(), isCanceled, invoiced, discount_total, observation);
             order.setAmount(amount);
         }
         return order;
@@ -120,9 +124,10 @@ public class OrderRepository implements IOrderRepository {
             int waiter_id = resultSet.getInt("waiter_id");
             double discount_total = resultSet.getDouble("discount_total");
             String observation = resultSet.getString("observation");
+            boolean isCanceled = resultSet.getInt("canceled")==1;
             boolean invoiced = resultSet.getInt("invoiced")==1;
             
-            orders.add(new OrderModel(id, new PersonModel(customer_id), new PersonModel(waiter_id), new ArrayList<OrderItemModel>(), invoiced, discount_total, observation));
+            orders.add(new OrderModel(id, new PersonModel(customer_id), new PersonModel(waiter_id), new ArrayList<OrderItemModel>(), isCanceled, invoiced, discount_total, observation));
         }
         return orders;
         }catch(Exception ex){
@@ -140,6 +145,7 @@ public class OrderRepository implements IOrderRepository {
                     + "(SELECT name FROM person WHERE person_id = customer_id) AS customer_name,"
                     + "waiter_id,"
                     + "(SELECT name FROM person WHERE person_id = waiter_id) AS waiter_name,"
+                    + "canceled,"
                     + "discount_total,"
                     + "order_total,"
                     + "observation "
@@ -155,6 +161,7 @@ public class OrderRepository implements IOrderRepository {
                 String customer_name = resultSet.getString("customer_name");
                 int waiter_id = resultSet.getInt("waiter_id");
                 String waiter_name = resultSet.getString("waiter_name");
+                boolean isCanceled = resultSet.getInt("canceled")==1;
                 double discount_total = resultSet.getDouble("discount_total");
                 double amount = resultSet.getDouble("order_total");
                 String observation = resultSet.getString("observation");
@@ -164,7 +171,7 @@ public class OrderRepository implements IOrderRepository {
                 PersonModel waiter = new PersonModel(waiter_id);
                 waiter.setName(waiter_name);
                 
-                OrderModel order = new OrderModel(id, customer, waiter, new ArrayList<OrderItemModel>(), invoiced, discount_total, observation);
+                OrderModel order = new OrderModel(id, customer, waiter, new ArrayList<OrderItemModel>(), isCanceled, invoiced, discount_total, observation);
                 order.setAmount(amount);
                 orders.add(order);
             }
@@ -229,5 +236,19 @@ public class OrderRepository implements IOrderRepository {
         }catch(Exception ex){
             return 0;
         }
+    }
+
+    @Override
+    public void cancel(int id) throws SQLException{
+        String query = "UPDATE `order` SET "
+                + "canceled =       ?,"
+                + "updated_at =     ? "
+                + "WHERE order_id = ?";
+
+        PreparedStatement statement = connect.prepareStatement(query);
+        statement.setInt(1, 1);
+        statement.setDate(2, new Date(new java.util.Date().getTime()));
+        statement.setInt(3, id);
+        statement.executeUpdate();
     }
 }

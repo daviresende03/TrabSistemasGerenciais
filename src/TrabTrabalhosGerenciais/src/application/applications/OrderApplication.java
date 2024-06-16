@@ -39,4 +39,8 @@ public class OrderApplication {
     public OrderVM get(int id){
         return OrderMap.getOrderVM(this.orderService.get(id));
     }
+
+    public void cancel(int id){
+        this.orderService.cancel(id);
+    }
 }

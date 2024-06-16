@@ -7,27 +7,30 @@ import java.util.Objects;
 public class OrderModel extends BaseModel{
         private PersonModel customer;
         private PersonModel waiter;
+        private boolean isCanceled;
         private List<OrderItemModel> products;
         private boolean invoiced;
         private double discountTotal;
         private double orderTotal;
         private String observation;
 
-    public OrderModel(int id, PersonModel customer, PersonModel waiter, List<OrderItemModel> products, boolean invoiced, double discountTotal, String observation) {
+    public OrderModel(int id, PersonModel customer, PersonModel waiter, List<OrderItemModel> products, boolean isCanceled, boolean invoiced, double discountTotal, String observation) {
         setId(id);
         this.customer = Objects.requireNonNullElse(customer, new PersonModel());
         this.waiter = Objects.requireNonNullElse(waiter, new PersonModel());
         this.products = Objects.requireNonNullElse(products, new ArrayList<OrderItemModel>());
+        this.isCanceled = isCanceled;
         this.invoiced = invoiced;
         this.discountTotal = discountTotal;
         this.observation = Objects.requireNonNullElse(observation,"");
         totalOrder();
     }
     
-    public OrderModel(PersonModel customer, PersonModel waiter, List<OrderItemModel> products, boolean invoiced, double discountTotal, String observation) {
+    public OrderModel(PersonModel customer, PersonModel waiter, List<OrderItemModel> products, boolean isCanceled, boolean invoiced, double discountTotal, String observation) {
         this.customer = Objects.requireNonNullElse(customer, new PersonModel());
         this.waiter = Objects.requireNonNullElse(waiter, new PersonModel());
         this.products = Objects.requireNonNullElse(products, new ArrayList<OrderItemModel>());
+        this.isCanceled = isCanceled;
         this.invoiced = invoiced;
         this.discountTotal = discountTotal;
         this.observation = Objects.requireNonNullElse(observation,"");
@@ -102,6 +105,14 @@ public class OrderModel extends BaseModel{
     
     public void setAmount(double amount){
         this.orderTotal = amount;
+    }
+
+    public boolean getIsCanceled(){
+        return this.isCanceled;
+    }
+
+    public void setIsCanceled(boolean isCanceled){
+        this.isCanceled = isCanceled;
     }
 
     private double totalOrderItems(){

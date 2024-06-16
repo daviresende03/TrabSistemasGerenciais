@@ -246,7 +246,23 @@ public class OrdersView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonConcludeOrderMouseClicked
 
     private void jButtonCancelOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCancelOrderMouseClicked
-        // TODO add your handling code here:
+        int lineSelected = this.jTableOrder.getSelectedRow();
+        if(lineSelected<0){
+            JOptionPane.showMessageDialog(null, "Primeiramente é necessário selecionar o registro que deseja cancelar." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        int orderId = (int)this.jTableOrder.getValueAt(lineSelected, 0);
+        this.orderController.cancel(orderId);
+        
+        ResponseService responseService = this.orderController.getResponseService();
+        if(responseService.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, responseService.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, responseService.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            this.resetScreen();
+            this.updateTotalLabels();
+        }
     }//GEN-LAST:event_jButtonCancelOrderMouseClicked
 
     private void resetScreen(){
@@ -295,5 +311,4 @@ public class OrdersView extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
     private OrderController orderController;
-
 }

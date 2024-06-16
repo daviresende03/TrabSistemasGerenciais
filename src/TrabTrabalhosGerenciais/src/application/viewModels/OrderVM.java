@@ -8,6 +8,7 @@ public class OrderVM {
     public PersonVM customer;
     public PersonVM waiter;
     public List<OrderItemVM> products;
+    public boolean isCanceled;
     public boolean invoiced;
     public double discount;
     public double amount;

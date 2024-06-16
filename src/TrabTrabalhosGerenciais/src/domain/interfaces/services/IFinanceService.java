@@ -2,7 +2,6 @@ package domain.interfaces.services;
 
 import domain.model.entities.FinanceModel;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface IFinanceService extends IBaseService<FinanceModel>{

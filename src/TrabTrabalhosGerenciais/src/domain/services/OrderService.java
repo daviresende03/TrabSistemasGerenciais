@@ -54,6 +54,7 @@ public class OrderService extends BaseService implements IOrderService{
                 model.setUpdatedDate(new Date());
                 if(model.getId() <= 0){ //New Order
                     model.setCreatedDate(new Date());
+                    model.setIsCanceled(false);
                     orderRepository.insert(model);
                     int orderId = model.getId();
 
@@ -321,7 +322,7 @@ public class OrderService extends BaseService implements IOrderService{
             FinanceModel finance = new FinanceModel();
             finance.setCashRegisterId(cashReg.getId());
             finance.setType(FinanceTypeEnum.RECEIPT);
-            finance.setDescription("LANC. AUTOMÁTICO: RECEBIMENTO DO PEDIDO "+order.getId());
+            finance.setDescription("LANC. AUTOMÁTICO: FATURAMENTO DO PEDIDO "+order.getId());
             finance.setValue(order.getAmount());
             finance.setUpdatedDate(new Date());
             finance.setCreatedDate(new Date());
@@ -345,6 +346,55 @@ public class OrderService extends BaseService implements IOrderService{
         }catch(Exception ex){
             responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao contabilizar os pedidos filtrados.");
             return 0;
+        }
+    }
+
+    @Override
+    public void cancel(int id){
+        try{
+            OrderModel order = orderRepository.select(id);
+            if(order.getId() <= 0){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível recuperar o pedido.");
+                return;
+            }
+            if(order.getIsCanceled()){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Não é possível cancelar um pedido já cancelado.");
+                return;
+            }
+
+            int cashRegId = cashRepository.selectIdThatStatusIsOpen();
+            if(cashRegId<=0){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "É necessário primeiramente abrir o caixa.");
+                return;
+            }
+            CashRegisterModel cashRegister = cashRepository.select(cashRegId);
+            if(cashRegister.getId()<=0){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível recuperar o caixa em aberto.");
+                return;
+            }
+
+            orderRepository.cancel(id);
+
+            if(order.getInvoiced()){
+                cashRegister.decreaseValue(order.getAmount());
+                cashRegister.setUpdatedDate(new Date());
+                cashRepository.updateAmount(cashRegister);
+
+                FinanceModel finance = new FinanceModel();
+                finance.setCashRegisterId(cashRegister.getId());
+                finance.setType(FinanceTypeEnum.PAYMENT);
+                finance.setDescription("LANC. AUTOMÁTICO: CANCELAMENTO DO PEDIDO "+order.getId());
+                finance.setValue(order.getAmount());
+                finance.setUpdatedDate(new Date());
+                finance.setCreatedDate(new Date());
+                financeRepository.insert(finance);
+            }
+
+            dataContext.commit();
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "Pedido cancelado com sucesso.");
+        }catch(Exception ex){
+            dataContext.rollback();
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao cancelar o pedido.");
         }
     }
 }

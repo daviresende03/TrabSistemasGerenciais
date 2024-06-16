@@ -21,7 +21,7 @@ public class FinancesView extends javax.swing.JInternalFrame {
         
         initComponents();
         this.setVisible(true);     
-        this.resetScreen();
+        this.resetScreen(0);
     }
 
     @SuppressWarnings("unchecked")
@@ -38,7 +38,6 @@ public class FinancesView extends javax.swing.JInternalFrame {
         jTextFieldValue = new javax.swing.JTextField();
         jButtonOpenAndClose = new javax.swing.JButton();
         jButtonNewRegister = new javax.swing.JButton();
-        jButtonDeleteRegister = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -106,13 +105,6 @@ public class FinancesView extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonDeleteRegister.setText("APAGAR REGISTRO");
-        jButtonDeleteRegister.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonDeleteRegisterMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,8 +115,6 @@ public class FinancesView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonNewRegister)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonDeleteRegister)
-                        .addGap(67, 67, 67)
                         .addComponent(jTextFieldValue, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonOpenAndClose))
@@ -151,17 +141,12 @@ public class FinancesView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonOpenAndClose)
-                    .addComponent(jButtonNewRegister)
-                    .addComponent(jButtonDeleteRegister))
+                    .addComponent(jButtonNewRegister))
                 .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonDeleteRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteRegisterMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeleteRegisterMouseClicked
 
     private void jButtonOpenAndCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOpenAndCloseMouseClicked
         boolean cashIsOpen = isOpenByTextField();
@@ -173,13 +158,21 @@ public class FinancesView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonOpenAndCloseMouseClicked
 
     private void jButtonNewRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonNewRegisterMouseClicked
+        int cashRegisterOpenId = this.cashRegisterController.getIdCashIsOpen();
+        if(cashRegisterOpenId<=0){
+            JOptionPane.showMessageDialog(null, "É necessário primeiramente abrir o caixa." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        NewFinanceView newFinanceView = new NewFinanceView(parentFrame);
+        NewFinanceView newFinanceView = new NewFinanceView(parentFrame, cashRegisterOpenId);
         newFinanceView.setVisible(true);
+        
+        this.resetScreen(cashRegisterOpenId);
     }//GEN-LAST:event_jButtonNewRegisterMouseClicked
 
-    private void resetScreen(){
-        int cashRegisterOpenId = this.cashRegisterController.getIdCashIsOpen();        
+    private void resetScreen(int cashRegisterId){
+        int cashRegisterOpenId = cashRegisterId<=0 ? this.cashRegisterController.getIdCashIsOpen() : cashRegisterId;  
         this.updateCashRegisterStatus(cashRegisterOpenId>0);
         this.updateFinanceTable(cashRegisterOpenId);        
     }
@@ -277,7 +270,6 @@ public class FinancesView extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonDeleteRegister;
     private javax.swing.JButton jButtonNewRegister;
     private javax.swing.JButton jButtonOpenAndClose;
     private javax.swing.JLabel jLabelStatus;

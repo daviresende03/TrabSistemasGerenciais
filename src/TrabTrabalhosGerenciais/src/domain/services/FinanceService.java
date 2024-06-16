@@ -7,6 +7,7 @@ import domain.interfaces.services.IFinanceService;
 import domain.model.entities.CashRegisterModel;
 import domain.model.entities.FinanceModel;
 import domain.model.entities.ResponseService;
+import domain.model.enums.FinanceTypeEnum;
 import domain.model.enums.ResponseTypeEnum;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,7 +32,7 @@ public class FinanceService extends BaseService implements IFinanceService {
     public void insert(FinanceModel model) {
         try{
             CashRegisterModel cashRegister = cashRegisterRepository.select(model.getCashRegisterId());
-            if(cashRegister.getId()>=0){
+            if(cashRegister.getId()<=0){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Não foi possível encontrar o caixa relacionado.");
                 return;
             }
@@ -45,7 +46,12 @@ public class FinanceService extends BaseService implements IFinanceService {
 
             if(model.validate()){
                 financeRepository.insert(model);
-                cashRegister.increaseValue(model.getValue());
+                if(model.getType() == FinanceTypeEnum.PAYMENT){
+                    cashRegister.decreaseValue(model.getValue());
+                }else{
+                    cashRegister.increaseValue(model.getValue());
+                }
+                cashRegister.setUpdatedDate(new Date());
                 cashRegisterRepository.updateAmount(cashRegister);
             }else{
                 responseService.setResponse(ResponseTypeEnum.ERROR, model.getMessage());

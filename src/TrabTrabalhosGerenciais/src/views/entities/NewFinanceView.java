@@ -10,8 +10,11 @@ import javax.swing.JOptionPane;
 
 public class NewFinanceView extends JDialog {
 
-    public NewFinanceView(JFrame parent) {
+    public NewFinanceView(JFrame parent, int cashRegisterId) {
         super(parent, "Novo registro", true);
+        
+        this.financeController = new FinanceController();
+        this.cashRegisterId = cashRegisterId;
         initComponents();
         setLocationRelativeTo(getParent());
     }
@@ -100,7 +103,7 @@ public class NewFinanceView extends JDialog {
     private void jButtonSaveFinanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveFinanceMouseClicked
         FinanceVM financeForm = getFinanceByForm();
         
-        if(financeForm.type <= 0 || financeForm.value <= 0 || financeForm.description.isBlank()){
+        if(financeForm.type < 0 || financeForm.value <= 0 || financeForm.description.isBlank()){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos." , "Atenção", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -113,15 +116,16 @@ public class NewFinanceView extends JDialog {
             JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            this.clearForm();
+            this.dispose();
         }
     }//GEN-LAST:event_jButtonSaveFinanceMouseClicked
 
     private FinanceVM getFinanceByForm(){
         FinanceVM financeForm = new FinanceVM();
         
-        financeForm.type = this.jComboBoxType.getSelectedIndex();
-        financeForm.value = Double.parseDouble(this.jTextFieldValue.getText());
+        financeForm.cashRegisterId = cashRegisterId;
+        financeForm.type = this.jComboBoxType.getSelectedIndex()+1;
+        financeForm.value = Double.parseDouble(this.jTextFieldValue.getText().isEmpty() ? "0" : this.jTextFieldValue.getText());
         financeForm.description = this.jTextFieldDescription.getText();
         
         return financeForm;
@@ -144,4 +148,5 @@ public class NewFinanceView extends JDialog {
     private javax.swing.JTextField jTextFieldValue;
     // End of variables declaration//GEN-END:variables
     private FinanceController financeController;
+    private int cashRegisterId;
 }

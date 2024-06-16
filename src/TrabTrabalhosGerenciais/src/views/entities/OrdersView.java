@@ -38,6 +38,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jButtonEditOrder = new javax.swing.JButton();
         jButtonConcludeOrder = new javax.swing.JButton();
+        jButtonCancelOrder = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -64,7 +65,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Filtrar pedidos");
 
-        jComboBoxOrdersFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aberto", "Faturado" }));
+        jComboBoxOrdersFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Abertos", "Faturados" }));
         jComboBoxOrdersFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxOrdersFilterActionPerformed(evt);
@@ -118,6 +119,9 @@ public class OrdersView extends javax.swing.JInternalFrame {
 
         jButtonEditOrder.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jButtonEditOrder.setText("EDITAR PEDIDO");
+        jButtonEditOrder.setMaximumSize(new java.awt.Dimension(138, 23));
+        jButtonEditOrder.setMinimumSize(new java.awt.Dimension(138, 23));
+        jButtonEditOrder.setPreferredSize(new java.awt.Dimension(138, 23));
         jButtonEditOrder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonEditOrderMouseClicked(evt);
@@ -126,9 +130,20 @@ public class OrdersView extends javax.swing.JInternalFrame {
 
         jButtonConcludeOrder.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jButtonConcludeOrder.setText("FECHAR PEDIDO");
+        jButtonConcludeOrder.setMaximumSize(new java.awt.Dimension(138, 23));
+        jButtonConcludeOrder.setMinimumSize(new java.awt.Dimension(138, 23));
+        jButtonConcludeOrder.setPreferredSize(new java.awt.Dimension(138, 23));
         jButtonConcludeOrder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonConcludeOrderMouseClicked(evt);
+            }
+        });
+
+        jButtonCancelOrder.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jButtonCancelOrder.setText("CANCELAR PEDIDO");
+        jButtonCancelOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonCancelOrderMouseClicked(evt);
             }
         });
 
@@ -149,9 +164,11 @@ public class OrdersView extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabelTotalInvoicedOrders))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonEditOrder)
+                                .addComponent(jButtonEditOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonConcludeOrder)
+                                .addComponent(jButtonCancelOrder)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonConcludeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(4, 4, 4))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
@@ -182,7 +199,8 @@ public class OrdersView extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonEditOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonConcludeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonConcludeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonCancelOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
 
@@ -227,6 +245,10 @@ public class OrdersView extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jButtonConcludeOrderMouseClicked
 
+    private void jButtonCancelOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCancelOrderMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCancelOrderMouseClicked
+
     private void resetScreen(){
         this.jComboBoxOrdersFilter.setSelectedIndex(0);
         this.loadOrderTableByDataBase();
@@ -256,6 +278,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancelOrder;
     private javax.swing.JButton jButtonConcludeOrder;
     private javax.swing.JButton jButtonEditOrder;
     private javax.swing.JComboBox<String> jComboBoxOrdersFilter;

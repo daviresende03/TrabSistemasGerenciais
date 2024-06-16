@@ -21,7 +21,8 @@ public class OrderDI {
                                          IOrderItemRepository orderItemRepository,
                                          IPersonRepository personRepository,
                                          IProductRepository productRepository,
-                                         ICashRegisterRepository cashRegisterRepository){
-        return new OrderService(dataContext, orderRepository, orderItemRepository, personRepository, productRepository, cashRegisterRepository);
+                                         ICashRegisterRepository cashRegisterRepository,
+                                         IFinanceRepository financeRepository){
+        return new OrderService(dataContext, orderRepository, orderItemRepository, personRepository, productRepository, cashRegisterRepository, financeRepository);
     }
 }

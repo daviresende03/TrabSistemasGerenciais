@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import domain.interfaces.repositories.*;
+import domain.interfaces.services.IFinanceService;
 import domain.model.entities.*;
+import domain.model.enums.FinanceTypeEnum;
 import domain.model.enums.ResponseTypeEnum;
 import domain.interfaces.services.IOrderService;
 
@@ -16,14 +18,22 @@ public class OrderService extends BaseService implements IOrderService{
     private final IPersonRepository personRepository;
     private final IProductRepository productRepository;
     private final ICashRegisterRepository cashRepository;
+    private final IFinanceRepository financeRepository;
 
-    public OrderService(IDataContext dataContext, IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IPersonRepository personRepository, IProductRepository productRepository, ICashRegisterRepository cashRegisterRepository) {
+    public OrderService(IDataContext dataContext,
+                        IOrderRepository orderRepository,
+                        IOrderItemRepository orderItemRepository,
+                        IPersonRepository personRepository,
+                        IProductRepository productRepository,
+                        ICashRegisterRepository cashRegisterRepository,
+                        IFinanceRepository financeRepository) {
         super(dataContext);
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.personRepository = personRepository;
         this.productRepository = productRepository;
         this.cashRepository = cashRegisterRepository;
+        this.financeRepository = financeRepository;
     }
 
     public void save(OrderModel model){
@@ -307,6 +317,16 @@ public class OrderService extends BaseService implements IOrderService{
             cashReg.increaseValue(order.getAmount());
             cashReg.setUpdatedDate(new Date());
             cashRepository.updateAmount(cashReg);
+
+            FinanceModel finance = new FinanceModel();
+            finance.setCashRegisterId(cashReg.getId());
+            finance.setType(FinanceTypeEnum.RECEIPT);
+            finance.setDescription("LANC. AUTOMÁTICO: RECEBIMENTO DO PEDIDO "+order.getId());
+            finance.setValue(order.getAmount());
+            finance.setUpdatedDate(new Date());
+            finance.setCreatedDate(new Date());
+            financeRepository.insert(finance);
+
 
             dataContext.commit();
             responseService.setResponse(ResponseTypeEnum.SUCCESS, "Pedido faturado com sucesso.");

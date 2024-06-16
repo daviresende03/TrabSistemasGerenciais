@@ -80,7 +80,7 @@ CREATE TABLE `operator` (
 -- ----------------------------
 -- Records of operator
 -- ----------------------------
-
+INSERT INTO `operator` VALUES ('1', 'ADMIN', '835d6dc88b708bc646d6db82c853ef4182fabbd4a8de59c213f2b5ab3ae7d9be', '1', '2024-06-18', '2024-06-18');
 -- ----------------------------
 -- Table structure for `order`
 -- ----------------------------

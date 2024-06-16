@@ -191,7 +191,7 @@ public class FinancesView extends javax.swing.JInternalFrame {
         model.setRowCount(0);
         
         for(FinanceVM finance : finances){            
-            amount+= (finance.type == 0 ? finance.value : (-finance.value));
+            amount+= (finance.type == 1 ? finance.value : (-finance.value));
             
             String type = finance.type == 1 ? "Recebimento" : "Pagamento";
             String valueString = String.format("R$ %.2f", finance.value);

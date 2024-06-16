@@ -1,23 +1,25 @@
 package domain.model.entities;
 
+import domain.model.enums.FinanceTypeEnum;
+
 import java.util.Date;
 
 public class FinanceModel extends BaseModel{
     private int financeId;
     private int cashRegisterId;
-    private int type;
+    private FinanceTypeEnum type;
     private double value;
     private String description;
     private Date createdAt;
     
-    public FinanceModel(int cashRegisterId, int type, double value, String description){
+    public FinanceModel(int cashRegisterId, FinanceTypeEnum type, double value, String description){
         this.cashRegisterId = cashRegisterId;
         this.type = type;
         this.value = value;
         this.description = description;
     }
     
-    public FinanceModel(int financeId, int cashRegisterId, int type, double value, String description){
+    public FinanceModel(int financeId, int cashRegisterId, FinanceTypeEnum type, double value, String description){
         setId(financeId);
         this.cashRegisterId = cashRegisterId;
         this.financeId = financeId;
@@ -36,11 +38,11 @@ public class FinanceModel extends BaseModel{
         this.financeId = financeId;
     }
     
-    public int getType() {
+    public FinanceTypeEnum getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(FinanceTypeEnum type) {
         this.type = type;
     }
 
@@ -77,7 +79,8 @@ public class FinanceModel extends BaseModel{
     }
     
     public boolean validate(){
-        if(type <= 0){
+        if(type.getValue() != FinanceTypeEnum.RECEIPT.getValue() &&
+           type.getValue() != FinanceTypeEnum.PAYMENT.getValue()){
             addMessage("Tipo de registro é obrigatório.");
             return false;
         }

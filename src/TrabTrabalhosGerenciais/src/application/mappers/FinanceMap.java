@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FinanceMap {
     public static FinanceVM getFinanceVM(FinanceModel model){
-        return new FinanceVM(model.getId(), model.getCashRegisterId(), model.getType(), model.getDescription(), model.getValue());
+        return new FinanceVM(model.getId(), model.getCashRegisterId(), model.getType().getValue(), model.getDescription(), model.getValue());
     }
 
     public static List<FinanceVM> getFinancesVM(List<FinanceModel> models){

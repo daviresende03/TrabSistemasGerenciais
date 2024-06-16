@@ -1,9 +1,9 @@
 package domain.model.enums;
 
 public enum FinanceTypeEnum {
-    RECEBIMENTO(1),
-    PAGAMENTO(2);
-    
+    RECEIPT(1),
+    PAYMENT(2);
+
     private final int value;
     
     FinanceTypeEnum(int value){
@@ -17,9 +17,9 @@ public enum FinanceTypeEnum {
      public static FinanceTypeEnum fromInteger(int type){
         switch(type){
             case 1:
-                return RECEBIMENTO;
+                return RECEIPT;
             case 2:
-                return PAGAMENTO;
+                return PAYMENT;
         }
         return null;
     }

@@ -3,6 +3,8 @@ package data.repositories;
 import java.sql.Connection;
 import domain.interfaces.repositories.IFinanceRepository;
 import domain.model.entities.FinanceModel;
+import domain.model.enums.FinanceTypeEnum;
+
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
@@ -21,6 +23,7 @@ public class FinanceRepository implements IFinanceRepository {
     @Override
     public void insert(FinanceModel model) throws SQLException {
         String query = "INSERT INTO finance("
+                + "cash_register_id,"
                 + "type,"
                 + "value,"
                 + "description,"
@@ -28,7 +31,8 @@ public class FinanceRepository implements IFinanceRepository {
                 + "VALUES(?, ?, ?, ?)";
         
         PreparedStatement statement = connect.prepareStatement(query);
-        statement.setInt(1, model.getType());
+        statement.setInt(1, model.getCashRegisterId());
+        statement.setInt(2, model.getType().getValue());
         statement.setDouble(2, model.getValue());
         statement.setString(3, model.getDescription());
         statement.setDate(4, new Date(model.getCreatedDate().getTime()));
@@ -70,7 +74,7 @@ public class FinanceRepository implements IFinanceRepository {
                 double value = resultSet.getDouble("value");
                 String description = resultSet.getString("description");
                 
-                finances.add(new FinanceModel(financeId, cashRegisterId, type, value, description));
+                finances.add(new FinanceModel(financeId, cashRegisterId, FinanceTypeEnum.fromInteger(type), value, description));
             }
             return finances;
         }catch(Exception ex){
@@ -94,7 +98,7 @@ public class FinanceRepository implements IFinanceRepository {
                 double value = resultSet.getDouble("value");
                 String description = resultSet.getString("description");
 
-                finances.add(new FinanceModel(financeId, cashRegisterId, type, value, description));
+                finances.add(new FinanceModel(financeId, cashRegisterId, FinanceTypeEnum.fromInteger(type), value, description));
             }
             return finances;
         }catch(Exception ex){

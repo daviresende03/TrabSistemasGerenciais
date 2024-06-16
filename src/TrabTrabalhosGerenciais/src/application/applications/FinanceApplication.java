@@ -21,7 +21,7 @@ public class FinanceApplication {
     }
     
     public void create(FinanceVM financeVM){
-        FinanceModel financeModel = new FinanceModel(financeVM.cashRegisterId, financeVM.type, financeVM.value, financeVM.description);
+        FinanceModel financeModel = new FinanceModel(financeVM.cashRegisterId, FinanceTypeEnum.fromInteger(financeVM.type), financeVM.value, financeVM.description);
         financeService.insert(financeModel);
     }
     

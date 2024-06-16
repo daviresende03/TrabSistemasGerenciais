@@ -1,14 +1,22 @@
 package views.login;
 
+import application.viewModels.OperatorLoginVM;
+import application.viewModels.OperatorVM;
+import controllers.OperatorController;
+import domain.model.entities.ResponseService;
+import domain.model.enums.ResponseTypeEnum;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import java.awt.*;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import views.main.MainView;
 
 public class LoginView extends javax.swing.JFrame {
 
     public LoginView() {
+        this.operatorController = new OperatorController();
+        
         initComponents();  
         
         setLocationRelativeTo(getParent());
@@ -212,18 +220,41 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelShowPasswordMouseClicked
 
     private void jLabelAccessMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAccessMouseClicked
-        this.dispose();
+        OperatorLoginVM operatorLogin = this.getOperatorLoginByForm();
+        if(operatorLogin.username.isEmpty() || operatorLogin.password.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Favor informe todos os campos" , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
-        MainView mainView = new MainView();
-        mainView.setVisible(true);
+        OperatorVM operator = this.operatorController.login(operatorLogin);
+        ResponseService response = this.operatorController.getResponseService();
+        if(response.getType() != ResponseTypeEnum.SUCCESS){
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+            nextWindow();
+        }
     }//GEN-LAST:event_jLabelAccessMouseClicked
 
+    private void nextWindow(){
+        this.dispose();
+        MainView mainView = new MainView();
+        mainView.setVisible(true);
+    }
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginView().setVisible(true);
             }
         });
+    }
+    
+    public OperatorLoginVM getOperatorLoginByForm(){
+        String username = this.jTextFieldUsername.getText();
+        String password = this.jPasswordField.getText();
+        
+        return new OperatorLoginVM(username, password);        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -240,4 +271,5 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextFieldUsername;
     // End of variables declaration//GEN-END:variables
+    private OperatorController operatorController;
 }

@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import domain.interfaces.repositories.*;
-import domain.interfaces.services.IFinanceService;
 import domain.model.entities.*;
 import domain.model.enums.FinanceTypeEnum;
 import domain.model.enums.ResponseTypeEnum;
@@ -341,6 +340,18 @@ public class OrderService extends BaseService implements IOrderService{
     public int count(boolean invoiced) {
         try{
             int count = orderRepository.count(invoiced);
+            responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
+            return count;
+        }catch(Exception ex){
+            responseService.setResponse(ResponseTypeEnum.ERROR, "Houve um erro ao contabilizar os pedidos filtrados.");
+            return 0;
+        }
+    }
+
+    @Override
+    public int countCanceleds() {
+        try{
+            int count = orderRepository.countCanceleds();
             responseService.setResponse(ResponseTypeEnum.SUCCESS, "");
             return count;
         }catch(Exception ex){

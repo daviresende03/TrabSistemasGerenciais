@@ -11,4 +11,5 @@ public interface IOrderService extends IBaseService<OrderModel>{
     int count(boolean invoiced);
     void save(OrderModel model);
     void cancel(int id);
+    int countCanceleds();
 }

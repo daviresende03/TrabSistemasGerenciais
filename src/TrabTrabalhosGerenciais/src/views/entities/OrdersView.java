@@ -35,7 +35,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
         jTableOrder = new javax.swing.JTable();
         jLabelTotalOpenOrders = new javax.swing.JLabel();
         jLabelTotalInvoicedOrders = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelTotalCanceledOrders = new javax.swing.JLabel();
         jButtonEditOrder = new javax.swing.JButton();
         jButtonConcludeOrder = new javax.swing.JButton();
         jButtonCancelOrder = new javax.swing.JButton();
@@ -115,7 +115,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
 
         jLabelTotalInvoicedOrders.setText("TOTAL DE PEDIDOS CONCLUÍDOS");
 
-        jLabel4.setText("TOTAL DE PEDIDOS CANCELADOS");
+        jLabelTotalCanceledOrders.setText("TOTAL DE PEDIDOS CANCELADOS");
 
         jButtonEditOrder.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jButtonEditOrder.setText("EDITAR PEDIDO");
@@ -161,7 +161,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
+                                    .addComponent(jLabelTotalCanceledOrders)
                                     .addComponent(jLabelTotalInvoicedOrders))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonEditOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,7 +196,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelTotalInvoicedOrders)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabelTotalCanceledOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonEditOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButtonConcludeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -273,9 +273,11 @@ public class OrdersView extends javax.swing.JInternalFrame {
     private void updateTotalLabels(){
         int totalCountOpenOrders = this.orderController.count(false);
         int totalCountInvoicedOrders = this.orderController.count(true);
+        int totalCanceledOrders = this.orderController.countCanceleds();
         
         this.jLabelTotalOpenOrders.setText("TOTAL DE PEDIDOS EM ABERTO: "+totalCountOpenOrders);
         this.jLabelTotalInvoicedOrders.setText("TOTAL DE PEDIDOS CONCLUÍDOS: "+totalCountInvoicedOrders);
+        this.jLabelTotalCanceledOrders.setText("TOTAL DE PEDIDOS CANCELADOS"+totalCanceledOrders);
     }
     
     private void loadOrderTableByDataBase(){
@@ -299,8 +301,8 @@ public class OrdersView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonEditOrder;
     private javax.swing.JComboBox<String> jComboBoxOrdersFilter;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelNewOrder;
+    private javax.swing.JLabel jLabelTotalCanceledOrders;
     private javax.swing.JLabel jLabelTotalInvoicedOrders;
     private javax.swing.JLabel jLabelTotalOpenOrders;
     private javax.swing.JScrollPane jScrollPane1;

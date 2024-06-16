@@ -51,6 +51,10 @@ public class OrderController {
         return orderApplication.count(invoiced);
     }
 
+    public int countCanceleds(){
+        return orderApplication.countCanceleds();
+    }
+
     public OrderVM get(int id){
         return orderApplication.get(id);
     }

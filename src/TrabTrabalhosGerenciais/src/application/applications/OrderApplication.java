@@ -36,6 +36,10 @@ public class OrderApplication {
         return this.orderService.count(invoiced);
     }
 
+    public int countCanceleds(){
+        return this.orderService.countCanceleds();
+    }
+
     public OrderVM get(int id){
         return OrderMap.getOrderVM(this.orderService.get(id));
     }

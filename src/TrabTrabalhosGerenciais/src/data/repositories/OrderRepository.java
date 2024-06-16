@@ -222,10 +222,30 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public int count(boolean invoiced) throws SQLException {
         try{
-            String query = "SELECT COUNT(*) FROM `order` WHERE invoiced = ?";
+            String query = "SELECT COUNT(*) FROM `order` WHERE invoiced = ? AND canceled = ?";
 
             PreparedStatement statement = connect.prepareStatement(query);
             statement.setInt(1,invoiced ? 1 : 0);
+            statement.setInt(2,0);
+            ResultSet resultSet = statement.executeQuery();
+
+            int count = 0;
+            if (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+            return count;
+        }catch(Exception ex){
+            return 0;
+        }
+    }
+
+    @Override
+    public int countCanceleds() throws SQLException {
+        try{
+            String query = "SELECT COUNT(*) FROM `order` WHERE canceled = ?";
+
+            PreparedStatement statement = connect.prepareStatement(query);
+            statement.setInt(1,1);
             ResultSet resultSet = statement.executeQuery();
 
             int count = 0;

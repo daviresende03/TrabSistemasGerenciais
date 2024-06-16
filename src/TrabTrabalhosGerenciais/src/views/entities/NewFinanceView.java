@@ -4,12 +4,16 @@ import application.viewModels.FinanceVM;
 import controllers.FinanceController;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ResponseTypeEnum;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class NewFinanceView extends javax.swing.JInternalFrame {
+public class NewFinanceView extends JDialog {
 
-    public NewFinanceView() {
+    public NewFinanceView(JFrame parent) {
+        super(parent, "Novo registro", true);
         initComponents();
+        setLocationRelativeTo(getParent());
     }
 
     @SuppressWarnings("unchecked")
@@ -28,23 +32,12 @@ public class NewFinanceView extends javax.swing.JInternalFrame {
         jLabelNewFinance.setText("NOVO REGISTRO");
 
         jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recebimento", "Pagamento" }));
-        jComboBoxType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxTypeActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Descrição");
 
         jLabelType.setText("Tipo");
 
         jLabelValue.setText("Valor");
-
-        jTextFieldValue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldValueActionPerformed(evt);
-            }
-        });
 
         jButtonSaveFinance.setText("SALVAR");
         jButtonSaveFinance.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -104,10 +97,6 @@ public class NewFinanceView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValueActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldValueActionPerformed
-
     private void jButtonSaveFinanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveFinanceMouseClicked
         FinanceVM financeForm = getFinanceByForm();
         
@@ -127,10 +116,6 @@ public class NewFinanceView extends javax.swing.JInternalFrame {
             this.clearForm();
         }
     }//GEN-LAST:event_jButtonSaveFinanceMouseClicked
-
-    private void jComboBoxTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxTypeActionPerformed
 
     private FinanceVM getFinanceByForm(){
         FinanceVM financeForm = new FinanceVM();

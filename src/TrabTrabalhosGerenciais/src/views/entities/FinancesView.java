@@ -9,7 +9,9 @@ import domain.model.enums.ResponseTypeEnum;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class FinancesView extends javax.swing.JInternalFrame {
 
@@ -98,6 +100,11 @@ public class FinancesView extends javax.swing.JInternalFrame {
         });
 
         jButtonNewRegister.setText("NOVO REGISTRO");
+        jButtonNewRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonNewRegisterMouseClicked(evt);
+            }
+        });
 
         jButtonDeleteRegister.setText("APAGAR REGISTRO");
         jButtonDeleteRegister.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -164,6 +171,12 @@ public class FinancesView extends javax.swing.JInternalFrame {
             this.closeCashRegister();
         }
     }//GEN-LAST:event_jButtonOpenAndCloseMouseClicked
+
+    private void jButtonNewRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonNewRegisterMouseClicked
+        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        NewFinanceView newFinanceView = new NewFinanceView(parentFrame);
+        newFinanceView.setVisible(true);
+    }//GEN-LAST:event_jButtonNewRegisterMouseClicked
 
     private void resetScreen(){
         int cashRegisterOpenId = this.cashRegisterController.getIdCashIsOpen();        

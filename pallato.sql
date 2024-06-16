@@ -10,10 +10,33 @@ Target Server Type    : MYSQL
 Target Server Version : 80037
 File Encoding         : 65001
 
-Date: 2024-06-13 22:56:39
+Date: 2024-06-16 19:32:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `cash_register`
+-- ----------------------------
+DROP TABLE IF EXISTS `cash_register`;
+CREATE TABLE `cash_register` (
+  `cash_register_id` int NOT NULL AUTO_INCREMENT,
+  `closed` int NOT NULL,
+  `opened_date` date NOT NULL,
+  `opened_time` time NOT NULL,
+  `closed_date` date DEFAULT NULL,
+  `closed_time` time DEFAULT NULL,
+  `amount` double(15,4) NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`cash_register_id`),
+  KEY `k_cash_register_1` (`closed`) USING BTREE,
+  KEY `k_cash_register_2` (`opened_date`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of cash_register
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `finance`
@@ -21,15 +44,41 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `finance`;
 CREATE TABLE `finance` (
   `finance_id` int NOT NULL AUTO_INCREMENT,
+  `cash_register_id` int NOT NULL,
   `type` int NOT NULL,
   `value` double(15,4) NOT NULL,
   `description` varchar(120) NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
   PRIMARY KEY (`finance_id`),
-  KEY `k_finance_1` (`type`) USING BTREE
+  KEY `k_finance_1` (`type`) USING BTREE,
+  KEY `fk_finance_1` (`cash_register_id`),
+  CONSTRAINT `fk_finance_1` FOREIGN KEY (`cash_register_id`) REFERENCES `cash_register` (`cash_register_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of finance
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `operator`
+-- ----------------------------
+DROP TABLE IF EXISTS `operator`;
+CREATE TABLE `operator` (
+  `operator_id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `admin` int NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`operator_id`),
+  KEY `k_operator_1` (`username`) USING BTREE,
+  KEY `k_operator_2` (`password`) USING BTREE,
+  KEY `k_operator_3` (`admin`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of operator
 -- ----------------------------
 
 -- ----------------------------
@@ -40,6 +89,7 @@ CREATE TABLE `order` (
   `order_id` int NOT NULL AUTO_INCREMENT,
   `customer_id` int DEFAULT NULL,
   `waiter_id` int NOT NULL,
+  `canceled` int NOT NULL,
   `invoiced` int NOT NULL,
   `discount_total` double(15,4) NOT NULL,
   `order_total` double(15,4) NOT NULL,

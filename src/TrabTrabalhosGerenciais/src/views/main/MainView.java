@@ -94,6 +94,7 @@ public class MainView extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code"> 
     private void initComponents() {
         panelHeader = new javax.swing.JPanel();
         panelMenu = new javax.swing.JPanel();
@@ -148,7 +149,7 @@ public class MainView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -172,7 +173,7 @@ public class MainView extends javax.swing.JFrame {
                 new MainView().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

@@ -286,7 +286,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
         tableModel.setRowCount(0);
         
         for(OrderVM order : orders){
-            String status = order.invoiced ? "FATURADO" : "ABERTO";
+            String status = order.isCanceled ? "CANCELADO" : (order.invoiced ? "FATURADO" : "ABERTO");
             String amount = String.format("R$ %.2f", order.amount);
             Object[] row = { order.id, order.customer.name, order.waiter.name, status, amount };
             tableModel.addRow(row);

@@ -81,6 +81,7 @@ public class OrderMap {
                 customerVM,
                 staffVM,
                 itemsVM,
+                orderModel.getIsCanceled(),
                 orderModel.getInvoiced(),
                 orderModel.getDiscountTotal(),
                 orderModel.getAmount(),

@@ -90,11 +90,17 @@ public class FinancesView extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jTableRegisters);
 
+        jTextFieldValue.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTextFieldValue.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldValue.setEnabled(false);
+        jTextFieldValue.setMinimumSize(new java.awt.Dimension(100, 31));
+        jTextFieldValue.setPreferredSize(new java.awt.Dimension(100, 31));
 
         jButtonOpenAndClose.setText("ABRIR CAIXA");
         jButtonOpenAndClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonOpenAndClose.setMaximumSize(new java.awt.Dimension(100, 35));
+        jButtonOpenAndClose.setMinimumSize(new java.awt.Dimension(100, 35));
+        jButtonOpenAndClose.setPreferredSize(new java.awt.Dimension(100, 35));
         jButtonOpenAndClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonOpenAndCloseMouseClicked(evt);
@@ -103,6 +109,9 @@ public class FinancesView extends javax.swing.JInternalFrame {
 
         jButtonNewRegister.setText("NOVO REGISTRO");
         jButtonNewRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonNewRegister.setMaximumSize(new java.awt.Dimension(100, 35));
+        jButtonNewRegister.setMinimumSize(new java.awt.Dimension(100, 35));
+        jButtonNewRegister.setPreferredSize(new java.awt.Dimension(100, 35));
         jButtonNewRegister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonNewRegisterMouseClicked(evt);
@@ -117,11 +126,11 @@ public class FinancesView extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonNewRegister)
+                        .addComponent(jButtonNewRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextFieldValue, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonOpenAndClose))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonOpenAndClose, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelTitle)
@@ -140,13 +149,13 @@ public class FinancesView extends javax.swing.JInternalFrame {
                     .addComponent(jLabelStatus)
                     .addComponent(jTextFieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonOpenAndClose)
-                    .addComponent(jButtonNewRegister))
-                .addGap(20, 20, 20))
+                    .addComponent(jButtonNewRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldValue, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonOpenAndClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         pack();

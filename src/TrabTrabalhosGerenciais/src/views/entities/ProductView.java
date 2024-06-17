@@ -234,10 +234,16 @@ public class ProductView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonClearFieldsMouseClicked
 
     private void jButtonSaveProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveProductMouseClicked
-        ProductVM productVM = getProductByForm();
+        ProductVM productVM;
+        try{
+             productVM = getProductByForm();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Existem valores incorretos." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         int productId = Integer.parseInt(this.jTextFieldProductId.getText().isEmpty() ? "0" : this.jTextFieldProductId.getText());
         
-        if(productVM.name.isBlank() || productVM.costPrice  == 0 || productVM.salePrice == 0 || productVM.stock == 0 || productVM.type == 0 || productVM.unitName.equals("0") || productVM.unitSymbol == null){
+        if(productVM.name.isBlank() || productVM.costPrice  == 0 || productVM.salePrice == 0 || productVM.stock == 0 || productVM.type < 0 || productVM.unitName.equals("0")){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos." , "Atenção", JOptionPane.WARNING_MESSAGE);
             return;
         }

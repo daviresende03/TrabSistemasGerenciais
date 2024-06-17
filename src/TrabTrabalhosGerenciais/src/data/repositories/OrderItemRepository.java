@@ -154,4 +154,19 @@ public class OrderItemRepository implements IOrderItemRepository{
         statement.setInt(1, orderId);
         statement.executeUpdate();
     }
+
+    @Override
+    public boolean existByProductId(int productId){
+        try{
+            String query = "SELECT null FROM order_item WHERE product_id = ?";
+
+            PreparedStatement statement = connect.prepareStatement(query);
+            statement.setInt(1,productId);
+            ResultSet resultSet = statement.executeQuery();
+
+            return resultSet.next();
+        }catch(Exception ex){
+            return false;
+        }
+    }
 }

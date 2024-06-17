@@ -2,6 +2,8 @@ package domain.services;
 
 import java.util.Date;
 import java.util.List;
+
+import domain.interfaces.repositories.IOrderItemRepository;
 import domain.model.entities.ProductModel;
 import domain.model.entities.UnitModel;
 import domain.model.enums.ResponseTypeEnum;
@@ -13,11 +15,13 @@ import domain.interfaces.services.IProductService;
 public class ProductService extends BaseService implements IProductService {
     private final IProductRepository productRepository;
     private final IUnitRepository unitRepository;
+    private final IOrderItemRepository orderItemRepository;
     
-    public ProductService(IDataContext dataContext, IProductRepository productRepository, IUnitRepository unitRepository){
+    public ProductService(IDataContext dataContext, IProductRepository productRepository, IUnitRepository unitRepository, IOrderItemRepository orderItemRepository){
         super(dataContext);
         this.productRepository = productRepository;
         this.unitRepository = unitRepository;
+        this.orderItemRepository = orderItemRepository;
     }
     
     @Override
@@ -58,6 +62,11 @@ public class ProductService extends BaseService implements IProductService {
             
             if(!productRepository.exist(id)){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Produto não encontrado.");
+                return;
+            }
+
+            if(orderItemRepository.existByProductId(id)){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Existem pedidos desse produto, não será possível remove-lo.");
                 return;
             }
             

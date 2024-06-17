@@ -2,6 +2,7 @@ package infra.dependencyInjections;
 
 import java.sql.Connection;
 import domain.interfaces.repositories.IDataContext;
+import domain.interfaces.repositories.IOrderRepository;
 import domain.interfaces.repositories.IPersonRepository;
 import domain.interfaces.services.IPersonService;
 import data.repositories.PersonRepository;
@@ -17,7 +18,7 @@ public class PersonDI {
         return new PersonRepository(con);
     }
     
-    public IPersonService getPersonService(IDataContext dataContext, IPersonRepository personRepository){
-        return new PersonService(dataContext, personRepository);
+    public IPersonService getPersonService(IDataContext dataContext, IPersonRepository personRepository, IOrderRepository orderRepository){
+        return new PersonService(dataContext, personRepository,orderRepository);
     }
 }

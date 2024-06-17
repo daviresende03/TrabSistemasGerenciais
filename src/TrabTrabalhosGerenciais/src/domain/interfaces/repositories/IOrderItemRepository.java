@@ -7,4 +7,5 @@ import domain.model.entities.OrderItemModel;
 public interface IOrderItemRepository extends IBaseRepository<OrderItemModel>{
     void deleteByOrderId(int orderId) throws SQLException;
     List<OrderItemModel> selectByOrderId(int orderId) throws SQLException;
+    boolean existByProductId(int productId);
 }

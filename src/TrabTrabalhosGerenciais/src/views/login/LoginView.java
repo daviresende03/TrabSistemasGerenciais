@@ -248,7 +248,7 @@ public class LoginView extends javax.swing.JFrame {
         if(response.getType() != ResponseTypeEnum.SUCCESS){
             JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
         }else{
-            JOptionPane.showMessageDialog(null, response.getMessage() , "Atenção", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, response.getMessage() , "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             nextWindow();
         }
     }//GEN-LAST:event_jLabelAccessMouseClicked

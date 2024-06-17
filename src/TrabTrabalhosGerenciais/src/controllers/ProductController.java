@@ -1,5 +1,7 @@
 package controllers;
 
+import data.repositories.OrderItemRepository;
+import infra.dependencyInjections.OrderDI;
 import infra.dependencyInjections.ProductDI;
 import infra.dependencyInjections.UnitDI;
 import application.applications.ProductApplication;
@@ -11,25 +13,21 @@ import java.util.List;
 import domain.services.ProductService;
 
 public class ProductController {
-    private final ProductDI productDependencyInjection;
-    private final UnitDI unitDependencyInjection;
-    
-    
-    private final IProductService productService;
-    private final IDataContext dataContext;
+
     private final ProductApplication productApplication;
     
     
     public ProductController(){
-        productDependencyInjection = new ProductDI();
-        unitDependencyInjection = new UnitDI();
-        
-        
-        
-        dataContext = productDependencyInjection.getDataContext();
-        productService = new ProductService(dataContext, 
-                                productDependencyInjection.getProductRepository(dataContext.getConnection()),
-                                unitDependencyInjection.getUnitRepository(dataContext.getConnection()));
+        ProductDI productDependencyInjection = new ProductDI();
+        UnitDI unitDependencyInjection = new UnitDI();
+        OrderDI orderDependencyInjection = new OrderDI();
+
+        IDataContext dataContext = productDependencyInjection.getDataContext();
+        IProductService productService = new ProductService(dataContext,
+                productDependencyInjection.getProductRepository(dataContext.getConnection()),
+                unitDependencyInjection.getUnitRepository(dataContext.getConnection()),
+                orderDependencyInjection.getOrderItemRepository(dataContext.getConnection()));
+
         productApplication = new ProductApplication(productService);
     }
     

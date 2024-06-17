@@ -3,9 +3,10 @@ package views.components;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.Icon;
-import org.w3c.dom.css.RGBColor;
 
 public class MenuItem extends javax.swing.JPanel {
 
@@ -21,17 +22,22 @@ public class MenuItem extends javax.swing.JPanel {
     private ActionListener act;
 
     public MenuItem(Icon icon, String menuName, boolean isChild, ActionListener act, MenuItem... subMenu) {
+        
         initComponents();
         lbIcon.setIcon(icon);
         lbName.setText(menuName);
-        setBackground(new java.awt.Color(173, 148, 100));
+        setBackground(new Color(173,148,100));
         if (act != null) {
             this.act = act;
         }
-        if(isChild) {            
+        if(isChild) {  
+            addHover(new Color(217,217,217), new Color(217,217,117));
             setBackground(new Color(217,217,217));
             lbName.setText("       " + menuName);
+        }else{
+            addHover(new Color(173,148,100), new Color(173,148,200));
         }
+        
         this.setSize(new Dimension(Integer.MAX_VALUE, 45));
         this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
         this.setMinimumSize(new Dimension(Integer.MAX_VALUE, 45));
@@ -41,30 +47,41 @@ public class MenuItem extends javax.swing.JPanel {
         }
     }
     
+    private void addHover(Color originalColor, Color hoverColor){
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                setBackground(hoverColor);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                setBackground(originalColor);
+            }
+        });
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSeparator1 = new javax.swing.JSeparator();
         lbIcon = new javax.swing.JLabel();
         lbName = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);
             }
         });
 
-        lbName.setBackground(new java.awt.Color(51, 51, 255));
-        lbName.setForeground(new java.awt.Color(0, 0, 0));
         lbName.setText("Menu Name Here ...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -81,9 +98,7 @@ public class MenuItem extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lbIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addGap(10, 10, 10))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -137,7 +152,6 @@ public class MenuItem extends javax.swing.JPanel {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbIcon;
     private javax.swing.JLabel lbName;
     // End of variables declaration//GEN-END:variables

@@ -3,7 +3,9 @@ package views.main;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import views.components.MenuItem;
@@ -34,6 +36,11 @@ public class MainView extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        
+        setLocationRelativeTo(getParent());
+        URL urlIcon = getClass().getResource("/images/systemIcon.png");
+        ImageIcon imageIcon = new ImageIcon(urlIcon);
+        this.setIconImage(imageIcon.getImage());
         
         instance = this;
         initComponents();

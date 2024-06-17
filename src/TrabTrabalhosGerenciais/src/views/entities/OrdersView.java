@@ -2,6 +2,7 @@ package views.entities;
 
 import application.viewModels.OrderVM;
 import controllers.OrderController;
+import domain.model.entities.OrderModel;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ResponseTypeEnum;
 import java.util.List;
@@ -223,11 +224,19 @@ public class OrdersView extends javax.swing.JInternalFrame {
         }
         
         int orderId = (int)this.jTableOrder.getValueAt(lineSelected, 0);
+        boolean isCanceled = ((String)this.jTableOrder.getValueAt(lineSelected, 3)).equals("CANCELADO");
+        
+        if(isCanceled){
+            JOptionPane.showMessageDialog(null, "Não é possível editar um pedido já cancelado." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         
         MainView mainView = MainView.getInstance();
         mainView.alterPanel(new NewOrderView(orderId));
     }//GEN-LAST:event_jButtonEditOrderMouseClicked
 
+    
     private void jButtonConcludeOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConcludeOrderMouseClicked
         int lineSelected = this.jTableOrder.getSelectedRow();
         if(lineSelected<0){

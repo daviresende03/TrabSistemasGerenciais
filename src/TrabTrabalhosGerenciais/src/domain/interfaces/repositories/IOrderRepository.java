@@ -11,4 +11,5 @@ public interface IOrderRepository extends IBaseRepository<OrderModel> {
     int countCanceleds() throws SQLException;
     void invoice(OrderModel order) throws SQLException;
     void cancel(int id) throws SQLException;
+    boolean existByPersonId(int personId);
 }

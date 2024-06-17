@@ -1,5 +1,6 @@
 package controllers;
 
+import infra.dependencyInjections.OrderDI;
 import infra.dependencyInjections.PersonDI;
 import application.applications.PersonApplication;
 import application.viewModels.PersonVM;
@@ -10,15 +11,17 @@ import java.util.List;
 import domain.services.PersonService;
 
 public class PersonController {
-    private final PersonDI personDependencyInjection;
-    private final IPersonService personService;
-    private final IDataContext dataContext;
     private final PersonApplication personApplication;
     
     public PersonController(){
-        personDependencyInjection = new PersonDI();
-        dataContext = personDependencyInjection.getDataContext();
-        personService = new PersonService(dataContext, personDependencyInjection.getPersonRepository(dataContext.getConnection()));
+        OrderDI orderDependencyInjection = new OrderDI();
+        PersonDI personDependencyInjection = new PersonDI();
+        IDataContext dataContext = personDependencyInjection.getDataContext();
+        IPersonService personService = new PersonService(
+                dataContext,
+                personDependencyInjection.getPersonRepository(dataContext.getConnection()),
+                orderDependencyInjection.getOrderRepository(dataContext.getConnection()));
+
         personApplication = new PersonApplication(personService);
     }
     

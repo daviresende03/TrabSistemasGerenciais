@@ -1,5 +1,6 @@
 package domain.services;
 
+import domain.interfaces.repositories.IOrderRepository;
 import domain.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,10 +13,12 @@ import domain.interfaces.services.IPersonService;
 
 public class PersonService extends BaseService implements IPersonService {
     private final IPersonRepository personRepository;
-    
-    public PersonService(IDataContext dataContext, IPersonRepository personRepository){
+    private final IOrderRepository orderRepository;
+
+    public PersonService(IDataContext dataContext, IPersonRepository personRepository, IOrderRepository orderRepository){
         super(dataContext);
         this.personRepository = personRepository;
+        this.orderRepository = orderRepository;
     }
     
     @Override
@@ -57,6 +60,11 @@ public class PersonService extends BaseService implements IPersonService {
             
             if(!personRepository.exist(id)){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Usuário não encontrado.");
+                return;
+            }
+
+            if(orderRepository.existByPersonId(id)){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Este usuário possui pedidos relacionados, não será possível remove-lo.");
                 return;
             }
             

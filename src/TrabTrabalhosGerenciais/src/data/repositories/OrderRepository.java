@@ -271,4 +271,20 @@ public class OrderRepository implements IOrderRepository {
         statement.setInt(3, id);
         statement.executeUpdate();
     }
+
+    @Override
+    public boolean existByPersonId(int personId){
+        try{
+            String query = "SELECT null FROM `order` WHERE customer_id = ? OR waiter_id = ?";
+
+            PreparedStatement statement = connect.prepareStatement(query);
+            statement.setInt(1,personId);
+            statement.setInt(2,personId);
+            ResultSet resultSet = statement.executeQuery();
+
+            return resultSet.next();
+        }catch(Exception ex){
+            return false;
+        }
+    }
 }

@@ -49,6 +49,7 @@ public class MainView extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.panelBody.setBackground(new Color(217,217,217));        
+        this.panelHeader.setVisible(false);
         
         buildMenu();
     }

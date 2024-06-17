@@ -4,7 +4,6 @@ import domain.interfaces.repositories.ICashRegisterRepository;
 import domain.interfaces.repositories.IDataContext;
 import domain.interfaces.services.ICashRegisterService;
 import domain.model.entities.CashRegisterModel;
-import domain.model.entities.ResponseService;
 import domain.model.enums.ResponseTypeEnum;
 
 import java.util.Date;

@@ -3,11 +3,8 @@ package application.applications;
 import application.mappers.FinanceMap;
 import application.viewModels.FinanceVM;
 import domain.interfaces.services.IFinanceService;
-import domain.model.entities.FinanceModel;
 import domain.model.entities.ResponseService;
-import java.util.ArrayList;
 import java.util.List;
-import domain.model.enums.FinanceTypeEnum;
 
 public class FinanceApplication {
     private final IFinanceService financeService;

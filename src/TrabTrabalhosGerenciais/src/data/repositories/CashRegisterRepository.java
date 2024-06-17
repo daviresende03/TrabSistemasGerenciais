@@ -2,12 +2,8 @@ package data.repositories;
 
 import domain.interfaces.repositories.ICashRegisterRepository;
 import domain.model.entities.CashRegisterModel;
-import domain.model.entities.FinanceModel;
-import domain.model.enums.FinanceTypeEnum;
 
-import javax.xml.transform.Result;
 import java.sql.*;
-import java.time.Instant;
 import java.util.List;
 
 public class CashRegisterRepository implements ICashRegisterRepository {

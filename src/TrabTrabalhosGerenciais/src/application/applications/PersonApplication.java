@@ -2,12 +2,8 @@ package application.applications;
 
 import application.mappers.PersonMap;
 import application.viewModels.PersonVM;
-import domain.model.entities.PersonModel;
 import domain.model.entities.ResponseService;
-import domain.model.enums.PersonTypeEnum;
 import domain.interfaces.services.IPersonService;
-import domain.model.valueObjects.Address;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PersonApplication {

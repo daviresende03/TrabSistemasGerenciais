@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import domain.interfaces.repositories.IProductRepository;
-import domain.interfaces.services.IProductService;
 import domain.model.entities.ResponseService;
 import domain.model.entities.UnitModel;
 import domain.model.enums.ResponseTypeEnum;

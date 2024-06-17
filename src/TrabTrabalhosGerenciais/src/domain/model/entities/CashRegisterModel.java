@@ -1,7 +1,5 @@
 package domain.model.entities;
 
-import domain.services.CashRegisterService;
-
 import java.sql.Time;
 import java.util.Date;
 

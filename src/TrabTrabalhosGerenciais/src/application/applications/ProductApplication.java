@@ -2,12 +2,8 @@ package application.applications;
 
 import application.mappers.ProductMap;
 import application.viewModels.ProductVM;
-import java.util.ArrayList;
 import java.util.List;
-import domain.model.entities.ProductModel;
 import domain.model.entities.ResponseService;
-import domain.model.entities.UnitModel;
-import domain.model.enums.ProductTypeEnum;
 import domain.interfaces.services.IProductService;
 
 public class ProductApplication {

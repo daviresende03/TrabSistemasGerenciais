@@ -3,7 +3,6 @@ package application.mappers;
 import application.viewModels.OrderItemVM;
 import application.viewModels.OrderVM;
 import application.viewModels.PersonVM;
-import application.viewModels.ProductVM;
 import domain.model.entities.*;
 import domain.model.enums.PersonTypeEnum;
 import domain.model.enums.ProductTypeEnum;

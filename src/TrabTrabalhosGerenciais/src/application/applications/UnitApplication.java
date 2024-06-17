@@ -1,5 +1,6 @@
 package application.applications;
 
+import application.mappers.UnitMap;
 import application.viewModels.UnitVM;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,7 @@ public class UnitApplication {
     }
     
     public void update(UnitVM unitVM){
-        UnitModel unitModel = new UnitModel(unitVM.id, unitVM.name, unitVM.symbol);
-        unitService.update(unitModel);
+        unitService.update(UnitMap.getUnit(unitVM));
     }
     
     public void delete(int id){
@@ -33,15 +33,10 @@ public class UnitApplication {
     }
     
     public UnitVM get(int id){
-        return new UnitVM(unitService.get(id));
+        return UnitMap.getUnitVM(unitService.get(id));
     }
     
     public List<UnitVM> getAll(){
-        List<UnitModel> unitsModel = unitService.getAll();
-        List<UnitVM> unitsVM = new ArrayList<UnitVM>();
-        for(UnitModel unitModel : unitsModel){
-            unitsVM.add(new UnitVM(unitModel));
-        }
-        return unitsVM;
+        return UnitMap.getUnitsVM(unitService.getAll());
     }
 }

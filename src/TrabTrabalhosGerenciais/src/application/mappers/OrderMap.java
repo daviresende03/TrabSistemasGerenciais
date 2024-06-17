@@ -100,7 +100,7 @@ public class OrderMap {
     private static OrderItemVM getOrderItemVM(OrderItemModel orderItemModel){
         return new OrderItemVM(
                 orderItemModel.getId(),
-                new ProductVM(orderItemModel.getProduct()),
+                ProductMap.getProductVM(orderItemModel.getProduct()),
                 orderItemModel.getQuantity(),
                 orderItemModel.getSalePrice());
     }

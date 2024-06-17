@@ -31,11 +31,11 @@ public class MenuItem extends javax.swing.JPanel {
             this.act = act;
         }
         if(isChild) {  
-            addHover(new Color(217,217,217), new Color(217,217,117));
+            addHover(new Color(217,217,217), new Color(178,178,178));
             setBackground(new Color(217,217,217));
             lbName.setText("       " + menuName);
         }else{
-            addHover(new Color(173,148,100), new Color(173,148,200));
+            addHover(new Color(173,148,100), new Color(225,209,176));
         }
         
         this.setSize(new Dimension(Integer.MAX_VALUE, 45));

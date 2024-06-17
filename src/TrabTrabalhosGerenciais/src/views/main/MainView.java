@@ -1,5 +1,6 @@
 package views.main;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import views.components.MenuItem;
 import views.entities.FinancesView;
 import views.entities.PersonView;
@@ -46,7 +48,8 @@ public class MainView extends javax.swing.JFrame {
         instance = this;
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.panelBody.setBackground(new Color(217,217,217));
+        this.panelBody.setBackground(new Color(217,217,217));        
+        
         buildMenu();
     }
     
@@ -133,8 +136,26 @@ public class MainView extends javax.swing.JFrame {
     public void alterPanel(JInternalFrame panel){
         panelBody.removeAll();
         panelBody.add(panel);
+        try {
+            panel.setMaximum(true);
+        } catch (java.beans.PropertyVetoException e) {
+            e.printStackTrace();
+        }
+        
         panelBody.repaint();
         panelBody.revalidate();
+        
+        URL url = getClass().getResource("/images/Logo.png");
+        ImageIcon originalIcon = new ImageIcon(url);
+        Image scaledImage = originalIcon.getImage().getScaledInstance(800, 800, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        JLabel jLabel1 = new JLabel(scaledIcon);
+        jLabel1.setHorizontalAlignment(JLabel.CENTER);
+        jLabel1.setVerticalAlignment(JLabel.CENTER);
+        this.panelBody.setLayout(new BorderLayout());
+        this.panelBody.add(jLabel1, BorderLayout.CENTER);
+        
+        
     }
 
     @SuppressWarnings("unchecked")

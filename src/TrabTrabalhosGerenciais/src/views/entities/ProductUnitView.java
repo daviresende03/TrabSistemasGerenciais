@@ -38,6 +38,7 @@ public class ProductUnitView extends javax.swing.JInternalFrame {
         jTextFieldProductUnitId = new javax.swing.JTextField();
         jButtonClearFields = new javax.swing.JButton();
 
+        setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Unidade de Produto");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ProductUnitIcon.png"))); // NOI18N

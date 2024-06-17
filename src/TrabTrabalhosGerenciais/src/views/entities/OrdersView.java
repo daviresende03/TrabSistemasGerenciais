@@ -281,7 +281,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
         
         this.jLabelTotalOpenOrders.setText("TOTAL DE PEDIDOS EM ABERTO: "+totalCountOpenOrders);
         this.jLabelTotalInvoicedOrders.setText("TOTAL DE PEDIDOS CONCLUÍDOS: "+totalCountInvoicedOrders);
-        this.jLabelTotalCanceledOrders.setText("TOTAL DE PEDIDOS CANCELADOS"+totalCanceledOrders);
+        this.jLabelTotalCanceledOrders.setText("TOTAL DE PEDIDOS CANCELADOS: "+totalCanceledOrders);
     }
     
     private void loadOrderTableByDataBase(){

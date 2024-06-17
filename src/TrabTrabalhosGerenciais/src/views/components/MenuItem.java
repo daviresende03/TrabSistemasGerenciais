@@ -33,7 +33,6 @@ public class MenuItem extends javax.swing.JPanel {
         if(isChild) {  
             addHover(new Color(217,217,217), new Color(178,178,178));
             setBackground(new Color(217,217,217));
-            lbName.setText("       " + menuName);
         }else{
             addHover(new Color(173,148,100), new Color(225,209,176));
         }

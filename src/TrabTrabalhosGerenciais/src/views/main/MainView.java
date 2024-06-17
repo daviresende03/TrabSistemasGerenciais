@@ -1,6 +1,7 @@
 package views.main;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -52,50 +53,67 @@ public class MainView extends javax.swing.JFrame {
     public static MainView getInstance() {
         return instance;
     }
+    
+    private ImageIcon getIcon(String filaPath){
+        URL url = getClass().getResource(filaPath);
+        ImageIcon originalIcon = new ImageIcon(url);
+        Image scaledImage = originalIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        
+        return new ImageIcon(scaledImage);
+    }
 
     private void buildMenu() {
+        ImageIcon registerIcon = getIcon("/images/register.png");        
+        ImageIcon saleIcon = getIcon("/images/sale.png");
+        ImageIcon financeIcon = getIcon("/images/finance.png");        
+        ImageIcon userIcon = getIcon("/images/PersonIcon.png");
+        ImageIcon productIcon = getIcon("/images/ProductViewIcon.png");
+        ImageIcon productUnitIcon = getIcon("/images/ProductUnitIcon.png");
+        ImageIcon orderIcon = getIcon("/images/NewOrderViewIcon.png");
+        ImageIcon orderViewIcon = getIcon("/images/OrdersViewIcon.png");
+        ImageIcon cashRegisterIcon = getIcon("/images/cashRegister.png");
 
-        MenuItem subMenuRegisterPerson = new MenuItem(null, "Usuários", true, new ActionListener() {
+        MenuItem subMenuRegisterPerson = new MenuItem(userIcon, "Usuários", true, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 alterPanel(new PersonView());
             }
         });
-        MenuItem subMenuRegisterProduct = new MenuItem(null, "Produtos", true, new ActionListener() {
+        MenuItem subMenuRegisterProduct = new MenuItem(productIcon, "Produtos", true, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 alterPanel(new ProductView());
             }
         });
-        MenuItem subMenuRegisterProductUnit = new MenuItem(null, "Unidades de Produtos", true, new ActionListener() {
+        MenuItem subMenuRegisterProductUnit = new MenuItem(productUnitIcon, "Unidades de Produtos", true, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 alterPanel(new ProductUnitView());
             }
         });
-        MenuItem menuRegister = new MenuItem(null, "Cadastros", false, null, subMenuRegisterPerson, subMenuRegisterProduct, subMenuRegisterProductUnit);
+        MenuItem menuRegister = new MenuItem(registerIcon, "Cadastros", false, null, subMenuRegisterPerson, subMenuRegisterProduct, subMenuRegisterProductUnit);
 
-        MenuItem subMenuSaleTableControl = new MenuItem(null, "Controle de Pedidos", true, new ActionListener() {
+        MenuItem subMenuSaleTableControl = new MenuItem(orderViewIcon, "Controle de Pedidos", true, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 alterPanel(new OrdersView());
             }
         });
-        MenuItem subMenuSaleOrder = new MenuItem(null, "Pedidos", true, new ActionListener() {
+        MenuItem subMenuSaleOrder = new MenuItem(orderIcon, "Pedidos", true, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 alterPanel(new NewOrderView(0));
             }
         });
-        MenuItem menuSale = new MenuItem(null, "Vendas", false, null, subMenuSaleTableControl, subMenuSaleOrder);
+        MenuItem menuSale = new MenuItem(saleIcon, "Vendas", false, null, subMenuSaleTableControl, subMenuSaleOrder);
         //Finance Menu
-        MenuItem subMenuFinanceCashControl = new MenuItem(null, "Controle de Caixa", true, new ActionListener() {
+        MenuItem subMenuFinanceCashControl = new MenuItem(cashRegisterIcon, "Controle de Caixa", true, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
                         alterPanel(new FinancesView());
                 }
         });
-        MenuItem menuFinance = new MenuItem(null, "Finanças", false, null, subMenuFinanceCashControl);
+        MenuItem menuFinance = new MenuItem(financeIcon, "Finanças", false, null, subMenuFinanceCashControl);
         
         
         addMenu(menuRegister, menuSale, menuFinance);
@@ -174,32 +192,6 @@ public class MainView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>                        
-
-    /*public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainView().setVisible(true);
-            }
-        });
-    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

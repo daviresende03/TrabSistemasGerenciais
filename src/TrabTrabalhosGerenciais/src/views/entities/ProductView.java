@@ -245,7 +245,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         try{
              productVM = getProductByForm();
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Existem valores incorretos." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Informe valores válidos" , "Atenção", JOptionPane.WARNING_MESSAGE);
             return;
         }
         int productId = Integer.parseInt(this.jTextFieldProductId.getText().isEmpty() ? "0" : this.jTextFieldProductId.getText());

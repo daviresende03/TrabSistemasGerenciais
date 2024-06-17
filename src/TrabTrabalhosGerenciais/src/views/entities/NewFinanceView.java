@@ -104,7 +104,13 @@ public class NewFinanceView extends JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSaveFinanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSaveFinanceMouseClicked
-        FinanceVM financeForm = getFinanceByForm();
+        FinanceVM financeForm;
+        try{
+            financeForm = getFinanceByForm();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Favor informar valores válidos." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
         if(financeForm.type < 0 || financeForm.value <= 0 || financeForm.description.isBlank()){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos." , "Atenção", JOptionPane.WARNING_MESSAGE);

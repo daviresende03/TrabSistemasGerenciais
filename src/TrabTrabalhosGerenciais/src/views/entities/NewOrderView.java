@@ -504,9 +504,18 @@ public class NewOrderView extends javax.swing.JInternalFrame {
             return;
         }
         
-        double discount = Double.parseDouble(this.jTextFieldDiscount.getText().isEmpty() ? "0" : this.jTextFieldDiscount.getText());
+        double discount = 0;
+        int id = 0;
+        
+        try{
+            discount = Double.parseDouble(this.jTextFieldDiscount.getText().isEmpty() ? "0" : this.jTextFieldDiscount.getText());
+            id = Integer.parseInt(this.jTextFieldOrderId.getText().isEmpty() ? "0" : this.jTextFieldOrderId.getText());
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Favor informar valores válidos." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         String obs = this.jTextAreaObservations.getText();
-        int id = Integer.parseInt(this.jTextFieldOrderId.getText().isEmpty() ? "0" : this.jTextFieldOrderId.getText());
         
         OrderVM order = new OrderVM(id, customer, staff, orderItems, false, invoiced, discount,0, obs);
         

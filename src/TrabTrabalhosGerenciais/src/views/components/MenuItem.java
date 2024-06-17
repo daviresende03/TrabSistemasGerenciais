@@ -1,9 +1,11 @@
 package views.components;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Icon;
+import org.w3c.dom.css.RGBColor;
 
 public class MenuItem extends javax.swing.JPanel {
 
@@ -26,7 +28,8 @@ public class MenuItem extends javax.swing.JPanel {
         if (act != null) {
             this.act = act;
         }
-        if(isChild) {
+        if(isChild) {            
+            setBackground(new Color(217,217,217));
             lbName.setText("       " + menuName);
         }
         this.setSize(new Dimension(Integer.MAX_VALUE, 45));

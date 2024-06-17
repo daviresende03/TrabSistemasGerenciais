@@ -1,5 +1,6 @@
 package views.main;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class MainView extends javax.swing.JFrame {
         instance = this;
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.panelBody.setBackground(new Color(217,217,217));
         buildMenu();
     }
     

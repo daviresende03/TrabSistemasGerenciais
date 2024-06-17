@@ -32,7 +32,7 @@ public class OrderRepository implements IOrderRepository {
                 + "observation,"
                 + "created_at,"
                 + "updated_at)"
-                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         PreparedStatement statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, order.getCustomer().getId());

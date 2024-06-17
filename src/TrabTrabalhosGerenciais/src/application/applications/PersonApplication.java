@@ -1,5 +1,6 @@
 package application.applications;
 
+import application.mappers.PersonMap;
 import application.viewModels.PersonVM;
 import domain.model.entities.PersonModel;
 import domain.model.entities.ResponseService;
@@ -21,50 +22,19 @@ public class PersonApplication {
     }
     
     public void create(PersonVM personVM){
-        PersonModel personModel = new PersonModel(
-                personVM.name,
-                personVM.document,
-                PersonTypeEnum.fromInteger(personVM.type),
-                new Address(personVM.street, personVM.number, personVM.neighborhood, personVM.city, personVM.state, personVM.postalCode, personVM.country),
-                personVM.birthDate,
-                personVM.observation,
-                personVM.customer,
-                personVM.staff,
-                personVM.supplier
-        );
-        personService.insert(personModel);
+        personService.insert(PersonMap.getPerson(personVM));
     }
     
     public List<PersonVM> getAll(boolean isCustomer, boolean isStaff, boolean isSupplier) {
-        List<PersonModel> peopleModel = personService.getAll(isCustomer, isStaff, isSupplier);
-        List<PersonVM> peopleVM = new ArrayList<PersonVM>();
-        
-        for(PersonModel personModel : peopleModel){
-            peopleVM.add(new PersonVM(personModel));
-        }
-        return peopleVM;
+        return PersonMap.getPeopleVM(personService.getAll(isCustomer, isStaff, isSupplier));
     }
     
     public PersonVM get(int id){
-        PersonModel personModel = personService.get(id);
-        return new PersonVM(personModel);
+        return PersonMap.getPersonVM(personService.get(id));
     }
     
     public void update(PersonVM personVM){
-        PersonModel personModel = new PersonModel(
-                personVM.id,
-                personVM.name,
-                personVM.document,
-                PersonTypeEnum.fromInteger(personVM.type),
-                new Address(personVM.street, personVM.number, personVM.neighborhood, personVM.city, personVM.state, personVM.postalCode, personVM.country),
-                personVM.birthDate,
-                personVM.observation,
-                personVM.customer,
-                personVM.staff,
-                personVM.supplier
-        );
-        
-        personService.update(personModel);
+        personService.update(PersonMap.getPerson(personVM));
     }
     
     public void delete(int id){

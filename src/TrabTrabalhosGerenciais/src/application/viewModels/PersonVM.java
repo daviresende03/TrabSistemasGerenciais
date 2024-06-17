@@ -22,23 +22,23 @@ public class PersonVM {
     public boolean supplier;
     
     public PersonVM(){}
-    
-    public PersonVM(PersonModel model){
-        id = model.getId();
-        name = model.getName();
-        document = model.getDocument();
-        type = model.getType().getValue();
-        street = model.getAddress().getStreet();
-        number = model.getAddress().getNumber();
-        neighborhood = model.getAddress().getNeighborhood();
-        city = model.getAddress().getCity();
-        state = model.getAddress().getState();
-        postalCode = model.getAddress().getPostalCode();
-        country = model.getAddress().getCountry();
-        birthDate = model.getBirthDate();
-        observation = model.getObservation();
-        customer = model.getCustomer();
-        staff = model.getStaff();
-        supplier = model.getSupplier();
+
+    public PersonVM(int id, String name, String document, int type, String street, String number, String neighborhood, String city, String state, String postalCode, String country, Date birthDate, String observation, boolean customer, boolean staff, boolean supplier) {
+        this.id = id;
+        this.name = name;
+        this.document = document;
+        this.type = type;
+        this.street = street;
+        this.number = number;
+        this.neighborhood = neighborhood;
+        this.city = city;
+        this.state = state;
+        this.postalCode = postalCode;
+        this.country = country;
+        this.birthDate = birthDate;
+        this.observation = observation;
+        this.customer = customer;
+        this.staff = staff;
+        this.supplier = supplier;
     }
 }

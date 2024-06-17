@@ -141,7 +141,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Id", "Código", "Nome", "Quantidade", "Preço"
+                "Id", "Produto", "Nome", "Quantidade", "Preço"
             }
         ) {
             Class[] types = new Class [] {

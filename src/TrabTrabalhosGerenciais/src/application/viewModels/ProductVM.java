@@ -11,17 +11,17 @@ public class ProductVM {
     public double costPrice;
     public double salePrice;
     public double stock;
-    
-    public ProductVM(ProductModel productModel){
-        id = productModel.getId();
-        name = productModel.getName();
-        type = productModel.getType().getValue();
-        unitName = productModel.getUnit().getName();
-        unitSymbol = productModel.getUnit().getSymbol();
-        costPrice = productModel.getCostPrice();
-        salePrice = productModel.getSalePrice();
-        stock = productModel.getStock();
-    }
-    
+
     public ProductVM(){}
+
+    public ProductVM(int id, String name, int type, String unitName, String unitSymbol, double costPrice, double salePrice, double stock) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.unitName = unitName;
+        this.unitSymbol = unitSymbol;
+        this.costPrice = costPrice;
+        this.salePrice = salePrice;
+        this.stock = stock;
+    }
 }

@@ -1,5 +1,6 @@
 package application.applications;
 
+import application.mappers.ProductMap;
 import application.viewModels.ProductVM;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,28 +22,11 @@ public class ProductApplication {
     }
     
     public void create(ProductVM productVM){
-        ProductModel productModel = new ProductModel(
-                productVM.name,
-                ProductTypeEnum.fromInteger(productVM.type),
-                new UnitModel(productVM.unitName, productVM.unitSymbol),
-                productVM.costPrice,
-                productVM.salePrice,
-                productVM.stock
-        );
-        productService.insert(productModel);
+        productService.insert(ProductMap.getProduct(productVM));
     }
     
     public void update(ProductVM productVM){
-        ProductModel productModel = new ProductModel(
-                productVM.id,
-                productVM.name,
-                ProductTypeEnum.fromInteger(productVM.type),
-                new UnitModel(productVM.unitName, productVM.unitSymbol),
-                productVM.costPrice,
-                productVM.salePrice,
-                productVM.stock
-        );
-        productService.update(productModel);
+        productService.update(ProductMap.getProduct(productVM));
     }
     
     public void delete(int id){
@@ -50,16 +34,10 @@ public class ProductApplication {
     }
     
     public ProductVM get(int id){
-        return new ProductVM(productService.get(id));
+        return ProductMap.getProductVM(productService.get(id));
     }
     
     public List<ProductVM> getAll(){
-        List<ProductModel> productsModel = productService.getAll();
-        List<ProductVM> productsVM = new ArrayList<ProductVM>();
-        
-        for(ProductModel productModel : productsModel){
-            productsVM.add(new ProductVM(productModel));
-        }
-        return productsVM;
+        return ProductMap.getProductsVM(productService.getAll());
     }
 }

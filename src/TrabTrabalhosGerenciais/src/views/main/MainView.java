@@ -38,7 +38,7 @@ public class MainView extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        }                
         
         setLocationRelativeTo(getParent());
         URL urlIcon = getClass().getResource("/images/systemIcon.png");
@@ -51,7 +51,21 @@ public class MainView extends javax.swing.JFrame {
         this.panelBody.setBackground(new Color(217,217,217));        
         this.panelHeader.setVisible(false);
         
+        this.addPrincipalImage();
+        
         buildMenu();
+    }
+    
+    private void addPrincipalImage(){
+        URL url = getClass().getResource("/images/Logo.png");
+        ImageIcon originalIcon = new ImageIcon(url);
+        Image scaledImage = originalIcon.getImage().getScaledInstance(800, 800, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        JLabel jLabel1 = new JLabel(scaledIcon);
+        jLabel1.setHorizontalAlignment(JLabel.CENTER);
+        jLabel1.setVerticalAlignment(JLabel.CENTER);
+        this.panelBody.setLayout(new BorderLayout());
+        this.panelBody.add(jLabel1, BorderLayout.CENTER);
     }
     
     public static MainView getInstance() {
@@ -146,17 +160,7 @@ public class MainView extends javax.swing.JFrame {
         panelBody.repaint();
         panelBody.revalidate();
         
-        URL url = getClass().getResource("/images/Logo.png");
-        ImageIcon originalIcon = new ImageIcon(url);
-        Image scaledImage = originalIcon.getImage().getScaledInstance(800, 800, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-        JLabel jLabel1 = new JLabel(scaledIcon);
-        jLabel1.setHorizontalAlignment(JLabel.CENTER);
-        jLabel1.setVerticalAlignment(JLabel.CENTER);
-        this.panelBody.setLayout(new BorderLayout());
-        this.panelBody.add(jLabel1, BorderLayout.CENTER);
-        
-        
+        this.addPrincipalImage();        
     }
 
     @SuppressWarnings("unchecked")

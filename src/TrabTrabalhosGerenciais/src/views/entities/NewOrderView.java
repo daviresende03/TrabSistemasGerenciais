@@ -91,9 +91,12 @@ public class NewOrderView extends javax.swing.JInternalFrame {
 
         jLabelCustomer.setText("Cliente");
 
+        jComboBoxCustomer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         jLabelStaff.setText("Atendente");
 
         jComboBoxStaff.setToolTipText("");
+        jComboBoxStaff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelProductsList.setText("Produtos");
 
@@ -183,6 +186,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jLabelOrderTotal.setText("Total dos Produtos");
 
         jButtonSaveOrder.setText("SALVAR");
+        jButtonSaveOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonSaveOrder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonSaveOrderMouseClicked(evt);
@@ -205,6 +209,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jTextFieldAmountOrder.setEnabled(false);
 
         jButtonSaleProduct.setText("ADICIONAR AO PEDIDO");
+        jButtonSaleProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonSaleProduct.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonSaleProductMouseClicked(evt);
@@ -214,6 +219,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         jLabelQuantity.setText("Quantidade");
 
         jButtonRemoveProduct.setText("REMOVER ITEM");
+        jButtonRemoveProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonRemoveProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRemoveProductActionPerformed(evt);

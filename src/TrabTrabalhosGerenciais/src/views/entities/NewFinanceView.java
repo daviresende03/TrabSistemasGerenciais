@@ -36,6 +36,7 @@ public class NewFinanceView extends JDialog {
         jLabelNewFinance.setText("NOVO REGISTRO");
 
         jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recebimento", "Pagamento" }));
+        jComboBoxType.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel2.setText("Descrição");
 
@@ -44,6 +45,7 @@ public class NewFinanceView extends JDialog {
         jLabelValue.setText("Valor");
 
         jButtonSaveFinance.setText("SALVAR");
+        jButtonSaveFinance.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonSaveFinance.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonSaveFinanceMouseClicked(evt);

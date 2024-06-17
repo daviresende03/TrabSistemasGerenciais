@@ -66,6 +66,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
         jLabel2.setText("Filtrar pedidos");
 
         jComboBoxOrdersFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Abertos", "Faturados" }));
+        jComboBoxOrdersFilter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboBoxOrdersFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxOrdersFilterActionPerformed(evt);
@@ -119,6 +120,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
 
         jButtonEditOrder.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jButtonEditOrder.setText("EDITAR PEDIDO");
+        jButtonEditOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonEditOrder.setMaximumSize(new java.awt.Dimension(138, 23));
         jButtonEditOrder.setMinimumSize(new java.awt.Dimension(138, 23));
         jButtonEditOrder.setPreferredSize(new java.awt.Dimension(138, 23));
@@ -130,6 +132,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
 
         jButtonConcludeOrder.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jButtonConcludeOrder.setText("FECHAR PEDIDO");
+        jButtonConcludeOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonConcludeOrder.setMaximumSize(new java.awt.Dimension(138, 23));
         jButtonConcludeOrder.setMinimumSize(new java.awt.Dimension(138, 23));
         jButtonConcludeOrder.setPreferredSize(new java.awt.Dimension(138, 23));
@@ -141,6 +144,7 @@ public class OrdersView extends javax.swing.JInternalFrame {
 
         jButtonCancelOrder.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jButtonCancelOrder.setText("CANCELAR PEDIDO");
+        jButtonCancelOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonCancelOrder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonCancelOrderMouseClicked(evt);

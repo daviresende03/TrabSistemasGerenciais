@@ -104,8 +104,10 @@ public class PersonView extends javax.swing.JInternalFrame {
         jLabelName.setText("Nome");
 
         jRadioButtonPJ.setText("PJ");
+        jRadioButtonPJ.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jRadioButtonPF.setText("PF");
+        jRadioButtonPF.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelDocument.setText("Documento");
 
@@ -136,10 +138,13 @@ public class PersonView extends javax.swing.JInternalFrame {
         jLabelFunction.setText("FUNÇÃO");
 
         jCheckBoxCustomer.setText("Cliente");
+        jCheckBoxCustomer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jCheckBoxStaff.setText("Colaborador");
+        jCheckBoxStaff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jCheckBoxSupplier.setText("Fornecedor");
+        jCheckBoxSupplier.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jButtonSaveUser.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jButtonSaveUser.setText("SALVAR");
@@ -208,6 +213,7 @@ public class PersonView extends javax.swing.JInternalFrame {
         });
 
         jButtonClearFields.setText("LIMPAR CAMPOS");
+        jButtonClearFields.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonClearFields.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonClearFieldsMouseClicked(evt);

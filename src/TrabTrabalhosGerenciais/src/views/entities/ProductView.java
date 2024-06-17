@@ -68,6 +68,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         jLabelTitle.setText("NOVO PRODUTO");
 
         jButtonClearFields.setText("LIMPAR CAMPOS");
+        jButtonClearFields.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonClearFields.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonClearFieldsMouseClicked(evt);
@@ -76,6 +77,8 @@ public class ProductView extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Nome");
 
+        jComboBoxUnit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         jLabelCostPrice.setText("Preço de Custo");
 
         jLabelSalePrice.setText("Preço de Venda");
@@ -83,6 +86,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         jLabelStock.setText("Estoque");
 
         jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Produto Final", "Prato Feito" }));
+        jComboBoxType.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jProductTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,6 +126,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         }
 
         jButtonDeleteProduct.setText("EXCLUIR");
+        jButtonDeleteProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonDeleteProduct.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonDeleteProductMouseClicked(evt);
@@ -129,6 +134,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         });
 
         jButtonEditProduct.setText("EDITAR");
+        jButtonEditProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonEditProduct.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonEditProductMouseClicked(evt);
@@ -136,6 +142,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         });
 
         jButtonSaveProduct.setText("SALVAR");
+        jButtonSaveProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonSaveProduct.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonSaveProductMouseClicked(evt);

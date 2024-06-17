@@ -152,6 +152,9 @@
     <Component class="javax.swing.JButton" name="jButtonClearFields">
       <Properties>
         <Property name="text" type="java.lang.String" value="LIMPAR CAMPOS"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonClearFieldsMouseClicked"/>
@@ -168,6 +171,9 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
+        </Property>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -202,6 +208,9 @@
             <StringItem index="0" value="Produto Final"/>
             <StringItem index="1" value="Prato Feito"/>
           </StringArray>
+        </Property>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -277,6 +286,9 @@
     <Component class="javax.swing.JButton" name="jButtonDeleteProduct">
       <Properties>
         <Property name="text" type="java.lang.String" value="EXCLUIR"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonDeleteProductMouseClicked"/>
@@ -285,6 +297,9 @@
     <Component class="javax.swing.JButton" name="jButtonEditProduct">
       <Properties>
         <Property name="text" type="java.lang.String" value="EDITAR"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonEditProductMouseClicked"/>
@@ -293,6 +308,9 @@
     <Component class="javax.swing.JButton" name="jButtonSaveProduct">
       <Properties>
         <Property name="text" type="java.lang.String" value="SALVAR"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonSaveProductMouseClicked"/>

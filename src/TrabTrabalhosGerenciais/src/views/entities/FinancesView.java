@@ -6,6 +6,7 @@ import controllers.CashRegisterController;
 import controllers.FinanceController;
 import domain.model.entities.ResponseService;
 import domain.model.enums.ResponseTypeEnum;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
@@ -93,6 +94,7 @@ public class FinancesView extends javax.swing.JInternalFrame {
         jTextFieldValue.setEnabled(false);
 
         jButtonOpenAndClose.setText("ABRIR CAIXA");
+        jButtonOpenAndClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonOpenAndClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonOpenAndCloseMouseClicked(evt);
@@ -100,6 +102,7 @@ public class FinancesView extends javax.swing.JInternalFrame {
         });
 
         jButtonNewRegister.setText("NOVO REGISTRO");
+        jButtonNewRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonNewRegister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonNewRegisterMouseClicked(evt);

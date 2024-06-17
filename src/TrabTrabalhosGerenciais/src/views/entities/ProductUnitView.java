@@ -83,6 +83,7 @@ public class ProductUnitView extends javax.swing.JInternalFrame {
         }
 
         jButtonDeleteProductUnit.setText("EXCLUIR");
+        jButtonDeleteProductUnit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonDeleteProductUnit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonDeleteProductUnitMouseClicked(evt);
@@ -90,6 +91,7 @@ public class ProductUnitView extends javax.swing.JInternalFrame {
         });
 
         jButtonEditProductUnit.setText("EDITAR");
+        jButtonEditProductUnit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonEditProductUnit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonEditProductUnitMouseClicked(evt);
@@ -98,6 +100,7 @@ public class ProductUnitView extends javax.swing.JInternalFrame {
 
         jButtonSaveProductUnit.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jButtonSaveProductUnit.setText("SALVAR");
+        jButtonSaveProductUnit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonSaveProductUnit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonSaveProductUnitMouseClicked(evt);
@@ -109,6 +112,7 @@ public class ProductUnitView extends javax.swing.JInternalFrame {
         jTextFieldProductUnitId.setEnabled(false);
 
         jButtonClearFields.setText("LIMPAR CAMPOS");
+        jButtonClearFields.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonClearFields.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonClearFieldsMouseClicked(evt);

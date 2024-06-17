@@ -287,11 +287,17 @@
     <Component class="javax.swing.JRadioButton" name="jRadioButtonPJ">
       <Properties>
         <Property name="text" type="java.lang.String" value="PJ"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButtonPF">
       <Properties>
         <Property name="text" type="java.lang.String" value="PF"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelDocument">
@@ -396,16 +402,25 @@
     <Component class="javax.swing.JCheckBox" name="jCheckBoxCustomer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cliente"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBoxStaff">
       <Properties>
         <Property name="text" type="java.lang.String" value="Colaborador"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBoxSupplier">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fornecedor"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSaveUser">
@@ -507,6 +522,9 @@
     <Component class="javax.swing.JButton" name="jButtonClearFields">
       <Properties>
         <Property name="text" type="java.lang.String" value="LIMPAR CAMPOS"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonClearFieldsMouseClicked"/>

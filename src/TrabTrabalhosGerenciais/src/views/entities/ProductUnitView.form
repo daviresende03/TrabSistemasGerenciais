@@ -167,6 +167,9 @@
     <Component class="javax.swing.JButton" name="jButtonDeleteProductUnit">
       <Properties>
         <Property name="text" type="java.lang.String" value="EXCLUIR"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonDeleteProductUnitMouseClicked"/>
@@ -175,6 +178,9 @@
     <Component class="javax.swing.JButton" name="jButtonEditProductUnit">
       <Properties>
         <Property name="text" type="java.lang.String" value="EDITAR"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonEditProductUnitMouseClicked"/>
@@ -186,6 +192,9 @@
           <Font name="sansserif" size="12" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="SALVAR"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonSaveProductUnitMouseClicked"/>
@@ -204,6 +213,9 @@
     <Component class="javax.swing.JButton" name="jButtonClearFields">
       <Properties>
         <Property name="text" type="java.lang.String" value="LIMPAR CAMPOS"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonClearFieldsMouseClicked"/>

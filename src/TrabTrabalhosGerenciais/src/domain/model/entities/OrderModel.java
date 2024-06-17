@@ -134,7 +134,7 @@ public class OrderModel extends BaseModel{
             addMessage("Pedido sem produtos registrados.");
             return false;
         }
-        if(discountTotal < 0 || discountTotal >= orderTotal){
+        if(discountTotal < 0 || discountTotal >= totalOrderItems()){
             addMessage("Desconto inválido.");
             return false;
         }

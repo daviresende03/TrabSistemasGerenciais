@@ -94,9 +94,9 @@ public class PersonView extends javax.swing.JInternalFrame {
         buttonGroupPersonType.add(jRadioButtonPJ);
 
         setClosable(true);
-        setTitle("Novo usuário");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/images/PersonIcon.png"))); // NOI18N
 
+        jLabelTitle.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelTitle.setText("NOVO USUÁRIO");
 
         jLabelPersonalData.setText("DADOS PESSOAIS");
@@ -413,7 +413,7 @@ public class PersonView extends javax.swing.JInternalFrame {
         }
         
         completeForm(person);
-        this.jLabelTitle.setText("Edição de Usuário");
+        this.jLabelTitle.setText("EDIÇÃO DE USUÁRIO");
         this.jButtonEditForm.setEnabled(false);
         
     }//GEN-LAST:event_jButtonEditFormMouseClicked
@@ -511,7 +511,7 @@ public class PersonView extends javax.swing.JInternalFrame {
         
         this.jTextFieldName.requestFocusInWindow();
         
-        this.jLabelTitle.setText("Novo Usuário");
+        this.jLabelTitle.setText("NOVO USUÁRIO");
         this.jButtonEditForm.setEnabled(true);
     }
     

@@ -55,6 +55,7 @@ public class FinancesView extends javax.swing.JInternalFrame {
         setClosable(true);
         setFrameIcon(null);
 
+        jLabelTitle.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelTitle.setText("CONTROLE DE CAIXA");
 
         jLabelStatus.setText("STATUS");

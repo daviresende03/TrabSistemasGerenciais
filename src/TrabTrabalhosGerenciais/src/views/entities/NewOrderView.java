@@ -86,6 +86,7 @@ public class NewOrderView extends javax.swing.JInternalFrame {
         setClosable(true);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/images/NewOrderViewIcon.png"))); // NOI18N
 
+        jLabelNewOrder.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelNewOrder.setText("NOVO PEDIDO");
 
         jLabelCustomer.setText("Cliente");

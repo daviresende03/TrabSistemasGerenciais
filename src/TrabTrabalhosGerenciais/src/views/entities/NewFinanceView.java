@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 public class NewFinanceView extends JDialog {
 
     public NewFinanceView(JFrame parent, int cashRegisterId) {
-        super(parent, "Novo registro", true);
+        super(parent, "", true);
         
         this.financeController = new FinanceController();
         this.cashRegisterId = cashRegisterId;
@@ -32,6 +32,7 @@ public class NewFinanceView extends JDialog {
         jTextFieldValue = new javax.swing.JTextField();
         jButtonSaveFinance = new javax.swing.JButton();
 
+        jLabelNewFinance.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelNewFinance.setText("NOVO REGISTRO");
 
         jComboBoxType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recebimento", "Pagamento" }));
@@ -66,7 +67,7 @@ public class NewFinanceView extends JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabelNewFinance))
-                                .addGap(0, 564, Short.MAX_VALUE))
+                                .addGap(0, 557, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelType)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

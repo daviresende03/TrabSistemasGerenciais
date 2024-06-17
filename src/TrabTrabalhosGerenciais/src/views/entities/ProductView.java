@@ -64,6 +64,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         setClosable(true);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ProductViewIcon.png"))); // NOI18N
 
+        jLabelTitle.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelTitle.setText("NOVO PRODUTO");
 
         jButtonClearFields.setText("LIMPAR CAMPOS");
@@ -106,8 +107,6 @@ public class ProductView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jProductTable.setCellSelectionEnabled(false);
-        jProductTable.setRowSelectionAllowed(true);
         jProductTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jProductTable);
         jProductTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -287,7 +286,7 @@ public class ProductView extends javax.swing.JInternalFrame {
         }
         
         completeForm(product);
-        this.jLabelTitle.setText("Edição de Usuário");
+        this.jLabelTitle.setText("EDIÇÃO DE USUÁRIO");
         this.jButtonEditProduct.setEnabled(false); 
     }//GEN-LAST:event_jButtonEditProductMouseClicked
 

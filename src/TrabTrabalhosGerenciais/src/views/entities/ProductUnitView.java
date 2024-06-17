@@ -40,9 +40,9 @@ public class ProductUnitView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Unidade de Produto");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ProductUnitIcon.png"))); // NOI18N
 
+        jLabelProductUnit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelProductUnit.setText("UNIDADE DE PRODUTO");
 
         jLabelProductUnitName.setText("Nome");
@@ -228,7 +228,7 @@ public class ProductUnitView extends javax.swing.JInternalFrame {
         }
         
         completeForm(unit);
-        this.jLabelProductUnit.setText("Edição de Unidade de Produto");
+        this.jLabelProductUnit.setText("EDIÇÃO DE UNIDADE DE PRODUTO");
         this.jButtonEditProductUnit.setEnabled(false);
     }//GEN-LAST:event_jButtonEditProductUnitMouseClicked
 

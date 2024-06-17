@@ -46,7 +46,6 @@
   </NonVisualComponents>
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="Novo usu&#xe1;rio"/>
     <Property name="frameIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
       <Image iconType="3" name="/images/PersonIcon.png"/>
     </Property>
@@ -267,6 +266,9 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabelTitle">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="NOVO USU&#xc1;RIO"/>
       </Properties>
     </Component>

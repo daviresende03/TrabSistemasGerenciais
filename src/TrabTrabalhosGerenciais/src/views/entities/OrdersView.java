@@ -58,9 +58,9 @@ public class OrdersView extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(jTable1);
 
         setClosable(true);
-        setTitle("LISTA DE PEDIDOS");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/images/OrdersViewIcon.png"))); // NOI18N
 
+        jLabelNewOrder.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelNewOrder.setText("PEDIDOS");
 
         jLabel2.setText("Filtrar pedidos");

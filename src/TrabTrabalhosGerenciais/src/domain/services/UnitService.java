@@ -3,6 +3,9 @@ package domain.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import domain.interfaces.repositories.IProductRepository;
+import domain.interfaces.services.IProductService;
 import domain.model.entities.ResponseService;
 import domain.model.entities.UnitModel;
 import domain.model.enums.ResponseTypeEnum;
@@ -12,10 +15,12 @@ import domain.interfaces.services.IUnitService;
 
 public class UnitService extends BaseService implements IUnitService {
     private final IUnitRepository unitRepository;
-    
-    public UnitService(IDataContext dataContext, IUnitRepository unitRepository){
+    private final IProductRepository productRepository;
+
+    public UnitService(IDataContext dataContext, IUnitRepository unitRepository, IProductRepository productRepository){
         super(dataContext);
         this.unitRepository = unitRepository;
+        this.productRepository = productRepository;
     }
     
     @Override
@@ -57,8 +62,13 @@ public class UnitService extends BaseService implements IUnitService {
                 return;
             }
             
-            if(unitRepository.exist(id)){
+            if(!unitRepository.exist(id)){
                 responseService.setResponse(ResponseTypeEnum.ERROR, "Unidade não encontrada.");
+                return;
+            }
+
+            if(productRepository.existByUnitId(id)){
+                responseService.setResponse(ResponseTypeEnum.ERROR, "Existem produtos relacionados a essa unidade, não será possível remove-la.");
                 return;
             }
             

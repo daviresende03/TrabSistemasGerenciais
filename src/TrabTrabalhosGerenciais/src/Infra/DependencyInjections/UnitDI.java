@@ -2,6 +2,8 @@ package infra.dependencyInjections;
 
 import data.context.DataContext;
 import java.sql.Connection;
+
+import domain.interfaces.repositories.IProductRepository;
 import domain.interfaces.repositories.IUnitRepository;
 import data.repositories.UnitRepository;
 import domain.interfaces.repositories.IDataContext;
@@ -17,7 +19,7 @@ public class UnitDI {
         return new UnitRepository(con);
     }
     
-    public IUnitService getUnitService(IDataContext dataContext, IUnitRepository unitRepository){
-        return new UnitService(dataContext, unitRepository);
+    public IUnitService getUnitService(IDataContext dataContext, IUnitRepository unitRepository, IProductRepository productRepository){
+        return new UnitService(dataContext, unitRepository, productRepository);
     }
 }

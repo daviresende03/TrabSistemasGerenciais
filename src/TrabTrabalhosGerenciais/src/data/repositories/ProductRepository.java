@@ -159,5 +159,20 @@ public class ProductRepository implements IProductRepository{
             return false;
         }
     }
+
+    @Override
+    public boolean existByUnitId(int unitId) {
+        try{
+            String query = "SELECT null FROM product WHERE product_unit_id = ?";
+
+            PreparedStatement statement = connect.prepareStatement(query);
+            statement.setInt(1, unitId);
+            ResultSet resultSet = statement.executeQuery();
+
+            return resultSet.next();
+        }catch(Exception ex){
+            return false;
+        }
+    }
     
 }

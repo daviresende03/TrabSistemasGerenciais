@@ -106,7 +106,8 @@ public class ProductView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jProductTable.setColumnSelectionAllowed(true);
+        jProductTable.setCellSelectionEnabled(false);
+        jProductTable.setRowSelectionAllowed(true);
         jProductTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jProductTable);
         jProductTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);

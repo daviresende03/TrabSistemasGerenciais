@@ -1,5 +1,6 @@
 package controllers;
 
+import infra.dependencyInjections.ProductDI;
 import infra.dependencyInjections.UnitDI;
 import application.applications.UnitApplication;
 import application.viewModels.UnitVM;
@@ -13,9 +14,11 @@ public class UnitController {
 
     public UnitController() {
         UnitDI unitDependencyInjection = new UnitDI();
+        ProductDI productDependencyInjection = new ProductDI();
         IDataContext dataContext = unitDependencyInjection.getDataContext();
         IUnitService unitService = unitDependencyInjection.getUnitService(dataContext,
-                unitDependencyInjection.getUnitRepository(dataContext.getConnection()));
+                unitDependencyInjection.getUnitRepository(dataContext.getConnection()),
+                productDependencyInjection.getProductRepository(dataContext.getConnection()));
         
         unitApplication = new UnitApplication(unitService);
     }

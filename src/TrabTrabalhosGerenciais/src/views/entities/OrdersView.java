@@ -224,10 +224,16 @@ public class OrdersView extends javax.swing.JInternalFrame {
         }
         
         int orderId = (int)this.jTableOrder.getValueAt(lineSelected, 0);
-        boolean isCanceled = ((String)this.jTableOrder.getValueAt(lineSelected, 3)).equals("CANCELADO");
+        String orderStatus = (String)this.jTableOrder.getValueAt(lineSelected, 3);
+        
+        boolean isCanceled = orderStatus.equals("CANCELADO");
+        boolean isInvoiced = orderStatus.equals("FATURADO");
         
         if(isCanceled){
             JOptionPane.showMessageDialog(null, "Não é possível editar um pedido já cancelado." , "Atenção", JOptionPane.WARNING_MESSAGE);
+            return;
+        }else if(isInvoiced){
+            JOptionPane.showMessageDialog(null, "Não é possível editar um pedido já faturado." , "Atenção", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
